@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.1.0",
+  "profile": {
+    "id": "fictional-ai-governance-baseline",
+    "version": "1.0.0",
+    "name": "Fictional AI governance baseline",
+    "reviewed_at": "2026-08-29"
+  },
+  "packs": [
+    {"id": "eu-ai-act-core", "version": "1.0.0", "path": "../../packs/eu-ai-act/1.0.0/pack.json", "content_hash": "ae2d6cfdfea42b84c1b2ca2e8e49ea75a0704289c6b7f111dd4a19cc39900c6a"},
+    {"id": "eu-gdpr-ai-core", "version": "1.0.0", "path": "../../packs/eu-gdpr-ai/1.0.0/pack.json", "content_hash": "ac8249a493702e2b17a3621ff490caa24da7556bc0f48c7f1198396c29363bcf"},
+    {"id": "eu-nis2-baseline", "version": "1.0.0", "path": "../../packs/eu-nis2-baseline/1.0.0/pack.json", "content_hash": "877c661973a412c3890fe7986e037f7771d8f903e48094a1c08915dc72fcd8d7"},
+    {"id": "nist-ai-rmf-core", "version": "1.0.0", "path": "../../packs/nist-ai-rmf/1.0.0/pack.json", "content_hash": "50c2f4d454d293222d77efb7346d4e13f8f65de2a32884e5647e829d0a7006d9"},
+    {"id": "nist-csf-core", "version": "2.0.0", "path": "../../packs/nist-csf/2.0.0/pack.json", "content_hash": "2b2d47b63b35ac231d69ec07e24e21795d382cb3806240c2779ae55072cf2ae2"}
+  ]
+}

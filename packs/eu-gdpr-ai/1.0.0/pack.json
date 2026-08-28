@@ -1,0 +1,246 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "eu-gdpr-ai-core",
+    "name": "EU GDPR — AI processing core",
+    "version": "1.0.0",
+    "authority_type": "binding_law",
+    "jurisdiction": "European Union / EEA",
+    "language": "en",
+    "source_version": "Regulation (EU) 2016/679, Official Journal text",
+    "effective_from": "2018-05-25",
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["ai_system", "ai_use", "organization"],
+    "coverage": [
+      "personal-data applicability and accountability signal",
+      "special-category condition triage",
+      "solely automated decisions under Article 22",
+      "selected DPIA triggers under Article 35",
+      "data protection by design and by default"
+    ],
+    "known_gaps": [
+      "This profile does not encode every GDPR duty, derogation or Member State provision.",
+      "Legal bases, transparency notices, processor terms, transfers, retention and data-subject rights require fuller profiles.",
+      "Article 22 and DPIA conclusions depend on legal interpretation and concrete effects."
+    ],
+    "notice": "This pack is an AI-oriented screening aid and not a complete record of processing activities or legal opinion."
+  },
+  "fact_catalog": [
+    {"id": "data.personal_processed", "type": "boolean", "question": "Are personal data processed?"},
+    {"id": "data.special_categories_processed", "type": "boolean", "question": "Are Article 9 special categories processed?"},
+    {"id": "gdpr.article9_condition_established", "type": "boolean", "question": "Is an Article 9 condition documented?"},
+    {"id": "decision.solely_automated", "type": "boolean", "question": "Is the decision based solely on automated processing?"},
+    {"id": "decision.legal_or_similarly_significant_effect", "type": "boolean", "question": "Does the decision produce legal or similarly significant effects?"},
+    {"id": "decision.contract_necessity_established", "type": "boolean", "question": "Is the decision necessary for entering into or performing a contract with the data subject?"},
+    {"id": "decision.authorized_by_union_or_member_state_law", "type": "boolean", "question": "Is the decision authorised by applicable Union or Member State law that also lays down suitable safeguards?"},
+    {"id": "decision.explicit_consent_obtained", "type": "boolean", "question": "Has the data subject given valid explicit consent to this decision?"},
+    {"id": "controls.article22_safeguards", "type": "boolean", "question": "Are applicable safeguards, including human intervention and contestation, implemented?"},
+    {"id": "processing.systematic_extensive_evaluation", "type": "boolean", "question": "Is there systematic and extensive evaluation of personal aspects based on automated processing?"},
+    {"id": "processing.large_scale_special_categories", "type": "boolean", "question": "Are special-category or criminal-conviction data processed on a large scale?"},
+    {"id": "processing.systematic_public_monitoring_large_scale", "type": "boolean", "question": "Is there systematic monitoring of a publicly accessible area on a large scale?"},
+    {"id": "controls.dpia_completed", "type": "boolean", "question": "Has a suitable DPIA been completed before processing?"},
+    {"id": "controls.data_protection_by_design", "type": "boolean", "question": "Are data-protection-by-design and default measures evidenced?"}
+  ],
+  "inheritance": [
+    {
+      "id": "gdpr.use.platform.privacy-by-design",
+      "fact": "controls.data_protection_by_design",
+      "path": ["implemented_by", "runs_on"],
+      "object_types": ["ai_platform"]
+    }
+  ],
+  "anchors": [
+    {
+      "id": "gdpr.art5",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 5",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Principles relating to processing of personal data and accountability."
+    },
+    {
+      "id": "gdpr.art9",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 9",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Processing of special categories is prohibited unless a listed condition applies."
+    },
+    {
+      "id": "gdpr.art22",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 22",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Right not to be subject to certain solely automated decisions with legal or similarly significant effects, subject to conditions and safeguards."
+    },
+    {
+      "id": "gdpr.art25",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 25",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Data protection by design and by default."
+    },
+    {
+      "id": "gdpr.art35",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 35, especially 35(1) and 35(3)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "DPIA requirement for processing likely to result in high risk, with listed trigger categories."
+    }
+  ],
+  "rules": [
+    {
+      "id": "gdpr.ai.personal-data-applicability",
+      "title": "Personal data processing is in scope",
+      "kind": "scope",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {"fact": {"key": "data.personal_processed", "operator": "eq", "value": true}},
+      "finding": {
+        "code": "EU-GDPR-PERSONAL-DATA-IN-SCOPE",
+        "level": "applicability",
+        "title": "The described processing uses personal data",
+        "summary": "The GDPR profile applies; document purposes, roles, legal basis, data categories, recipients, retention, safeguards and rights."
+      },
+      "anchors": ["gdpr.art5"],
+      "obligations": [{"code": "GDPR-ACCOUNTABILITY", "title": "Establish the full processing record and accountability evidence."}]
+    },
+    {
+      "id": "gdpr.ai.special-category-gap",
+      "title": "Special-category condition not evidenced",
+      "kind": "obligation_gap",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "data.special_categories_processed", "operator": "eq", "value": true}},
+          {"fact": {"key": "gdpr.article9_condition_established", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-9-GAP",
+        "level": "legal_basis_gap",
+        "title": "No Article 9 condition is established",
+        "summary": "The processing uses special-category data but the inventory does not establish a permitted Article 9 condition."
+      },
+      "anchors": ["gdpr.art9"],
+      "obligations": [{"code": "STOP-OR-ESTABLISH-ARTICLE-9", "title": "Do not proceed until a valid Article 9 condition and safeguards are documented."}]
+    },
+    {
+      "id": "gdpr.ai.article22-restriction",
+      "title": "Solely automated significant decision",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "decision.solely_automated", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-DECISION",
+        "level": "restricted_automated_decision",
+        "title": "Article 22 automated-decision safeguards must be resolved",
+        "summary": "The described decision is solely automated and has legal or similarly significant effects."
+      },
+      "anchors": ["gdpr.art22"],
+      "obligations": [
+        {"code": "ESTABLISH-ARTICLE-22-BASIS", "title": "Establish whether an Article 22(2) condition permits the decision."},
+        {"code": "IMPLEMENT-ARTICLE-22-SAFEGUARDS", "title": "Where applicable, implement human intervention, expression of viewpoint and contestation safeguards."}
+      ]
+    },
+    {
+      "id": "gdpr.ai.article22-condition-gap",
+      "title": "No Article 22(2) condition established",
+      "kind": "legal_basis_gap",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "decision.solely_automated", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.contract_necessity_established", "operator": "eq", "value": false}},
+          {"fact": {"key": "decision.authorized_by_union_or_member_state_law", "operator": "eq", "value": false}},
+          {"fact": {"key": "decision.explicit_consent_obtained", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-CONDITION-GAP",
+        "level": "legal_basis_gap",
+        "title": "No Article 22(2) condition is established",
+        "summary": "The solely automated significant decision is not evidenced as contractually necessary, authorised by law or based on explicit consent."
+      },
+      "anchors": ["gdpr.art22"],
+      "obligations": [{"code": "STOP-OR-ESTABLISH-ARTICLE-22-CONDITION", "title": "Do not rely on the solely automated decision until an Article 22(2) condition is validly established."}]
+    },
+    {
+      "id": "gdpr.ai.article22-safeguard-gap",
+      "title": "Article 22 safeguards not evidenced",
+      "kind": "obligation_gap",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "decision.solely_automated", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}},
+          {
+            "any": [
+              {"fact": {"key": "decision.contract_necessity_established", "operator": "eq", "value": true}},
+              {"fact": {"key": "decision.authorized_by_union_or_member_state_law", "operator": "eq", "value": true}},
+              {"fact": {"key": "decision.explicit_consent_obtained", "operator": "eq", "value": true}}
+            ]
+          },
+          {"fact": {"key": "controls.article22_safeguards", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-SAFEGUARD-GAP",
+        "level": "safeguard_gap",
+        "title": "The permitted automated decision lacks evidenced safeguards",
+        "summary": "An Article 22 condition is asserted, but the applicable safeguards are not evidenced."
+      },
+      "anchors": ["gdpr.art22"],
+      "obligations": [{"code": "IMPLEMENT-ARTICLE-22-SAFEGUARDS", "title": "Implement and document the safeguards required for the relevant Article 22 condition."}]
+    },
+    {
+      "id": "gdpr.ai.dpia-trigger",
+      "title": "DPIA trigger",
+      "kind": "obligation",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {"fact": {"key": "processing.systematic_extensive_evaluation", "operator": "eq", "value": true}},
+              {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}}
+            ]
+          },
+          {"fact": {"key": "processing.large_scale_special_categories", "operator": "eq", "value": true}},
+          {"fact": {"key": "processing.systematic_public_monitoring_large_scale", "operator": "eq", "value": true}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-35-DPIA",
+        "level": "dpia_required",
+        "title": "A listed DPIA trigger is established",
+        "summary": "The supplied facts match at least one Article 35(3) trigger category."
+      },
+      "anchors": ["gdpr.art35"],
+      "obligations": [{"code": "COMPLETE-DPIA", "title": "Complete and document a DPIA before the processing starts; consult the authority where residual high risk remains."}]
+    },
+    {
+      "id": "gdpr.ai.privacy-by-design-gap",
+      "title": "Data protection by design gap",
+      "kind": "obligation_gap",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "data.personal_processed", "operator": "eq", "value": true}},
+          {"fact": {"key": "controls.data_protection_by_design", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-25-GAP",
+        "level": "control_gap",
+        "title": "Data-protection-by-design measures are not evidenced",
+        "summary": "Personal data are processed, but suitable design and default measures are not established in the inventory."
+      },
+      "anchors": ["gdpr.art25"],
+      "obligations": [{"code": "IMPLEMENT-PRIVACY-BY-DESIGN", "title": "Define technical and organisational measures appropriate to the risks and processing context."}]
+    }
+  ]
+}

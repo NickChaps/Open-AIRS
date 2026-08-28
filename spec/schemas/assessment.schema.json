@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/assessment.schema.json",
+  "title": "AIR Framework assessment record",
+  "type": "object",
+  "required": ["assessment_id", "assessed_at", "result_hash", "schema_version", "engine_version", "inventory", "pack", "target", "effective_facts", "findings", "summary"],
+  "properties": {
+    "assessment_id": {"type": "string"},
+    "assessed_at": {"type": "string", "format": "date-time"},
+    "result_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "schema_version": {"const": "0.1.0"},
+    "engine_version": {"type": "string"},
+    "inventory": {"type": "object"},
+    "pack": {"type": "object"},
+    "target": {"type": "object"},
+    "effective_facts": {"type": "object"},
+    "findings": {"type": "array", "items": {"type": "object"}},
+    "summary": {"type": "object"}
+  },
+  "additionalProperties": true
+}

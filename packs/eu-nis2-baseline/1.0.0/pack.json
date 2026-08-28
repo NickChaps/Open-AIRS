@@ -1,0 +1,184 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "eu-nis2-baseline",
+    "name": "NIS2 Directive — EU baseline",
+    "version": "1.0.0",
+    "authority_type": "binding_law",
+    "jurisdiction": "European Union; national transposition required",
+    "language": "en",
+    "source_version": "Directive (EU) 2022/2555, Official Journal text",
+    "effective_from": "2023-01-16",
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+    "coverage": [
+      "entity-scope marker",
+      "management-body governance under Article 20",
+      "selected cybersecurity risk-management measures under Article 21",
+      "incident-reporting process under Article 23"
+    ],
+    "known_gaps": [
+      "NIS2 is a directive; national law, competent-authority guidance and sector-specific Union acts must be overlaid.",
+      "This pack does not decide entity scope from sector, size and establishment facts.",
+      "Detailed incident timelines and national notification channels require jurisdiction profiles.",
+      "Implementing Regulation (EU) 2024/2690 and sector-specific requirements are not encoded."
+    ],
+    "notice": "Use this pack only as an EU baseline together with a reviewed national overlay."
+  },
+  "fact_catalog": [
+    {"id": "nis2.entity_classification", "type": "string", "question": "Is the entity essential, important, out of scope or unresolved under applicable national law?"},
+    {"id": "controls.management_body_approves_cyber_measures", "type": "boolean", "question": "Does the management body approve and oversee cybersecurity risk measures?"},
+    {"id": "controls.management_body_cyber_training", "type": "boolean", "question": "Do management-body members receive required cybersecurity training?"},
+    {"id": "controls.cyber_risk_management_program", "type": "boolean", "question": "Are appropriate and proportionate technical, operational and organisational measures implemented?"},
+    {"id": "controls.supply_chain_security", "type": "boolean", "question": "Does the programme address supply-chain security?"},
+    {"id": "controls.incident_reporting_process", "type": "boolean", "question": "Is there an operational process for significant-incident reporting?"}
+  ],
+  "inheritance": [],
+  "anchors": [
+    {
+      "id": "nis2.scope",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Articles 2 and 3; Annexes I and II",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Scope and distinction between essential and important entities, subject to the Directive and national transposition."
+    },
+    {
+      "id": "nis2.art20",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 20",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Management bodies approve and oversee measures, may face liability under national law, and must receive training."
+    },
+    {
+      "id": "nis2.art21",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 21(1) and 21(2)",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Appropriate and proportionate technical, operational and organisational measures, including ten listed areas."
+    },
+    {
+      "id": "nis2.art23",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 23",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Notification duties for significant incidents, with staged reporting."
+    }
+  ],
+  "rules": [
+    {
+      "id": "nis2.baseline.in-scope",
+      "title": "NIS2 entity in scope",
+      "kind": "scope",
+      "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+      "finding": {
+        "code": "EU-NIS2-IN-SCOPE",
+        "level": "applicability",
+        "title": "The entity is recorded as essential or important",
+        "summary": "The NIS2 governance, risk-management and reporting baseline applies, subject to national law and sector-specific rules."
+      },
+      "anchors": ["nis2.scope"],
+      "obligations": [{"code": "APPLY-NATIONAL-NIS2-PROFILE", "title": "Pin the relevant national-transposition and sector profile."}]
+    },
+    {
+      "id": "nis2.baseline.management-approval-gap",
+      "title": "Management-body approval gap",
+      "kind": "obligation_gap",
+      "applies_to": ["organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+          {"fact": {"key": "controls.management_body_approves_cyber_measures", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ARTICLE-20-APPROVAL-GAP",
+        "level": "governance_gap",
+        "title": "Management-body approval and oversight are not evidenced",
+        "summary": "An in-scope entity lacks evidence that its management body approves and oversees Article 21 measures."
+      },
+      "anchors": ["nis2.art20"],
+      "obligations": [{"code": "MANAGEMENT-APPROVAL", "title": "Establish approval, oversight and accountable reporting to the management body."}]
+    },
+    {
+      "id": "nis2.baseline.management-training-gap",
+      "title": "Management cybersecurity training gap",
+      "kind": "obligation_gap",
+      "applies_to": ["organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+          {"fact": {"key": "controls.management_body_cyber_training", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ARTICLE-20-TRAINING-GAP",
+        "level": "governance_gap",
+        "title": "Management-body cybersecurity training is not evidenced",
+        "summary": "The in-scope entity has not evidenced the training required for management-body members."
+      },
+      "anchors": ["nis2.art20"],
+      "obligations": [{"code": "MANAGEMENT-CYBER-TRAINING", "title": "Provide and evidence proportionate management-body training."}]
+    },
+    {
+      "id": "nis2.baseline.risk-measures-gap",
+      "title": "Cybersecurity risk-management programme gap",
+      "kind": "obligation_gap",
+      "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {
+        "all": [
+          {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+          {"fact": {"key": "controls.cyber_risk_management_program", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ARTICLE-21-GAP",
+        "level": "control_gap",
+        "title": "Appropriate and proportionate risk measures are not evidenced",
+        "summary": "The in-scope entity lacks evidence of an Article 21 cybersecurity risk-management programme."
+      },
+      "anchors": ["nis2.art21"],
+      "obligations": [{"code": "IMPLEMENT-ARTICLE-21-MEASURES", "title": "Map and implement the Article 21(2) areas using an all-hazards, proportionate approach."}]
+    },
+    {
+      "id": "nis2.baseline.supply-chain-gap",
+      "title": "Supply-chain security gap",
+      "kind": "obligation_gap",
+      "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {
+        "all": [
+          {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+          {"fact": {"key": "controls.supply_chain_security", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ARTICLE-21-SUPPLY-CHAIN-GAP",
+        "level": "control_gap",
+        "title": "Supply-chain security is not evidenced",
+        "summary": "Security aspects of relationships with direct suppliers and service providers are not established."
+      },
+      "anchors": ["nis2.art21"],
+      "obligations": [{"code": "SUPPLY-CHAIN-SECURITY", "title": "Assess supplier vulnerabilities and the quality and resilience of supplier security practices."}]
+    },
+    {
+      "id": "nis2.baseline.incident-reporting-gap",
+      "title": "Incident-reporting process gap",
+      "kind": "obligation_gap",
+      "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {
+        "all": [
+          {"fact": {"key": "nis2.entity_classification", "operator": "in", "value": ["essential", "important"]}},
+          {"fact": {"key": "controls.incident_reporting_process", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ARTICLE-23-GAP",
+        "level": "reporting_gap",
+        "title": "A significant-incident reporting process is not evidenced",
+        "summary": "The in-scope entity lacks an operational process aligned to applicable staged notification duties."
+      },
+      "anchors": ["nis2.art23"],
+      "obligations": [{"code": "INCIDENT-REPORTING-PROCESS", "title": "Implement the applicable national early-warning, notification and final-report workflow."}]
+    }
+  ]
+}

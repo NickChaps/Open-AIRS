@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use AIR Framework, please cite the project and the version you evaluated."
+title: "AIR Framework: an open AI registry and governance framework"
+type: software
+authors:
+  - family-names: Chapuis
+    given-names: Nicolas
+version: 0.1.0-alpha
+date-released: 2026-08-29
+license: Apache-2.0
+repository-code: "https://github.com/NickChaps/AIR-Framework"
+abstract: >-
+  A domain-neutral engine for evaluating governed objects against versioned,
+  evidence-backed rule packs, with an initial focus on AI governance.
+keywords:
+  - ai-governance
+  - ai-registry
+  - eu-ai-act
+  - gdpr
+  - nis2
+  - nist-ai-rmf
+  - rule-engine

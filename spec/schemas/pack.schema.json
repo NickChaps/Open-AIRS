@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/pack.schema.json",
+  "title": "AIR Framework rule pack",
+  "type": "object",
+  "required": ["schema_version", "pack", "anchors", "rules"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "pack": {
+      "type": "object",
+      "required": ["id", "name", "version", "authority_type", "jurisdiction", "reviewed_at", "applies_to", "coverage", "known_gaps"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "authority_type": {"enum": ["binding_law", "regulatory_guidance", "voluntary_framework", "organizational_policy", "fictional_example"]},
+        "jurisdiction": {"type": "string"},
+        "language": {"type": "string"},
+        "source_version": {"type": "string"},
+        "effective_from": {"type": ["string", "null"], "format": "date"},
+        "reviewed_at": {"type": "string", "format": "date"},
+        "applies_to": {"type": "array", "items": {"$ref": "#/$defs/object_type"}, "minItems": 1},
+        "coverage": {"type": "array", "items": {"type": "string"}},
+        "known_gaps": {"type": "array", "items": {"type": "string"}},
+        "notice": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "fact_catalog": {"type": "array", "items": {"type": "object"}},
+    "inheritance": {"type": "array", "items": {"$ref": "#/$defs/inheritance"}},
+    "anchors": {"type": "array", "items": {"$ref": "#/$defs/anchor"}},
+    "rules": {"type": "array", "items": {"$ref": "#/$defs/rule"}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "object_type": {
+      "enum": ["ai_system", "ai_platform", "configured_ai_application", "agent_skill", "connector", "model", "ai_use", "organization", "provider", "service", "contract", "clause_library", "generic"]
+    },
+    "relation_step": {
+      "oneOf": [
+        {"type": "string", "minLength": 1},
+        {
+          "type": "object",
+          "required": ["relation"],
+          "properties": {
+            "relation": {"type": "string", "minLength": 1},
+            "direction": {"enum": ["outgoing", "incoming"]}
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["literal"],
+          "properties": {"literal": {"type": "boolean"}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["fact"],
+          "properties": {
+            "fact": {
+              "type": "object",
+              "required": ["key"],
+              "properties": {
+                "key": {"type": "string", "minLength": 1},
+                "operator": {"enum": ["eq", "neq", "in", "not_in", "contains", "contains_any", "contains_all", "truthy", "exists", "gt", "gte", "lt", "lte"]},
+                "value": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["not"],
+          "properties": {"not": {"$ref": "#/$defs/condition"}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["all"],
+          "properties": {"all": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/condition"}}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["any"],
+          "properties": {"any": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/condition"}}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["related"],
+          "properties": {
+            "related": {
+              "type": "object",
+              "required": ["path", "where"],
+              "properties": {
+                "path": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/relation_step"}},
+                "object_types": {"type": "array", "items": {"$ref": "#/$defs/object_type"}},
+                "quantifier": {"enum": ["any", "all", "none"]},
+                "where": {"$ref": "#/$defs/condition"}
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "anchor": {
+      "type": "object",
+      "required": ["id", "source", "locator", "url", "summary"],
+      "properties": {
+        "id": {"type": "string"},
+        "source": {"type": "string"},
+        "locator": {"type": "string"},
+        "url": {"type": "string", "format": "uri"},
+        "summary": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "inheritance": {
+      "type": "object",
+      "required": ["id", "fact", "path"],
+      "properties": {
+        "id": {"type": "string"},
+        "fact": {"type": "string"},
+        "path": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/relation_step"}},
+        "object_types": {"type": "array", "items": {"$ref": "#/$defs/object_type"}}
+      },
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "title", "kind", "applies_to", "when", "finding", "anchors"],
+      "properties": {
+        "id": {"type": "string"},
+        "title": {"type": "string"},
+        "kind": {"type": "string"},
+        "applies_to": {"type": "array", "items": {"$ref": "#/$defs/object_type"}, "minItems": 1},
+        "when": {"$ref": "#/$defs/condition"},
+        "finding": {
+          "type": "object",
+          "required": ["code", "level", "title", "summary"],
+          "properties": {
+            "code": {"type": "string"},
+            "level": {"type": "string"},
+            "title": {"type": "string"},
+            "summary": {"type": "string"}
+          },
+          "additionalProperties": true
+        },
+        "reason": {"type": "object"},
+        "anchors": {"type": "array", "items": {"type": "string"}},
+        "obligations": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    }
+  }
+}

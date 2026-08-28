@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.1.0",
+  "inventory_id": "fictional-enterprise-ai-inventory",
+  "snapshot_id": "snapshot-2026-08-29-a",
+  "captured_at": "2026-08-29T10:00:00Z",
+  "objects": [
+    {
+      "id": "platform-orbit",
+      "type": "ai_platform",
+      "name": "Orbit AI Workspace (fictional)",
+      "facts": {
+        "controls.ai_literacy_measures": {"state": "known", "value": true, "evidence": ["ev-platform-controls"]},
+        "controls.data_protection_by_design": {"state": "known", "value": true, "evidence": ["ev-platform-controls"]}
+      }
+    },
+    {
+      "id": "app-talent-sorter",
+      "type": "configured_ai_application",
+      "name": "Talent Sorter (fictional)",
+      "facts": {
+        "interaction.direct_with_natural_person": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]}
+      }
+    },
+    {
+      "id": "skill-cv-screening",
+      "type": "agent_skill",
+      "name": "CV screening instructions (fictional)",
+      "facts": {
+        "capability.cv_screening": {"state": "known", "value": true, "evidence": ["ev-skill-text"]}
+      }
+    },
+    {
+      "id": "connector-candidate-mail",
+      "type": "connector",
+      "name": "Candidate messaging connector (fictional)",
+      "facts": {
+        "connector.can_send_external_message": {"state": "known", "value": true, "evidence": ["ev-connector-config"]},
+        "connector.requires_human_confirmation": {"state": "known", "value": false, "evidence": ["ev-connector-config"]}
+      }
+    },
+    {
+      "id": "use-recruiting-assistant",
+      "type": "ai_use",
+      "name": "Screen and respond to job applicants (fictional)",
+      "facts": {
+        "ai.is_ai_system": {"state": "known", "value": true, "evidence": ["ev-use-declaration"]},
+        "use.domain": {"state": "known", "value": "employment", "evidence": ["ev-use-declaration"]},
+        "use.tasks": {"state": "known", "value": ["filter_applications", "rank_candidates", "send_rejection"], "evidence": ["ev-use-declaration", "ev-app-prompt"]},
+        "aiact.annex_iii_use_case": {"state": "known", "value": "employment_recruitment", "evidence": ["ev-use-declaration"]},
+        "aiact.profiles_natural_persons": {"state": "known", "value": true, "evidence": ["ev-app-prompt"]},
+        "aiact.significant_risk": {"state": "known", "value": true, "evidence": ["ev-legal-review"]},
+        "aiact.materially_influences_decision": {"state": "known", "value": true, "evidence": ["ev-app-prompt", "ev-legal-review"]},
+        "aiact.task.narrow_procedural": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "aiact.task.improves_previous_human_activity": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "aiact.task.detects_patterns_without_replacing_human": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "aiact.task.preparatory": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "practice.emotion_inference": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "practice.manipulative_or_deceptive": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
+        "interaction.direct_with_natural_person": {"state": "known", "value": true, "evidence": ["ev-use-declaration"]},
+        "interaction.ai_nature_obvious": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
+        "data.personal_processed": {"state": "known", "value": true, "evidence": ["ev-use-declaration"]},
+        "data.special_categories_processed": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
+        "decision.solely_automated": {"state": "known", "value": true, "evidence": ["ev-app-prompt", "ev-connector-config"]},
+        "decision.legal_or_similarly_significant_effect": {"state": "known", "value": true, "evidence": ["ev-legal-review"]},
+        "decision.contract_necessity_established": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
+        "decision.authorized_by_union_or_member_state_law": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
+        "decision.explicit_consent_obtained": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
+        "controls.article22_safeguards": {"state": "known", "value": false, "evidence": ["ev-connector-config"]},
+        "processing.systematic_extensive_evaluation": {"state": "known", "value": true, "evidence": ["ev-app-prompt"]},
+        "controls.dpia_completed": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]}
+      }
+    }
+  ],
+  "relations": [
+    {"id": "rel-app-platform", "source": "app-talent-sorter", "type": "runs_on", "target": "platform-orbit", "evidence": ["ev-platform-controls"]},
+    {"id": "rel-app-skill", "source": "app-talent-sorter", "type": "loads_skill", "target": "skill-cv-screening", "evidence": ["ev-app-prompt"]},
+    {"id": "rel-app-connector", "source": "app-talent-sorter", "type": "can_invoke", "target": "connector-candidate-mail", "evidence": ["ev-connector-config"]},
+    {"id": "rel-use-app", "source": "use-recruiting-assistant", "type": "implemented_by", "target": "app-talent-sorter", "evidence": ["ev-use-declaration"]}
+  ],
+  "evidence": [
+    {"id": "ev-platform-controls", "kind": "configuration", "source": "Fictional platform control snapshot", "summary": "The platform tenant enforces selected common controls.", "captured_at": "2026-08-29T09:00:00Z"},
+    {"id": "ev-app-prompt", "kind": "document", "source": "Fictional application instructions", "summary": "Instructions rank CVs and allow rejection messages.", "captured_at": "2026-08-29T09:05:00Z"},
+    {"id": "ev-skill-text", "kind": "document", "source": "Fictional Agent Skill", "summary": "The passive skill describes criteria for screening applications.", "captured_at": "2026-08-29T09:06:00Z"},
+    {"id": "ev-connector-config", "kind": "configuration", "source": "Fictional connector policy", "summary": "The application can send candidate messages without a separate human confirmation gate.", "captured_at": "2026-08-29T09:07:00Z"},
+    {"id": "ev-use-declaration", "kind": "declaration", "source": "Fictional use owner declaration", "summary": "The intended use screens applicants and sends outcomes.", "captured_at": "2026-08-29T09:10:00Z"},
+    {"id": "ev-legal-review", "kind": "document", "source": "Fictional legal triage note", "summary": "The use materially influences recruitment, presents significant fundamental-rights risk, and no Article 22 condition is evidenced.", "captured_at": "2026-08-29T09:30:00Z"}
+  ]
+}

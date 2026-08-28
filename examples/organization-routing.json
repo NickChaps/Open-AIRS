@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "profile": {
+    "id": "fictional-review-workflow",
+    "version": "1.0.0",
+    "name": "Fictional review workflow",
+    "reviewed_at": "2026-08-29"
+  },
+  "routes": [
+    {"id": "stop_and_legal_review", "label": "Stop and obtain legal review", "description": "Immediate legal review for a prohibition signal.", "priority": 10},
+    {"id": "formal_conformity_path", "label": "Open the formal conformity path", "description": "Assign the high-risk-system work programme.", "priority": 20},
+    {"id": "complete_evidence", "label": "Complete missing evidence", "description": "Resolve an indeterminate result before approval.", "priority": 30}
+  ],
+  "mappings": [
+    {"id": "map-prohibited", "route": "stop_and_legal_review", "match": {"statuses": ["matched"], "levels": ["prohibited_practice"]}},
+    {"id": "map-high-risk", "route": "formal_conformity_path", "match": {"statuses": ["matched"], "levels": ["high_risk"]}},
+    {"id": "map-unknown", "route": "complete_evidence", "match": {"statuses": ["indeterminate"]}}
+  ]
+}

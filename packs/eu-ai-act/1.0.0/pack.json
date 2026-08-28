@@ -1,0 +1,417 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "eu-ai-act-core",
+    "name": "EU AI Act — core qualification",
+    "version": "1.0.0",
+    "authority_type": "binding_law",
+    "jurisdiction": "European Union",
+    "language": "en",
+    "source_version": "Regulation (EU) 2024/1689 as amended by Regulation (EU) 2026/1744, Official Journal texts",
+    "effective_from": null,
+    "application_timeline": [
+      {"date": "2024-08-01", "event": "Entry into force"},
+      {"date": "2025-02-02", "event": "Chapters I and II apply, including Articles 4 and 5"},
+      {"date": "2026-08-02", "event": "General application date, subject to Article 113 exceptions"},
+      {"date": "2026-12-02", "event": "Article 5(1)(ba), 5(1)(bb), 5(1a) and 5(1b) apply"},
+      {"date": "2027-12-02", "event": "Chapter III Sections 1 to 3 apply to Article 6(2) and Annex III high-risk systems"},
+      {"date": "2028-08-02", "event": "Chapter III Sections 1 to 3 apply to Article 6(1) and Annex I high-risk systems"}
+    ],
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["ai_system", "ai_use", "organization"],
+    "coverage": [
+      "selected prohibited practices under Article 5",
+      "high-risk qualification entry points under Article 6 and Annex III employment uses",
+      "provider-role changes under Article 25",
+      "AI literacy under Article 4 as amended in 2026",
+      "direct-interaction transparency under Article 50"
+    ],
+    "known_gaps": [
+      "This is a triage core, not an exhaustive conformity checklist.",
+      "Most Annex III areas are not yet encoded beyond employment and worker management.",
+      "Annex I product legislation requires a sector-specific profile.",
+      "The Article 5 prohibitions added by Regulation (EU) 2026/1744 are disclosed in the source timeline but not yet encoded as rules.",
+      "GPAI model obligations, notified bodies, market surveillance and penalties are not yet encoded.",
+      "Commission guidelines, harmonised standards and delegated amendments require separate reviewed releases."
+    ],
+    "notice": "A matched result is a legal triage signal, not a certification or legal opinion. Verify facts, current law and applicable guidance."
+  },
+  "fact_catalog": [
+    {"id": "ai.is_ai_system", "type": "boolean", "question": "Does the composition meet the Regulation's AI-system definition?"},
+    {"id": "use.domain", "type": "string", "question": "In which domain is the system intended to be used?"},
+    {"id": "use.tasks", "type": "array", "question": "Which material tasks form the intended purpose?"},
+    {"id": "aiact.annex_iii_use_case", "type": "string", "question": "Which Annex III use case, if any, applies?"},
+    {"id": "aiact.profiles_natural_persons", "type": "boolean", "question": "Does the system profile natural persons within Article 6(3)?"},
+    {"id": "aiact.significant_risk", "type": "boolean", "question": "Does the system pose a significant risk of harm to health, safety or fundamental rights?"},
+    {"id": "aiact.materially_influences_decision", "type": "boolean", "question": "Does the system materially influence the outcome of decision-making?"},
+    {"id": "aiact.task.narrow_procedural", "type": "boolean", "question": "Is the system intended to perform a narrow procedural task?"},
+    {"id": "aiact.task.improves_previous_human_activity", "type": "boolean", "question": "Is it intended to improve the result of a previously completed human activity?"},
+    {"id": "aiact.task.detects_patterns_without_replacing_human", "type": "boolean", "question": "Does it detect decision-making patterns or deviations without being meant to replace or influence a previously completed human assessment without proper human review?"},
+    {"id": "aiact.task.preparatory", "type": "boolean", "question": "Is it intended to perform a preparatory task to an assessment relevant to an Annex III use?"},
+    {"id": "practice.emotion_inference", "type": "boolean", "question": "Does the system infer emotions?"},
+    {"id": "practice.medical_or_safety_exception", "type": "boolean", "question": "Is the emotion inference intended for medical or safety reasons?"},
+    {"id": "practice.manipulative_or_deceptive", "type": "boolean", "question": "Does the system deploy prohibited manipulative, subliminal or deceptive techniques?"},
+    {"id": "practice.materially_distorts_decision", "type": "boolean", "question": "Does it materially distort informed decision-making?"},
+    {"id": "practice.significant_harm_likely", "type": "boolean", "question": "Does it cause or reasonably likely cause significant harm?"},
+    {"id": "product.is_safety_component", "type": "boolean", "question": "Does the system meet the amended Article 3(14) safety-component definition, including the Article 6(1a) and 6(1b) clarifications?"},
+    {"id": "product.third_party_conformity_assessment_required", "type": "boolean", "question": "Does Annex I legislation require third-party conformity assessment?"},
+    {"id": "product.third_party_assessment_only_non_safety_risks", "type": "boolean", "question": "Is third-party conformity assessment required solely for non-health-and-safety risks within Article 6(1c)?"},
+    {"id": "change.substantial_modification", "type": "boolean", "question": "Has an actor made a substantial modification?"},
+    {"id": "change.intended_purpose_became_high_risk", "type": "boolean", "question": "Did an actor change the intended purpose so the system becomes high-risk?"},
+    {"id": "interaction.direct_with_natural_person", "type": "boolean", "question": "Is the system intended to interact directly with natural persons?"},
+    {"id": "interaction.ai_nature_obvious", "type": "boolean", "question": "Is the AI nature obvious to a reasonably informed, observant and circumspect person?"},
+    {"id": "organization.uses_ai", "type": "boolean", "question": "Does the organisation provide or deploy AI systems?"},
+    {"id": "controls.ai_literacy_measures", "type": "boolean", "question": "Are measures in place to support development of AI literacy for relevant staff and other persons operating or using AI on the organisation's behalf?"},
+    {"id": "capability.cv_screening", "type": "boolean", "question": "Do instructions or capabilities support analysing, filtering or ranking applications?"}
+  ],
+  "inheritance": [
+    {
+      "id": "aiact.use.platform.ai-literacy",
+      "fact": "controls.ai_literacy_measures",
+      "path": ["implemented_by", "runs_on"],
+      "object_types": ["ai_platform"]
+    }
+  ],
+  "anchors": [
+    {
+      "id": "aiact.art3",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Article 3",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "Definitions, including AI system, intended purpose, provider, deployer and substantial modification."
+    },
+    {
+      "id": "aiact.art4",
+      "source": "Regulation (EU) 2026/1744",
+      "locator": "Article 1(5), replacing Article 4 of Regulation (EU) 2024/1689",
+      "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+      "summary": "Providers and deployers must take measures to support development of AI literacy; they do not have to guarantee a specific level for any individual."
+    },
+    {
+      "id": "aiact.art5",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Article 5(1)(a) and 5(1)(f)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "Selected prohibited practices, including harmful manipulation and emotion inference in workplaces or education subject to limited exceptions."
+    },
+    {
+      "id": "aiact.art6",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Article 6",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "High-risk classification for Annex I products and Annex III uses, including the narrow Article 6(3) exception."
+    },
+    {
+      "id": "aiact.omnibus.art6",
+      "source": "Regulation (EU) 2026/1744",
+      "locator": "Article 1(8), inserting Article 6(1a) to 6(1c)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+      "summary": "Clarifies safety components and excludes third-party assessment triggered solely by specified non-health-and-safety risks from the Article 6(1) route."
+    },
+    {
+      "id": "aiact.omnibus.timeline",
+      "source": "Regulation (EU) 2026/1744",
+      "locator": "Article 1(40), amending Article 113",
+      "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+      "summary": "Sets 2 December 2027 for Chapter III Sections 1 to 3 for Annex III systems and 2 August 2028 for Annex I systems."
+    },
+    {
+      "id": "aiact.annex3.4",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Annex III, point 4",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "Employment and worker-management systems, including targeted recruitment advertising, analysis and filtering of applications, candidate evaluation and certain employment decisions."
+    },
+    {
+      "id": "aiact.art25",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Article 25(1)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "Certain distributors, importers, deployers or third parties become providers when they rebrand, substantially modify or change the intended purpose of a high-risk system."
+    },
+    {
+      "id": "aiact.art50",
+      "source": "Regulation (EU) 2024/1689",
+      "locator": "Article 50(1)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "summary": "Providers of systems intended to interact directly with people must generally inform them that they are interacting with AI."
+    }
+  ],
+  "rules": [
+    {
+      "id": "aiact.core.prohibited-harmful-manipulation",
+      "title": "Potential prohibited harmful manipulation",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "practice.manipulative_or_deceptive", "operator": "eq", "value": true}},
+          {"fact": {"key": "practice.materially_distorts_decision", "operator": "eq", "value": true}},
+          {"fact": {"key": "practice.significant_harm_likely", "operator": "eq", "value": true}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ART5-HARMFUL-MANIPULATION",
+        "level": "prohibited_practice",
+        "title": "The described practice matches a prohibited-practice pattern",
+        "summary": "The supplied facts indicate manipulative, subliminal or deceptive techniques that materially distort decisions and cause or are reasonably likely to cause significant harm."
+      },
+      "reason": {
+        "matched": "All three cumulative triage facts are established.",
+        "indeterminate": "At least one cumulative legal element is missing or conflicted.",
+        "not_matched": "At least one cumulative element is not established."
+      },
+      "anchors": ["aiact.art5"],
+      "obligations": [
+        {"code": "STOP-AND-LEGAL-REVIEW", "title": "Do not place, put into service or use the practice without immediate specialist review."}
+      ]
+    },
+    {
+      "id": "aiact.core.prohibited-emotion-work-education",
+      "title": "Emotion inference in workplace or education",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "practice.emotion_inference", "operator": "eq", "value": true}},
+          {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace", "education"]}},
+          {"fact": {"key": "practice.medical_or_safety_exception", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ART5-EMOTION-WORK-EDUCATION",
+        "level": "prohibited_practice",
+        "title": "Emotion inference falls within the workplace or education prohibition",
+        "summary": "The use infers emotions in a workplace or education context and no medical or safety exception is established."
+      },
+      "anchors": ["aiact.art5"],
+      "obligations": [{"code": "STOP-AND-LEGAL-REVIEW", "title": "Stop the proposed practice and obtain specialist review."}]
+    },
+    {
+      "id": "aiact.core.high-risk-annex1-product",
+      "title": "High-risk AI system under Article 6(1)",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system"],
+      "when": {
+        "all": [
+          {"fact": {"key": "product.is_safety_component", "operator": "eq", "value": true}},
+          {"fact": {"key": "product.third_party_conformity_assessment_required", "operator": "eq", "value": true}},
+          {"fact": {"key": "product.third_party_assessment_only_non_safety_risks", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-HIGH-RISK-ARTICLE-6-1",
+        "level": "high_risk",
+        "title": "The system matches the Article 6(1) product route",
+        "summary": "It is a safety component or covered product, the relevant Annex I legislation requires third-party conformity assessment, and that assessment is not required solely for a non-health-and-safety risk excluded by Article 6(1c)."
+      },
+      "anchors": ["aiact.art6", "aiact.omnibus.art6", "aiact.omnibus.timeline"],
+      "obligations": [{"code": "HIGH-RISK-CONFORMITY", "title": "Prepare the high-risk-system requirements and relevant sectoral conformity route, accounting for the 2 August 2028 application date."}]
+    },
+    {
+      "id": "aiact.core.annex3-employment-candidate",
+      "title": "Annex III employment candidate",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "any": [
+          {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
+          {
+            "all": [
+              {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace"]}},
+              {
+                "any": [
+                  {"fact": {"key": "use.tasks", "operator": "contains_any", "value": ["target_recruitment_ads", "filter_applications", "rank_candidates", "evaluate_candidates", "employment_decision", "allocate_work", "monitor_workers"]}},
+                  {
+                    "related": {
+                      "path": ["implemented_by", "loads_skill"],
+                      "object_types": ["agent_skill"],
+                      "quantifier": "any",
+                      "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ANNEX-III-4-CANDIDATE",
+        "level": "annex_iii_candidate",
+        "title": "The intended purpose falls within an Annex III employment area",
+        "summary": "Employment or worker-management purpose is established. The constituent elements of Article 6(3) must still be tested before a final high-risk conclusion."
+      },
+      "anchors": ["aiact.art6", "aiact.annex3.4"],
+      "obligations": [{"code": "DOCUMENT-ARTICLE-6-3", "title": "Document the Article 6(3) analysis and retain the evidence."}]
+    },
+    {
+      "id": "aiact.core.annex3-employment-high-risk",
+      "title": "Confirmed high-risk Annex III employment use",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {
+            "any": [
+              {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
+              {
+                "all": [
+                  {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace"]}},
+                  {
+                    "any": [
+                      {"fact": {"key": "use.tasks", "operator": "contains_any", "value": ["target_recruitment_ads", "filter_applications", "rank_candidates", "evaluate_candidates", "employment_decision", "allocate_work", "monitor_workers"]}},
+                      {
+                        "related": {
+                          "path": ["implemented_by", "loads_skill"],
+                          "object_types": ["agent_skill"],
+                          "quantifier": "any",
+                          "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "any": [
+              {"fact": {"key": "aiact.profiles_natural_persons", "operator": "eq", "value": true}},
+              {"fact": {"key": "aiact.significant_risk", "operator": "eq", "value": true}},
+              {"fact": {"key": "aiact.materially_influences_decision", "operator": "eq", "value": true}},
+              {
+                "all": [
+                  {"fact": {"key": "aiact.task.narrow_procedural", "operator": "eq", "value": false}},
+                  {"fact": {"key": "aiact.task.improves_previous_human_activity", "operator": "eq", "value": false}},
+                  {"fact": {"key": "aiact.task.detects_patterns_without_replacing_human", "operator": "eq", "value": false}},
+                  {"fact": {"key": "aiact.task.preparatory", "operator": "eq", "value": false}}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-HIGH-RISK-ANNEX-III-4",
+        "level": "high_risk",
+        "title": "The employment use matches the high-risk classification test",
+        "summary": "The use falls within Annex III point 4 and the supplied Article 6(3) facts do not remove it from high-risk classification. Chapter III Sections 1 to 3 apply to Annex III systems from 2 December 2027."
+      },
+      "anchors": ["aiact.art6", "aiact.annex3.4", "aiact.omnibus.timeline"],
+      "obligations": [{"code": "HIGH-RISK-REQUIREMENTS", "title": "Prepare provider and deployer duties, registration, conformity, oversight, monitoring and evidence for application from 2 December 2027."}]
+    },
+    {
+      "id": "aiact.core.annex3-article-6-3-exception",
+      "title": "Article 6(3) exception from high-risk classification",
+      "kind": "legal_qualification",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {
+            "any": [
+              {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
+              {
+                "all": [
+                  {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace"]}},
+                  {
+                    "any": [
+                      {"fact": {"key": "use.tasks", "operator": "contains_any", "value": ["target_recruitment_ads", "filter_applications", "rank_candidates", "evaluate_candidates", "employment_decision", "allocate_work", "monitor_workers"]}},
+                      {
+                        "related": {
+                          "path": ["implemented_by", "loads_skill"],
+                          "object_types": ["agent_skill"],
+                          "quantifier": "any",
+                          "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {"fact": {"key": "aiact.profiles_natural_persons", "operator": "eq", "value": false}},
+          {"fact": {"key": "aiact.significant_risk", "operator": "eq", "value": false}},
+          {"fact": {"key": "aiact.materially_influences_decision", "operator": "eq", "value": false}},
+          {
+            "any": [
+              {"fact": {"key": "aiact.task.narrow_procedural", "operator": "eq", "value": true}},
+              {"fact": {"key": "aiact.task.improves_previous_human_activity", "operator": "eq", "value": true}},
+              {"fact": {"key": "aiact.task.detects_patterns_without_replacing_human", "operator": "eq", "value": true}},
+              {"fact": {"key": "aiact.task.preparatory", "operator": "eq", "value": true}}
+            ]
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ARTICLE-6-3-NOT-HIGH-RISK",
+        "level": "not_high_risk_under_article_6_3",
+        "title": "The supplied facts match an Article 6(3) exception condition",
+        "summary": "The Annex III use is recorded as non-profiling, non-material, without significant risk, and limited to a listed task category."
+      },
+      "anchors": ["aiact.art6", "aiact.annex3.4"],
+      "obligations": [{"code": "DOCUMENT-ARTICLE-6-3", "title": "Document the assessment before placing the system on the market or putting it into service and complete any required registration."}]
+    },
+    {
+      "id": "aiact.core.value-chain-provider-role",
+      "title": "Actor may become provider",
+      "kind": "role_qualification",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {
+        "any": [
+          {"fact": {"key": "change.substantial_modification", "operator": "eq", "value": true}},
+          {"fact": {"key": "change.intended_purpose_became_high_risk", "operator": "eq", "value": true}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ARTICLE-25-PROVIDER-ROLE",
+        "level": "provider_role_review",
+        "title": "The modification may transfer provider obligations",
+        "summary": "A substantial modification or a change of intended purpose to a high-risk use can make another value-chain actor the provider of the specific system."
+      },
+      "anchors": ["aiact.art3", "aiact.art25"],
+      "obligations": [{"code": "VALUE-CHAIN-ROLE-REVIEW", "title": "Identify the actor, modification, system boundary and resulting provider obligations."}]
+    },
+    {
+      "id": "aiact.core.direct-interaction-transparency",
+      "title": "Direct AI interaction disclosure",
+      "kind": "obligation",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "interaction.direct_with_natural_person", "operator": "eq", "value": true}},
+          {"fact": {"key": "interaction.ai_nature_obvious", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ARTICLE-50-DISCLOSURE",
+        "level": "transparency_obligation",
+        "title": "People must be informed that they are interacting with AI",
+        "summary": "The system directly interacts with natural persons and its AI nature is not established as obvious."
+      },
+      "anchors": ["aiact.art50"],
+      "obligations": [{"code": "DISCLOSE-AI-INTERACTION", "title": "Provide clear and timely information that the person is interacting with an AI system."}]
+    },
+    {
+      "id": "aiact.core.ai-literacy",
+      "title": "AI literacy measures",
+      "kind": "obligation",
+      "applies_to": ["organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "organization.uses_ai", "operator": "eq", "value": true}},
+          {"fact": {"key": "controls.ai_literacy_measures", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-AIACT-ARTICLE-4-LITERACY-GAP",
+        "level": "obligation_gap",
+        "title": "No AI-literacy support measure is evidenced",
+        "summary": "The organisation uses AI but the inventory does not evidence measures supporting development of AI literacy for relevant people."
+      },
+      "anchors": ["aiact.art4"],
+      "obligations": [{"code": "IMPLEMENT-AI-LITERACY", "title": "Define support measures based on technical knowledge, experience, education, training, context and affected people; no specific individual level must be guaranteed."}]
+    }
+  ]
+}

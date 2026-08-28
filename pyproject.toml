@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "air-governance-framework"
+version = "0.1.0a0"
+description = "Auditable rule-pack engine and registry model for AI governance and beyond"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Nicolas Chapuis" }]
+keywords = ["ai governance", "ai registry", "rule engine", "EU AI Act", "GDPR", "NIS2", "NIST AI RMF"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/NickChaps/AIR-Framework"
+Documentation = "https://github.com/NickChaps/AIR-Framework/tree/main/docs"
+Source = "https://github.com/NickChaps/AIR-Framework"
+Issues = "https://github.com/NickChaps/AIR-Framework/issues"
+
+[project.scripts]
+air-framework = "air_framework.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/air_framework"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build]
+include = [
+  "src/air_framework/**/*.py",
+  "src/air_framework/py.typed",
+]

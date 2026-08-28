@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "nist-csf-core",
+    "name": "NIST Cybersecurity Framework 2.0 — function baseline",
+    "version": "2.0.0",
+    "authority_type": "voluntary_framework",
+    "jurisdiction": "International voluntary use; published by NIST (United States)",
+    "language": "en",
+    "source_version": "NIST CSWP 29, Cybersecurity Framework 2.0",
+    "effective_from": "2024-02-26",
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+    "coverage": ["top-level readiness for GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER"],
+    "known_gaps": [
+      "This pack does not encode every CSF 2.0 category and subcategory.",
+      "It does not supply an organisational Current or Target Profile.",
+      "Implementation tiers and informative references require separate profiles."
+    ],
+    "notice": "CSF 2.0 is voluntary. Findings describe profile gaps, not legal non-compliance."
+  },
+  "fact_catalog": [
+    {"id": "nist.csf.govern_target_met", "type": "boolean", "question": "Are target GOVERN outcomes met?"},
+    {"id": "nist.csf.identify_target_met", "type": "boolean", "question": "Are target IDENTIFY outcomes met?"},
+    {"id": "nist.csf.protect_target_met", "type": "boolean", "question": "Are target PROTECT outcomes met?"},
+    {"id": "nist.csf.detect_target_met", "type": "boolean", "question": "Are target DETECT outcomes met?"},
+    {"id": "nist.csf.respond_target_met", "type": "boolean", "question": "Are target RESPOND outcomes met?"},
+    {"id": "nist.csf.recover_target_met", "type": "boolean", "question": "Are target RECOVER outcomes met?"}
+  ],
+  "inheritance": [],
+  "anchors": [
+    {
+      "id": "nist.csf.2",
+      "source": "NIST Cybersecurity Framework 2.0",
+      "locator": "NIST CSWP 29, CSF Core",
+      "url": "https://doi.org/10.6028/NIST.CSWP.29",
+      "summary": "CSF 2.0 organises cybersecurity outcomes into six concurrent Functions: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND and RECOVER."
+    },
+    {
+      "id": "nist.csf.profiles",
+      "source": "NIST CSF 2.0 Profiles",
+      "locator": "Organizational Profiles",
+      "url": "https://www.nist.gov/cyberframework/profiles",
+      "summary": "Current and Target Profiles support gap analysis and prioritisation."
+    }
+  ],
+  "rules": [
+    {
+      "id": "nist.csf.govern-gap", "title": "GOVERN target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.govern_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-GOVERN-GAP", "level": "framework_gap", "title": "GOVERN target outcomes are not met", "summary": "Cybersecurity risk strategy, policy, roles, oversight or supply-chain governance remains below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-GOVERN-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    },
+    {
+      "id": "nist.csf.identify-gap", "title": "IDENTIFY target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.identify_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-IDENTIFY-GAP", "level": "framework_gap", "title": "IDENTIFY target outcomes are not met", "summary": "Assets, risks, improvements or related context remain below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-IDENTIFY-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    },
+    {
+      "id": "nist.csf.protect-gap", "title": "PROTECT target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.protect_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-PROTECT-GAP", "level": "framework_gap", "title": "PROTECT target outcomes are not met", "summary": "Safeguards for identities, access, data, platforms or resilience remain below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-PROTECT-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    },
+    {
+      "id": "nist.csf.detect-gap", "title": "DETECT target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.detect_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-DETECT-GAP", "level": "framework_gap", "title": "DETECT target outcomes are not met", "summary": "Continuous monitoring or adverse-event analysis remains below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-DETECT-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    },
+    {
+      "id": "nist.csf.respond-gap", "title": "RESPOND target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.respond_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-RESPOND-GAP", "level": "framework_gap", "title": "RESPOND target outcomes are not met", "summary": "Incident management, analysis, reporting, communication or mitigation remains below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-RESPOND-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    },
+    {
+      "id": "nist.csf.recover-gap", "title": "RECOVER target gap", "kind": "framework_gap", "applies_to": ["organization", "service", "ai_platform", "ai_system"],
+      "when": {"fact": {"key": "nist.csf.recover_target_met", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-CSF-RECOVER-GAP", "level": "framework_gap", "title": "RECOVER target outcomes are not met", "summary": "Recovery execution or communication remains below the selected target."},
+      "anchors": ["nist.csf.2", "nist.csf.profiles"], "obligations": [{"code": "CSF-RECOVER-PLAN", "title": "Record the Current and Target Profile gap and assign a treatment."}]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "nist-ai-rmf-core",
+    "name": "NIST AI RMF 1.0 — core outcomes",
+    "version": "1.0.0",
+    "authority_type": "voluntary_framework",
+    "jurisdiction": "International voluntary use; published by NIST (United States)",
+    "language": "en",
+    "source_version": "NIST AI 100-1 and NIST AI 600-1",
+    "effective_from": "2023-01-26",
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+    "coverage": [
+      "top-level GOVERN, MAP, MEASURE and MANAGE function readiness",
+      "Generative AI Profile applicability marker"
+    ],
+    "known_gaps": [
+      "This baseline does not encode every category, subcategory or suggested action.",
+      "AI RMF 1.0 is under revision; a future release must not silently replace this pinned version.",
+      "Organisation-specific target profiles and tolerances are not supplied."
+    ],
+    "notice": "NIST AI RMF is voluntary. Findings are outcome gaps, not legal non-compliance."
+  },
+  "fact_catalog": [
+    {"id": "nist.airmf.govern_profile_defined", "type": "boolean", "question": "Are AI risk governance policies, roles and accountability defined?"},
+    {"id": "nist.airmf.map_context_documented", "type": "boolean", "question": "Are context, intended purpose, affected people and impacts mapped?"},
+    {"id": "nist.airmf.measure_program_operational", "type": "boolean", "question": "Are risks and trustworthiness characteristics measured with documented methods?"},
+    {"id": "nist.airmf.manage_actions_tracked", "type": "boolean", "question": "Are prioritised risk responses owned and tracked?"},
+    {"id": "ai.generative", "type": "boolean", "question": "Does the system use generative AI?"},
+    {"id": "nist.gai.profile_considered", "type": "boolean", "question": "Has NIST AI 600-1 been considered for the generative-AI context?"}
+  ],
+  "inheritance": [],
+  "anchors": [
+    {
+      "id": "nist.airmf.1",
+      "source": "NIST AI Risk Management Framework 1.0",
+      "locator": "NIST AI 100-1, Core and Functions",
+      "url": "https://doi.org/10.6028/NIST.AI.100-1",
+      "summary": "Voluntary framework organised around GOVERN, MAP, MEASURE and MANAGE."
+    },
+    {
+      "id": "nist.airmf.gai",
+      "source": "NIST AI RMF: Generative Artificial Intelligence Profile",
+      "locator": "NIST AI 600-1",
+      "url": "https://doi.org/10.6028/NIST.AI.600-1",
+      "summary": "Cross-sectoral profile describing generative-AI risks and suggested actions aligned to AI RMF functions."
+    },
+    {
+      "id": "nist.airmf.status",
+      "source": "NIST AI RMF official landing page",
+      "locator": "Revision status reviewed 2026-08-29",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "summary": "NIST states that AI RMF 1.0 is being revised; this pack therefore pins 1.0."
+    }
+  ],
+  "rules": [
+    {
+      "id": "nist.airmf.govern-gap",
+      "title": "GOVERN outcome gap",
+      "kind": "framework_gap",
+      "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+      "when": {"fact": {"key": "nist.airmf.govern_profile_defined", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-AIRMF-GOVERN-GAP", "level": "framework_gap", "title": "AI risk governance is not established", "summary": "Policies, roles, accountability and a risk-management culture are not evidenced for the target."},
+      "anchors": ["nist.airmf.1"],
+      "obligations": [{"code": "NIST-GOVERN", "title": "Define the target GOVERN outcomes and evidence current practice."}]
+    },
+    {
+      "id": "nist.airmf.map-gap",
+      "title": "MAP outcome gap",
+      "kind": "framework_gap",
+      "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+      "when": {"fact": {"key": "nist.airmf.map_context_documented", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-AIRMF-MAP-GAP", "level": "framework_gap", "title": "Context and impacts are not mapped", "summary": "Intended purpose, context, affected people, benefits and harms are not sufficiently evidenced."},
+      "anchors": ["nist.airmf.1"],
+      "obligations": [{"code": "NIST-MAP", "title": "Map context and material impacts before selecting measurements and responses."}]
+    },
+    {
+      "id": "nist.airmf.measure-gap",
+      "title": "MEASURE outcome gap",
+      "kind": "framework_gap",
+      "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+      "when": {"fact": {"key": "nist.airmf.measure_program_operational", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-AIRMF-MEASURE-GAP", "level": "framework_gap", "title": "Risk measurement is not operational", "summary": "Documented, repeatable measurement and evaluation methods are not evidenced."},
+      "anchors": ["nist.airmf.1"],
+      "obligations": [{"code": "NIST-MEASURE", "title": "Select and document measurements appropriate to the mapped risks."}]
+    },
+    {
+      "id": "nist.airmf.manage-gap",
+      "title": "MANAGE outcome gap",
+      "kind": "framework_gap",
+      "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+      "when": {"fact": {"key": "nist.airmf.manage_actions_tracked", "operator": "eq", "value": false}},
+      "finding": {"code": "NIST-AIRMF-MANAGE-GAP", "level": "framework_gap", "title": "Risk responses are not owned and tracked", "summary": "Prioritised treatments, residual risks and ongoing monitoring are not evidenced."},
+      "anchors": ["nist.airmf.1"],
+      "obligations": [{"code": "NIST-MANAGE", "title": "Prioritise, assign and monitor risk responses against the target profile."}]
+    },
+    {
+      "id": "nist.airmf.gai-profile-gap",
+      "title": "Generative AI Profile not considered",
+      "kind": "framework_gap",
+      "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
+      "when": {
+        "all": [
+          {"fact": {"key": "ai.generative", "operator": "eq", "value": true}},
+          {"fact": {"key": "nist.gai.profile_considered", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {"code": "NIST-AIRMF-GAI-PROFILE-GAP", "level": "framework_gap", "title": "Generative-AI-specific risks are not mapped to NIST AI 600-1", "summary": "The target uses generative AI but the cross-sectoral Generative AI Profile is not evidenced in its target profile."},
+      "anchors": ["nist.airmf.gai"],
+      "obligations": [{"code": "CONSIDER-NIST-AI-600-1", "title": "Select relevant GAI risks and actions rather than treating the profile as a binary certification."}]
+    }
+  ]
+}

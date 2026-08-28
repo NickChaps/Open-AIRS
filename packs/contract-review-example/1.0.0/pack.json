@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "fictional-contract-review",
+    "name": "Fictional SaaS contract clause review",
+    "version": "1.0.0",
+    "authority_type": "fictional_example",
+    "jurisdiction": "Not applicable — educational example",
+    "language": "en",
+    "source_version": "Original fictional clause library 1.0",
+    "effective_from": null,
+    "reviewed_at": "2026-08-29",
+    "applies_to": ["contract"],
+    "coverage": [
+      "confidentiality",
+      "data processing terms",
+      "intellectual property",
+      "security incident notice",
+      "audit cooperation",
+      "liability allocation"
+    ],
+    "known_gaps": [
+      "The clauses are fictional and are not legal drafting or advice.",
+      "The example tests only clause presence, not drafting quality, enforceability or negotiation position."
+    ],
+    "notice": "Educational conformance fixture only. Do not use the fictional clause expectations as a real clause library."
+  },
+  "fact_catalog": [
+    {"id": "clause.confidentiality_present", "type": "boolean", "question": "Is a confidentiality clause present?"},
+    {"id": "clause.data_processing_present", "type": "boolean", "question": "Are data-processing terms present?"},
+    {"id": "clause.intellectual_property_present", "type": "boolean", "question": "Is ownership or licensing of deliverables addressed?"},
+    {"id": "clause.security_incident_notice_present", "type": "boolean", "question": "Is a security-incident notice obligation present?"},
+    {"id": "clause.audit_cooperation_present", "type": "boolean", "question": "Is audit or assurance cooperation addressed?"},
+    {"id": "clause.liability_allocation_present", "type": "boolean", "question": "Is liability allocated?"}
+  ],
+  "inheritance": [],
+  "anchors": [
+    {"id": "contract.demo.confidentiality", "source": "Fictional clause library", "locator": "CL-01", "url": "https://example.invalid/air-framework/clause-library/CL-01", "summary": "The example expects mutual protection of identified confidential information."},
+    {"id": "contract.demo.data", "source": "Fictional clause library", "locator": "CL-02", "url": "https://example.invalid/air-framework/clause-library/CL-02", "summary": "The example expects data-processing roles and instructions to be addressed."},
+    {"id": "contract.demo.ip", "source": "Fictional clause library", "locator": "CL-03", "url": "https://example.invalid/air-framework/clause-library/CL-03", "summary": "The example expects ownership or licensing of deliverables and pre-existing materials to be addressed."},
+    {"id": "contract.demo.security", "source": "Fictional clause library", "locator": "CL-04", "url": "https://example.invalid/air-framework/clause-library/CL-04", "summary": "The example expects a defined security-incident notification mechanism."},
+    {"id": "contract.demo.audit", "source": "Fictional clause library", "locator": "CL-05", "url": "https://example.invalid/air-framework/clause-library/CL-05", "summary": "The example expects proportionate assurance and audit cooperation."},
+    {"id": "contract.demo.liability", "source": "Fictional clause library", "locator": "CL-06", "url": "https://example.invalid/air-framework/clause-library/CL-06", "summary": "The example expects liability allocation to be explicit."}
+  ],
+  "rules": [
+    {
+      "id": "contract.demo.confidentiality-missing", "title": "Confidentiality clause missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.confidentiality_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-CONFIDENTIALITY", "level": "clause_gap", "title": "Confidentiality is not addressed", "summary": "The fictional expected confidentiality clause is absent."},
+      "anchors": ["contract.demo.confidentiality"], "obligations": [{"code": "REVIEW-CL-01", "title": "Review whether a confidentiality clause should be added."}]
+    },
+    {
+      "id": "contract.demo.data-processing-missing", "title": "Data-processing terms missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.data_processing_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-DATA", "level": "clause_gap", "title": "Data-processing terms are not addressed", "summary": "The fictional expected data-processing terms are absent."},
+      "anchors": ["contract.demo.data"], "obligations": [{"code": "REVIEW-CL-02", "title": "Review whether suitable data-processing terms should be added."}]
+    },
+    {
+      "id": "contract.demo.ip-missing", "title": "Intellectual-property terms missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.intellectual_property_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-IP", "level": "clause_gap", "title": "Intellectual-property allocation is not addressed", "summary": "The fictional expected ownership or licensing terms are absent."},
+      "anchors": ["contract.demo.ip"], "obligations": [{"code": "REVIEW-CL-03", "title": "Review ownership and licence terms for deliverables and pre-existing materials."}]
+    },
+    {
+      "id": "contract.demo.security-notice-missing", "title": "Security-incident notice missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.security_incident_notice_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-SECURITY-NOTICE", "level": "clause_gap", "title": "Security-incident notice is not addressed", "summary": "The fictional expected notification mechanism is absent."},
+      "anchors": ["contract.demo.security"], "obligations": [{"code": "REVIEW-CL-04", "title": "Review incident scope, timing, content and cooperation."}]
+    },
+    {
+      "id": "contract.demo.audit-missing", "title": "Audit cooperation missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.audit_cooperation_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-AUDIT", "level": "clause_gap", "title": "Audit or assurance cooperation is not addressed", "summary": "The fictional expected assurance mechanism is absent."},
+      "anchors": ["contract.demo.audit"], "obligations": [{"code": "REVIEW-CL-05", "title": "Review proportionate evidence, audit and remediation rights."}]
+    },
+    {
+      "id": "contract.demo.liability-missing", "title": "Liability allocation missing", "kind": "clause_gap", "applies_to": ["contract"],
+      "when": {"fact": {"key": "clause.liability_allocation_present", "operator": "eq", "value": false}},
+      "finding": {"code": "DEMO-CONTRACT-LIABILITY", "level": "clause_gap", "title": "Liability allocation is not addressed", "summary": "The fictional expected liability allocation is absent."},
+      "anchors": ["contract.demo.liability"], "obligations": [{"code": "REVIEW-CL-06", "title": "Review caps, exclusions and risk allocation with qualified counsel."}]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "inventory_id": "fictional-contract-demo",
+  "snapshot_id": "contract-snapshot-1",
+  "captured_at": "2026-08-29T11:00:00Z",
+  "objects": [
+    {
+      "id": "contract-cloud-demo",
+      "type": "contract",
+      "name": "Cloud services agreement (fictional)",
+      "facts": {
+        "clause.confidentiality_present": {"state": "known", "value": true, "evidence": ["ev-contract"]},
+        "clause.data_processing_present": {"state": "known", "value": true, "evidence": ["ev-contract"]},
+        "clause.intellectual_property_present": {"state": "known", "value": false, "evidence": ["ev-contract"]},
+        "clause.security_incident_notice_present": {"state": "known", "value": false, "evidence": ["ev-contract"]},
+        "clause.audit_cooperation_present": {"state": "unknown", "evidence": ["ev-contract"], "note": "The text is ambiguous."},
+        "clause.liability_allocation_present": {"state": "known", "value": true, "evidence": ["ev-contract"]}
+      }
+    }
+  ],
+  "relations": [],
+  "evidence": [
+    {"id": "ev-contract", "kind": "document", "source": "Fictional cloud services agreement", "summary": "Synthetic contract created only for framework conformance tests.", "captured_at": "2026-08-29T11:00:00Z"}
+  ]
+}

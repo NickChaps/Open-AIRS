@@ -1,0 +1,178 @@
+# SPDX-License-Identifier: Apache-2.0
+"""Command-line interface for validation, assessment and drift review."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+from typing import Any
+
+from .engine import assess, assess_inventory, diff_assessments, pack_impact
+from .errors import AirFrameworkError
+from .io import dump_json, load_json
+from .profiles import assess_profile, load_profile_packs
+from .routing import apply_routes
+from .validation import (
+    validate_inventory,
+    validate_pack,
+    validate_pack_profile,
+    validate_route_profile,
+)
+
+
+def _write(value: Any, output: str | None, compact: bool) -> None:
+    rendered = dump_json(value, pretty=not compact)
+    if output:
+        Path(output).write_text(rendered, encoding="utf-8")
+    else:
+        sys.stdout.write(rendered)
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="air-framework",
+        description="Evaluate governed objects against auditable rule packs.",
+    )
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    validate_inventory_parser = commands.add_parser(
+        "validate-inventory", help="Validate an inventory snapshot"
+    )
+    validate_inventory_parser.add_argument("inventory")
+
+    validate_pack_parser = commands.add_parser("validate-pack", help="Validate a rule pack")
+    validate_pack_parser.add_argument("pack")
+
+    assess_parser = commands.add_parser("assess", help="Assess one object with one pack")
+    assess_parser.add_argument("--inventory", required=True)
+    assess_parser.add_argument("--pack", required=True)
+    assess_parser.add_argument("--target", required=True)
+    assess_parser.add_argument("--output")
+    assess_parser.add_argument("--assessed-at")
+    assess_parser.add_argument("--include-not-matched", action="store_true")
+    assess_parser.add_argument("--compact", action="store_true")
+
+    assess_all_parser = commands.add_parser(
+        "assess-all", help="Assess every compatible object in an inventory"
+    )
+    assess_all_parser.add_argument("--inventory", required=True)
+    assess_all_parser.add_argument("--pack", required=True)
+    assess_all_parser.add_argument("--output")
+    assess_all_parser.add_argument("--assessed-at")
+    assess_all_parser.add_argument("--include-not-matched", action="store_true")
+    assess_all_parser.add_argument("--compact", action="store_true")
+
+    diff_parser = commands.add_parser("diff", help="Compare two assessment records")
+    diff_parser.add_argument("before")
+    diff_parser.add_argument("after")
+    diff_parser.add_argument("--output")
+    diff_parser.add_argument("--compact", action="store_true")
+
+    impact_parser = commands.add_parser(
+        "impact", help="Dry-run a candidate pack against an inventory"
+    )
+    impact_parser.add_argument("--inventory", required=True)
+    impact_parser.add_argument("--before-pack", required=True)
+    impact_parser.add_argument("--after-pack", required=True)
+    impact_parser.add_argument("--assessed-at")
+    impact_parser.add_argument("--output")
+    impact_parser.add_argument("--compact", action="store_true")
+
+    route_parser = commands.add_parser(
+        "route", help="Apply an organisation-owned route profile to assessment records"
+    )
+    route_parser.add_argument("--profile", required=True)
+    route_parser.add_argument("--assessment", required=True, action="append")
+    route_parser.add_argument("--output")
+    route_parser.add_argument("--compact", action="store_true")
+
+    validate_routes_parser = commands.add_parser(
+        "validate-routes", help="Validate an organisation route profile"
+    )
+    validate_routes_parser.add_argument("profile")
+
+    assess_profile_parser = commands.add_parser(
+        "assess-profile", help="Assess one object with a version-pinned pack profile"
+    )
+    assess_profile_parser.add_argument("--inventory", required=True)
+    assess_profile_parser.add_argument("--profile", required=True)
+    assess_profile_parser.add_argument("--target", required=True)
+    assess_profile_parser.add_argument("--assessed-at")
+    assess_profile_parser.add_argument("--output")
+    assess_profile_parser.add_argument("--compact", action="store_true")
+
+    validate_profile_parser = commands.add_parser(
+        "validate-profile", help="Validate a pack-selection profile and all pins"
+    )
+    validate_profile_parser.add_argument("profile")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        if args.command == "validate-inventory":
+            validate_inventory(load_json(args.inventory))
+            print(f"valid inventory: {args.inventory}")
+        elif args.command == "validate-pack":
+            validate_pack(load_json(args.pack))
+            print(f"valid pack: {args.pack}")
+        elif args.command == "assess":
+            result = assess(
+                load_json(args.inventory),
+                load_json(args.pack),
+                args.target,
+                assessed_at=args.assessed_at,
+                include_not_matched=args.include_not_matched,
+            )
+            _write(result, args.output, args.compact)
+        elif args.command == "assess-all":
+            result = assess_inventory(
+                load_json(args.inventory),
+                load_json(args.pack),
+                assessed_at=args.assessed_at,
+                include_not_matched=args.include_not_matched,
+            )
+            _write(result, args.output, args.compact)
+        elif args.command == "diff":
+            result = diff_assessments(load_json(args.before), load_json(args.after))
+            _write(result, args.output, args.compact)
+        elif args.command == "impact":
+            result = pack_impact(
+                load_json(args.inventory),
+                load_json(args.before_pack),
+                load_json(args.after_pack),
+                assessed_at=args.assessed_at,
+            )
+            _write(result, args.output, args.compact)
+        elif args.command == "route":
+            result = apply_routes(
+                [load_json(path) for path in args.assessment], load_json(args.profile)
+            )
+            _write(result, args.output, args.compact)
+        elif args.command == "validate-routes":
+            validate_route_profile(load_json(args.profile))
+            print(f"valid route profile: {args.profile}")
+        elif args.command == "assess-profile":
+            profile, packs = load_profile_packs(args.profile)
+            result = assess_profile(
+                load_json(args.inventory),
+                profile,
+                packs,
+                args.target,
+                assessed_at=args.assessed_at,
+            )
+            _write(result, args.output, args.compact)
+        elif args.command == "validate-profile":
+            profile, _ = load_profile_packs(args.profile)
+            validate_pack_profile(profile)
+            print(f"valid pack profile: {args.profile}")
+        return 0
+    except AirFrameworkError as exc:
+        parser.exit(2, f"error: {exc}\n")
+
+
+if __name__ == "__main__":  # pragma: no cover
+    raise SystemExit(main())

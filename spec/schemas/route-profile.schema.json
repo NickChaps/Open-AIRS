@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/route-profile.schema.json",
+  "title": "AIR Framework organisation route profile",
+  "type": "object",
+  "required": ["schema_version", "profile", "routes", "mappings"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "profile": {
+      "type": "object",
+      "required": ["id", "version", "name"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "name": {"type": "string"},
+        "reviewed_at": {"type": "string", "format": "date"}
+      },
+      "additionalProperties": true
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "priority"],
+        "properties": {
+          "id": {"type": "string"},
+          "label": {"type": "string"},
+          "description": {"type": "string"},
+          "priority": {"type": "integer"}
+        }
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "route", "match"],
+        "properties": {
+          "id": {"type": "string"},
+          "route": {"type": "string"},
+          "match": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": {"enum": ["statuses", "levels", "finding_codes", "kinds", "rule_ids", "pack_ids"]},
+            "additionalProperties": {"type": "array", "minItems": 1}
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
