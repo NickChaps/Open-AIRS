@@ -23,7 +23,7 @@
     },
     {
       "id": "skill-cv-screening",
-      "type": "agent_skill",
+      "type": "skill",
       "name": "CV screening instructions (fictional)",
       "facts": {
         "capability.cv_screening": {"state": "known", "value": true, "evidence": ["ev-skill-text"]}
@@ -58,6 +58,7 @@
         "practice.manipulative_or_deceptive": {"state": "known", "value": false, "evidence": ["ev-app-prompt"]},
         "interaction.direct_with_natural_person": {"state": "known", "value": true, "evidence": ["ev-use-declaration"]},
         "interaction.ai_nature_obvious": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
+        "interaction.authorized_law_enforcement_exception": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
         "data.personal_processed": {"state": "known", "value": true, "evidence": ["ev-use-declaration"]},
         "data.special_categories_processed": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
         "decision.solely_automated": {"state": "known", "value": true, "evidence": ["ev-app-prompt", "ev-connector-config"]},
@@ -65,6 +66,7 @@
         "decision.contract_necessity_established": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
         "decision.authorized_by_union_or_member_state_law": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
         "decision.explicit_consent_obtained": {"state": "known", "value": false, "evidence": ["ev-legal-review"]},
+        "decision.based_on_special_categories": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]},
         "controls.article22_safeguards": {"state": "known", "value": false, "evidence": ["ev-connector-config"]},
         "processing.systematic_extensive_evaluation": {"state": "known", "value": true, "evidence": ["ev-app-prompt"]},
         "controls.dpia_completed": {"state": "known", "value": false, "evidence": ["ev-use-declaration"]}
@@ -80,7 +82,7 @@
   "evidence": [
     {"id": "ev-platform-controls", "kind": "configuration", "source": "Fictional platform control snapshot", "summary": "The platform tenant enforces selected common controls.", "captured_at": "2026-08-29T09:00:00Z"},
     {"id": "ev-app-prompt", "kind": "document", "source": "Fictional application instructions", "summary": "Instructions rank CVs and allow rejection messages.", "captured_at": "2026-08-29T09:05:00Z"},
-    {"id": "ev-skill-text", "kind": "document", "source": "Fictional Agent Skill", "summary": "The passive skill describes criteria for screening applications.", "captured_at": "2026-08-29T09:06:00Z"},
+    {"id": "ev-skill-text", "kind": "document", "source": "Fictional skill", "summary": "The passive skill describes criteria for screening applications.", "captured_at": "2026-08-29T09:06:00Z"},
     {"id": "ev-connector-config", "kind": "configuration", "source": "Fictional connector policy", "summary": "The application can send candidate messages without a separate human confirmation gate.", "captured_at": "2026-08-29T09:07:00Z"},
     {"id": "ev-use-declaration", "kind": "declaration", "source": "Fictional use owner declaration", "summary": "The intended use screens applicants and sends outcomes.", "captured_at": "2026-08-29T09:10:00Z"},
     {"id": "ev-legal-review", "kind": "document", "source": "Fictional legal triage note", "summary": "The use materially influences recruitment, presents significant fundamental-rights risk, and no Article 22 condition is evidenced.", "captured_at": "2026-08-29T09:30:00Z"}

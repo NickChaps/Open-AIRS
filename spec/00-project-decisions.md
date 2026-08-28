@@ -25,7 +25,7 @@ Language models may extract semantic facts from text and explain deterministic r
 
 Facts and controls may propagate through explicit relations. Final legal classifications are recomputed for the relevant composition and use unless a rule explicitly defines a scoped propagation.
 
-An Agent Skill is a passive instruction package. It cannot invoke a connector by itself. A runtime or configured application may load a skill and invoke connectors under the permissions exposed by its platform.
+A skill is a passive instruction package. It cannot invoke a connector by itself. A runtime or configured application may load a skill and invoke connectors under the permissions exposed by its platform.
 
 ## Legal registry and governance inventory
 

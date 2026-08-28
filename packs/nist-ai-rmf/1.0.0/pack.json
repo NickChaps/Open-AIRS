@@ -7,8 +7,8 @@
     "authority_type": "voluntary_framework",
     "jurisdiction": "International voluntary use; published by NIST (United States)",
     "language": "en",
-    "source_version": "NIST AI 100-1 and NIST AI 600-1",
-    "effective_from": "2023-01-26",
+    "source_version": "NIST AI 100-1 (2023) and NIST AI 600-1 (2024)",
+    "effective_from": null,
     "reviewed_at": "2026-08-29",
     "applies_to": ["ai_system", "ai_platform", "configured_ai_application", "ai_use", "organization"],
     "coverage": [

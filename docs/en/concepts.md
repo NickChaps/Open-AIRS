@@ -1,45 +1,150 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# Objects, facts and rules in plain language
+# Understanding AIR Framework
 
-Think of AIR Framework as a case file that can be replayed.
+AIR turns a scattered AI estate into governance records that can be understood,
+verified and replayed.
 
-An **object** is something you govern: a system, platform, configured
-application, skill, connector, concrete use, supplier or contract. A
-**relationship** says how objects combine. A **fact** is one bounded answer
-about an object. **Evidence** tells a reviewer where that answer came from. A
-**pack** contains versioned rules and source anchors. An **assessment** records
-what those rules concluded at one point in time.
+A record connects a business use to the application that implements it, its
+platform, models, skills, connectors, providers and evidence. Versioned rule
+packs then evaluate the established facts.
+
+## An example before the definitions
+
+An organisation uses a general-purpose AI platform. A configured application
+on that platform loads a skill describing how to analyse CVs. It also has
+access to a connector capable of sending messages to applicants.
+
+The platform name, skill text and connector presence do not qualify the use on
+their own. AIR connects them:
+
+```mermaid
+flowchart LR
+    U["Use<br/>Pre-screen applicants"] --> A["Configured application"]
+    A --> P["AI platform"]
+    A --> S["Skill<br/>screening criteria"]
+    A --> C["Connector<br/>messaging"]
+    P --> M["Model"]
+    U --> D["Data and people<br/>CVs · applicants"]
+
+    classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef component fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class U,D use
+    class A,P app
+    class S,C,M component
+```
+
+The record can then establish precise facts: the use filters applications,
+processes personal data, influences a recruitment decision and may trigger an
+external action. Every fact points to evidence. AI Act and GDPR packs evaluate
+the same factual basis on separate axes.
+
+## The six parts of the model
+
+### 1. Object
+
+An object is something to govern or something needed to explain a use: AI
+system, platform, configured application, skill, connector, model, concrete
+use, organisation, provider, service or contract.
+
+All these objects may belong in the inventory without being classified as
+standalone AI systems in law.
+
+### 2. Relationship
+
+A relationship describes composition: this application runs on that platform,
+loads this skill, can invoke this connector and implements this use. The
+registry becomes a graph rather than a context-free software list.
+
+### 3. Fact
+
+A fact answers a bounded question:
+
+- does the use process personal data?
+- does the application filter job applications?
+- does the runtime enforce human confirmation?
+- does the system interact directly with a person?
+
+A fact has four states: `known`, `unknown`, `conflicted` or `not_applicable`.
+Missing information therefore never becomes an automatic “no”.
+
+### 4. Evidence
+
+Evidence records where the fact came from: declaration, platform
+configuration, prompt, skill, contract, provider documentation, API or human
+review. AIR retains the useful excerpt, capture date and confidence assigned to
+the fact.
+
+### 5. Rule pack
+
+A pack translates an identified version of a legal text or framework into
+factual questions, deterministic conditions, outcomes, obligations and source
+anchors. It also publishes its coverage and known gaps.
+
+The initial distribution includes AI Act, GDPR, NIS2, NIST AI RMF and NIST CSF
+packs, together with a fictional contract example.
+
+### 6. Assessment
+
+An assessment preserves the registry snapshot, pack version, effective facts,
+rules tested and outcome. Two assessments can be compared to explain a change
+in the estate, evidence or authority.
 
 ## Why the concrete use matters
 
-A general AI platform can support many purposes. One configured application
-may summarise documents while another screens job applicants. The purpose,
-people affected, data, runtime controls and possible actions can therefore
-change the legal analysis without changing the underlying model.
+One general-purpose platform can serve several purposes. One application
+summarises documents, another prepares a credit decision and a third screens
+job applicants. Qualification therefore depends on composition and use, not
+only on the product purchased or model selected.
 
-Agent Skills are stored as objects because their instructions can contribute
-to that purpose. They remain passive artefacts. The runtime executes an
-application, and the runtime invokes connectors within its permission policy.
+A skill is a passive text object. It does not perform an action on its own, but
+its instructions may contribute to an application’s purpose. AIR therefore
+connects it to the affected application and use. Action capabilities belong to
+the runtime and the connectors it actually authorises.
 
-## Why a language model does not make the final decision
+## What the language model does
 
-A model is useful for reading a prompt and extracting a fact such as “the
-instructions rank candidates.” It is less suitable as an invisible legal rule
-engine: the same text can produce different answers after a model update, and
-the legal test becomes hard to inspect.
+The LLM reads unstructured material and proposes bounded facts with evidence:
+“these instructions rank applicants”, “this configuration enforces human
+confirmation”, or “the evidence is insufficient”.
 
-AIR therefore lets a model propose facts with evidence and confidence. A small
-deterministic engine then applies the published rule. A reviewer can disagree
-with a fact, correct it and replay the exact same rule.
+It does not silently choose the legal rule or turn a written instruction into
+an enforced control. The deterministic engine tests the facts against the
+published pack version.
 
-## Why a pack is not an Agent Skill
+```mermaid
+flowchart LR
+    T["Text and configurations"] --> L["LLM<br/>fact proposals"]
+    L --> H["Validation or challenge"]
+    H --> F["Facts + evidence"]
+    F --> E["Deterministic rules"]
+    E --> R["Explainable outcome"]
 
-A **pack** is normative data: fact definitions, deterministic conditions,
-source anchors, coverage, gaps and an immutable version. The engine can replay
-it without a language model.
+    classDef source fill:#f8fafc,stroke:#64748b,color:#0f172a
+    classDef assist fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
+    class T source
+    class L,H,F assist
+    class E engine
+    class R result
+```
 
-An **Agent Skill** is an instruction package for a model or human-assisted
-workflow. The assessment skill helps extract bounded facts and review evidence.
-The authoring skill helps draft and test a pack. Neither skill silently becomes
-the active doctrine, and neither replaces the pack it works with.
+## What the organisation decides
+
+The pack produces a legal or methodological finding. The organisation may then
+route it to review, request evidence, assign an owner or block deployment.
+These organisational routes stay separate from the public pack.
+
+A new pack version follows the same discipline: dry-run across the estate,
+impact comparison, explicit approval and activation. Earlier versions remain
+available for audit.
+
+## Continue
+
+- [Follow the complete governance workflow](governance-workflow.md)
+- [Understand what the AI registry contains](ai-registry.md)
+- [Read an assessment](reading-an-assessment.md)
+- [Review sources and coverage](sources-and-coverage.md)
+- [Open the object graph specification](../../spec/01-object-graph.md)

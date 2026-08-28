@@ -56,10 +56,12 @@
     {"id": "product.is_safety_component", "type": "boolean", "question": "Does the system meet the amended Article 3(14) safety-component definition, including the Article 6(1a) and 6(1b) clarifications?"},
     {"id": "product.third_party_conformity_assessment_required", "type": "boolean", "question": "Does Annex I legislation require third-party conformity assessment?"},
     {"id": "product.third_party_assessment_only_non_safety_risks", "type": "boolean", "question": "Is third-party conformity assessment required solely for non-health-and-safety risks within Article 6(1c)?"},
-    {"id": "change.substantial_modification", "type": "boolean", "question": "Has an actor made a substantial modification?"},
+    {"id": "change.name_or_trademark_on_existing_high_risk_system", "type": "boolean", "question": "Has a distributor, importer, deployer or other third party put its name or trademark on an existing high-risk AI system?"},
+    {"id": "change.substantial_modification_of_high_risk_system_remaining_high_risk", "type": "boolean", "question": "Has an actor substantially modified an existing high-risk AI system in a way that leaves it high-risk?"},
     {"id": "change.intended_purpose_became_high_risk", "type": "boolean", "question": "Did an actor change the intended purpose so the system becomes high-risk?"},
     {"id": "interaction.direct_with_natural_person", "type": "boolean", "question": "Is the system intended to interact directly with natural persons?"},
     {"id": "interaction.ai_nature_obvious", "type": "boolean", "question": "Is the AI nature obvious to a reasonably informed, observant and circumspect person?"},
+    {"id": "interaction.authorized_law_enforcement_exception", "type": "boolean", "question": "Is the system authorised by law for criminal-offence detection, prevention, investigation or prosecution and covered by the Article 50(1) exception?"},
     {"id": "organization.uses_ai", "type": "boolean", "question": "Does the organisation provide or deploy AI systems?"},
     {"id": "controls.ai_literacy_measures", "type": "boolean", "question": "Are measures in place to support development of AI literacy for relevant staff and other persons operating or using AI on the organisation's behalf?"},
     {"id": "capability.cv_screening", "type": "boolean", "question": "Do instructions or capabilities support analysing, filtering or ranking applications?"}
@@ -145,6 +147,7 @@
       "applies_to": ["ai_system", "ai_use"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {"fact": {"key": "practice.manipulative_or_deceptive", "operator": "eq", "value": true}},
           {"fact": {"key": "practice.materially_distorts_decision", "operator": "eq", "value": true}},
           {"fact": {"key": "practice.significant_harm_likely", "operator": "eq", "value": true}}
@@ -173,6 +176,7 @@
       "applies_to": ["ai_system", "ai_use"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {"fact": {"key": "practice.emotion_inference", "operator": "eq", "value": true}},
           {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace", "education"]}},
           {"fact": {"key": "practice.medical_or_safety_exception", "operator": "eq", "value": false}}
@@ -194,6 +198,7 @@
       "applies_to": ["ai_system"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {"fact": {"key": "product.is_safety_component", "operator": "eq", "value": true}},
           {"fact": {"key": "product.third_party_conformity_assessment_required", "operator": "eq", "value": true}},
           {"fact": {"key": "product.third_party_assessment_only_non_safety_risks", "operator": "eq", "value": false}}
@@ -214,21 +219,26 @@
       "kind": "legal_qualification",
       "applies_to": ["ai_system", "ai_use"],
       "when": {
-        "any": [
-          {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
+        "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {
-            "all": [
-              {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace"]}},
+            "any": [
+              {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
               {
-                "any": [
-                  {"fact": {"key": "use.tasks", "operator": "contains_any", "value": ["target_recruitment_ads", "filter_applications", "rank_candidates", "evaluate_candidates", "employment_decision", "allocate_work", "monitor_workers"]}},
+                "all": [
+                  {"fact": {"key": "use.domain", "operator": "in", "value": ["employment", "workplace"]}},
                   {
-                    "related": {
-                      "path": ["implemented_by", "loads_skill"],
-                      "object_types": ["agent_skill"],
-                      "quantifier": "any",
-                      "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
-                    }
+                    "any": [
+                      {"fact": {"key": "use.tasks", "operator": "contains_any", "value": ["target_recruitment_ads", "filter_applications", "rank_candidates", "evaluate_candidates", "employment_decision", "allocate_work", "monitor_workers"]}},
+                      {
+                        "related": {
+                          "path": ["implemented_by", "loads_skill"],
+                          "object_types": ["skill"],
+                          "quantifier": "any",
+                          "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -252,6 +262,7 @@
       "applies_to": ["ai_system", "ai_use"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {
             "any": [
               {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
@@ -264,7 +275,7 @@
                       {
                         "related": {
                           "path": ["implemented_by", "loads_skill"],
-                          "object_types": ["agent_skill"],
+                          "object_types": ["skill"],
                           "quantifier": "any",
                           "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
                         }
@@ -308,6 +319,7 @@
       "applies_to": ["ai_system", "ai_use"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {
             "any": [
               {"fact": {"key": "aiact.annex_iii_use_case", "operator": "in", "value": ["employment_recruitment", "employment_worker_management"]}},
@@ -320,7 +332,7 @@
                       {
                         "related": {
                           "path": ["implemented_by", "loads_skill"],
-                          "object_types": ["agent_skill"],
+                          "object_types": ["skill"],
                           "quantifier": "any",
                           "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
                         }
@@ -360,15 +372,16 @@
       "applies_to": ["ai_system", "ai_use", "organization"],
       "when": {
         "any": [
-          {"fact": {"key": "change.substantial_modification", "operator": "eq", "value": true}},
+          {"fact": {"key": "change.name_or_trademark_on_existing_high_risk_system", "operator": "eq", "value": true}},
+          {"fact": {"key": "change.substantial_modification_of_high_risk_system_remaining_high_risk", "operator": "eq", "value": true}},
           {"fact": {"key": "change.intended_purpose_became_high_risk", "operator": "eq", "value": true}}
         ]
       },
       "finding": {
         "code": "EU-AIACT-ARTICLE-25-PROVIDER-ROLE",
         "level": "provider_role_review",
-        "title": "The modification may transfer provider obligations",
-        "summary": "A substantial modification or a change of intended purpose to a high-risk use can make another value-chain actor the provider of the specific system."
+        "title": "The actor may acquire provider obligations",
+        "summary": "Putting an actor's name or trademark on an existing high-risk system, substantially modifying one, or changing a system's intended purpose so it becomes high-risk can make that actor the provider of the specific system."
       },
       "anchors": ["aiact.art3", "aiact.art25"],
       "obligations": [{"code": "VALUE-CHAIN-ROLE-REVIEW", "title": "Identify the actor, modification, system boundary and resulting provider obligations."}]
@@ -380,15 +393,17 @@
       "applies_to": ["ai_system", "ai_use"],
       "when": {
         "all": [
+          {"fact": {"key": "ai.is_ai_system", "operator": "eq", "value": true}},
           {"fact": {"key": "interaction.direct_with_natural_person", "operator": "eq", "value": true}},
-          {"fact": {"key": "interaction.ai_nature_obvious", "operator": "eq", "value": false}}
+          {"fact": {"key": "interaction.ai_nature_obvious", "operator": "eq", "value": false}},
+          {"fact": {"key": "interaction.authorized_law_enforcement_exception", "operator": "eq", "value": false}}
         ]
       },
       "finding": {
         "code": "EU-AIACT-ARTICLE-50-DISCLOSURE",
         "level": "transparency_obligation",
         "title": "People must be informed that they are interacting with AI",
-        "summary": "The system directly interacts with natural persons and its AI nature is not established as obvious."
+        "summary": "The system directly interacts with natural persons, its AI nature is not established as obvious, and the limited law-enforcement exception is not established."
       },
       "anchors": ["aiact.art50"],
       "obligations": [{"code": "DISCLOSE-AI-INTERACTION", "title": "Provide clear and timely information that the person is interacting with an AI system."}]

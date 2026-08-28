@@ -39,6 +39,23 @@ class AssessmentTests(unittest.TestCase):
         )
         self.assertIn("skill-cv-screening", candidate["trace"]["related_objects"])
 
+    def test_non_ai_automation_cannot_match_ai_act_use_rules(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
+        use["facts"]["ai.is_ai_system"] = {
+            "state": "known",
+            "value": False,
+            "evidence": ["ev-legal-review"],
+        }
+        result = assess(
+            inventory,
+            load("packs/eu-ai-act/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+            include_not_matched=True,
+        )
+        matched = [item for item in result["findings"] if item["status"] == "matched"]
+        self.assertEqual([], matched)
+
     def test_passive_skill_can_contribute_to_use_purpose(self):
         inventory = deepcopy(load("examples/ai-governance/inventory.json"))
         use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
@@ -56,6 +73,47 @@ class AssessmentTests(unittest.TestCase):
         )
         self.assertEqual("matched", high_risk["status"])
         self.assertIn("skill-cv-screening", high_risk["trace"]["related_objects"])
+
+    def test_ai_act_rebranding_can_transfer_provider_role(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
+        use["facts"]["change.name_or_trademark_on_existing_high_risk_system"] = {
+            "state": "known",
+            "value": True,
+            "evidence": ["ev-legal-review"],
+        }
+        result = assess(
+            inventory,
+            load("packs/eu-ai-act/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+        )
+        provider_role = next(
+            item
+            for item in result["findings"]
+            if item["rule_id"] == "aiact.core.value-chain-provider-role"
+        )
+        self.assertEqual("matched", provider_role["status"])
+
+    def test_ai_act_law_enforcement_exception_prevents_interaction_finding(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
+        use["facts"]["interaction.authorized_law_enforcement_exception"] = {
+            "state": "known",
+            "value": True,
+            "evidence": ["ev-legal-review"],
+        }
+        result = assess(
+            inventory,
+            load("packs/eu-ai-act/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+            include_not_matched=True,
+        )
+        disclosure = next(
+            item
+            for item in result["findings"]
+            if item["rule_id"] == "aiact.core.direct-interaction-transparency"
+        )
+        self.assertEqual("not_matched", disclosure["status"])
 
     def test_platform_control_is_inherited_only_when_pack_declares_it(self):
         result = assess(
@@ -99,6 +157,46 @@ class AssessmentTests(unittest.TestCase):
         )
         dpia = next(item for item in result["findings"] if item["rule_id"] == "gdpr.ai.dpia-trigger")
         self.assertEqual([], dpia["trace"]["missing_facts"])
+
+    def test_gdpr_dpia_trigger_and_completion_gap_are_separate(self):
+        result = assess(
+            load("examples/ai-governance/inventory.json"),
+            load("packs/eu-gdpr-ai/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+        )
+        by_rule = {item["rule_id"]: item for item in result["findings"]}
+        self.assertEqual("matched", by_rule["gdpr.ai.dpia-trigger"]["status"])
+        self.assertEqual("matched", by_rule["gdpr.ai.dpia-completion-gap"]["status"])
+
+    def test_gdpr_article22_special_category_restriction_is_encoded(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
+        use["facts"]["data.special_categories_processed"] = {
+            "state": "known",
+            "value": True,
+            "evidence": ["ev-use-declaration"],
+        }
+        use["facts"]["decision.based_on_special_categories"] = {
+            "state": "known",
+            "value": True,
+            "evidence": ["ev-use-declaration"],
+        }
+        use["facts"]["decision.article22_4_special_category_condition_established"] = {
+            "state": "known",
+            "value": False,
+            "evidence": ["ev-legal-review"],
+        }
+        result = assess(
+            inventory,
+            load("packs/eu-gdpr-ai/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+        )
+        special_category = next(
+            item
+            for item in result["findings"]
+            if item["rule_id"] == "gdpr.ai.article22-special-category-gap"
+        )
+        self.assertEqual("matched", special_category["status"])
 
     def test_incompatible_object_type_fails_closed(self):
         with self.assertRaises(EvaluationError):

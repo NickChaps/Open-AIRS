@@ -15,6 +15,8 @@ Commencez par la question la plus proche de votre travail.
    distinguer un constat juridique, une preuve manquante et une voie interne.
 5. Vérifiez [les sources et la couverture](sources-et-couverture.md) avant de
    vous appuyer sur un pack.
+6. Consultez la [revue datée de viabilité des packs](../audits/2026-08-29-pack-viability.fr.md)
+   pour voir les dernières vérifications, corrections et limites résiduelles.
 
 ## Je paramètre la gouvernance
 

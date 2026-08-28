@@ -11,7 +11,7 @@ The root [Apache License 2.0](LICENSE) applies to:
 - rule packs and independently authored anchor metadata;
 - automated tests and fixtures;
 - fictional examples;
-- Agent Skills and their scripts;
+- skills and their scripts;
 - CI and development configuration.
 
 Unless a file states otherwise, files outside `docs/` are covered by Apache-2.0.

@@ -5,7 +5,7 @@ between:
 
 - a platform that exposes controls;
 - a configured application that executes;
-- a passive Agent Skill that contributes CV-screening instructions;
+- a passive skill that contributes CV-screening instructions;
 - a connector that makes outbound action possible;
 - a concrete recruitment use that is the relevant legal composition.
 

@@ -3,7 +3,7 @@
 # Rule packs
 
 A pack is an immutable, reviewable release of anchors, facts, inheritance
-policies and deterministic rules. It is data, not an Agent Skill.
+policies and deterministic rules.
 
 ## Required metadata
 

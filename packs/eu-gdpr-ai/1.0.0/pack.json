@@ -14,7 +14,7 @@
     "coverage": [
       "personal-data applicability and accountability signal",
       "special-category condition triage",
-      "solely automated decisions under Article 22",
+      "solely automated decisions, including the special-category restriction under Article 22",
       "selected DPIA triggers under Article 35",
       "data protection by design and by default"
     ],
@@ -34,6 +34,8 @@
     {"id": "decision.contract_necessity_established", "type": "boolean", "question": "Is the decision necessary for entering into or performing a contract with the data subject?"},
     {"id": "decision.authorized_by_union_or_member_state_law", "type": "boolean", "question": "Is the decision authorised by applicable Union or Member State law that also lays down suitable safeguards?"},
     {"id": "decision.explicit_consent_obtained", "type": "boolean", "question": "Has the data subject given valid explicit consent to this decision?"},
+    {"id": "decision.based_on_special_categories", "type": "boolean", "question": "Is the solely automated decision based on special categories of personal data within Article 9(1)?"},
+    {"id": "decision.article22_4_special_category_condition_established", "type": "boolean", "question": "For this decision, is an Article 9(2)(a) or 9(2)(g) condition established as required by Article 22(4)?"},
     {"id": "controls.article22_safeguards", "type": "boolean", "question": "Are applicable safeguards, including human intervention and contestation, implemented?"},
     {"id": "processing.systematic_extensive_evaluation", "type": "boolean", "question": "Is there systematic and extensive evaluation of personal aspects based on automated processing?"},
     {"id": "processing.large_scale_special_categories", "type": "boolean", "question": "Are special-category or criminal-conviction data processed on a large scale?"},
@@ -197,6 +199,33 @@
       "obligations": [{"code": "IMPLEMENT-ARTICLE-22-SAFEGUARDS", "title": "Implement and document the safeguards required for the relevant Article 22 condition."}]
     },
     {
+      "id": "gdpr.ai.article22-special-category-gap",
+      "title": "Article 22(4) special-category restriction",
+      "kind": "legal_basis_gap",
+      "applies_to": ["ai_system", "ai_use"],
+      "when": {
+        "all": [
+          {"fact": {"key": "decision.solely_automated", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}},
+          {"fact": {"key": "decision.based_on_special_categories", "operator": "eq", "value": true}},
+          {
+            "any": [
+              {"fact": {"key": "decision.article22_4_special_category_condition_established", "operator": "eq", "value": false}},
+              {"fact": {"key": "controls.article22_safeguards", "operator": "eq", "value": false}}
+            ]
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-4-SPECIAL-CATEGORY-GAP",
+        "level": "legal_basis_gap",
+        "title": "The special-category conditions for this automated decision are not established",
+        "summary": "A solely automated significant decision is based on special-category data, but the limited Article 9(2)(a) or 9(2)(g) condition and suitable safeguards required by Article 22(4) are not both evidenced."
+      },
+      "anchors": ["gdpr.art9", "gdpr.art22"],
+      "obligations": [{"code": "STOP-OR-ESTABLISH-ARTICLE-22-4", "title": "Do not use special-category data for the decision until an Article 9(2)(a) or 9(2)(g) condition and suitable safeguards are established."}]
+    },
+    {
       "id": "gdpr.ai.dpia-trigger",
       "title": "DPIA trigger",
       "kind": "obligation",
@@ -221,6 +250,37 @@
       },
       "anchors": ["gdpr.art35"],
       "obligations": [{"code": "COMPLETE-DPIA", "title": "Complete and document a DPIA before the processing starts; consult the authority where residual high risk remains."}]
+    },
+    {
+      "id": "gdpr.ai.dpia-completion-gap",
+      "title": "Required DPIA not evidenced as complete",
+      "kind": "obligation_gap",
+      "applies_to": ["ai_system", "ai_use", "organization"],
+      "when": {
+        "all": [
+          {
+            "any": [
+              {
+                "all": [
+                  {"fact": {"key": "processing.systematic_extensive_evaluation", "operator": "eq", "value": true}},
+                  {"fact": {"key": "decision.legal_or_similarly_significant_effect", "operator": "eq", "value": true}}
+                ]
+              },
+              {"fact": {"key": "processing.large_scale_special_categories", "operator": "eq", "value": true}},
+              {"fact": {"key": "processing.systematic_public_monitoring_large_scale", "operator": "eq", "value": true}}
+            ]
+          },
+          {"fact": {"key": "controls.dpia_completed", "operator": "eq", "value": false}}
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-35-DPIA-GAP",
+        "level": "dpia_gap",
+        "title": "A required DPIA is not evidenced as complete",
+        "summary": "The processing matches a listed Article 35(3) trigger and the inventory does not evidence completion of a suitable DPIA before processing."
+      },
+      "anchors": ["gdpr.art35"],
+      "obligations": [{"code": "COMPLETE-DPIA-BEFORE-PROCESSING", "title": "Complete and document the DPIA before processing and resolve any residual high risk through the applicable consultation process."}]
     },
     {
       "id": "gdpr.ai.privacy-by-design-gap",

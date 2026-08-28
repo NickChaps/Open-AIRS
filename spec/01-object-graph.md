@@ -13,7 +13,7 @@ inventory without being an AI system in law.
 | `ai_system` | A candidate AI system considered as a deployable whole | A fraud-detection system |
 | `ai_platform` | A runtime or tenant that exposes models, controls and connectors | An enterprise AI workspace |
 | `configured_ai_application` | An application configured on a platform, often called an “agent” by vendors | A recruiting assistant |
-| `agent_skill` | A passive package of instructions and optional resources | A CV-screening skill |
+| `skill` | A passive package of instructions and optional resources | A CV-screening skill |
 | `connector` | A capability exposed by a runtime to read or act on another system | HRIS read/write access |
 | `model` | A model made available to a platform or system | A language model endpoint |
 | `ai_use` | A concrete intended purpose in a business and operational context | Screening applicants for a role |
@@ -30,7 +30,7 @@ schema version.
 Relations form a directed graph. The reference examples use:
 
 - `runs_on`: configured application → platform;
-- `loads_skill`: configured application → Agent Skill;
+- `loads_skill`: configured application → skill;
 - `can_invoke`: configured application or platform → connector;
 - `offers_model`: platform → model;
 - `implemented_by`: concrete use → configured application or AI system;

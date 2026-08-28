@@ -13,7 +13,7 @@ OBJECT_TYPES = {
     "ai_system",
     "ai_platform",
     "configured_ai_application",
-    "agent_skill",
+    "skill",
     "connector",
     "model",
     "ai_use",
@@ -64,7 +64,7 @@ RELATION_SIGNATURES = {
     ),
     "loads_skill": (
         {"configured_ai_application", "ai_platform", "ai_system"},
-        {"agent_skill"},
+        {"skill"},
     ),
     "can_invoke": (
         {"configured_ai_application", "ai_platform", "ai_system"},

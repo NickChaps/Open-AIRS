@@ -8,6 +8,6 @@ Until a public security contact is published, do not send sensitive production d
 
 ## Security boundary
 
-Rule packs and Agent Skills are executable governance inputs. Treat third-party packages as untrusted until their origin, licence, requested tools and bundled scripts have been reviewed.
+Rule packs and skills are executable governance inputs. Treat third-party packages as untrusted until their origin, licence, requested tools and bundled scripts have been reviewed.
 
 The reference engine does not grant connector permissions. Permissions remain the responsibility of the host runtime.

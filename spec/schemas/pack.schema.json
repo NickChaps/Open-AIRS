@@ -34,7 +34,7 @@
   "additionalProperties": false,
   "$defs": {
     "object_type": {
-      "enum": ["ai_system", "ai_platform", "configured_ai_application", "agent_skill", "connector", "model", "ai_use", "organization", "provider", "service", "contract", "clause_library", "generic"]
+      "enum": ["ai_system", "ai_platform", "configured_ai_application", "skill", "connector", "model", "ai_use", "organization", "provider", "service", "contract", "clause_library", "generic"]
     },
     "relation_step": {
       "oneOf": [

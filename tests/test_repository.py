@@ -40,6 +40,38 @@ class RepositoryIntegrityTests(unittest.TestCase):
                         )
                     )
 
+    def test_project_readmes_explain_the_model_visually(self):
+        for name in ["README.md", "README.fr.md"]:
+            body = (ROOT / name).read_text(encoding="utf-8")
+            with self.subTest(path=name):
+                self.assertGreaterEqual(body.count("```mermaid"), 3)
+                self.assertIn("CONCEPTS.md", body)
+        self.assertTrue((ROOT / "CONCEPTS.md").exists())
+
+    def test_every_pack_has_illustrated_english_and_french_guides(self):
+        version_dirs = sorted(path.parent for path in ROOT.glob("packs/*/*/pack.json"))
+        self.assertGreaterEqual(len(version_dirs), 6)
+        for directory in version_dirs:
+            for name in ["README.md", "README.fr.md"]:
+                path = directory / name
+                with self.subTest(path=path):
+                    self.assertTrue(path.exists())
+                    self.assertIn("```mermaid", path.read_text(encoding="utf-8"))
+
+    def test_public_object_type_is_skill(self):
+        paths = [
+            ROOT / "src/air_framework/validation.py",
+            ROOT / "spec/schemas/inventory.schema.json",
+            ROOT / "spec/schemas/pack.schema.json",
+            ROOT / "examples/ai-governance/inventory.json",
+            ROOT / "packs/eu-ai-act/1.0.0/pack.json",
+        ]
+        for path in paths:
+            with self.subTest(path=path):
+                body = path.read_text(encoding="utf-8")
+                self.assertNotIn("agent_skill", body)
+                self.assertIn("skill", body)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -33,7 +33,7 @@ Supported operators are `eq`, `neq`, `in`, `not_in`, `contains`,
 {
   "related": {
     "path": ["implemented_by", "loads_skill"],
-    "object_types": ["agent_skill"],
+    "object_types": ["skill"],
     "quantifier": "any",
     "where": {"fact": {"key": "capability.cv_screening", "operator": "eq", "value": true}}
   }

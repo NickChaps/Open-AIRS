@@ -15,6 +15,8 @@ question closest to your work.
    legal finding from an evidence gap or an internal route.
 5. Review [Sources and coverage](sources-and-coverage.md) before relying on a
    pack.
+6. Open the [dated pack viability review](../audits/2026-08-29-pack-viability.md)
+   to see the latest source check, corrections and residual limits.
 
 ## I configure governance
 

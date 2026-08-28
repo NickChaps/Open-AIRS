@@ -22,6 +22,28 @@ class PackConformanceTests(unittest.TestCase):
             with self.subTest(path=path):
                 validate_pack(json.loads(path.read_text(encoding="utf-8")))
 
+    def test_every_declared_fact_is_used_by_a_rule_or_inheritance(self):
+        def collect_fact_keys(node, result):
+            if isinstance(node, dict):
+                fact = node.get("fact")
+                if isinstance(fact, dict) and isinstance(fact.get("key"), str):
+                    result.add(fact["key"])
+                for value in node.values():
+                    collect_fact_keys(value, result)
+            elif isinstance(node, list):
+                for value in node:
+                    collect_fact_keys(value, result)
+
+        for path in sorted(ROOT.glob("packs/*/*/pack.json")):
+            pack = json.loads(path.read_text(encoding="utf-8"))
+            used = set()
+            for rule in pack["rules"]:
+                collect_fact_keys(rule["when"], used)
+            used.update(item["fact"] for item in pack.get("inheritance", []))
+            declared = {item["id"] for item in pack["fact_catalog"]}
+            with self.subTest(path=path):
+                self.assertEqual(set(), declared - used)
+
     def test_every_example_inventory_validates(self):
         paths = sorted(ROOT.glob("examples/**/inventory.json"))
         self.assertGreaterEqual(len(paths), 2)
@@ -29,7 +51,7 @@ class PackConformanceTests(unittest.TestCase):
             with self.subTest(path=path):
                 validate_inventory(json.loads(path.read_text(encoding="utf-8")))
 
-    def test_agent_skill_cannot_invoke_a_connector(self):
+    def test_skill_cannot_invoke_a_connector(self):
         inventory = json.loads(
             (ROOT / "examples/ai-governance/inventory.json").read_text(encoding="utf-8")
         )

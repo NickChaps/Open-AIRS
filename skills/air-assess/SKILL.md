@@ -1,6 +1,6 @@
 ---
 name: air-assess
-description: Assess a governed object with AIR Framework rule packs. Use when asked to qualify an AI use, system, platform, configured application, Agent Skill, connector, organisation, service or contract from documents, prompts, configuration or declarations while preserving evidence, unknowns and deterministic legal or framework conclusions.
+description: Assess a governed object with AIR Framework rule packs. Use when asked to qualify an AI use, system, platform, configured application, skill, connector, organisation, service or contract from documents, prompts, configuration or declarations while preserving evidence, unknowns and deterministic legal or framework conclusions.
 license: Apache-2.0
 metadata:
   author: AIR Framework contributors
@@ -23,7 +23,7 @@ component as an AI system.
 For a configured application, model the relevant composition:
 
 - the application `runs_on` its platform;
-- the application `loads_skill` for passive Agent Skills;
+- the application `loads_skill` for passive skills;
 - the application or platform `can_invoke` connectors;
 - the concrete use is `implemented_by` the application or system.
 

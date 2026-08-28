@@ -12,3 +12,10 @@
 - Encoded Article 6(3) from constituent facts rather than a model-produced
   legal conclusion.
 - Recorded staged Article 113 application dates and explicit gaps.
+- Completed the Article 25(1) provider-role test with the name-or-trademark
+  case and narrowed substantial modification to an existing high-risk system
+  that remains high-risk.
+- Added the Article 50(1) law-enforcement exception as an explicit fact so an
+  unresolved exception produces an indeterminate result.
+- Gated prohibited-practice, high-risk and direct-interaction rules on the
+  AI-system definition fact.
