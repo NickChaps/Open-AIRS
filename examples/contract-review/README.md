@@ -15,14 +15,16 @@ flowchart LR
     F --> E["Deterministic engine"]
     L --> E
     E --> R["2 gaps<br/>1 indeterminate"]
-    R --> H["Targeted human review<br/>of ambiguous audit wording"]
+    X --> N["Second LLM call<br/>referenced readable note"]
+    R --> N
+    N --> H["Targeted human review<br/>of ambiguous audit wording"]
 
     classDef source fill:#dbeafe,stroke:#2563eb,color:#172554
     classDef analysis fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
     class C,L source
     class X,F,E analysis
-    class R,H result
+    class R,N,H result
 ```
 
 ## Clause reading

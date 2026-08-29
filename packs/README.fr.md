@@ -64,9 +64,9 @@ Chaque répertoire de version publié devient immuable :
 1. écrire une version candidate ;
 2. valider sa structure et ses cas de conformité ;
 3. la simuler sur le registre existant ;
-4. relire l’écart de constats et de routage ;
+4. relire les changements de constats et de parcours internes ;
 5. approuver et figer la version ;
-6. conserver les évaluations précédentes pour l’audit et le drift.
+6. conserver les évaluations précédentes pour l’audit et la comparaison dans le temps.
 
 `pack.json` est la source interprétable par la machine. Le README et le
-CHANGELOG voisins sont la surface de revue humaine.
+CHANGELOG voisins présentent la version aux personnes qui la relisent.

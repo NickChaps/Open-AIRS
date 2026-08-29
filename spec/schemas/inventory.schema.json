@@ -68,6 +68,11 @@
         "name": {"type": "string", "minLength": 1},
         "description": {"type": "string"},
         "external_ids": {"type": "object"},
+        "evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
         "facts": {"type": "object", "additionalProperties": {"$ref": "#/$defs/fact"}}
       },
       "additionalProperties": true

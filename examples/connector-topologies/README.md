@@ -27,7 +27,7 @@ flowchart LR
 | Platform specific | One connector linked from one platform | Applications on that platform can reach it |
 | Application specific | Connector linked directly from one application | Only that application can reach it |
 
-`can_invoke` means the capability is available in the captured runtime
+`can_invoke` means the capability is available in the captured platform
 configuration. It does not prove that an action occurred. Actual executions,
 credentials, permission sets and human confirmation gates need their own
 evidence.

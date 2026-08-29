@@ -11,9 +11,12 @@
     "inventory_id": "fictional-contract-demo",
     "snapshot_id": "contract-snapshot-1"
   },
+  "pack_inputs": [
+    {"id": "fictional-contract-review", "version": "1.0.0", "content_hash": "8a311d6c0e2c98e09e0f926d53387c30f6a5ea158d2cca85979338c72dc9eb6b"}
+  ],
   "extractor": {
     "kind": "llm",
-    "skill": {"id": "air-assess", "version": "0.2.0"},
+    "skill": {"id": "air-assess", "version": "0.3.0"},
     "model": {"id": "fictional-assessment-model", "version": "2026-08"},
     "run_id": "fictional-run-contract-001"
   },

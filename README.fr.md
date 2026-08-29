@@ -8,317 +8,344 @@
 
 [Read in English](README.md)
 
-AIR Framework est un socle ouvert pour construire un registre IA et qualifier
-un parc à partir de faits prouvés et de règles versionnées. Il relie ce qui
-existe réellement dans l’entreprise, ce que les textes exigent et les décisions
-que l’organisation prend ensuite.
+AIR Framework aide une organisation à tenir son registre IA, qualifier ses
+usages et expliquer chaque résultat. Il relie les systèmes réellement utilisés,
+les preuves disponibles et des règles issues de textes identifiés comme l’AI
+Act, le RGPD, NIS2 ou les référentiels NIST.
 
-## Pourquoi ce projet existe
+Il s’adresse aux équipes juridiques, conformité, sécurité, numériques et aux
+développeurs qui doivent partager le même dossier sans adopter le même niveau
+de détail technique.
 
-L’enquête mondiale publiée par McKinsey le 25 août 2026 a recueilli 1 719
-réponses dans 97 pays entre mai et juin. Près de **neuf répondants sur dix**
-déclarent un usage régulier de l’IA dans au moins une fonction et **44 %** un
-déploiement à l’échelle de l’entreprise. Parmi les organisations de plus d’un
-milliard de dollars de chiffre d’affaires, **40 %** déclarent mettre des agents
-à l’échelle dans au moins une fonction, contre 27 % un an plus tôt
+Le résultat attendu est simple à lire : **ce que fait l’usage, ce que les règles
+en concluent, pourquoi elles le concluent et ce qu’il reste à vérifier**.
+
+## Le problème
+
+Une entreprise peut déployer une plateforme IA, puis y créer des centaines
+d’applications configurées, souvent appelées agents. Ces applications chargent
+des instructions réutilisables, utilisent des modèles et accèdent parfois aux
+outils de l’entreprise par des connecteurs.
+
+Le nom de la plateforme ne suffit plus. Une même plateforme peut résumer des
+documents, préparer un dossier de crédit ou classer des candidatures. La
+finalité, les personnes concernées, les données, les actions possibles et les
+contrôles techniques changent d’un usage à l’autre.
+
+```mermaid
+flowchart LR
+    U1["Usage documentaire"] -->|"réalisé par"| A1["Application<br/>Synthèse"]
+    U2["Usage financier"] -->|"réalisé par"| A2["Application<br/>Crédit"]
+    U3["Usage RH"] -->|"réalisé par"| A3["Application<br/>Recrutement"]
+    A1 -->|"fonctionne sur"| P["Plateforme IA"]
+    A2 -->|"fonctionne sur"| P
+    A3 -->|"fonctionne sur"| P
+    A3 -->|"charge"| S["Skill<br/>Instructions de tri"]
+    A3 -->|"peut invoquer"| C["Connecteur<br/>Messagerie"]
+
+    classDef platform fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef app fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
+    class P platform
+    class A1,A2,A3,S,C app
+    class U1,U2,U3 use
+```
+
+La croissance est déjà visible. Dans son enquête publiée le 25 août 2026,
+McKinsey rapporte que près de neuf répondants sur dix utilisent régulièrement
+l’IA dans au moins une fonction, que 44 % déclarent un déploiement à l’échelle
+de l’entreprise et que 40 % des organisations de plus d’un milliard de dollars
+de chiffre d’affaires mettent des agents à l’échelle dans au moins une fonction
 ([McKinsey, 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)).
 
 Dans le même temps, l’[AI Act européen](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
-est entré dans sa phase d’application. Les entreprises doivent savoir quels
-systèmes et usages elles exploitent, pourquoi une qualification s’applique,
-quelles preuves la soutiennent et ce qui a changé depuis la dernière revue.
+entre progressivement en application. Les équipes juridiques, conformité,
+sécurité et numériques doivent pouvoir retrouver un usage, comprendre sa
+qualification et reproduire l’analyse qui était valable à une date donnée.
 
-Le nombre de fournisseurs ne décrit plus le périmètre à gouverner. Une
-plateforme peut exposer plusieurs modèles, héberger des dizaines d’applications
-configurées souvent appelées « agents », charger des skills et ouvrir des
-connecteurs vers les outils de l’entreprise. Chaque élément peut être réutilisé
-dans plusieurs usages métier.
+## Ce qu’AIR apporte
 
-```mermaid
-flowchart LR
-    P["1 plateforme IA"] --> M["plusieurs modèles"]
-    P --> A["des applications configurées<br/>ou agents"]
-    A --> S["des skills"]
-    A --> C["des connecteurs"]
-    A --> U["des usages métier"]
-    U --> X["des finalités, données,<br/>personnes et actions différentes"]
+AIR conserve dans le même dossier la composition réelle de l’usage, la lecture
+des sources et l’effet exact des règles. Ces trois couches restent séparées et
+peuvent être relues ou remplacées à leur propre rythme.
 
-    classDef platform fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef component fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
-    class P platform
-    class M,A,S,C component
-    class U,X use
-```
+AIR construit un dossier commun à partir de quatre éléments :
 
-La volumétrie devient combinatoire. Une liste de logiciels ou une campagne
-Excel ponctuelle ne suffit plus à expliquer qu’une même plateforme est utilisée
-pour résumer des documents, assister un conseiller ou trier des candidatures.
-Or la finalité, les données, les personnes concernées, les actions possibles et
-les contrôles du runtime peuvent changer la qualification.
+| Élément | En langage courant | Exemple |
+| --- | --- | --- |
+| **Objet** | Une chose que l’organisation veut suivre | Plateforme, système, application configurée, skill, connecteur, modèle, usage, contrat |
+| **Fait** | Une réponse précise utilisée par les règles | « L’application classe des candidats » |
+| **Preuve** | La source qui permet d’affirmer ce fait | Extrait du prompt, configuration du connecteur, réponse du responsable métier |
+| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.1.0 ou RGPD 1.1.0 |
 
-AIR Framework propose une manière reproductible de gérer cette complexité.
+Une référence exacte au texte ou au référentiel est appelée **ancrage**. Une
+photographie datée du registre est appelée **version d’inventaire** dans cette
+documentation. Les termes techniques restent disponibles dans les fichiers
+JSON et les spécifications, mais ils ne sont pas nécessaires pour comprendre
+un dossier.
 
-## AIR en trente secondes
+Avec ces éléments, AIR peut produire :
 
-1. **Inventorier** les systèmes, plateformes, applications, modèles, skills,
-   connecteurs et usages, avec leurs relations.
-2. **Établir des faits** précis à partir d’API, de déclarations et de documents,
-   en conservant la preuve et le niveau de confiance.
-3. **Appliquer des packs de règles déterministes** ancrés dans un texte juridique
-   ou un référentiel publié.
-4. **Conserver chaque version** de l’inventaire, des packs et des résultats pour
-   expliquer un changement ou mesurer le drift.
-5. **Laisser l’organisation décider** de ses validations et de ses circuits de
-   traitement sans les présenter comme du droit.
+- un inventaire qui montre la composition réelle d’un usage ;
+- une analyse écrite par un modèle de langage, avec les preuves citées et les
+  incertitudes visibles ;
+- des constats calculés par des règles stables ;
+- les références juridiques ou méthodologiques exactes ;
+- les obligations et informations encore manquantes ;
+- un historique permettant d’expliquer chaque évolution ;
+- un circuit interne défini séparément par l’organisation.
+
+## Comment fonctionne une qualification
+
+Le modèle de langage et le moteur de règles ont deux responsabilités
+différentes.
 
 ```mermaid
 flowchart LR
-    S["API · formulaires · documents<br/>configurations · déclarations"] --> G["Registre<br/>objets + relations"]
-    G --> D["Faits directs<br/>normalisés depuis les sources structurées"]
-    K["Skill air-assess<br/>questions + protocole"] --> L["Évaluation LLM<br/>lecture sémantique"]
-    G --> L
-    P["Packs versionnés<br/>catalogues + règles + ancrages"] --> L
-    L --> I["Faits inférés + analyse de source<br/>preuves + confiance"]
-    D --> F["Grille de faits résolue<br/>connus · inconnus · contradictoires"]
-    I --> F
-    F --> E["Moteur déterministe"]
+    S["Sources<br/>API · formulaires · prompts · documents"] --> G["Registre<br/>objets · relations · preuves"]
+    G --> L["1. Le LLM lit<br/>faits proposés + justification"]
+    P["Packs choisis<br/>questions · règles · références"] --> L
+    L --> F["2. Faits retenus<br/>connus · inconnus · contradictoires"]
+    G --> F
+    F --> E["3. Le moteur applique<br/>les règles publiées"]
     P --> E
-    E --> R["Constats · obligations<br/>inconnues · ancrages"]
-    R --> N["Dossier lisible<br/>analyse + résultat déterministe"]
-    N --> Q{"Politique de revue"}
-    Q -->|"matériel · incertain · échantillonné"| H["Revue humaine"]
-    Q -->|"non sélectionné"| C["Évaluation courante"]
-    H -->|"confirmé"| C
-    H -->|"corrigé"| G2["Correction versionnée<br/>et nouvelle évaluation"]
-    G2 --> G
-    R --> O["Voies de traitement<br/>propres à l’organisation"]
+    E --> N["4. Le LLM explique<br/>sans modifier les résultats"]
+    L --> N
+    N --> R["Dossier lisible<br/>constats · preuves · ancrages"]
 
-    classDef input fill:#f8fafc,stroke:#64748b,color:#0f172a
+    classDef source fill:#f8fafc,stroke:#64748b,color:#0f172a
     classDef registry fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef facts fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef rules fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef judge fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
-    class S,H,K input
-    class G,G2 registry
-    class D,L,I,F,N facts
-    class E,P rules
-    class R,O,Q,C result
+    class S source
+    class G registry
+    class L,F judge
+    class P,E engine
+    class N,R result
 ```
 
-Les valeurs structurées issues des API et des configurations peuvent alimenter
-directement les faits. Le modèle de langage traite la lecture sémantique et les
-jugements bornés, puis rédige une analyse de source reliée aux preuves. AIR
-résout les valeurs directes et inférées dans une même grille avant que le moteur
-déterministe applique les règles figées et fournisse les constats, ancrages et
-obligations stables. Les mêmes faits résolus et la même version d’un pack
-produisent le même résultat.
+### 1. Le modèle lit et justifie
 
-La revue humaine forme une couche de contrôle autour du pipeline automatisé.
-L’organisation peut l’imposer pour les cas matériels ou incertains et utiliser
-des échantillons stratifiés sur le reste du parc. Une correction crée un
-nouveau snapshot de source ou une version candidate de l’extracteur, du pack,
-de la voie ou de l’explication, puis une nouvelle évaluation. Les versions
-antérieures restent consultables. Voir [la revue humaine à l’échelle d’un parc](docs/fr/controle-qualite.md).
+Le LLM reçoit l’objet à qualifier, les composants liés, les preuves et la liste
+fermée des questions posées par les packs choisis. Il produit deux sorties dans
+le même appel :
 
-`air-assess` guide le LLM ou l’agent hôte au moment de la lecture sémantique.
-Le moteur Python sans dépendance n’appelle aucun modèle : sa ligne de commande
-part d’un inventaire qui contient déjà des faits structurés. Chaque organisation
-peut ainsi choisir son modèle et son environnement tout en conservant des fiches
-de faits, de preuves et de revue portables.
+- des faits structurés, avec un état, une preuve, une confiance et une raison
+  courte ;
+- une analyse en texte courant qui décrit le périmètre, les observations, les
+  inconnues et les points de vigilance.
 
-La version alpha livre le skill, les formats de fiches, les validateurs et le
-moteur déterministe. Le produit hôte fournit l’appel au modèle, la résolution
-des faits, l’échantillonnage périodique, le stockage, les droits d’accès et
-l’interface de revue.
+Il ne peut proposer que les faits déclarés par les packs. Il ne peut pas créer
+une règle, une obligation ou une référence juridique. Une consigne de sécurité
+écrite dans un prompt prouve l’existence de la consigne. Elle ne prouve pas
+qu’un contrôle technique est réellement activé.
 
-## Le graphe du registre
+### 2. AIR conserve les désaccords
 
-AIR conserve dans son inventaire les composants qui expliquent chaque usage.
-Certains sont nécessaires à la gouvernance sans constituer eux-mêmes un
-système d’IA autonome au sens de la loi. Le registre juridique final est une
-vue de ce graphe.
+Les données fiables reçues par API ou configuration restent prioritaires. Si
+la lecture du modèle contredit une information déjà établie, AIR conserve le
+désaccord. Il ne remplace pas silencieusement la valeur existante. Une absence
+d’information reste une inconnue ; elle ne devient jamais automatiquement un
+« non ».
+
+### 3. Le moteur applique les règles
+
+Le moteur Python lit les faits retenus et teste les conditions des packs. Cette
+étape n’appelle aucun modèle. À faits identiques et version de règles identique,
+le résultat est identique.
+
+Les règles rattachent alors les constats, les obligations et les ancrages
+publiés. Les conclusions de l’AI Act, du RGPD, de NIS2 et des profils NIST
+restent séparées.
+
+### 4. Le LLM rédige le dossier final
+
+Un second appel transforme les faits et les résultats calculés en une note
+lisible. Chaque affirmation importante doit renvoyer à un fait et une preuve,
+ou à une règle et ses ancrages. Le texte ne peut ni modifier un résultat ni
+ajouter une conclusion absente du moteur.
+
+Le dossier conserve donc les deux formes utiles : une structure exploitable par
+la machine et une explication que les équipes métier peuvent relire.
+
+## Exemple : une application trie des CV
+
+Imaginons une application configurée sur une plateforme d’entreprise. Elle
+charge un skill de présélection, classe les candidatures et possède un
+connecteur capable d’envoyer un refus sans confirmation humaine séparée.
+
+Le LLM peut proposer les faits suivants :
+
+| Fait proposé | Preuve | Confiance |
+| --- | --- | --- |
+| L’usage filtre et classe des candidatures | Déclaration d’usage et instructions | 0,99 |
+| Le connecteur peut envoyer un refus sans étape humaine distincte | Configuration du connecteur | 0,97 |
+| Aucune AIPD terminée n’est prouvée | Déclaration du responsable | 0,99 |
+
+Son analyse explique en quelques paragraphes pourquoi ces sources décrivent une
+présélection de candidats, quel rôle joue le connecteur et quelles informations
+restent inconnues.
+
+Le moteur applique ensuite les packs. Dans l’exemple livré, le pack AI Act
+retient le cas de recrutement de l’annexe III et les règles associées au haut
+risque. Le pack RGPD constate une décision exclusivement automatisée produisant
+un effet significatif, sans exception établie au titre de l’article 22, ainsi
+qu’une AIPD requise dont l’achèvement n’est pas prouvé. Le profil NIST conserve
+ses propres écarts, sans les présenter comme une non-conformité juridique.
+
+[Ouvrir le cas complet, sans lancer de code](examples/ai-governance/README.fr.md).
+
+## Le contrôle humain à l’échelle d’un parc
+
+Une entreprise qui possède des milliers d’applications ne peut pas demander une
+validation manuelle de chaque lecture. AIR exécute la qualification, conserve
+les preuves et applique ensuite la politique de contrôle définie par
+l’organisation.
 
 ```mermaid
-flowchart TB
-    U["Usage concret<br/>Présélection de candidatures"] -->|implemented_by| A["Application IA configurée<br/>Assistant recrutement"]
-    A -->|runs_on| P["Plateforme IA"]
-    P -->|offers_model| M["Modèle"]
-    A -->|loads_skill| S["Skill<br/>instructions de présélection"]
-    A -->|can_invoke| C["Connecteur<br/>messagerie ou SIRH"]
-    U -->|operated_by| O["Organisation"]
-    P -->|provided_by| V["Fournisseur"]
+flowchart LR
+    A["Qualifications automatisées"] --> Q{"Sélection de contrôle"}
+    Q -->|"résultat sensible"| C["Revue ciblée"]
+    Q -->|"preuve faible ou contradictoire"| C
+    Q -->|"échantillon périodique"| S["Revue qualité"]
+    Q -->|"non sélectionné"| V["Version courante"]
+    C --> D{"Décision"}
+    S --> D
+    D -->|"confirmé"| V
+    D -->|"corrigé"| N["Nouvelle preuve ou version candidate"]
+    N --> A
 
-    classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
-    classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef component fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef actor fill:#f1f5f9,stroke:#64748b,color:#0f172a
-    class U use
-    class A,P app
-    class M,S,C component
-    class O,V actor
+    classDef auto fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef review fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef change fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    class A,V auto
+    class Q,C,S,D review
+    class N change
 ```
 
-Dans cet exemple, le skill est un paquet textuel passif. Il ne peut pas appeler
-un connecteur. L’application ou la plateforme effectue l’action dans la limite
-des permissions du runtime. Le skill reste important au registre parce que ses
-instructions peuvent contribuer à la finalité de l’usage.
+Une correction reste visible et déclenche une nouvelle évaluation. Les équipes
+peuvent mesurer la qualité par type d’usage, modèle, pack et période, puis
+améliorer le protocole de lecture ou les règles après validation.
 
-Chaque pack déclare explicitement les relations qu’il traverse et les faits
-qu’il autorise à hériter. Une qualification juridique finale n’est jamais
-copiée mécaniquement d’un parent vers un enfant : elle est recalculée pour la
-composition et l’usage évalués.
+[Lire le guide du contrôle qualité](docs/fr/controle-qualite.md).
 
-## Quatre couches de décision
+## Ce qui est livré aujourd’hui
 
-| Couche | Question traitée | Exemple |
+La distribution contient :
+
+- le modèle d’inventaire et de relations ;
+- les formats de faits, preuves, extractions, évaluations, notes et revues ;
+- un moteur Python sans dépendance d’exécution ;
+- une commande facultative `qualify` qui appelle un service compatible avec
+  l’API Chat Completions, une fois pour la lecture et une fois pour la note ;
+- la vérification locale de chaque référence produite par le modèle ;
+- les packs versionnés et leurs tests ;
+- la comparaison de deux évaluations et la simulation d’une nouvelle version
+  de pack ;
+- un mécanisme séparé pour les circuits internes de l’organisation ;
+- des exemples complets sur la gouvernance IA, les connecteurs et les contrats.
+
+Le framework n’impose ni fournisseur de modèle, ni modèle précis, ni circuit
+d’approbation interne. La clé d’API reste dans une variable d’environnement.
+
+## Packs fournis
+
+| Pack | Nature | Périmètre résumé |
 | --- | --- | --- |
-| **Objets et relations** | Qu’existe-t-il et comment les éléments se composent-ils ? | Cette application fonctionne sur cette plateforme et charge ce skill. |
-| **Faits et preuves** | Que savons-nous réellement ? | Les instructions classent des candidatures ; la preuve est telle section du prompt. |
-| **Packs normatifs** | Que conclut cette version de ce texte ou référentiel ? | La règle liée à l’annexe III de l’AI Act correspond aux faits établis. |
-| **Voies organisationnelles** | Que décide l’entreprise après le constat ? | Revue juridique, demande de preuve, validation sécurité ou autre circuit interne. |
+| [EU AI Act 1.1.0](packs/eu-ai-act/1.1.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
+| [RGPD pour les usages IA 1.1.0](packs/eu-gdpr-ai/1.1.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
+| [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.fr.md) | Directive européenne | Gouvernance, mesures de l’article 21 et signalement des incidents, à appliquer avec le droit national concerné |
+| [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.fr.md) | Référentiel volontaire | 72 résultats du Core dans un profil choisi par l’organisation |
+| [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.fr.md) | Référentiel volontaire | 106 résultats du Core dans un profil choisi par l’organisation |
+| [Revue contractuelle fictive](packs/contract-review-example/1.0.0/README.fr.md) | Exemple | Contrat comparé à un clausier fictif avec le même moteur |
 
-Cette séparation évite trois erreurs fréquentes : faire passer une politique
-interne pour une obligation légale, demander au LLM d’inventer la conclusion,
-ou considérer toute information absente comme un « non ».
+Chaque guide indique l’autorité, la version, la couverture, les limites et les
+sources officielles. Une entreprise choisit explicitement les packs et versions
+qu’elle active.
 
-## Ce que produit une évaluation
+## Essayer le framework
 
-Une évaluation AIR conserve ensemble :
+Le moteur exige Python 3.11 ou une version plus récente.
 
-- la cible et le snapshot exact du registre ;
-- les faits directs, hérités, inconnus ou contradictoires ;
-- la preuve de chaque fait établi et la confiance lorsqu’un modèle l’a inféré ;
-- la version et l’empreinte du pack appliqué ;
-- la règle déclenchée, son explication et ses ancrages exacts ;
-- les obligations, lacunes de preuve et inconnues ;
-- un identifiant stable permettant de comparer deux évaluations.
-
-La fiche d’extraction conserve les propositions sémantiques du modèle et son
-analyse de source. Une fiche d’analyse séparée transforme les faits et constats
-déterministes en texte lisible dont chaque affirmation matérielle renvoie à ses
-preuves, règles et ancrages. La fiche de revue indique pourquoi le cas a été
-sélectionné, ce que la personne a confirmé ou corrigé et quelle action versionnée
-en découle.
-
-Le produit hôte peut afficher la dernière version dans le registre tout en
-gardant l’historique complet pour l’audit, la simulation d’impact et l’analyse
-du drift.
-
-## Packs livrés dans la première distribution
-
-| Pack | Autorité | Ce qu’il apporte |
-| --- | --- | --- |
-| **[EU AI Act](packs/eu-ai-act/1.1.0/README.fr.md)** | Droit européen contraignant | Toutes les voies de l’article 5, tous les cas annexe III, préparation des opérateurs, article 50 et GPAI. |
-| **[EU GDPR · profil IA](packs/eu-gdpr-ai/1.1.0/README.fr.md)** | Droit européen avec lignes EDPB identifiées | Périmètre, principes, droits, décisions automatisées, AIPD, sécurité, transferts et modèles IA. |
-| **[EU NIS2 · socle](packs/eu-nis2-baseline/1.1.0/README.fr.md)** | Directive européenne à compléter nationalement | Article 20, dix familles de l’article 21 et déclarations d’incident de l’article 23. |
-| **[NIST AI RMF + profil GenAI](packs/nist-ai-rmf/1.1.0/README.fr.md)** | Référentiel volontaire | 72 résultats du Core dans un profil cible choisi par l’organisation. |
-| **[NIST CSF 2.0](packs/nist-csf/2.1.0/README.fr.md)** | Référentiel volontaire | 106 résultats actuels du Core dans un profil cible choisi par l’organisation. |
-| **[Revue contractuelle fictive](packs/contract-review-example/1.0.0/README.fr.md)** | Exemple pédagogique | Démonstration du même moteur sur un contrat et un clausier fictifs. |
-
-Chaque pack publie les faits attendus, les conditions déterministes, les
-sources, la couverture et les lacunes connues. Une nouvelle version est
-simulée sur le parc avant activation.
-
-## Pour qui ?
-
-- **Juridique et conformité** : relire la raison d’un constat, son texte source
-  et les preuves manquantes sans parcourir du code.
-- **Sécurité et risques** : rattacher les contrôles de plateforme, les
-  connecteurs et les référentiels cyber aux usages concernés.
-- **Équipes numériques et responsables de plateformes** : alimenter le registre
-  depuis les API et comprendre l’effet d’une modification de configuration.
-- **Métiers** : décrire la finalité et le contexte d’un usage avec des mots
-  compréhensibles, puis répondre aux seules questions encore ouvertes.
-- **Développeurs de solutions de gouvernance** : réutiliser les schémas, le
-  moteur, les packs et les tests dans leur propre produit.
-
-## Commencer ici
-
-| Si vous voulez… | Ouvrez… |
-| --- | --- |
-| comprendre les concepts sans prérequis technique | **[Concepts d’AIR Framework](CONCEPTS.md)** |
-| voir un parcours complet, du besoin métier à la décision | [Parcours métier](docs/fr/parcours-metier.md) |
-| savoir ce que contient un registre IA utile | [Contenu du registre IA](docs/fr/registre-ia.md) |
-| comprendre la revue humaine et l’échantillonnage à grande échelle | [Guide de contrôle qualité](docs/fr/controle-qualite.md) |
-| voir le résultat de gouvernance IA sans lancer de code | [Exemple complet de gouvernance IA](examples/ai-governance/README.fr.md) |
-| voir la revue contractuelle sans lancer de code | [Exemple complet de revue contractuelle](examples/contract-review/README.fr.md) |
-| modéliser des connecteurs partagés ou réservés à une application | [Exemple de topologies de connecteurs](examples/connector-topologies/README.fr.md) |
-| exécuter un exemple en dix minutes | [Démarrage rapide](docs/fr/demarrage.md) |
-| lire les faits, constats et l’analyse auditable | [Lire une évaluation](docs/fr/lire-une-evaluation.md) |
-| vérifier la couverture et les sources | [Sources et couverture](docs/fr/sources-et-couverture.md) |
-| consulter l’audit actuel des packs | [Revue de couverture des packs du 29 août 2026](docs/audits/2026-08-29-pack-viability.fr.md) |
-| créer un nouveau pack | [Créer et publier un pack](docs/fr/creer-un-pack.md) |
-| intégrer le moteur | [Spécification du graphe d’objets](spec/01-object-graph.md) |
-
-La [documentation française complète](docs/fr/README.md) est organisée par
-profil métier. Les spécifications sous `spec/` décrivent les contrats
-techniques et normatifs du framework.
-
-### Les deux skills fournis avec AIR
-
-Le mot **skill** garde le même sens partout : un paquet d’instructions textuel.
-Le dossier [`skills/`](skills/) en fournit deux prêts à l’emploi : l’un aide à
-extraire des faits et relire une évaluation, l’autre aide à écrire et tester un
-pack. Ils sont optionnels. Ils utilisent le framework sans remplacer le moteur
-ni les règles. S’ils sont déployés sur une plateforme, ils peuvent être
-inventoriés comme n’importe quel autre objet `skill` du parc.
-
-| Même format, deux positions | Ce qu’AIR enregistre |
-| --- | --- |
-| Un skill trouvé dans un parc IA | Son texte, sa version, sa plateforme et son effet sur la finalité des usages composés |
-| Un skill d’aide AIR déployé par une équipe | Les mêmes champs, avec des instructions destinées à guider l’évaluation ou la création de packs |
-
-Le contexte de déploiement et le contenu donnent son rôle au skill. Le schéma
-d’objet reste identique.
-
-## Essayer l’exemple de gouvernance IA
-
-Le moteur de référence n’a aucune dépendance d’exécution en dehors de
-Python 3.11 ou supérieur.
+### Sans appel à un modèle
 
 ```bash
 python -m pip install .
-
-air-framework validate-extraction examples/ai-governance/extraction.json
-air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
-air-framework assess \
-  --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.1.0/pack.json \
-  --target use-recruiting-assistant
 
 air-framework assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
-
-air-framework validate-note examples/ai-governance/assessment-note.json
-air-framework validate-review examples/ai-governance/review.json
 ```
 
-La commande de profil applique une sélection explicite de packs figés par
-version et empreinte. Aucun jeu de règles global ne s’active en silence.
+Cette commande rejoue les règles sur les faits déjà présents dans l’exemple.
 
-## Portée de la version alpha
+### Avec lecture et justification par un LLM
 
-AIR Framework ne certifie pas la conformité et ne remplace pas les
-professionnels du droit, de la sécurité ou des risques. Un résultat dépend de
-la version des packs actifs, des preuves disponibles et de la qualité des faits
-transmis au moteur.
+Le fournisseur doit accepter le format OpenAI-compatible Chat Completions et
+les réponses JSON. La commande n’accepte pas de clé secrète en argument.
+Elle envoie au service choisi la cible, sa composition et les preuves liées :
+vérifiez donc que ce service est autorisé à recevoir ces contenus.
 
-Le dépôt contient la distribution de référence `v0.1.0-alpha.3`. Les schémas et
-interfaces en ligne de commande peuvent encore évoluer. Consultez la
-[déclaration clean-room](CLEAN_ROOM.md), les [décisions fondatrices](spec/00-project-decisions.md),
-les [dépendances auditées](DEPENDENCIES.md) et le [guide de contribution](CONTRIBUTING.md).
+```bash
+export AIR_LLM_API_KEY="votre-cle"
+export AIR_LLM_MODEL="votre-modele"
+export AIR_LLM_BASE_URL="https://votre-fournisseur.example/v1"
 
-## Licences et citation
+air-framework qualify \
+  --inventory examples/ai-governance/inventory.json \
+  --profile examples/ai-governance/pack-profile.json \
+  --target use-recruiting-assistant \
+  --reasoning-effort low \
+  --output-dir qualification-demo
+```
 
-Le code, les schémas, les packs de règles, les tests, les exemples et les
-skills sont sous [licence Apache 2.0](LICENSE). Les guides et documents
-explicatifs sont sous [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/deed.fr).
-Le détail figure dans [LICENSE-POLICY.md](LICENSE-POLICY.md).
+Le dossier de sortie contient cinq fichiers :
 
-Les lois, normes et publications externes ne sont pas placées sous ces
-licences. Les packs renvoient vers leurs sources officielles et contiennent des
-règles, tests et explications rédigés indépendamment. Les informations de
-citation figurent dans [CITATION.cff](CITATION.cff).
+1. l’extraction et la justification du LLM ;
+2. la nouvelle version d’inventaire ;
+3. les résultats déterministes ;
+4. la note lisible produite après calcul ;
+5. un manifeste avec l’empreinte de chaque fichier.
+
+Aucun appel payant n’est nécessaire pour exécuter les tests du dépôt. Le client
+LLM est remplacé par un faux client déterministe dans les tests.
+
+## Où aller ensuite
+
+Il existe beaucoup de fichiers parce que les packs sont bilingues et conservent
+leurs versions. Pour découvrir le projet, quatre entrées suffisent :
+
+| Votre besoin | Point de départ |
+| --- | --- |
+| Comprendre AIR avec un exemple et les mots essentiels | [Comprendre AIR](docs/fr/concepts.md) |
+| Voir exactement ce que contient un registre IA | [Le registre IA](docs/fr/registre-ia.md) |
+| Exécuter les exemples et inspecter les fichiers | [Parcours de dix minutes](docs/fr/demarrage.md) |
+| Créer des règles ou intégrer le moteur | [Documentation par rôle](docs/fr/README.md) |
+
+Les spécifications techniques se trouvent dans [`spec/`](spec/). Les revues
+datées de couverture se trouvent dans [`docs/audits/`](docs/audits/). Elles
+servent de preuves de maintenance et ne font pas partie du parcours de lecture
+initial.
+
+## Limites
+
+AIR Framework ne certifie pas la conformité et ne remplace pas un avis
+juridique, une analyse de sécurité ou une décision de l’organisation. Un
+résultat dépend des preuves disponibles, de la qualité de la lecture, des packs
+choisis et de leur version.
+
+Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
+réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
+échantillonnés selon le risque et la politique interne.
+
+La version actuelle est `v0.1.0-alpha.4`. Les formats peuvent encore évoluer.
+
+## Licence et citation
+
+Le code, les schémas, les packs, les tests, les exemples et les skills sont
+publiés sous [Apache 2.0](LICENSE). Les guides et textes explicatifs sont sous
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.fr). Les sources
+externes conservent leurs propres droits. Consultez [LICENSE-POLICY.md](LICENSE-POLICY.md),
+[CITATION.cff](CITATION.cff) et la [déclaration clean-room](CLEAN_ROOM.md).

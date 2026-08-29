@@ -2,9 +2,14 @@
 
 # What the AI registry contains
 
-The governance inventory is broader than the legal list of AI systems. That is
-intentional. It needs enough context to explain why a legal system boundary and
-intended purpose were chosen.
+The governance inventory is broader than the legal list of AI systems. It
+needs enough context to explain why a legal system boundary and intended
+purpose were chosen.
+
+The EU AI Act does not provide one internal registry template for every
+organisation. AIR gathers the information needed for qualification,
+documentation and applicable duties, then projects the legal view that fits
+the organisation's role and context.
 
 ```mermaid
 flowchart LR
@@ -16,7 +21,7 @@ flowchart LR
     Q --> A["AI Act register view"]
     Q --> G["GDPR and NIS2 views"]
     Q --> N["NIST profile views"]
-    A --> H["History<br/>snapshots · versions · drift"]
+    A --> H["History<br/>versions · changes · comparisons"]
     G --> H
     N --> H
 
@@ -39,7 +44,7 @@ flowchart LR
 | Who and what can it affect? | People, material decisions, personal data, special-category data and other sensitive information | Provides the factual basis for legal qualification |
 | What follows? | AI Act qualification, separate GDPR and security findings, reasons, anchors, evidence gaps, obligations and due dates | Makes the result reviewable and actionable |
 
-Every entry also carries the assessment version, source snapshot and change
+Every entry also carries the assessment version, source inventory version and change
 history. A register can therefore show the current result and reproduce the
 result that was active at an earlier date.
 

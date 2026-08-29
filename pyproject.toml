@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "air-governance-framework"
-version = "0.1.0a3"
+version = "0.1.0a4"
 description = "Auditable rule-pack engine and registry model for AI governance and beyond"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -41,5 +41,6 @@ testpaths = ["tests"]
 [tool.hatch.build]
 include = [
   "src/air_framework/**/*.py",
+  "src/air_framework/**/*.txt",
   "src/air_framework/py.typed",
 ]

@@ -28,7 +28,7 @@ flowchart LR
 | Propre à une application | Un connecteur relié directement à une application | Cette application seule peut l’atteindre |
 
 `can_invoke` signifie que la capacité est disponible dans la configuration
-runtime capturée. Cette relation ne prouve pas qu’une action a eu lieu. Les
+capturée de la plateforme. Cette relation ne prouve pas qu’une action a eu lieu. Les
 exécutions, identifiants, droits et validations humaines demandent leurs propres
 preuves.
 

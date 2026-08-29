@@ -18,7 +18,9 @@ flowchart LR
     X --> F
     F --> E["Deterministic packs<br/>AI Act · GDPR · NIST"]
     E --> R["Findings, anchors<br/>and obligations"]
-    R --> H["Stratified human sample"]
+    X --> N["Second LLM call<br/>referenced readable note"]
+    R --> N
+    N --> H["Stratified human sample"]
 
     classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
     classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
@@ -27,7 +29,7 @@ flowchart LR
     class U use
     class A,P app
     class S,C,D component
-    class X,F,E,R,H decision
+    class X,F,E,R,N,H decision
 ```
 
 ## What AIR receives
@@ -38,7 +40,7 @@ flowchart LR
 | Screening skill | Criteria for analysing CVs |
 | Connector configuration | Candidate messages can be sent without a separate confirmation gate |
 | Use declaration | Employment recruitment purpose, personal data and direct interaction with applicants |
-| Platform snapshot | Shared logging, security and operational controls |
+| Dated platform configuration | Shared logging, security and operational controls |
 
 The skill remains passive text. The connector is invoked by the configured
 application under platform permissions.
@@ -59,7 +61,7 @@ with the deterministic result:
 > governance gaps.
 
 The note retains the scope, evidence-linked statements, unknowns and cautions.
-It records that prompt guidelines do not prove runtime enforcement.
+It records that prompt guidelines do not prove enforcement by the platform.
 
 Key semantic proposals are visible before the rules run:
 

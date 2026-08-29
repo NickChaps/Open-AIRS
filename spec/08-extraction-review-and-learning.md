@@ -21,13 +21,15 @@ flowchart LR
     F --> E["Deterministic engine"]
     P --> E
     E --> A["Assessment<br/>findings · unknowns · anchors · obligations"]
+    A --> N["Explanation call<br/>readable note with references"]
+    X --> N
     A --> R["Organisation route"]
     A --> Q{"Review policy"}
     Q -->|"selected"| H["Human review record"]
     Q -->|"not selected"| C["Current assessment"]
     H -->|"confirmed"| C
-    H -->|"corrected"| N["Versioned correction<br/>and reassessment"]
-    N --> G
+    H -->|"corrected"| V["Versioned correction<br/>and reassessment"]
+    V --> G
 ```
 
 Structured sources can supply direct facts without a model. The extraction
@@ -35,40 +37,59 @@ agent handles fields that require semantic reading and makes bounded
 judgements. It can recognise that
 instructions rank candidates, that a configured application can send a message
 or that a contract clause is ambiguous. It returns the proposed facts used by
-the pack and a concise source-analysis note. Direct and inferred facts are
+the pack and a source-analysis note. Direct and inferred facts are
 resolved into one grid before evaluation. The note records claims, evidence,
 unknowns and cautions. It is an audit rationale, not a transcript of private
 model reasoning.
 
 The engine evaluates the fact grid with a pinned pack. It owns the reproducible
-rule result, anchors and obligations. An organisation route is computed from
-the immutable findings as a separate step.
+rule result, anchors and obligations. The explanation call receives the
+extraction and engine results, then writes prose whose references are checked
+locally. It cannot change a status or create a rule, anchor or obligation. An
+organisation route is computed from the immutable findings as a separate step.
 
 ## The `air-assess` skill
 
-`air-assess` is a portable instruction package for the extraction agent. The
-Python engine does not call it. A host agent uses the skill to:
+`air-assess` is a portable instruction package for the extraction and
+explanation calls. The Python rule engine does not call it. The optional
+`air-framework qualify` command provides a reference orchestrator. A product
+can implement the same interface with its own model gateway. The sequence is:
 
 1. establish the target and composition;
 2. read the selected packs and their fact catalogues;
-3. produce an extraction record for semantic facts and contribute it to the
-   resolved inventory snapshot;
-4. invoke the deterministic engine;
-5. prepare the readable assessment note from the extraction and engine output.
+3. produce an extraction record for semantic facts, source analysis and exact
+   pack pins;
+4. create a new inventory snapshot while retaining any conflict with reliable
+   structured facts;
+5. invoke the deterministic engine;
+6. prepare the readable assessment note from the extraction and engine output;
+7. reject the note if any cited fact, evidence item, rule or anchor is absent.
 
-The CLI starts at step 4 when an inventory already contains structured facts.
+The `assess` and `assess-profile` commands start at step 5 when an inventory
+already contains the required facts. The `qualify` command runs all seven
+steps.
 
 ## Reference alpha boundary
 
 | Included in this repository | Supplied by an integrating product |
 | --- | --- |
-| `air-assess` instructions | Model client and secure source access |
-| Extraction, assessment-note and review schemas | Resolution of direct and inferred facts into inventory snapshots |
+| `air-assess` instructions and versioned prompt templates | Secure source access and secrets management |
+| OpenAI-compatible model client and two-call orchestrator | Provider selection, budget and regional controls |
+| Extraction, assessment-note and review schemas | Durable database and access control |
+| Direct and inferred fact resolution with visible conflicts | Organisation-specific source precedence rules when needed |
 | Deterministic pack engine and traces | Review-selection policy, scheduler and reviewer interface |
-| Versioned pack and route formats | Storage, access control and approval workflow |
+| Versioned pack and route formats | Approval and activation workflow |
 
-This boundary keeps the framework provider-neutral. It also means that running
-the Python CLI alone does not invoke a model or select a periodic sample.
+The client uses the OpenAI-compatible Chat Completions request shape and can
+target different providers through environment variables. The framework ships
+no provider key and selects no model by default. `assess` never invokes a
+model; `qualify` does. No command selects a periodic sample on its own.
+
+Each extraction stores the model id, provider label, model run id, complete
+prompt hash, prompt-template version and every pack version and hash sent to
+the model. The note stores the corresponding renderer metadata. Token usage is
+retained when the provider returns it. These fields allow an auditor to
+identify the exact protocol used for both calls.
 
 ## Review selection
 

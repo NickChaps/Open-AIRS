@@ -14,12 +14,12 @@
       "snapshot_id": "contract-snapshot-1"
     },
     "extraction_ids": ["urn:air:extraction:fictional-contract-20260829"],
-    "assessment_ids": ["urn:air:assessment:d8a041070c24ea4c998e18d4"]
+    "assessment_ids": ["urn:air:assessment:dff677e513fe5c5b3e9db8c7"]
   },
   "renderer": {
     "kind": "hybrid",
     "id": "air-assess",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "model": {
       "id": "fictional-assessment-model",
       "version": "2026-08"
@@ -49,7 +49,7 @@
       "kind": "finding",
       "text": "The deterministic library returns gaps for intellectual-property allocation and security-incident notice.",
       "references": {
-        "assessment_id": "urn:air:assessment:d8a041070c24ea4c998e18d4",
+        "assessment_id": "urn:air:assessment:dff677e513fe5c5b3e9db8c7",
         "rule_ids": [
           "contract.demo.ip-missing",
           "contract.demo.security-notice-missing"
@@ -63,7 +63,7 @@
       "text": "The supplied cooperation wording does not establish an audit or assurance right.",
       "references": {
         "fact_ids": ["clause.audit_cooperation_present"],
-        "assessment_id": "urn:air:assessment:d8a041070c24ea4c998e18d4",
+        "assessment_id": "urn:air:assessment:dff677e513fe5c5b3e9db8c7",
         "rule_ids": ["contract.demo.audit-missing"],
         "anchor_ids": ["contract.demo.audit"]
       }

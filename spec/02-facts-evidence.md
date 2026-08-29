@@ -40,7 +40,7 @@ characterisation such as an Annex III use-case code. The proposal remains
 visible with its evidence and confidence. Finding codes, anchors and
 obligations come from the versioned rule pack and deterministic engine.
 
-The model also produces a concise source analysis. Each observation references
+The model also produces a source analysis. Each observation references
 the facts and evidence that support it. The analysis records scope, conclusions,
 unknowns and cautions needed for audit. It does not contain private model
 chain-of-thought. After deterministic evaluation, a separate assessment note

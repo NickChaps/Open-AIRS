@@ -8,310 +8,330 @@
 
 [Lire en français](README.fr.md)
 
-AIR Framework is an open foundation for building an AI registry and evaluating
-an AI estate from evidence-backed facts and versioned rules. It connects what
-actually exists in an organisation, what published authorities require and the
-decisions the organisation makes next.
+AIR Framework helps an organisation maintain its AI registry, assess its uses
+and explain every result. It connects deployed systems, available evidence and
+rules derived from identified sources such as the EU AI Act, GDPR, NIS2 and
+NIST publications.
 
-## Why this project exists
+It is written for legal, compliance, security and digital teams as well as the
+developers who must share one case file without needing the same level of
+technical detail.
 
-McKinsey's global survey published on 25 August 2026 collected 1,719 responses
-across 97 countries between May and June. Nearly **nine in ten respondents**
-report regular AI use in at least one business function, and **44%** report
-enterprise-wide scaling. Among organisations with more than $1 billion in
-annual revenue, **40%** report scaling agents in at least one function, up from
-27% a year earlier
-([McKinsey, 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)).
+The expected result is easy to read: **what the use does, what the rules
+conclude, why they conclude it and what still needs evidence**.
 
-At the same time, the European [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
-has entered its application phase. Organisations need to know which systems
-and uses they operate, why a qualification applies, which evidence supports it
-and what has changed since the previous review.
+## The problem
 
-Counting vendors does not describe the governed estate. One platform may
-expose several models, host dozens of configured applications commonly called
-“agents”, load skills and provide connectors to business systems. Each
-component can be reused across several business uses.
+An organisation can deploy one AI platform and create hundreds of configured
+applications on it, commonly called agents. These applications may load
+reusable instructions, use several models and access business tools through
+connectors.
+
+The platform name is no longer enough. The same platform can summarise
+documents, prepare a credit file or rank job applications. Purpose, affected
+people, data, possible actions and technical controls differ for each use.
 
 ```mermaid
 flowchart LR
-    P["1 AI platform"] --> M["several models"]
-    P --> A["configured applications<br/>or agents"]
-    A --> S["skills"]
-    A --> C["connectors"]
-    A --> U["business uses"]
-    U --> X["different purposes, data,<br/>people and actions"]
+    U1["Document use"] -->|"implemented by"| A1["Application<br/>Summaries"]
+    U2["Financial use"] -->|"implemented by"| A2["Application<br/>Credit"]
+    U3["Employment use"] -->|"implemented by"| A3["Application<br/>Recruitment"]
+    A1 -->|"runs on"| P["AI platform"]
+    A2 -->|"runs on"| P
+    A3 -->|"runs on"| P
+    A3 -->|"loads"| S["Skill<br/>Screening instructions"]
+    A3 -->|"can invoke"| C["Connector<br/>Messaging"]
 
     classDef platform fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef component fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef app fill:#ecfeff,stroke:#0891b2,color:#164e63
     classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
     class P platform
-    class M,A,S,C component
-    class U,X use
+    class A1,A2,A3,S,C app
+    class U1,U2,U3 use
 ```
 
-The number of combinations grows quickly. A software list or a one-off
-spreadsheet campaign cannot explain that the same platform is used to
-summarise documents, assist an adviser and screen job applicants. Yet intended
-purpose, data, affected people, available actions and runtime controls can all
-change the assessment.
+The scale is already visible. McKinsey's survey published on 25 August 2026
+reports regular AI use in at least one function by almost nine respondents in
+ten, enterprise-wide scaling by 44%, and agent scaling in at least one function
+by 40% of organisations with more than $1 billion in annual revenue
+([McKinsey, 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)).
 
-AIR Framework provides a reproducible way to govern that complexity.
+The [EU AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+is also entering its application stages. Legal, compliance, security and
+digital teams need to find a use, understand its assessment and reproduce the
+analysis that applied on a given date.
 
-## AIR in thirty seconds
+## What AIR provides
 
-1. **Inventory** systems, platforms, applications, models, skills, connectors
-   and concrete uses, including their relationships.
-2. **Establish precise facts** from APIs, declarations and documents while
-   retaining the evidence and confidence level.
-3. **Apply deterministic rule packs** anchored to a published legal or
-   methodological source.
-4. **Keep every version** of the inventory, packs and outcomes so a change or
-   drift can be explained.
-5. **Let the organisation decide** its review and approval routes without
-   presenting those choices as law.
+AIR keeps the actual composition, source reading and exact effect of the rules
+in one case file. These three layers remain separate and can be reviewed or
+updated on their own schedules.
+
+AIR builds one reviewable record from four elements:
+
+| Element | Plain meaning | Example |
+| --- | --- | --- |
+| **Object** | Something the organisation needs to track | Platform, system, configured application, skill, connector, model, use or contract |
+| **Fact** | A precise answer used by rules | “The application ranks candidates” |
+| **Evidence** | The source supporting that fact | Prompt excerpt, connector configuration, use-owner declaration |
+| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.1.0 or GDPR 1.1.0 |
+
+An exact reference to a law or framework is called an **anchor**. A dated copy
+of the registry is called an **inventory version** in the reader guides. JSON
+files and specifications retain the technical field names, but readers do not
+need them to understand an assessment.
+
+AIR can then produce:
+
+- an inventory that shows the real composition of a use;
+- model-written analysis with cited evidence and visible uncertainty;
+- findings calculated by stable rules;
+- exact legal or methodological references;
+- obligations and missing information;
+- history that explains each change;
+- a separate internal process owned by the organisation.
+
+## How an assessment works
+
+The language model and the rule engine have different jobs.
 
 ```mermaid
 flowchart LR
-    S["APIs · forms · documents<br/>configurations · declarations"] --> G["Registry<br/>objects + relationships"]
-    G --> D["Direct facts<br/>normalised from structured sources"]
-    K["air-assess skill<br/>questions + protocol"] --> L["LLM assessment<br/>semantic reading"]
-    G --> L
-    P["Versioned packs<br/>fact catalogues + rules + anchors"] --> L
-    L --> I["Inferred facts + source analysis<br/>evidence + confidence"]
-    D --> F["Resolved fact grid<br/>known · unknown · conflicted"]
-    I --> F
-    F --> E["Deterministic engine"]
+    S["Sources<br/>APIs · forms · prompts · documents"] --> G["Registry<br/>objects · relations · evidence"]
+    G --> L["1. LLM reads<br/>fact proposals + explanation"]
+    P["Selected packs<br/>questions · rules · references"] --> L
+    L --> F["2. Retained facts<br/>known · unknown · conflicted"]
+    G --> F
+    F --> E["3. Engine applies<br/>published rules"]
     P --> E
-    E --> R["Findings · obligations<br/>unknowns · anchors"]
-    R --> N["Readable case file<br/>analysis + deterministic result"]
-    N --> Q{"Review policy"}
-    Q -->|"material · uncertain · sampled"| H["Human review"]
-    Q -->|"not selected"| C["Current assessment"]
-    H -->|"confirmed"| C
-    H -->|"corrected"| G2["Versioned correction<br/>and reassessment"]
-    G2 --> G
-    R --> O["Organisation-owned<br/>review routes"]
+    E --> N["4. LLM explains<br/>without changing the results"]
+    L --> N
+    N --> R["Readable record<br/>findings · evidence · anchors"]
 
-    classDef input fill:#f8fafc,stroke:#64748b,color:#0f172a
+    classDef source fill:#f8fafc,stroke:#64748b,color:#0f172a
     classDef registry fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef facts fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef rules fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef judge fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
-    class S,H,K input
-    class G,G2 registry
-    class D,L,I,F,N facts
-    class E,P rules
-    class R,O,Q,C result
+    class S source
+    class G registry
+    class L,F judge
+    class P,E engine
+    class N,R result
 ```
 
-Structured API and configuration values can populate facts directly. The
-language model handles semantic reading and bounded judgements, then writes an
-evidence-linked source analysis. AIR resolves direct and inferred values into
-one grid before the deterministic engine applies pinned rules and supplies the
-stable findings, anchors and obligations. The same resolved facts evaluated
-with the same pack version produce the same result.
+### 1. The model reads and explains
 
-Human review is a control layer around the automated pipeline. An organisation
-can require it for material or uncertain cases and use stratified samples for
-the rest of a large inventory. A correction creates a new source snapshot or a
-candidate extractor, pack, route or explanation version, then a new assessment;
-prior versions remain available. See [human review at registry
-scale](docs/en/quality-control.md).
+The LLM receives the assessment target, connected components, evidence and the
+closed list of questions declared by the selected packs. It returns two forms
+of output in one call:
 
-`air-assess` is used by the host LLM or agent at the semantic-reading stage.
-The dependency-free Python engine does not call a model: its CLI begins with an
-inventory that already contains structured facts. This boundary lets each
-organisation choose its model and execution environment while keeping the
-fact, evidence and review records portable.
+- structured fact proposals with a state, evidence, confidence and short
+  rationale;
+- plain-language analysis describing scope, observations, unknowns and
+  cautions.
 
-The alpha ships the skill, record formats, validators and deterministic engine.
-The host product supplies model invocation, fact resolution, periodic sampling,
-storage, access control and the reviewer interface.
+The model can propose only fact ids declared by the packs. It cannot create a
+rule, obligation or legal reference. A security guideline in a prompt proves
+that the instruction exists. It does not prove that the operating platform enforces the
+control.
 
-## The registry graph
+### 2. AIR keeps disagreements visible
 
-AIR keeps the components needed to explain each use in its governance
-inventory. Some matter to governance without constituting standalone AI
-systems in law. The final legal registry is a view of this graph.
+Reliable API and configuration values remain authoritative. If the model
+contradicts an established value, AIR records a conflict. It never overwrites
+that value silently. Missing information stays unknown; it never becomes an
+automatic “no”.
+
+### 3. The engine applies the rules
+
+The Python engine reads the retained facts and tests each published condition.
+This step makes no model call. The same facts and the same rule version produce
+the same result.
+
+Rules attach findings, obligations and published anchors. EU AI Act, GDPR,
+NIS2 and NIST results remain separate.
+
+### 4. The model writes the final record
+
+A second call turns the facts and calculated results into a readable note.
+Every important statement must cite a fact and evidence, or a rule and its
+anchors. The note cannot change a result or add a conclusion absent from the
+engine.
+
+The record therefore contains both machine-readable data and an explanation
+that business reviewers can inspect.
+
+## Example: an application screens CVs
+
+Consider a configured application on an enterprise platform. It loads a
+screening skill, ranks applicants and has a connector that can send rejection
+messages without a separate human confirmation step.
+
+The LLM may propose:
+
+| Proposed fact | Evidence | Confidence |
+| --- | --- | --- |
+| The use filters and ranks job applications | Use declaration and instructions | 0.99 |
+| The connector can send a rejection without a separate human step | Connector configuration | 0.97 |
+| No completed DPIA is evidenced | Use-owner declaration | 0.99 |
+
+Its analysis explains why those sources describe candidate screening, how the
+connector changes the use and which information remains unknown.
+
+The engine then applies the selected packs. In the bundled example, the EU AI
+Act pack matches the Annex III employment route and the related high-risk
+rules. The GDPR pack finds a solely automated decision with a significant
+effect, no established Article 22 exception, and a required DPIA whose
+completion is not evidenced. The selected NIST profile keeps its own gaps
+separate and does not present them as legal non-compliance.
+
+[Open the complete worked example without running code](examples/ai-governance/README.md).
+
+## Human control across a large estate
+
+An organisation with thousands of applications cannot manually approve every
+model reading. AIR runs the assessment, stores the evidence and then applies
+the organisation's control policy.
 
 ```mermaid
-flowchart TB
-    U["Concrete use<br/>Applicant pre-screening"] -->|implemented_by| A["Configured AI application<br/>Recruitment assistant"]
-    A -->|runs_on| P["AI platform"]
-    P -->|offers_model| M["Model"]
-    A -->|loads_skill| S["Skill<br/>screening instructions"]
-    A -->|can_invoke| C["Connector<br/>mail or HRIS"]
-    U -->|operated_by| O["Organisation"]
-    P -->|provided_by| V["Provider"]
+flowchart LR
+    A["Automated assessments"] --> Q{"Control selection"}
+    Q -->|"sensitive result"| C["Targeted review"]
+    Q -->|"weak or conflicting evidence"| C
+    Q -->|"periodic sample"| S["Quality review"]
+    Q -->|"not selected"| V["Current version"]
+    C --> D{"Decision"}
+    S --> D
+    D -->|"confirmed"| V
+    D -->|"corrected"| N["New evidence or candidate version"]
+    N --> A
 
-    classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
-    classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef component fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef actor fill:#f1f5f9,stroke:#64748b,color:#0f172a
-    class U use
-    class A,P app
-    class M,S,C component
-    class O,V actor
+    classDef auto fill:#ecfeff,stroke:#0891b2,color:#164e63
+    classDef review fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef change fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    class A,V auto
+    class Q,C,S,D review
+    class N change
 ```
 
-In this example, the skill is a passive text package. It cannot call a
-connector. The application or platform performs an action within the runtime’s
-permissions. The skill still belongs in the inventory because its instructions
-may contribute to the purpose of the use.
+A correction stays visible and triggers a new assessment. Teams can measure
+quality by use type, model, pack and period, then improve the reading protocol
+or rules after approval.
 
-Each pack explicitly declares the relations it may traverse and the facts that
-may be inherited. A final legal classification is never copied mechanically
-from a parent to a child. It is recalculated for the assessed composition and
-use.
+[Read the quality-control guide](docs/en/quality-control.md).
 
-## Four decision layers
+## What the repository contains today
 
-| Layer | Question | Example |
+The distribution includes:
+
+- the inventory and relationship model;
+- formats for facts, evidence, extractions, assessments, notes and reviews;
+- a dependency-free Python rule engine;
+- an optional `qualify` command that calls a Chat Completions compatible
+  service once for source reading and once for the final note;
+- local validation of every reference produced by the model;
+- versioned packs and conformance tests;
+- assessment comparison and pack-impact simulation;
+- a separate mechanism for organisation-owned internal processes;
+- complete examples for AI governance, connector topology and contracts.
+
+The framework does not impose a model provider, a particular model or an
+internal approval process. The API key stays in an environment variable.
+
+## Bundled packs
+
+| Pack | Nature | Summary |
 | --- | --- | --- |
-| **Objects and relationships** | What exists and how is it composed? | This application runs on that platform and loads this skill. |
-| **Facts and evidence** | What do we actually know? | The instructions rank applicants; the evidence is this section of the prompt. |
-| **Normative packs** | What does this version of the authority conclude? | The rule anchored to Annex III of the AI Act matches the established facts. |
-| **Organisation-owned routes** | What does the organisation decide after the finding? | Legal review, evidence request, security approval or another internal route. |
+| [EU AI Act 1.1.0](packs/eu-ai-act/1.1.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
+| [GDPR for AI uses 1.1.0](packs/eu-gdpr-ai/1.1.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
+| [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.md) | EU directive | Governance, Article 21 measures and incident reporting, to be applied with the relevant national law |
+| [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.md) | Voluntary framework | 72 Core outcomes within an organisation-selected target profile |
+| [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.md) | Voluntary framework | 106 Core outcomes within an organisation-selected target profile |
+| [Fictional contract review](packs/contract-review-example/1.0.0/README.md) | Example | A fictional agreement checked against a clause library by the same engine |
 
-This separation prevents three common errors: presenting internal policy as a
-legal obligation, asking an LLM to invent the conclusion, and treating missing
-information as “no”.
+Each guide states its authority, version, coverage, limits and official
+sources. An organisation explicitly selects the pack versions it uses.
 
-## What an assessment contains
+## Try the framework
 
-An AIR assessment keeps together:
+The engine requires Python 3.11 or later.
 
-- the target and exact registry snapshot;
-- direct, inherited, unknown and conflicting facts;
-- evidence for every established fact and confidence when a model inferred it;
-- the version and content hash of the applied pack;
-- the matched rule, explanation and exact anchors;
-- obligations, evidence gaps and unknowns;
-- a stable identifier used to compare assessments.
-
-The extraction record carries the model’s semantic fact proposals and source
-analysis. A separate assessment note turns facts and deterministic findings
-into readable prose whose material statements reference their evidence, rules
-and anchors. The review record captures why a case was selected, what a person
-confirmed or corrected and which versioned action followed.
-
-A host product may display the latest assessment in the registry while
-retaining the full history for audit, impact simulation and drift analysis.
-
-## Packs in the first distribution
-
-| Pack | Authority | Contribution |
-| --- | --- | --- |
-| **[EU AI Act](packs/eu-ai-act/1.1.0/README.md)** | Binding European law | All Article 5 routes, all Annex III cases, high-risk operator readiness, Article 50 and GPAI. |
-| **[EU GDPR · AI profile](packs/eu-gdpr-ai/1.1.0/README.md)** | Binding European law with marked EDPB guidance | Scope, principles, rights, automated decisions, DPIA, security, transfers and AI-model questions. |
-| **[EU NIS2 · baseline](packs/eu-nis2-baseline/1.1.0/README.md)** | European directive requiring national overlays | Article 20, all ten Article 21 measure families and Article 23 incident reporting. |
-| **[NIST AI RMF + GenAI Profile](packs/nist-ai-rmf/1.1.0/README.md)** | Voluntary framework | All 72 Core outcomes through an organisation-selected target profile. |
-| **[NIST CSF 2.0](packs/nist-csf/2.1.0/README.md)** | Voluntary framework | All 106 current Core outcomes through an organisation-selected Target Profile. |
-| **[Fictional contract review](packs/contract-review-example/1.0.0/README.md)** | Teaching example | The same engine applied to a fictional contract and clause library. |
-
-Each pack publishes its fact definitions, deterministic conditions, sources,
-coverage and known gaps. A new pack version is dry-run against the registry
-before activation.
-
-## Who is it for?
-
-- **Legal and compliance teams** can inspect why a finding exists, its source
-  text and missing evidence without reading code.
-- **Security and risk teams** can connect platform controls, connectors and
-  cyber frameworks to the affected uses.
-- **Digital and platform teams** can populate the registry from APIs and see
-  the impact of a configuration change.
-- **Business owners** can describe purpose and context in plain language, then
-  answer only the questions that remain open.
-- **Governance product developers** can embed the schemas, engine, packs and
-  conformance tests in their own product.
-
-## Start here
-
-| If you want to… | Open… |
-| --- | --- |
-| understand the model without a technical prerequisite | **[AIR Framework concepts](CONCEPTS.md)** |
-| follow a complete path from business need to decision | [Governance workflow](docs/en/governance-workflow.md) |
-| understand what a useful AI registry contains | [AI registry guide](docs/en/ai-registry.md) |
-| understand human review and sampling at scale | [Quality-control guide](docs/en/quality-control.md) |
-| see the AI-governance result without running code | [Worked AI-governance example](examples/ai-governance/README.md) |
-| see contract review without running code | [Worked contract-review example](examples/contract-review/README.md) |
-| model shared and application-specific connectors | [Connector topology example](examples/connector-topologies/README.md) |
-| run an example in ten minutes | [Quickstart](docs/en/quickstart.md) |
-| read facts, findings and the auditable narrative | [Reading an assessment](docs/en/reading-an-assessment.md) |
-| verify source coverage | [Sources and coverage](docs/en/sources-and-coverage.md) |
-| inspect the current pack audit | [Rule-pack coverage review, 29 August 2026](docs/audits/2026-08-29-pack-viability.md) |
-| create a new pack | [Authoring and releasing a pack](docs/en/authoring-packs.md) |
-| integrate the engine | [Object graph specification](spec/01-object-graph.md) |
-
-The [complete English documentation](docs/en/README.md) is organised by role.
-The files under `spec/` define the framework’s technical and normative
-contracts.
-
-### The two skills shipped with AIR
-
-The word **skill** has one meaning throughout the project: a package of textual
-instructions. The [`skills/`](skills/) directory provides two ready-to-use
-skills. One helps extract facts and review assessments; the other helps author
-and test a pack. They are optional. They use the framework without replacing
-the engine or its rules. When deployed on a platform, they can be inventoried
-like any other `skill` object in the estate.
-
-| Same format, two positions | What AIR records |
-| --- | --- |
-| A skill found in an AI estate | Its text, version, platform and effect on the intended purpose of composed uses |
-| An AIR helper skill deployed by a team | The same fields, plus the fact that its instructions guide assessment or pack authoring |
-
-Deployment context and content determine the skill's role. Its object schema
-remains the same.
-
-## Run the AI governance example
-
-The reference engine has no runtime dependency beyond Python 3.11+.
+### Without a model call
 
 ```bash
 python -m pip install .
-
-air-framework validate-extraction examples/ai-governance/extraction.json
-air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
-air-framework assess \
-  --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.1.0/pack.json \
-  --target use-recruiting-assistant
 
 air-framework assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
-
-air-framework validate-note examples/ai-governance/assessment-note.json
-air-framework validate-review examples/ai-governance/review.json
 ```
 
-The profile command evaluates an explicit selection of packs pinned by version
-and content hash. No hidden global ruleset becomes active.
+This replays the rules on facts already present in the example.
 
-## Scope of the alpha release
+### With LLM reading and explanation
 
-AIR Framework does not certify compliance and does not replace legal, security
-or risk professionals. A result depends on the active pack versions, available
-evidence and the quality of facts supplied to the engine.
+The provider must accept the OpenAI-compatible Chat Completions shape and JSON
+responses. The command never accepts a secret key as an argument.
+It sends the selected service the target, its composition and linked evidence,
+so confirm that the service is authorised to receive that material.
 
-This repository contains the `v0.1.0-alpha.3` reference distribution. Schemas and
-command-line interfaces may still change. See the [clean-room statement](CLEAN_ROOM.md),
-[foundational decisions](spec/00-project-decisions.md), [audited dependencies](DEPENDENCIES.md)
-and [contribution guide](CONTRIBUTING.md).
+```bash
+export AIR_LLM_API_KEY="your-key"
+export AIR_LLM_MODEL="your-model"
+export AIR_LLM_BASE_URL="https://your-provider.example/v1"
 
-## Licensing and citation
+air-framework qualify \
+  --inventory examples/ai-governance/inventory.json \
+  --profile examples/ai-governance/pack-profile.json \
+  --target use-recruiting-assistant \
+  --reasoning-effort low \
+  --output-dir qualification-demo
+```
 
-Code, schemas, rule packs, tests, examples and skills are licensed under
-the [Apache License 2.0](LICENSE). Human-readable guides and explanatory
-documentation are licensed under
-[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-See [LICENSE-POLICY.md](LICENSE-POLICY.md) for the file-level policy.
+The output directory contains five files:
 
-Official laws, standards and external publications are not relicensed by this
-repository. Packs point to authoritative sources and contain independently
-written rules, tests and explanations. Citation metadata is provided in
-[CITATION.cff](CITATION.cff).
+1. LLM extraction and source analysis;
+2. the new inventory version;
+3. deterministic results;
+4. the readable note written after calculation;
+5. a manifest containing every file hash.
+
+Repository tests make no paid model call. They replace the client with a
+deterministic fake.
+
+## Where to go next
+
+The repository contains many files because packs are bilingual and retain
+their earlier versions. Four entry points cover the normal reading path:
+
+| Need | Start here |
+| --- | --- |
+| Understand AIR through an example and essential terms | [Understand AIR](docs/en/concepts.md) |
+| See what an AI registry contains | [The AI registry](docs/en/ai-registry.md) |
+| Run the examples and inspect the files | [Ten-minute walkthrough](docs/en/quickstart.md) |
+| Author rules or integrate the engine | [Documentation by role](docs/en/README.md) |
+
+Technical specifications live in [`spec/`](spec/). Dated coverage reviews live
+in [`docs/audits/`](docs/audits/). They are maintenance evidence and are not
+part of the initial reading path.
+
+## Limits
+
+AIR Framework does not certify compliance and does not replace legal advice,
+security analysis or an organisation's decision. A result depends on available
+evidence, reading quality, selected packs and their versions.
+
+The framework preserves unknowns and conflicts. Human controls can be targeted
+or sampled according to risk and internal policy.
+
+The current release is `v0.1.0-alpha.4`. Formats may still change.
+
+## Licence and citation
+
+Code, schemas, packs, tests, examples and skills are published under
+[Apache 2.0](LICENSE). Reader documentation is published under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). External sources
+retain their own rights. See [LICENSE-POLICY.md](LICENSE-POLICY.md),
+[CITATION.cff](CITATION.cff) and the [clean-room statement](CLEAN_ROOM.md).

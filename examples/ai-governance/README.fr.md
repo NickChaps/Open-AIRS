@@ -19,7 +19,9 @@ flowchart LR
     X --> F
     F --> E["Packs déterministes<br/>AI Act · RGPD · NIST"]
     E --> R["Constats, ancrages<br/>et obligations"]
-    R --> H["Échantillon humain stratifié"]
+    X --> N["Second appel LLM<br/>note lisible référencée"]
+    R --> N
+    N --> H["Échantillon humain stratifié"]
 
     classDef use fill:#fef3c7,stroke:#d97706,color:#78350f
     classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
@@ -28,7 +30,7 @@ flowchart LR
     class U use
     class A,P app
     class S,C,D component
-    class X,F,E,R,H decision
+    class X,F,E,R,N,H decision
 ```
 
 ## Ce qu’AIR reçoit
@@ -39,7 +41,7 @@ flowchart LR
 | Skill de présélection | Critères d’analyse des CV |
 | Configuration du connecteur | Les messages peuvent partir sans confirmation humaine séparée |
 | Déclaration d’usage | Finalité de recrutement, données personnelles et interaction avec les candidats |
-| Snapshot de plateforme | Contrôles communs de journalisation, sécurité et exploitation |
+| Configuration datée de la plateforme | Contrôles communs de journalisation, sécurité et exploitation |
 
 Le skill reste un texte passif. L’application configurée invoque le connecteur
 selon les autorisations de la plateforme.
@@ -62,7 +64,7 @@ résultat déterministe :
 
 La fiche conserve le périmètre, les affirmations reliées aux preuves, les
 inconnues et les précautions. Elle précise qu’une consigne dans un prompt ne
-prouve pas son application dans le runtime.
+prouve pas son application réelle par la plateforme.
 
 Les principales propositions sémantiques restent visibles avant le passage des
 règles :

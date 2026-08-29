@@ -4,17 +4,17 @@
 
 A platform may contain thousands of configured applications and skills. AIR
 runs automated extraction and deterministic evaluation across the inventory.
-Reviewers concentrate on material cases, uncertainty, change and representative
+Reviewers concentrate on important cases, uncertainty, change and representative
 samples.
 
-The reference alpha defines and validates the records used by this process.
-The integrating product runs the model, schedules samples and presents the
-review queue.
+The `qualify` command provides the reference model-call flow. Software that
+integrates AIR selects the model, schedules samples and presents the review
+queue to the relevant teams.
 
 ```mermaid
 flowchart TB
     A["Automated assessment<br/>fact grid + analysis + findings"] --> Q{"Review policy"}
-    Q -->|"material finding"| M["Mandatory review"]
+    Q -->|"sensitive finding"| M["Mandatory review"]
     Q -->|"uncertain or changed"| T["Targeted review"]
     Q -->|"quality programme"| S["Stratified sample"]
     Q -->|"not selected"| P["Publish current version"]
@@ -34,7 +34,7 @@ record.
 For configured applications and skills, a stratified sample is often the only
 practical control at scale. The complete use still matters. A passive skill can
 change the purpose of an application, and a platform connector can make an
-action possible. A material composed use can therefore trigger a full review
+action possible. A sensitive composed use can therefore trigger a full review
 even when the skill or configured application is not a standalone AI system in
 law.
 
@@ -43,7 +43,7 @@ law.
 | Layer | Review question | Typical correction |
 | --- | --- | --- |
 | Source and composition | Did AIR receive the current prompt, metadata, platform and connector configuration? | Capture a missing source or relationship |
-| Extraction | Does each proposed fact follow from the cited evidence? | Correct the fact and create a new snapshot |
+| Extraction | Does each proposed fact follow from the cited evidence? | Correct the fact and create a new inventory version |
 | Pack | Does the rule express the reviewed source correctly? | Publish a candidate pack and run impact analysis |
 | Route | Does the organisation send this finding to the right workflow? | Publish a new route profile |
 | Explanation | Does the readable note match the facts, findings and anchors? | Correct the renderer or assessment skill |
@@ -59,14 +59,14 @@ existing registry before a new version is approved.
 | Measure | What it reveals |
 | --- | --- |
 | Reviewer agreement by fact family | Where semantic extraction remains unstable |
-| Material false-negative rate | Whether important cases escape the expected findings |
+| False-negative rate for important cases | Whether sensitive cases escape the expected findings |
 | Unknown and conflict rate | Whether sources or questions are incomplete |
 | Anchor fidelity | Whether every normative sentence resolves to the returned source |
 | Explanation fidelity | Whether readable prose matches facts and findings |
-| Drift by model, skill and period | Whether a new component changed quality |
+| Quality change by model, skill and period | Whether a new component changed quality |
 
 A quality programme should combine representative stratified samples with
-extra coverage of rare material findings and low-confidence cases. A reviewed
+extra coverage of rare important findings and low-confidence cases. A reviewed
 subset can use two independent reviewers to measure adjudication consistency.
 
 This process supports rising measured accuracy while retaining an audit trail.

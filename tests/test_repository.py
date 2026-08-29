@@ -41,12 +41,15 @@ class RepositoryIntegrityTests(unittest.TestCase):
                     )
 
     def test_project_readmes_explain_the_model_visually(self):
-        for name in ["README.md", "README.fr.md"]:
+        concept_links = {
+            "README.md": "docs/en/concepts.md",
+            "README.fr.md": "docs/fr/concepts.md",
+        }
+        for name, concept_link in concept_links.items():
             body = (ROOT / name).read_text(encoding="utf-8")
             with self.subTest(path=name):
                 self.assertGreaterEqual(body.count("```mermaid"), 3)
-                self.assertIn("CONCEPTS.md", body)
-        self.assertTrue((ROOT / "CONCEPTS.md").exists())
+                self.assertIn(concept_link, body)
 
     def test_every_pack_has_illustrated_english_and_french_guides(self):
         version_dirs = sorted(path.parent for path in ROOT.glob("packs/*/*/pack.json"))

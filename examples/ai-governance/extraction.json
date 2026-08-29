@@ -11,9 +11,14 @@
     "inventory_id": "fictional-enterprise-ai-inventory",
     "snapshot_id": "snapshot-2026-08-29-a"
   },
+  "pack_inputs": [
+    {"id": "eu-ai-act-core", "version": "1.1.0", "content_hash": "64ee6f93cd407d78c152e830d8ab7beef23225b9bf78130229974e5f55ee824b"},
+    {"id": "eu-gdpr-ai-core", "version": "1.1.0", "content_hash": "f6298053692c5a4eeb3eacf102c58a8912d1a734a981a73ef208193bd5fab2af"},
+    {"id": "nist-ai-rmf-core", "version": "1.1.0", "content_hash": "a554d34bb319c934550616f6657cdf0ff7a50916e73fcfb3cb77c49cabfaa0c1"}
+  ],
   "extractor": {
     "kind": "hybrid",
-    "skill": {"id": "air-assess", "version": "0.2.0"},
+    "skill": {"id": "air-assess", "version": "0.3.0"},
     "model": {"id": "fictional-assessment-model", "version": "2026-08"},
     "run_id": "fictional-run-recruiting-001"
   },

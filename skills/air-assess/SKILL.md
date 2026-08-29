@@ -4,15 +4,21 @@ description: Assess a governed object with AIR Framework rule packs. Use when as
 license: Apache-2.0
 metadata:
   author: AIR Framework contributors
-  version: 0.2.0
+  version: 0.3.0
   compatibility: Python 3.11+ and AIR Framework
 ---
 
 # AIR assessment
 
 Produce an evidence-backed assessment from raw sources through deterministic
-evaluation. The skill guides the model that prepares the fact grid and review
-note. The Python engine does not invoke this skill.
+evaluation. The skill guides the model that prepares the fact grid and the
+readable note. The `air-framework qualify` orchestrator performs these two
+model calls. The rule engine between them does not call a model.
+
+The runtime system prompts are published in
+[`src/air_framework/prompts`](../../src/air_framework/prompts/). Their version
+and content hash are stored with each model output. This file adds the full
+operating protocol for hosts that deploy AIR as a portable skill.
 
 ## 1. Establish the target
 
@@ -60,6 +66,9 @@ unknowns and cautions. Provide an audit rationale, not private chain-of-thought.
 Resolve direct and inferred values into the inventory fact grid. Keep
 contradictions visible; do not overwrite a structured source silently.
 
+The record must pin every pack whose fact catalogue was sent to the model. A
+fact id outside those catalogues invalidates the extraction.
+
 ## 4. Validate and evaluate
 
 Run:
@@ -75,7 +84,7 @@ assessment ids, content hashes and indeterminate results.
 
 ## 5. Build the readable assessment note
 
-Lead with the target and matched findings. For every material conclusion, show
+Lead with the target and matched findings. For every important conclusion, show
 the rule, reason, evidence, related objects, exact anchors and open unknowns.
 Use [assessment note](references/assessment-note.md) and
 [output review](references/output-review.md). Keep the extraction analysis and
@@ -84,7 +93,7 @@ GDPR, NIS2 and NIST axes into one colour.
 
 Store the note with
 [`assessment-note.schema.json`](../../spec/schemas/assessment-note.schema.json).
-Every material factual or normative statement must reference its structured
+Every important factual or normative statement must reference its structured
 support.
 
 Only apply an organisation route profile when the user has supplied or approved

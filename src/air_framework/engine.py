@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping as MappingABC
 from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any, Mapping
@@ -12,30 +11,12 @@ from .canonical import content_hash
 from .conditions import Truth, evaluate_condition
 from .errors import EvaluationError
 from .graph import InventoryGraph
-from .validation import validate_inventory, validate_pack
+from .validation import fact_value_matches_type, validate_inventory, validate_pack
 from .version import __version__
 
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-
-
-def _fact_value_matches_type(value: Any, fact_type: str) -> bool:
-    """Return whether a known value matches its pack-declared fact type."""
-
-    if fact_type == "boolean":
-        return isinstance(value, bool)
-    if fact_type == "string":
-        return isinstance(value, str)
-    if fact_type == "array":
-        return isinstance(value, list)
-    if fact_type == "integer":
-        return isinstance(value, int) and not isinstance(value, bool)
-    if fact_type == "number":
-        return isinstance(value, (int, float)) and not isinstance(value, bool)
-    if fact_type == "object":
-        return isinstance(value, MappingABC)
-    return False
 
 
 def _validate_effective_fact_types(
@@ -48,7 +29,7 @@ def _validate_effective_fact_types(
         fact_type = catalog.get(fact_id)
         if fact_type is None or not isinstance(fact, Mapping) or fact.get("state") != "known":
             continue
-        if not _fact_value_matches_type(fact.get("value"), fact_type):
+        if not fact_value_matches_type(fact.get("value"), fact_type):
             raise EvaluationError(
                 f"Known fact {fact_id!r} must contain a value of type {fact_type!r}"
             )

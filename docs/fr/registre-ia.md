@@ -6,6 +6,11 @@ L’inventaire de gouvernance est plus large que la seule liste juridique des
 systèmes d’IA. C’est volontaire : il doit expliquer pourquoi un périmètre et
 une finalité ont été retenus.
 
+L’AI Act ne fournit pas un modèle unique de registre interne valable pour toute
+organisation. AIR rassemble les informations nécessaires aux qualifications,
+à la documentation et aux obligations applicables, puis permet d’en extraire
+la vue juridique adaptée au rôle et au contexte de l’organisation.
+
 ```mermaid
 flowchart LR
     S["Sources<br/>API · déclarations · documents"] --> I["Inventaire de gouvernance<br/>objets · relations · preuves"]
@@ -16,7 +21,7 @@ flowchart LR
     Q --> A["Vue registre AI Act"]
     Q --> G["Vues RGPD et NIS2"]
     Q --> N["Vues de profils NIST"]
-    A --> H["Historique<br/>snapshots · versions · drift"]
+    A --> H["Historique<br/>versions · changements · comparaisons"]
     G --> H
     N --> H
 
@@ -39,7 +44,7 @@ flowchart LR
 | Qui et quoi peut être affecté ? | Personnes, décisions importantes, données personnelles, catégories particulières et autres données sensibles | Fournit la base factuelle de la qualification juridique |
 | Quelles suites donner ? | Qualification AI Act, constats RGPD et sécurité séparés, raisons, ancrages, preuves manquantes, obligations et échéances | Rend le résultat relisible et exploitable |
 
-Chaque fiche conserve aussi la version de l’évaluation, le snapshot source et
+Chaque fiche conserve aussi la version de l’évaluation, la version d’inventaire source et
 l’historique. Le registre peut afficher le résultat actuel et reproduire celui
 qui était actif à une date antérieure.
 

@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "review_id": "urn:air:review:fictional-recruiting-sample-20260829",
   "reviewed_at": "2026-08-29T15:30:00Z",
-  "assessment_id": "urn:air:assessment:7255d4ae487d0fd863864fde",
+  "assessment_id": "urn:air:assessment:e899004c532bae1122af51c1",
   "target": {
     "id": "use-recruiting-assistant",
     "type": "ai_use",
@@ -11,7 +11,7 @@
   "review_type": "sample",
   "selection": {
     "strategy": "stratified",
-    "reason": "Monthly quality sample for employment uses assessed by air-assess 0.2.0.",
+    "reason": "Monthly quality sample for employment uses assessed by air-assess 0.3.0.",
     "population_snapshot_id": "snapshot-2026-08-29-a",
     "stratum": "employment / configured application / high confidence"
   },

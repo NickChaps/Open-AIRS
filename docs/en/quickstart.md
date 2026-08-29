@@ -8,7 +8,8 @@ flowchart LR
     X --> V["Validate objects,<br/>relations and evidence"]
     V --> A["Assess one use<br/>with a pinned pack"]
     A --> P["Assess the same use<br/>with a pack profile"]
-    P --> R["Review findings,<br/>unknowns and anchors"]
+    P --> L["Option: call the LLM<br/>reading + note"]
+    L --> R["Review findings,<br/>unknowns and anchors"]
     R --> H["Inspect the sampled<br/>human review"]
     H --> W["Apply an organisation route<br/>when required"]
 
@@ -17,7 +18,7 @@ flowchart LR
     classDef result fill:#ecfeff,stroke:#0891b2,color:#164e63
     class O,X,V input
     class A,P engine
-    class R,H,W result
+    class L,R,H,W result
 ```
 
 ## 1. Open the worked case
@@ -28,16 +29,18 @@ the sampled review on one page.
 
 ## 2. Inspect the semantic extraction
 
-[`extraction.json`](../../examples/ai-governance/extraction.json) is the portable
-output expected from a host LLM guided by `air-assess`. It contains the fact
-grid, evidence references, confidence and a concise readable analysis.
+[`extraction.json`](../../examples/ai-governance/extraction.json) shows the
+format produced by LLM reading. It contains fact proposals, evidence,
+confidence, the packs that defined the questions and a structured readable
+analysis.
 
 ```bash
 air-framework validate-extraction examples/ai-governance/extraction.json
 ```
 
-The reference engine does not call a model. An integrating application runs its
-chosen LLM and writes this record before invoking the deterministic CLI.
+The rule engine does not call a model. The optional `qualify` command does
+orchestrate the complete flow: it calls the LLM for this record, runs the
+engine, then calls the LLM a second time for the final note.
 
 ## 3. Open the worked inventory
 
@@ -83,7 +86,31 @@ reuse the AI Act label: it independently evaluates personal-data,
 automated-decision and DPIA facts. Incompatible packs are skipped visibly for
 that target type.
 
-## 7. Inspect the sampled review
+## 7. Run full qualification with an LLM
+
+This step is optional and may incur a provider charge. The key stays in an
+environment variable. The target, its composition and linked evidence are sent
+to the selected service, which must be authorised to receive that material.
+
+```bash
+export AIR_LLM_API_KEY="your-key"
+export AIR_LLM_MODEL="your-model"
+export AIR_LLM_BASE_URL="https://your-provider.example/v1"
+
+air-framework qualify \
+  --inventory examples/ai-governance/inventory.json \
+  --profile examples/ai-governance/pack-profile.json \
+  --target use-recruiting-assistant \
+  --reasoning-effort low \
+  --output-dir qualification-demo
+```
+
+The provider must accept the OpenAI-compatible Chat Completions shape and
+structured JSON responses. `qualification-demo` stores the model reading, the
+resulting inventory version, engine findings, readable note and file hashes
+separately.
+
+## 8. Inspect the sampled review
 
 The example records why this case entered a stratified quality sample and what
 the reviewer confirmed. Validation checks the review record without changing
@@ -94,7 +121,7 @@ air-framework validate-review examples/ai-governance/review.json
 air-framework validate-note examples/ai-governance/assessment-note.json
 ```
 
-## 8. Apply a company workflow when useful
+## 9. Apply a company workflow when useful
 
 Use `examples/organization-routing.json` with the `route` command. The route
 profile can assign a work queue, but it cannot change the legal finding.

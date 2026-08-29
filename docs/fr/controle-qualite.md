@@ -4,17 +4,17 @@
 
 Une plateforme peut contenir des milliers d’applications configurées et de
 skills. AIR exécute l’extraction automatisée et l’évaluation déterministe sur
-le parc. Les relecteurs se concentrent sur les cas matériels, l’incertitude,
+le parc. Les relecteurs se concentrent sur les cas importants, l’incertitude,
 les changements et des échantillons représentatifs.
 
-La version alpha de référence définit et valide les fiches de ce processus. Le
-produit intégrateur exécute le modèle, planifie les échantillons et présente la
-file de revue.
+La commande `qualify` fournit le flux de référence pour appeler le modèle. Le
+logiciel qui intègre AIR choisit le modèle, planifie les échantillons et
+présente la file de revue aux équipes concernées.
 
 ```mermaid
 flowchart TB
     A["Évaluation automatisée<br/>grille + analyse + constats"] --> Q{"Politique de revue"}
-    Q -->|"constat matériel"| M["Revue obligatoire"]
+    Q -->|"constat sensible"| M["Revue obligatoire"]
     Q -->|"incertitude ou changement"| T["Revue ciblée"]
     Q -->|"contrôle qualité"| S["Échantillon stratifié"]
     Q -->|"non sélectionné"| P["Publier la version courante"]
@@ -35,7 +35,7 @@ Pour les applications configurées et les skills, un échantillonnage stratifié
 est souvent le seul contrôle praticable à grande échelle. La composition de
 l’usage reste déterminante. Un skill passif peut modifier la finalité d’une
 application, tandis qu’un connecteur de plateforme peut rendre une action
-possible. Un usage composé matériel peut donc exiger une revue complète même
+possible. Un usage composé sensible peut donc exiger une revue complète même
 si le skill ou l’application configurée ne constitue pas un système d’IA
 autonome au sens juridique.
 
@@ -44,7 +44,7 @@ autonome au sens juridique.
 | Couche | Question de contrôle | Correction habituelle |
 | --- | --- | --- |
 | Source et composition | AIR a-t-il reçu le prompt, les métadonnées, la plateforme et les connecteurs à jour ? | Capturer la source ou la relation manquante |
-| Extraction | Chaque fait proposé découle-t-il de la preuve citée ? | Corriger le fait et créer un nouveau snapshot |
+| Extraction | Chaque fait proposé découle-t-il de la preuve citée ? | Corriger le fait et créer une nouvelle version d’inventaire |
 | Pack | La règle traduit-elle correctement la source relue ? | Publier un pack candidat et simuler son impact |
 | Voie | Le constat rejoint-il le bon parcours interne ? | Publier un nouveau profil de routage |
 | Explication | La note lisible correspond-elle aux faits, constats et ancrages ? | Corriger le rendu ou le skill d’évaluation |
@@ -61,14 +61,14 @@ d’une nouvelle version.
 | Mesure | Ce qu’elle révèle |
 | --- | --- |
 | Accord des relecteurs par famille de faits | Les lectures sémantiques encore instables |
-| Taux de faux négatifs matériels | Les cas importants qui échappent aux constats attendus |
+| Taux de faux négatifs sur les cas importants | Les situations sensibles qui échappent aux constats attendus |
 | Taux d’inconnues et de contradictions | Les sources ou questions incomplètes |
 | Fidélité des ancrages | La correspondance entre chaque phrase normative et la source retournée |
 | Fidélité de l’explication | La correspondance entre le texte lisible, les faits et les constats |
-| Drift par modèle, skill et période | L’effet d’un nouveau composant sur la qualité |
+| Écart de qualité par modèle, skill et période | L’effet d’un nouveau composant sur la qualité |
 
 Le programme qualité combine des échantillons stratifiés représentatifs avec
-une couverture renforcée des constats matériels rares et des faibles niveaux de
+une couverture renforcée des constats importants rares et des faibles niveaux de
 confiance. Un sous-ensemble peut être relu par deux personnes indépendantes afin
 de mesurer la cohérence des arbitrages.
 

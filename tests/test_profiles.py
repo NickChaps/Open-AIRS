@@ -31,6 +31,16 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(
             {"eu-ai-act-core", "eu-gdpr-ai-core", "nist-ai-rmf-core"}, pack_ids
         )
+        self.assertEqual(
+            {"eu-nis2-baseline", "nist-csf-core"},
+            {item["id"] for item in result["skipped_packs"]},
+        )
+        self.assertTrue(
+            all(
+                item["reason"] == "not_applicable_to_object_type:ai_use"
+                for item in result["skipped_packs"]
+            )
+        )
         versions = {
             item["pack"]["id"]: item["pack"]["version"]
             for item in result["assessments"]

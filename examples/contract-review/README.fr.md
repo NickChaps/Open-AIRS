@@ -15,14 +15,16 @@ flowchart LR
     F --> E["Moteur déterministe"]
     L --> E
     E --> R["2 écarts<br/>1 indéterminé"]
-    R --> H["Revue humaine ciblée<br/>sur la clause d’audit"]
+    X --> N["Second appel LLM<br/>note lisible référencée"]
+    R --> N
+    N --> H["Revue humaine ciblée<br/>sur la clause d’audit"]
 
     classDef source fill:#dbeafe,stroke:#2563eb,color:#172554
     classDef analysis fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
     class C,L source
     class X,F,E analysis
-    class R,H result
+    class R,N,H result
 ```
 
 ## Lecture des clauses

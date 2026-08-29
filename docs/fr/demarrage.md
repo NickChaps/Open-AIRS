@@ -8,7 +8,8 @@ flowchart LR
     X --> V["Valider les objets,<br/>relations et preuves"]
     V --> A["Évaluer un usage<br/>avec un pack figé"]
     A --> P["Évaluer le même usage<br/>avec un profil de packs"]
-    P --> R["Relire constats,<br/>inconnues et ancrages"]
+    P --> L["Option : appeler le LLM<br/>lecture + note"]
+    L --> R["Relire constats,<br/>inconnues et ancrages"]
     R --> H["Lire la revue humaine<br/>par échantillon"]
     H --> W["Appliquer une voie d’organisation<br/>si nécessaire"]
 
@@ -17,7 +18,7 @@ flowchart LR
     classDef result fill:#ecfeff,stroke:#0891b2,color:#164e63
     class O,X,V input
     class A,P engine
-    class R,H,W result
+    class L,R,H,W result
 ```
 
 ## 1. Ouvrir le cas complet
@@ -28,16 +29,18 @@ déterministe et la revue par échantillon.
 
 ## 2. Lire l’extraction sémantique
 
-[`extraction.json`](../../examples/ai-governance/extraction.json) est le format
-portable attendu d’un LLM hôte guidé par `air-assess`. Il contient la grille de
-faits, les preuves, la confiance et une analyse courte en langage courant.
+[`extraction.json`](../../examples/ai-governance/extraction.json) montre le
+format produit par la lecture LLM. Il contient les faits proposés, les preuves,
+la confiance, les packs qui ont défini les questions et une analyse structurée en
+langage courant.
 
 ```bash
 air-framework validate-extraction examples/ai-governance/extraction.json
 ```
 
-Le moteur de référence n’appelle pas de modèle. L’application intégratrice
-exécute le LLM de son choix et produit cette fiche avant le moteur déterministe.
+Le moteur de règles n’appelle pas de modèle. La commande facultative `qualify`
+orchestre cependant le flux complet : elle appelle le LLM pour cette fiche,
+lance le moteur, puis appelle le LLM une seconde fois pour la note finale.
 
 ## 3. Ouvrir l’inventaire d’exemple
 
@@ -83,7 +86,32 @@ pas l’étiquette AI Act : elle analyse séparément les données personnelles,
 décision automatisée et l’AIPD. Les packs incompatibles avec le type d’objet
 sont écartés de manière visible.
 
-## 7. Lire la revue par échantillon
+## 7. Lancer la qualification complète avec un LLM
+
+Cette étape est facultative et peut entraîner un coût chez le fournisseur du
+modèle. La clé reste dans une variable d’environnement. La cible, sa composition
+et les preuves liées sont envoyées au service choisi ; celui-ci doit être
+autorisé à recevoir ces contenus.
+
+```bash
+export AIR_LLM_API_KEY="votre-cle"
+export AIR_LLM_MODEL="votre-modele"
+export AIR_LLM_BASE_URL="https://votre-fournisseur.example/v1"
+
+air-framework qualify \
+  --inventory examples/ai-governance/inventory.json \
+  --profile examples/ai-governance/pack-profile.json \
+  --target use-recruiting-assistant \
+  --reasoning-effort low \
+  --output-dir qualification-demo
+```
+
+Le fournisseur doit accepter le format Chat Completions compatible OpenAI et
+les réponses JSON structurées. `qualification-demo` conserve séparément la
+lecture du modèle, la version d’inventaire obtenue, les résultats du moteur, la
+note lisible et leurs empreintes.
+
+## 8. Lire la revue par échantillon
 
 L’exemple conserve la raison de la sélection dans un échantillon stratifié et
 les points confirmés par le relecteur. La validation contrôle la fiche sans
@@ -94,7 +122,7 @@ air-framework validate-review examples/ai-governance/review.json
 air-framework validate-note examples/ai-governance/assessment-note.json
 ```
 
-## 8. Ajouter un processus d’entreprise si utile
+## 9. Ajouter un processus d’entreprise si utile
 
 Le fichier `examples/organization-routing.json` fonctionne avec la commande
 `route`. Il peut affecter une file de travail, mais ne peut pas modifier le

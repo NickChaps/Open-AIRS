@@ -25,6 +25,10 @@ inventory without being an AI system in law.
 Extensions may use `generic` until they register a stable type in a future
 schema version.
 
+An object can cite evidence directly before any semantic fact exists. This is
+how a newly imported prompt, contract or configuration becomes available to
+the extraction call. Facts and relations can cite the same evidence records.
+
 ## Composition and inheritance
 
 Relations form a directed graph. The reference examples use:
@@ -36,6 +40,13 @@ Relations form a directed graph. The reference examples use:
 - `implemented_by`: concrete use → configured application or AI system;
 - `operated_by`: system, platform or use → organization;
 - `provided_by`: component or service → provider.
+
+For the optional LLM call, the reference orchestrator follows outgoing
+relations for up to three steps from the assessment target. This includes the
+usual use → application → platform → shared-connector path and avoids sending
+unrelated applications that happen to run on the same platform. The rule
+engine has no implicit three-step rule: it follows the explicit paths declared
+by each pack.
 
 ## Connector scope
 

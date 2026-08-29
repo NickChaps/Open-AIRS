@@ -14,6 +14,45 @@ from .io import load_json
 from .validation import validate_inventory, validate_pack, validate_pack_profile
 
 
+def verify_profile_packs(
+    profile: Mapping[str, Any], packs: Sequence[Mapping[str, Any]]
+) -> None:
+    """Verify that direct API callers supplied exactly the profile's pinned packs."""
+
+    validate_pack_profile(profile)
+    pins = {item["id"]: item for item in profile["packs"]}
+    supplied: set[str] = set()
+    for pack in packs:
+        validate_pack(pack)
+        metadata = pack["pack"]
+        pack_id = metadata["id"]
+        pin = pins.get(pack_id)
+        if pin is None:
+            raise ValidationError(
+                f"Pack {pack_id!r} is not selected by profile {profile['profile']['id']!r}"
+            )
+        if pack_id in supplied:
+            raise ValidationError(f"Pack {pack_id!r} was supplied more than once")
+        if metadata["version"] != pin["version"]:
+            raise ValidationError(
+                f"Pack {pack_id} version mismatch: expected {pin['version']}, "
+                f"got {metadata['version']}"
+            )
+        expected_hash = pin.get("content_hash")
+        actual_hash = content_hash(pack)
+        if expected_hash and expected_hash != actual_hash:
+            raise ValidationError(
+                f"Pack {pack_id} content hash mismatch: expected {expected_hash}, "
+                f"got {actual_hash}"
+            )
+        supplied.add(pack_id)
+    missing = set(pins) - supplied
+    if missing:
+        raise ValidationError(
+            f"Profile packs were not supplied: {sorted(missing)!r}"
+        )
+
+
 def load_profile_packs(profile_path: str | Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Load a profile and verify that every local pack matches its pin."""
 
@@ -52,14 +91,25 @@ def assess_profile(
     """Assess one target with every compatible pack in a pinned profile."""
 
     validate_inventory(inventory)
-    validate_pack_profile(profile)
+    verify_profile_packs(profile, packs)
     target = next((item for item in inventory["objects"] if item["id"] == target_id), None)
     if target is None:
         raise ValidationError(f"Unknown target object {target_id!r}")
+    compatible_packs = [
+        pack for pack in packs if target["type"] in pack["pack"]["applies_to"]
+    ]
+    skipped_packs = [
+        {
+            "id": pack["pack"]["id"],
+            "version": pack["pack"]["version"],
+            "reason": f"not_applicable_to_object_type:{target['type']}",
+        }
+        for pack in packs
+        if target["type"] not in pack["pack"]["applies_to"]
+    ]
     results = [
         assess(inventory, pack, target_id, assessed_at=assessed_at)
-        for pack in packs
-        if target["type"] in pack["pack"]["applies_to"]
+        for pack in compatible_packs
     ]
     stable = {
         "schema_version": "0.1.0",
@@ -69,6 +119,7 @@ def assess_profile(
             "content_hash": content_hash(profile),
         },
         "target": {"id": target["id"], "type": target["type"], "name": target["name"]},
+        "skipped_packs": skipped_packs,
     }
     hash_material = {
         **stable,

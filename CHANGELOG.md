@@ -4,6 +4,39 @@ All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.
 
+## [0.1.0-alpha.4] - 2026-08-29
+
+### Added
+
+- An optional OpenAI-compatible qualification command that calls a model for
+  bounded fact extraction, runs the deterministic profile and calls the model
+  again for an evidence-linked readable note.
+- Versioned runtime prompts, model and prompt metadata, exact pack pins and a
+  five-file qualification bundle with content hashes.
+- Object-level evidence links so a new prompt, document or configuration can
+  be read before any semantic fact exists.
+- Unit tests for the two-call flow, pack-bound fact ids and types, direct-fact
+  conflicts, object-level evidence, connector context and profile-pin
+  enforcement.
+
+### Changed
+
+- Human review diagrams now place targeted and sampled review after automated
+  qualification.
+- Public introductions and navigation now begin with the reader, problem,
+  outcome and concrete workflow, with fewer documentation entry points.
+- Direct API profile assessments now reject missing, unexpected or mismatched
+  packs. The CLI loading checks remain in place.
+- Qualification follows the directed composition graph far enough to include a
+  platform connector without sending unrelated sibling applications to the
+  model.
+- A model response of `unknown` can no longer downgrade an established direct
+  fact. Readable findings are rejected unless they cite an assessment, rule and
+  anchor.
+- Qualification stops before a paid model call when the target composition has
+  no linked evidence or the selected profile fails its pin checks.
+- CLI output commands create missing parent directories.
+
 ## [0.1.0-alpha.3] - 2026-08-29
 
 ### Added

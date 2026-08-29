@@ -12,3 +12,7 @@ class ValidationError(AirFrameworkError):
 
 class EvaluationError(AirFrameworkError):
     """Raised when a valid-looking rule cannot be evaluated safely."""
+
+
+class LlmError(AirFrameworkError):
+    """Raised when the optional model-assisted qualification cannot complete safely."""

@@ -63,9 +63,9 @@ Every released version directory is immutable:
 1. author a candidate version;
 2. validate its structure and conformance cases;
 3. dry-run it against the existing inventory;
-4. review the finding and routing diff;
+4. review changes to findings and internal workflows;
 5. approve and pin the version;
-6. retain previous assessments for audit and drift analysis.
+6. retain previous assessments for audit and comparison over time.
 
 `pack.json` is the machine-readable source. The adjacent README and CHANGELOG
-are the human review surface.
+present the version to the people who review it.

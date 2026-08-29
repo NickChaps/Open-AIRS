@@ -13,7 +13,8 @@ flowchart TB
     M --> A["Ancrages et preuves"]
     U --> A
     N --> A
-    A --> Q{"Politique de revue"}
+    A --> L["Second appel LLM<br/>note lisible avec références"]
+    L --> Q{"Politique de revue"}
     Q -->|"sélectionné"| H["Fiche de revue humaine"]
     Q -->|"non sélectionné"| C["Évaluation courante"]
     H --> D{"Résultat de la revue"}
@@ -25,10 +26,12 @@ flowchart TB
     classDef trace fill:#ecfeff,stroke:#0891b2,color:#164e63
     class T,X,P identity
     class S,M,U,N,Q,D status
-    class A,H,C,V trace
+    class A,L,H,C,V trace
 ```
 
-Commencez par sept champs :
+Le premier appel LLM lit les sources et propose les faits. Le moteur calcule
+ensuite les constats. Le second appel rédige la note lisible sans pouvoir
+modifier ces constats. Commencez la relecture par sept champs :
 
 1. `target` : l’objet exact et le périmètre évalué ;
 2. `extraction` : les faits sémantiques proposés, les preuves, la confiance et l’analyse de source ;
@@ -38,8 +41,8 @@ Commencez par sept champs :
 6. `anchors` : les emplacements juridiques ou méthodologiques exacts ;
 7. `review` : la raison de sélection et l’arbitrage humain lorsqu’il existe.
 
-Le dossier lisible est une fiche `assessment-note` séparée. Chaque phrase
-matérielle renvoie aux faits et preuves ou à l’évaluation, à la règle et aux
+Le dossier lisible est une fiche `assessment-note` séparée. Chaque affirmation
+importante renvoie aux faits et preuves ou à l’évaluation, à la règle et aux
 ancrages qui l’étayent.
 
 `matched` signifie que la condition déterministe publiée est vraie avec les

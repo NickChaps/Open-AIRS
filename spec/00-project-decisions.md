@@ -21,9 +21,10 @@ Public legal and methodological packs do not ship an organisational traffic-ligh
 
 Language models may extract semantic facts from text and explain deterministic results. They do not silently replace the rule engine. Every inferred fact must retain its evidence, confidence, extractor profile and model provenance. Unknown and conflicting evidence are first-class states.
 
-`air-assess` is an instruction package used by the host LLM or agent. The
-reference Python engine begins with structured facts and does not invoke the
-skill or a model itself. Its outputs remain reproducible across model providers.
+`air-assess` is an instruction package used by the model calls. The `assess`
+commands begin with structured facts and never invoke a model. The optional
+`qualify` command provides a reference two-call orchestrator around the same
+deterministic engine. Rule results remain reproducible across model providers.
 
 ## Review at scale
 

@@ -65,7 +65,7 @@ Un fait répond à une question bornée :
 
 - l’usage traite-t-il des données personnelles ?
 - l’application filtre-t-elle des candidatures ?
-- une validation humaine est-elle imposée par le runtime ?
+- la plateforme impose-t-elle réellement une validation humaine ?
 - le système interagit-il directement avec une personne ?
 
 Un fait a quatre états : `known`, `unknown`, `conflicted` ou `not_applicable`.
@@ -89,7 +89,7 @@ NIST CSF ainsi qu’un exemple contractuel fictif.
 
 ### 6. Évaluation
 
-Une évaluation conserve le snapshot du registre, la version du pack, les faits
+Une évaluation conserve la version du registre, la version du pack, les faits
 effectifs, les règles testées et le résultat. Deux évaluations peuvent être
 comparées pour expliquer un changement du parc, d’une preuve ou du référentiel.
 
@@ -104,35 +104,50 @@ produit ou du modèle.
 Un skill est un objet textuel passif. Il n’exécute pas seul une action, mais ses
 instructions peuvent contribuer à la finalité d’une application. AIR le relie
 donc à l’application et à l’usage concernés. Les capacités d’action sont
-portées par le runtime et les connecteurs effectivement autorisés.
+portées par la plateforme en fonctionnement et les connecteurs effectivement autorisés.
 
 ## Ce que fait le modèle de langage
 
-Le LLM lit des contenus peu structurés et propose des faits bornés avec leurs
-preuves : « cette instruction classe des candidats », « cette configuration
-impose une confirmation humaine » ou « la preuve est insuffisante ».
+Le LLM lit des contenus peu structurés et répond aux questions précises du pack
+avec leurs preuves : « cette instruction classe des candidats », « cette
+configuration impose une confirmation humaine » ou « la preuve est
+insuffisante ». Il rédige aussi une analyse en texte courant. Cette analyse
+explique le périmètre, les observations et les inconnues ; elle ne remplace pas
+les faits structurés.
 
-Il ne choisit pas silencieusement la règle juridique et ne transforme pas une
-consigne écrite en contrôle réellement appliqué. Le moteur déterministe teste
-les faits contre la version publiée du pack.
+Il ne crée ni règle juridique, ni obligation, ni référence. Il ne transforme
+pas une consigne écrite en contrôle réellement appliqué. Le moteur teste les
+faits contre la version publiée du pack. Un second appel au LLM peut ensuite
+rédiger la note finale à partir des résultats calculés. Chaque phrase importante
+doit citer les faits, preuves, règles et références qui la soutiennent.
 
 ```mermaid
 flowchart LR
     T["Textes et configurations"] --> L["LLM<br/>proposition de faits"]
-    L --> H["Validation ou contestation"]
-    H --> F["Faits + preuves"]
+    L --> F["Faits + preuves<br/>analyse de source"]
     F --> E["Règles déterministes"]
-    E --> R["Résultat explicable"]
+    E --> N["Second appel LLM<br/>note référencée"]
+    L --> N
+    N --> R["Résultat explicable"]
+    R --> Q{"Politique de contrôle"}
+    Q -->|"cas ciblé"| H["Revue humaine"]
+    Q -->|"échantillon"| H
+    Q -->|"non sélectionné"| C["Version courante"]
+    H --> C
 
     classDef source fill:#f8fafc,stroke:#64748b,color:#0f172a
     classDef assist fill:#ecfeff,stroke:#0891b2,color:#164e63
     classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
     class T source
-    class L,H,F assist
+    class L,H,F,N assist
     class E engine
-    class R result
+    class R,Q,C result
 ```
+
+La revue humaine intervient donc après la qualification, sur les cas choisis
+par la politique de contrôle. Elle n’est pas une étape obligatoire pour chaque
+application du parc.
 
 ## Les décisions propres à l’entreprise
 

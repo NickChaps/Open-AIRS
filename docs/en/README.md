@@ -2,46 +2,51 @@
 
 # AIR Framework documentation
 
-You do not need to be a developer to understand the framework. Start with the
-question closest to your work.
+You do not need to read the whole repository. Choose the path that matches
+your work.
 
-## I work in legal, compliance, security or risk
+## Understand and review a record
 
-1. Read [What the registry contains](ai-registry.md).
-2. Follow [a complete governance workflow](governance-workflow.md), with no
-   technical prerequisite.
-3. Try the [ten-minute walkthrough](quickstart.md).
-4. Use [How to read an assessment](reading-an-assessment.md) to distinguish a
-   legal finding from an evidence gap or an internal route.
-5. Understand [human review and sampling at registry scale](quality-control.md).
-6. Review [Sources and coverage](sources-and-coverage.md) before relying on a
-   pack.
-7. Open the [dated pack coverage review](../audits/2026-08-29-pack-viability.md)
-   to see the latest source check and residual limits.
+This path is for legal, compliance, risk, security and business teams.
 
-## I configure governance
+1. [Understand AIR through one case](concepts.md)
+2. [See the information held by the AI registry](ai-registry.md)
+3. [Read a result, its evidence and references](reading-an-assessment.md)
+4. [Understand targeted and sampled quality controls](quality-control.md)
 
-1. Read [Objects, facts and rules in plain language](concepts.md).
-2. Learn how to [author and release a pack](authoring-packs.md).
-3. Keep company decisions in [organisation-owned routes](../../spec/06-organization-routing.md).
-4. Review the [connector topology example](../../examples/connector-topologies/README.md).
-5. Configure [review selection and controlled improvement](quality-control.md).
-6. Dry-run every pack update before activation.
+The [fictional recruitment case](../../examples/ai-governance/README.md) shows
+the complete record without requiring a command.
 
-## I integrate or develop
+## Configure rules
 
-- JSON schemas are under [`spec/schemas`](../../spec/schemas/).
-- The condition language is documented in
-  [`spec/04-condition-language.md`](../../spec/04-condition-language.md).
-- Extraction, readable-note and human-review records are documented in
-  [`spec/08-extraction-review-and-learning.md`](../../spec/08-extraction-review-and-learning.md).
-- The Python reference engine is under [`src/air_framework`](../../src/air_framework/).
-- Executable examples are under [`examples`](../../examples/).
-- Conformance tests are under [`tests`](../../tests/).
+This path is for people maintaining a law, framework or organisation-approved
+policy.
 
-## Guarantees and limits
+1. [Create a rule pack](authoring-packs.md)
+2. [Check the source, coverage and limits](sources-and-coverage.md)
+3. [Simulate a change before activation](../../spec/03-rule-packs.md)
 
-It makes inputs, evidence, rules, versions and outcomes inspectable. It does
-not promise that a machine can certify legal compliance. Unknown evidence stays
-unknown, source authority stays visible and an organisation's workflow remains
-separate from the legal or methodological result.
+Readable pack guides are listed in [`packs/README.md`](../../packs/README.md).
+The JSON file is needed only when inspecting or changing executable conditions.
+
+## Install or integrate
+
+Start with the [ten-minute walkthrough](quickstart.md). It covers two modes:
+
+- replaying rules with no model call;
+- running full qualification with LLM reading and explanation.
+
+Developers can then open:
+
+- the [JSON schemas](../../spec/schemas/);
+- the [condition language](../../spec/04-condition-language.md);
+- the [LLM, review and improvement flow](../../spec/08-extraction-review-and-learning.md);
+- the [Python engine](../../src/air_framework/);
+- the [tests](../../tests/).
+
+## Reference documents
+
+Specifications, licences, earlier pack versions, changelogs and dated audits
+remain necessary for project traceability. They do not form another reading
+path. Open them when checking a version, source, architecture decision or
+contribution.

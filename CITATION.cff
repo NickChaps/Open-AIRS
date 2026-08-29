@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Chapuis
     given-names: Nicolas
-version: 0.1.0-alpha.3
+version: 0.1.0-alpha.4
 date-released: 2026-08-29
 license: Apache-2.0
 repository-code: "https://github.com/NickChaps/AIR-Framework"

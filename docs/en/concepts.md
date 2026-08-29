@@ -63,7 +63,7 @@ A fact answers a bounded question:
 
 - does the use process personal data?
 - does the application filter job applications?
-- does the runtime enforce human confirmation?
+- does the platform actually enforce human confirmation?
 - does the system interact directly with a person?
 
 A fact has four states: `known`, `unknown`, `conflicted` or `not_applicable`.
@@ -87,7 +87,7 @@ packs, together with a fictional contract example.
 
 ### 6. Assessment
 
-An assessment preserves the registry snapshot, pack version, effective facts,
+An assessment preserves the registry version, pack version, effective facts,
 rules tested and outcome. Two assessments can be compared to explain a change
 in the estate, evidence or authority.
 
@@ -101,35 +101,48 @@ precise qualification than the product or model name alone.
 A skill is a passive text object. It does not perform an action on its own, but
 its instructions may contribute to an application’s purpose. AIR therefore
 connects it to the affected application and use. Action capabilities belong to
-the runtime and the connectors it actually authorises.
+the operating platform and the connectors it actually authorises.
 
 ## What the language model does
 
-The LLM reads unstructured material and proposes bounded facts with evidence:
-“these instructions rank applicants”, “this configuration enforces human
-confirmation”, or “the evidence is insufficient”.
+The LLM reads unstructured material and answers the pack's precise questions
+with evidence: “these instructions rank applicants”, “this configuration
+enforces human confirmation”, or “the evidence is insufficient”. It also
+writes a plain-language source analysis. That analysis explains scope,
+observations and unknowns; it does not replace the structured facts.
 
-It does not silently choose the legal rule or turn a written instruction into
-an enforced control. The deterministic engine tests the facts against the
-published pack version.
+The model creates no legal rule, obligation or reference. It does not turn a
+written instruction into an enforced control. The engine tests facts against
+the published pack version. A second model call may then write the final note
+from the calculated results. Every important sentence must cite the facts,
+evidence, rules and references supporting it.
 
 ```mermaid
 flowchart LR
     T["Text and configurations"] --> L["LLM<br/>fact proposals"]
-    L --> H["Validation or challenge"]
-    H --> F["Facts + evidence"]
+    L --> F["Facts + evidence<br/>source analysis"]
     F --> E["Deterministic rules"]
-    E --> R["Explainable outcome"]
+    E --> N["Second LLM call<br/>referenced note"]
+    L --> N
+    N --> R["Explainable outcome"]
+    R --> Q{"Control policy"}
+    Q -->|"targeted case"| H["Human review"]
+    Q -->|"sample"| H
+    Q -->|"not selected"| C["Current version"]
+    H --> C
 
     classDef source fill:#f8fafc,stroke:#64748b,color:#0f172a
     classDef assist fill:#ecfeff,stroke:#0891b2,color:#164e63
     classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
     class T source
-    class L,H,F assist
+    class L,H,F,N assist
     class E engine
-    class R result
+    class R,Q,C result
 ```
+
+Human review therefore follows qualification for cases selected by the control
+policy. It is not a required step for every application in the estate.
 
 ## Decisions owned by the organisation
 

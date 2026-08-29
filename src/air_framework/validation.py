@@ -167,6 +167,24 @@ def validate_fact(fact: Any, path: str) -> None:
         raise ValidationError(f"{path}.extractor: expected an object")
 
 
+def fact_value_matches_type(value: Any, fact_type: str) -> bool:
+    """Return whether a known value matches a pack-declared fact type."""
+
+    if fact_type == "boolean":
+        return isinstance(value, bool)
+    if fact_type == "string":
+        return isinstance(value, str)
+    if fact_type == "array":
+        return isinstance(value, list)
+    if fact_type == "integer":
+        return isinstance(value, int) and not isinstance(value, bool)
+    if fact_type == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
+    if fact_type == "object":
+        return isinstance(value, Mapping)
+    return False
+
+
 def _validate_relation_path(value: Any, path: str) -> None:
     if not isinstance(value, list) or not value:
         raise ValidationError(f"{path}: expected a non-empty list")
@@ -337,6 +355,20 @@ def validate_inventory(inventory: Mapping[str, Any]) -> None:
         if object_type not in OBJECT_TYPES:
             raise ValidationError(f"{path}.type: unsupported object type {object_type!r}")
         _require(item, "name", str, path)
+        object_evidence = item.get("evidence", [])
+        if not isinstance(object_evidence, list) or not all(
+            isinstance(evidence_id, str) for evidence_id in object_evidence
+        ):
+            raise ValidationError(
+                f"{path}.evidence: expected a list of evidence identifiers"
+            )
+        if len(object_evidence) != len(set(object_evidence)):
+            raise ValidationError(f"{path}.evidence: duplicate evidence id")
+        for evidence_id in object_evidence:
+            if evidence_id not in evidence_ids:
+                raise ValidationError(
+                    f"{path}.evidence: unknown evidence id {evidence_id!r}"
+                )
         facts = item.get("facts", {})
         if not isinstance(facts, Mapping):
             raise ValidationError(f"{path}.facts: expected an object keyed by fact id")
@@ -587,6 +619,17 @@ def validate_extraction_record(record: Mapping[str, Any]) -> None:
     inventory = _require(record, "inventory", dict, "extraction")
     _require(inventory, "inventory_id", str, "extraction.inventory")
     _require(inventory, "snapshot_id", str, "extraction.inventory")
+
+    pack_inputs = _require(record, "pack_inputs", list, "extraction")
+    if not pack_inputs or not all(isinstance(item, Mapping) for item in pack_inputs):
+        raise ValidationError("extraction.pack_inputs: expected non-empty pack pins")
+    _unique(pack_inputs, "id", "extraction.pack_inputs")
+    for index, pin in enumerate(pack_inputs):
+        path = f"extraction.pack_inputs[{index}]"
+        _require(pin, "version", str, path)
+        digest = _require(pin, "content_hash", str, path)
+        if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
+            raise ValidationError(f"{path}.content_hash: expected a lower-case SHA-256 digest")
 
     extractor = _require(record, "extractor", dict, "extraction")
     extractor_kind = _require(extractor, "kind", str, "extraction.extractor")

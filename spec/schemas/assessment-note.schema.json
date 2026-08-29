@@ -71,7 +71,19 @@
         "id": {"type": "string", "minLength": 1},
         "version": {"type": "string", "minLength": 1},
         "model": {"type": "object"},
-        "run_id": {"type": "string"}
+        "run_id": {"type": "string"},
+        "usage": {"type": "object"},
+        "prompt_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "prompt_template": {
+          "type": "object",
+          "required": ["id", "version", "content_hash"],
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "version": {"type": "string", "minLength": 1},
+            "content_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     },
@@ -152,7 +164,62 @@
           "additionalProperties": false
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {"kind": {"const": "fact"}},
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "references": {
+                "required": ["fact_ids", "evidence"],
+                "properties": {
+                  "fact_ids": {"minItems": 1},
+                  "evidence": {"minItems": 1}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"kind": {"const": "unknown"}},
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "references": {
+                "anyOf": [
+                  {
+                    "required": ["fact_ids"],
+                    "properties": {"fact_ids": {"minItems": 1}}
+                  },
+                  {"required": ["assessment_id"]}
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"kind": {"const": "finding"}},
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": {
+              "references": {
+                "required": ["assessment_id", "rule_ids", "anchor_ids"],
+                "properties": {
+                  "rule_ids": {"minItems": 1},
+                  "anchor_ids": {"minItems": 1}
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

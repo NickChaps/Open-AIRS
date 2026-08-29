@@ -11,6 +11,11 @@ from typing import Any
 from .engine import assess, assess_inventory, diff_assessments, pack_impact
 from .errors import AirFrameworkError
 from .io import dump_json, load_json
+from .judge import (
+    client_from_environment,
+    qualify_with_llm,
+    write_qualification_bundle,
+)
 from .profiles import assess_profile, load_profile_packs
 from .routing import apply_routes
 from .validation import (
@@ -27,7 +32,9 @@ from .validation import (
 def _write(value: Any, output: str | None, compact: bool) -> None:
     rendered = dump_json(value, pretty=not compact)
     if output:
-        Path(output).write_text(rendered, encoding="utf-8")
+        destination = Path(output)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(rendered, encoding="utf-8")
     else:
         sys.stdout.write(rendered)
 
@@ -124,6 +131,29 @@ def build_parser() -> argparse.ArgumentParser:
         "validate-profile", help="Validate a pack-selection profile and all pins"
     )
     validate_profile_parser.add_argument("profile")
+
+    qualify_parser = commands.add_parser(
+        "qualify",
+        help="Run LLM fact extraction, deterministic packs and a readable LLM note",
+    )
+    qualify_parser.add_argument("--inventory", required=True)
+    qualify_parser.add_argument("--profile", required=True)
+    qualify_parser.add_argument("--target", required=True)
+    qualify_parser.add_argument("--output-dir", required=True)
+    qualify_parser.add_argument("--language", default="fr")
+    qualify_parser.add_argument("--model")
+    qualify_parser.add_argument("--base-url")
+    qualify_parser.add_argument("--provider-name", default="openai-compatible")
+    qualify_parser.add_argument("--api-key-env", default="AIR_LLM_API_KEY")
+    qualify_parser.add_argument(
+        "--response-format",
+        choices=["json_schema", "json_object"],
+        default="json_schema",
+    )
+    qualify_parser.add_argument("--reasoning-effort")
+    qualify_parser.add_argument("--max-tokens", type=int, default=5000)
+    qualify_parser.add_argument("--timeout", type=float, default=120.0)
+    qualify_parser.add_argument("--assessed-at")
     return parser
 
 
@@ -196,6 +226,29 @@ def main(argv: list[str] | None = None) -> int:
             profile, _ = load_profile_packs(args.profile)
             validate_pack_profile(profile)
             print(f"valid pack profile: {args.profile}")
+        elif args.command == "qualify":
+            profile, packs = load_profile_packs(args.profile)
+            client = client_from_environment(
+                model=args.model,
+                base_url=args.base_url,
+                api_key_env=args.api_key_env,
+                provider_name=args.provider_name,
+                response_format=args.response_format,
+                reasoning_effort=args.reasoning_effort,
+                max_tokens=args.max_tokens,
+                timeout=args.timeout,
+            )
+            bundle = qualify_with_llm(
+                load_json(args.inventory),
+                profile,
+                packs,
+                args.target,
+                client,
+                language=args.language,
+                assessed_at=args.assessed_at,
+            )
+            write_qualification_bundle(bundle, args.output_dir)
+            print(f"qualification bundle: {Path(args.output_dir).resolve()}")
         return 0
     except AirFrameworkError as exc:
         parser.exit(2, f"error: {exc}\n")

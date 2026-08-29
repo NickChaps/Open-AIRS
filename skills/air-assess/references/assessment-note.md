@@ -1,6 +1,6 @@
 # Readable assessment note
 
-Prepare a concise note that a legal, compliance, security or business reviewer
+Prepare a clear note that a legal, compliance, security or business reviewer
 can verify without opening raw JSON.
 
 ## Required content

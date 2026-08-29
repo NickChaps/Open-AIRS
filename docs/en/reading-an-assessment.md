@@ -13,7 +13,8 @@ flowchart TB
     M --> A["Anchors and evidence"]
     U --> A
     N --> A
-    A --> Q{"Review policy"}
+    A --> L["Second LLM call<br/>readable referenced note"]
+    L --> Q{"Review policy"}
     Q -->|"selected"| H["Human review record"]
     Q -->|"not selected"| C["Current assessment"]
     H --> D{"Review outcome"}
@@ -25,10 +26,12 @@ flowchart TB
     classDef trace fill:#ecfeff,stroke:#0891b2,color:#164e63
     class T,X,P identity
     class S,M,U,N,Q,D status
-    class A,H,C,V trace
+    class A,L,H,C,V trace
 ```
 
-Start with seven fields:
+The first LLM call reads the sources and proposes facts. The engine then
+calculates the findings. The second call writes the readable note without
+changing those findings. Start the review with seven fields:
 
 1. `target`: the exact object and system boundary assessed;
 2. `extraction`: semantic fact proposals, evidence, confidence and source analysis;
@@ -38,7 +41,7 @@ Start with seven fields:
 6. `anchors`: the exact legal or methodological locations behind the rule;
 7. `review`: selection reason and human adjudication when the case was selected.
 
-The readable case file is a separate `assessment-note` record. Each material
+The readable case file is a separate `assessment-note` record. Each important
 sentence points back to the facts and evidence or to the assessment, rule and
 anchors that support it.
 
