@@ -15,7 +15,18 @@
     "target": {"type": "object"},
     "effective_facts": {"type": "object"},
     "findings": {"type": "array", "items": {"type": "object"}},
-    "summary": {"type": "object"}
+    "summary": {
+      "type": "object",
+      "required": ["evaluated_rules", "returned_findings", "matched", "indeterminate", "not_matched"],
+      "properties": {
+        "evaluated_rules": {"type": "integer", "minimum": 0},
+        "returned_findings": {"type": "integer", "minimum": 0},
+        "matched": {"type": "integer", "minimum": 0},
+        "indeterminate": {"type": "integer", "minimum": 0},
+        "not_matched": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
   },
   "additionalProperties": true
 }

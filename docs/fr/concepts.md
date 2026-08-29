@@ -57,7 +57,7 @@ systèmes d’IA autonomes au sens de la loi.
 
 Une relation explique la composition : cette application fonctionne sur cette
 plateforme, charge ce skill, peut invoquer ce connecteur et réalise cet usage.
-Le registre devient un graphe plutôt qu’une liste de logiciels sans contexte.
+Le graphe conserve le contexte que chaque logiciel apporte à l’usage.
 
 ### 3. Fait
 
@@ -93,12 +93,13 @@ Une évaluation conserve le snapshot du registre, la version du pack, les faits
 effectifs, les règles testées et le résultat. Deux évaluations peuvent être
 comparées pour expliquer un changement du parc, d’une preuve ou du référentiel.
 
-## Pourquoi l’usage concret est déterminant
+## Le rôle de l’usage concret
 
 Une plateforme généraliste peut servir plusieurs finalités. Une application
 résume des documents ; une autre prépare une décision de crédit ; une troisième
-filtre des candidatures. La qualification dépend donc de la composition et de
-l’usage, pas seulement du produit acheté ou du modèle utilisé.
+filtre des candidatures. La composition, la finalité et le contexte d’usage
+déterminent la qualification avec davantage de précision que le seul nom du
+produit ou du modèle.
 
 Un skill est un objet textuel passif. Il n’exécute pas seul une action, mais ses
 instructions peuvent contribuer à la finalité d’une application. AIR le relie
@@ -133,7 +134,7 @@ flowchart LR
     class R result
 ```
 
-## Ce que l’entreprise décide elle-même
+## Les décisions propres à l’entreprise
 
 Le pack produit un constat juridique ou méthodologique. L’entreprise peut
 ensuite l’orienter vers une revue, demander une preuve, affecter un responsable

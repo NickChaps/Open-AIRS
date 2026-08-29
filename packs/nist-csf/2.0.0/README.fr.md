@@ -103,9 +103,9 @@ Il n’encode pas encore :
 - les Informative References et profils sectoriels ;
 - les mesures et preuves attendues pour chaque résultat.
 
-Ce pack est donc un socle d’intégration et un exemple de format.
-Un profil de production doit sélectionner les résultats CSF pertinents plutôt
-que déclarer une fonction entière conforme à partir d’une phrase générale.
+Ce pack est donc un socle d’intégration et un exemple de format. Un profil de
+production doit sélectionner les résultats CSF pertinents. Une phrase générale
+ne suffit pas à établir qu’une fonction entière est satisfaite.
 
 ## Sources officielles
 

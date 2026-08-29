@@ -103,9 +103,9 @@ Not yet encoded:
 - Informative References and sector profiles;
 - measurements and evidence requirements for individual outcomes.
 
-This pack is therefore an integration baseline and example. A
-production profile should select the relevant CSF outcomes rather than mark an
-entire function complete from a general statement.
+This pack is therefore an integration baseline and example. A production
+profile should select the relevant CSF outcomes. A general statement does not
+establish completion of an entire function.
 
 ## Official sources
 

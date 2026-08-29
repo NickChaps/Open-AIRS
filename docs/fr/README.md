@@ -35,7 +35,7 @@ Commencez par la question la plus proche de votre travail.
 - Les exemples exécutables sont dans [`examples`](../../examples/).
 - Les tests de conformité sont dans [`tests`](../../tests/).
 
-## Ce que garantit AIR Framework
+## Garanties et limites
 
 AIR rend inspectables les entrées, les preuves, les règles, les versions et les
 résultats. Il ne prétend pas qu’une machine peut certifier la conformité

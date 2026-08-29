@@ -54,8 +54,8 @@ standalone AI systems in law.
 ### 2. Relationship
 
 A relationship describes composition: this application runs on that platform,
-loads this skill, can invoke this connector and implements this use. The
-registry becomes a graph rather than a context-free software list.
+loads this skill, can invoke this connector and implements this use. The graph
+retains the context that each component contributes to the use.
 
 ### 3. Fact
 
@@ -91,12 +91,12 @@ An assessment preserves the registry snapshot, pack version, effective facts,
 rules tested and outcome. Two assessments can be compared to explain a change
 in the estate, evidence or authority.
 
-## Why the concrete use matters
+## The role of the concrete use
 
 One general-purpose platform can serve several purposes. One application
 summarises documents, another prepares a credit decision and a third screens
-job applicants. Qualification therefore depends on composition and use, not
-only on the product purchased or model selected.
+job applicants. Composition, intended purpose and use context produce a more
+precise qualification than the product or model name alone.
 
 A skill is a passive text object. It does not perform an action on its own, but
 its instructions may contribute to an application’s purpose. AIR therefore
@@ -131,7 +131,7 @@ flowchart LR
     class R result
 ```
 
-## What the organisation decides
+## Decisions owned by the organisation
 
 The pack produces a legal or methodological finding. The organisation may then
 route it to review, request evidence, assign an owner or block deployment.

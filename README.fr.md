@@ -15,21 +15,24 @@ que l’organisation prend ensuite.
 
 ## Pourquoi ce projet existe
 
-L’IA est déjà sortie des seuls laboratoires. En 2025, **20 % des entreprises de
-l’Union européenne** utilisaient au moins une technologie d’IA, contre 13,5 %
-en 2024. La proportion atteignait **55 % parmi les grandes entreprises**
-([Eurostat, 2026](https://ec.europa.eu/eurostat/web/products-statistical-reports/w/ks-01-26-009)).
+L’enquête mondiale publiée par McKinsey le 25 août 2026 a recueilli 1 719
+réponses dans 97 pays entre mai et juin. Près de **neuf répondants sur dix**
+déclarent un usage régulier de l’IA dans au moins une fonction et **44 %** un
+déploiement à l’échelle de l’entreprise. Parmi les organisations de plus d’un
+milliard de dollars de chiffre d’affaires, **40 %** déclarent mettre des agents
+à l’échelle dans au moins une fonction, contre 27 % un an plus tôt
+([McKinsey, 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)).
 
 Dans le même temps, l’[AI Act européen](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 est entré dans sa phase d’application. Les entreprises doivent savoir quels
 systèmes et usages elles exploitent, pourquoi une qualification s’applique,
 quelles preuves la soutiennent et ce qui a changé depuis la dernière revue.
 
-Le problème de gouvernance ne vient pas seulement du nombre de fournisseurs.
-Une plateforme peut exposer plusieurs modèles, héberger des dizaines
-d’applications configurées souvent appelées « agents », charger des skills et
-ouvrir des connecteurs vers les outils de l’entreprise. Chacun de ces éléments
-peut être réutilisé dans plusieurs usages métier.
+Le nombre de fournisseurs ne décrit plus le périmètre à gouverner. Une
+plateforme peut exposer plusieurs modèles, héberger des dizaines d’applications
+configurées souvent appelées « agents », charger des skills et ouvrir des
+connecteurs vers les outils de l’entreprise. Chaque élément peut être réutilisé
+dans plusieurs usages métier.
 
 ```mermaid
 flowchart LR
@@ -96,11 +99,12 @@ Le modèle de langage **propose des faits**, il ne rend pas seul le jugement
 juridique. Les mêmes faits et la même version d’un pack produisent le même
 résultat déterministe.
 
-## Le registre est un graphe, pas une simple liste
+## Le graphe du registre
 
-AIR conserve un inventaire de gouvernance plus large que le registre juridique
-final. Un composant peut être utile pour expliquer un usage sans être lui-même
-un système d’IA autonome au sens de la loi.
+AIR conserve dans son inventaire les composants qui expliquent chaque usage.
+Certains sont nécessaires à la gouvernance sans constituer eux-mêmes un
+système d’IA autonome au sens de la loi. Le registre juridique final est une
+vue de ce graphe.
 
 ```mermaid
 flowchart TB
@@ -132,7 +136,7 @@ qu’il autorise à hériter. Une qualification juridique finale n’est jamais
 copiée mécaniquement d’un parent vers un enfant : elle est recalculée pour la
 composition et l’usage évalués.
 
-## Quatre couches qui ne se confondent pas
+## Quatre couches de décision
 
 | Couche | Question traitée | Exemple |
 | --- | --- | --- |
@@ -221,8 +225,8 @@ inventoriés comme n’importe quel autre objet `skill` du parc.
 | Un skill trouvé dans un parc IA | Son texte, sa version, sa plateforme et son effet sur la finalité des usages composés |
 | Un skill d’aide AIR déployé par une équipe | Les mêmes champs, avec des instructions destinées à guider l’évaluation ou la création de packs |
 
-La différence vient de l’endroit où le skill est déployé et de ce que fait son
-texte, pas d’un second type d’objet.
+Le contexte de déploiement et le contenu donnent son rôle au skill. Le schéma
+d’objet reste identique.
 
 ## Essayer l’exemple de gouvernance IA
 
@@ -247,7 +251,7 @@ air-framework assess-profile \
 La commande de profil applique une sélection explicite de packs figés par
 version et empreinte. Aucun jeu de règles global ne s’active en silence.
 
-## Ce que le projet ne prétend pas
+## Portée de la version alpha
 
 AIR Framework ne certifie pas la conformité et ne remplace pas les
 professionnels du droit, de la sécurité ou des risques. Un résultat dépend de

@@ -34,7 +34,7 @@ question closest to your work.
 - Executable examples are under [`examples`](../../examples/).
 - Conformance tests are under [`tests`](../../tests/).
 
-## What AIR Framework promises
+## Guarantees and limits
 
 It makes inputs, evidence, rules, versions and outcomes inspectable. It does
 not promise that a machine can certify legal compliance. Unknown evidence stays

@@ -51,6 +51,32 @@ class ProfileTests(unittest.TestCase):
         finally:
             temporary_path.unlink(missing_ok=True)
 
+    def test_profile_assessment_id_is_stable_across_run_times(self):
+        profile, packs = load_profile_packs(ROOT / "examples/ai-governance/pack-profile.json")
+        inventory = json.loads(
+            (ROOT / "examples/ai-governance/inventory.json").read_text(encoding="utf-8")
+        )
+        first = assess_profile(
+            inventory,
+            profile,
+            packs,
+            "use-recruiting-assistant",
+            assessed_at="2026-08-29T12:00:00Z",
+        )
+        second = assess_profile(
+            inventory,
+            profile,
+            packs,
+            "use-recruiting-assistant",
+            assessed_at="2026-09-01T12:00:00Z",
+        )
+        self.assertEqual(first["profile_assessment_id"], second["profile_assessment_id"])
+        self.assertEqual(first["result_hash"], second["result_hash"])
+        self.assertNotEqual(
+            first["assessments"][0]["assessed_at"],
+            second["assessments"][0]["assessed_at"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

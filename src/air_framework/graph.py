@@ -80,7 +80,12 @@ class InventoryGraph:
         resolved = deepcopy(target.get("facts", {}))
         for policy in policies:
             fact_key = policy["fact"]
-            if fact_key in resolved and resolved[fact_key].get("state") == "known":
+            direct = resolved.get(fact_key)
+            if isinstance(direct, Mapping) and direct.get("state") in {
+                "known",
+                "conflicted",
+                "not_applicable",
+            }:
                 continue
             parent_ids = self.follow(object_id, policy["path"])
             object_types = set(policy.get("object_types", []))

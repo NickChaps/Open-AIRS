@@ -25,7 +25,7 @@ inventory without being an AI system in law.
 Extensions may use `generic` until they register a stable type in a future
 schema version.
 
-## Composition, not containment alone
+## Composition and inheritance
 
 Relations form a directed graph. The reference examples use:
 

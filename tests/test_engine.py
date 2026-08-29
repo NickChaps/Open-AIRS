@@ -125,6 +125,57 @@ class AssessmentTests(unittest.TestCase):
         self.assertEqual("inherited", fact["provenance"])
         self.assertEqual(["platform-orbit"], fact["inherited_from"])
 
+    def test_direct_conflict_is_not_overwritten_by_inheritance(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(
+            item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant"
+        )
+        use["facts"]["controls.ai_literacy_measures"] = {
+            "state": "conflicted",
+            "evidence": ["ev-use-declaration", "ev-platform-controls"],
+        }
+        result = assess(
+            inventory,
+            load("packs/eu-ai-act/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+        )
+        self.assertEqual(
+            "conflicted",
+            result["effective_facts"]["controls.ai_literacy_measures"]["state"],
+        )
+
+    def test_summary_counts_all_evaluated_rules_when_non_matches_are_hidden(self):
+        result = assess(
+            load("examples/ai-governance/inventory.json"),
+            load("packs/eu-ai-act/1.0.0/pack.json"),
+            "use-recruiting-assistant",
+        )
+        summary = result["summary"]
+        self.assertEqual(
+            summary["evaluated_rules"],
+            summary["matched"] + summary["indeterminate"] + summary["not_matched"],
+        )
+        self.assertEqual(summary["returned_findings"], len(result["findings"]))
+        self.assertGreater(summary["not_matched"], 0)
+        self.assertGreater(summary["evaluated_rules"], summary["returned_findings"])
+
+    def test_known_fact_value_must_match_pack_catalog_type(self):
+        inventory = deepcopy(load("examples/ai-governance/inventory.json"))
+        use = next(
+            item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant"
+        )
+        use["facts"]["ai.is_ai_system"] = {
+            "state": "known",
+            "value": "yes",
+            "evidence": ["ev-legal-review"],
+        }
+        with self.assertRaises(EvaluationError):
+            assess(
+                inventory,
+                load("packs/eu-ai-act/1.0.0/pack.json"),
+                "use-recruiting-assistant",
+            )
+
     def test_same_content_has_same_id_despite_run_time(self):
         inventory = load("examples/contract-review/inventory.json")
         pack = load("packs/contract-review-example/1.0.0/pack.json")

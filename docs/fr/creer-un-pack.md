@@ -2,20 +2,20 @@
 
 # Créer et publier un pack
 
-## Partir de l’autorité, pas de la voie souhaitée
+## Identifier l’autorité et le périmètre
 
 Indiquez si la source relève du droit contraignant, d’une ligne directrice,
 d’un référentiel volontaire, d’une politique d’entreprise ou d’un exemple
 fictif. Identifiez la juridiction, la version, la date d’effet et l’URL
 officielle. Décrivez la couverture et les lacunes avant d’écrire les règles.
 
-## Transformer le test en faits bornés
+## Décomposer le test en faits vérifiables
 
 Pour chaque élément du test, posez une question à laquelle un relecteur peut
 répondre avec une preuve. N’extrayez pas « haut risque » comme un fait si le
 pack doit précisément le déterminer. Conservez les inconnues et les conflits.
 
-## Écrire la condition auditable la plus simple
+## Écrire une condition auditable
 
 Utilisez le langage de conditions v0.1. Ajoutez un résumé original, un code de
 constat stable, les ancrages exacts et les obligations. Ne mettez pas les voies

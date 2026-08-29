@@ -2,10 +2,10 @@
 
 [Lire en français](README.fr.md)
 
-This educational pack demonstrates that AIR’s object, fact and rule model is
-not limited to AI regulation. A contract becomes the governed object. Clause
-presence is captured as evidence-backed facts, then deterministic rules compare
-those facts with a fictional clause library.
+This educational pack applies AIR’s object, fact and rule model to contract
+review. A contract becomes the governed object. Clause presence is captured as
+evidence-backed facts, then deterministic rules compare those facts with a
+fictional clause library.
 
 Nothing in this pack is a real contract template, recommended clause or legal
 opinion.

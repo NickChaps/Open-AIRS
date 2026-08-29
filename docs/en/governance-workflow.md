@@ -44,5 +44,6 @@ interpretations outside pack coverage and defines its own work routes. A new
 pack version is first simulated against the registry. It replaces the active
 version only after explicit approval.
 
-The result is not “AI certification of compliance.” It is a reproducible case
-file: same evidence, same facts, same rule version, same deterministic result.
+The result is a reproducible case file: same evidence, same facts, same rule
+version, same deterministic result. It is not an AI-issued compliance
+certification.

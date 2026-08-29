@@ -38,6 +38,25 @@
         "extractor": {"type": "object"},
         "note": {"type": "string"}
       },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"state": {"const": "known"}},
+            "required": ["state"]
+          },
+          "then": {"required": ["value"]}
+        },
+        {
+          "if": {
+            "properties": {"state": {"enum": ["known", "conflicted"]}},
+            "required": ["state"]
+          },
+          "then": {
+            "required": ["evidence"],
+            "properties": {"evidence": {"minItems": 1}}
+          }
+        }
+      ],
       "additionalProperties": true
     },
     "object": {

@@ -113,6 +113,41 @@ class PackConformanceTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             validate_pack(invalid)
 
+    def test_pack_requires_a_human_readable_finding_summary(self):
+        pack = json.loads(
+            (ROOT / "packs/eu-ai-act/1.0.0/pack.json").read_text(encoding="utf-8")
+        )
+        del pack["rules"][0]["finding"]["summary"]
+        with self.assertRaises(ValidationError):
+            validate_pack(pack)
+
+    def test_inventory_requires_capture_time(self):
+        inventory = json.loads(
+            (ROOT / "examples/ai-governance/inventory.json").read_text(encoding="utf-8")
+        )
+        del inventory["captured_at"]
+        with self.assertRaises(ValidationError):
+            validate_inventory(inventory)
+
+    def test_known_fact_requires_evidence(self):
+        inventory = json.loads(
+            (ROOT / "examples/ai-governance/inventory.json").read_text(encoding="utf-8")
+        )
+        target = next(
+            item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant"
+        )
+        target["facts"]["ai.is_ai_system"]["evidence"] = []
+        with self.assertRaises(ValidationError):
+            validate_inventory(inventory)
+
+    def test_relation_evidence_must_resolve(self):
+        inventory = json.loads(
+            (ROOT / "examples/ai-governance/inventory.json").read_text(encoding="utf-8")
+        )
+        inventory["relations"][0]["evidence"] = ["missing-evidence"]
+        with self.assertRaises(ValidationError):
+            validate_inventory(inventory)
+
     def test_binding_packs_have_official_anchors(self):
         for relative in [
             "packs/eu-ai-act/1.0.0/pack.json",

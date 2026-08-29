@@ -2,20 +2,20 @@
 
 # Authoring and releasing a pack
 
-## Start from authority, not from the desired route
+## Identify the authority and scope
 
 Record whether the source is binding law, guidance, a voluntary framework,
 company policy or a fictional example. Identify jurisdiction, version,
 effective date and an official URL. State coverage and gaps before writing a
 rule.
 
-## Turn the test into bounded facts
+## Break the test into verifiable facts
 
 For each legal element, ask a question that a reviewer can answer with
 evidence. Do not encode “high risk” as an extracted fact when the pack is meant
 to decide high risk. Preserve unknown and conflict states.
 
-## Write the smallest auditable condition
+## Write an auditable condition
 
 Use the v0.1 condition language. Add an independently written summary, stable
 finding code, exact anchors and resulting obligations. Keep organisation routes

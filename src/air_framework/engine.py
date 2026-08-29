@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping as MappingABC
 from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any, Mapping
@@ -17,6 +18,40 @@ from .version import __version__
 
 def _utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _fact_value_matches_type(value: Any, fact_type: str) -> bool:
+    """Return whether a known value matches its pack-declared fact type."""
+
+    if fact_type == "boolean":
+        return isinstance(value, bool)
+    if fact_type == "string":
+        return isinstance(value, str)
+    if fact_type == "array":
+        return isinstance(value, list)
+    if fact_type == "integer":
+        return isinstance(value, int) and not isinstance(value, bool)
+    if fact_type == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
+    if fact_type == "object":
+        return isinstance(value, MappingABC)
+    return False
+
+
+def _validate_effective_fact_types(
+    effective_facts: Mapping[str, Any], pack: Mapping[str, Any]
+) -> None:
+    """Fail closed when a known fact conflicts with the pack's declared type."""
+
+    catalog = {item["id"]: item["type"] for item in pack.get("fact_catalog", [])}
+    for fact_id, fact in effective_facts.items():
+        fact_type = catalog.get(fact_id)
+        if fact_type is None or not isinstance(fact, Mapping) or fact.get("state") != "known":
+            continue
+        if not _fact_value_matches_type(fact.get("value"), fact_type):
+            raise EvaluationError(
+                f"Known fact {fact_id!r} must contain a value of type {fact_type!r}"
+            )
 
 
 def assess(
@@ -44,8 +79,9 @@ def assess(
         )
     inheritance = pack.get("inheritance", [])
     effective_facts = graph.effective_facts(target_id, inheritance)
+    _validate_effective_fact_types(effective_facts, pack)
     anchor_index = {item["id"]: item for item in pack["anchors"]}
-    findings: list[dict[str, Any]] = []
+    evaluated_findings: list[dict[str, Any]] = []
     for rule in pack["rules"]:
         if target["type"] not in rule["applies_to"]:
             continue
@@ -61,8 +97,6 @@ def assess(
             Truth.FALSE: "not_matched",
             Truth.UNKNOWN: "indeterminate",
         }[trace.truth]
-        if status == "not_matched" and not include_not_matched:
-            continue
         finding = {
             "rule_id": rule["id"],
             "status": status,
@@ -82,7 +116,13 @@ def assess(
             "anchors": [deepcopy(anchor_index[item]) for item in rule["anchors"]],
             "obligations": deepcopy(rule.get("obligations", [])) if status == "matched" else [],
         }
-        findings.append(finding)
+        evaluated_findings.append(finding)
+
+    findings = [
+        item
+        for item in evaluated_findings
+        if include_not_matched or item["status"] != "not_matched"
+    ]
 
     stable_result = {
         "schema_version": "0.1.0",
@@ -102,9 +142,15 @@ def assess(
         "effective_facts": effective_facts,
         "findings": findings,
         "summary": {
-            "matched": sum(item["status"] == "matched" for item in findings),
-            "indeterminate": sum(item["status"] == "indeterminate" for item in findings),
-            "not_matched": sum(item["status"] == "not_matched" for item in findings),
+            "evaluated_rules": len(evaluated_findings),
+            "returned_findings": len(findings),
+            "matched": sum(item["status"] == "matched" for item in evaluated_findings),
+            "indeterminate": sum(
+                item["status"] == "indeterminate" for item in evaluated_findings
+            ),
+            "not_matched": sum(
+                item["status"] == "not_matched" for item in evaluated_findings
+            ),
         },
     }
     result_hash = content_hash(stable_result)

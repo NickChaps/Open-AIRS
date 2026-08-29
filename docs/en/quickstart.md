@@ -28,8 +28,8 @@ air-framework assess \
 ```
 
 The output shows an Annex III employment candidate, the Article 6(3) result,
-the high-risk conclusion and a transparency duty. It also exposes unresolved
-facts instead of hiding them.
+the high-risk conclusion and a transparency duty. Unresolved facts remain
+visible in the same record.
 
 ## 4. Apply a pinned set of packs
 

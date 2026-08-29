@@ -58,8 +58,8 @@ flowchart LR
 | Incident handling | Is there an operational process for significant-incident reporting? |
 
 The pack returns a gap only after the entity has been marked in scope. An
-unresolved scope remains visible and must be completed through the national
-profile rather than guessed from a company name or industry label.
+unresolved scope remains visible. The national profile must establish it from
+applicable law and evidence; a company name or industry label is insufficient.
 
 ## What a finding means
 

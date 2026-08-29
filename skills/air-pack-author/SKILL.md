@@ -17,9 +17,9 @@ the reference engine.
 
 Use the current authoritative source. Record its type: binding law, regulatory
 guidance, voluntary framework, organisational policy or fictional example.
-Confirm that independently written rules may be published. Link protected
-standards instead of reproducing or operationalising their text without a
-suitable licence.
+Confirm that independently written rules may be published. For a protected
+standard, publish a link and independently authored implementation guidance.
+Reproduction or close operationalisation requires a suitable licence.
 
 ## 2. Declare scope before rules
 

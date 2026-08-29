@@ -112,6 +112,10 @@ def validate_fact(fact: Any, path: str) -> None:
         evidence = fact["evidence"]
         if not isinstance(evidence, list) or not all(isinstance(item, str) for item in evidence):
             raise ValidationError(f"{path}.evidence: expected a list of evidence identifiers")
+    if state in {"known", "conflicted"} and not fact.get("evidence"):
+        raise ValidationError(
+            f"{path}.evidence: at least one evidence identifier is required for state {state!r}"
+        )
 
 
 def _validate_relation_path(value: Any, path: str) -> None:
@@ -260,6 +264,7 @@ def validate_inventory(inventory: Mapping[str, Any]) -> None:
         )
     _require(inventory, "inventory_id", str, "inventory")
     _require(inventory, "snapshot_id", str, "inventory")
+    _require(inventory, "captured_at", str, "inventory")
     objects = _require(inventory, "objects", list, "inventory")
     relations = _require(inventory, "relations", list, "inventory")
     evidence = _require(inventory, "evidence", list, "inventory")
@@ -316,6 +321,16 @@ def validate_inventory(inventory: Mapping[str, Any]) -> None:
                 raise ValidationError(
                     f"{path}: {relation_type!r} cannot target "
                     f"{object_types[target]!r}"
+                )
+        relation_evidence = item.get("evidence", [])
+        if not isinstance(relation_evidence, list) or not all(
+            isinstance(evidence_id, str) for evidence_id in relation_evidence
+        ):
+            raise ValidationError(f"{path}.evidence: expected a list of evidence identifiers")
+        for evidence_id in relation_evidence:
+            if evidence_id not in evidence_ids:
+                raise ValidationError(
+                    f"{path}.evidence: unknown evidence id {evidence_id!r}"
                 )
 
     for index, item in enumerate(evidence):
@@ -410,6 +425,7 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
         _require(finding, "code", str, f"{path}.finding")
         _require(finding, "level", str, f"{path}.finding")
         _require(finding, "title", str, f"{path}.finding")
+        _require(finding, "summary", str, f"{path}.finding")
         rule_anchors = _require(rule, "anchors", list, path)
         unknown_anchors = [item for item in rule_anchors if item not in anchor_ids]
         if unknown_anchors:
@@ -454,7 +470,9 @@ def validate_route_profile(profile: Mapping[str, Any]) -> None:
     for index, route in enumerate(routes):
         path = f"route_profile.routes[{index}]"
         _require(route, "label", str, path)
-        _require(route, "priority", int, path)
+        priority = _require(route, "priority", int, path)
+        if isinstance(priority, bool):
+            raise ValidationError(f"{path}.priority: expected int, got bool")
     for index, mapping in enumerate(mappings):
         path = f"route_profile.mappings[{index}]"
         route_id = _require(mapping, "route", str, path)

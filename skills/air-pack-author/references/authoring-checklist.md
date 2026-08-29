@@ -17,7 +17,7 @@
 ## Rules
 
 - Stable pack, rule, anchor and finding identifiers
-- Bounded facts rather than conclusions
+- Bounded fact questions
 - Three-valued conditions preserve unknowns
 - Independently written summaries
 - Exact anchors for every normative result

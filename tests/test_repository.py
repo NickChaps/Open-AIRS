@@ -72,6 +72,21 @@ class RepositoryIntegrityTests(unittest.TestCase):
                 self.assertNotIn("agent_skill", body)
                 self.assertIn("skill", body)
 
+    def test_public_markdown_avoids_recurring_ai_tells(self):
+        false_contrasts = re.compile(
+            r"\b(?:not just|not only|rather than|instead of|pas seulement|"
+            r"pas uniquement|plutôt que|au lieu de)\b|"
+            r"^#{1,6} .*[,;:]\s*(?:not|pas)\b",
+            re.IGNORECASE | re.MULTILINE,
+        )
+        for path in ROOT.rglob("*.md"):
+            if ".git" in path.parts:
+                continue
+            body = path.read_text(encoding="utf-8")
+            with self.subTest(path=path):
+                self.assertNotIn("—", body)
+                self.assertIsNone(false_contrasts.search(body))
+
 
 if __name__ == "__main__":
     unittest.main()

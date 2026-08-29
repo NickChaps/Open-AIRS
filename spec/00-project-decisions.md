@@ -21,7 +21,7 @@ Public legal and methodological packs do not ship an organisational traffic-ligh
 
 Language models may extract semantic facts from text and explain deterministic results. They do not silently replace the rule engine. Every inferred fact must retain its evidence, confidence, extractor profile and model provenance. Unknown and conflicting evidence are first-class states.
 
-## Composition before labels
+## Composition and classification
 
 Facts and controls may propagate through explicit relations. Final legal classifications are recomputed for the relevant composition and use unless a rule explicitly defines a scoped propagation.
 

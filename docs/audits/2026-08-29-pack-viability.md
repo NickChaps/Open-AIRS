@@ -48,11 +48,12 @@ overview.
 Four corrections were made. The Article 25 rule now covers all three cases in
 paragraph 1, including name or trademark placement. The substantial-
 modification fact now requires an existing high-risk system that remains
-high-risk. The Article 50(1) direct-interaction rule now resolves the limited
-law-enforcement exception explicitly instead of assuming it away. The
-prohibited-practice, high-risk and direct-interaction rules also require the
-composition to meet the AI-system definition, preventing non-AI automation
-from matching solely because its purpose looks similar.
+high-risk. The Article 50(1) direct-interaction rule includes the limited
+law-enforcement exception as an explicit fact; missing evidence produces an
+indeterminate result. The prohibited-practice, high-risk and direct-interaction
+rules also require the composition to meet the AI-system definition,
+preventing non-AI automation from matching solely because its purpose looks
+similar.
 
 The pack contains nine triage rules. It still excludes most Annex III areas,
 complete provider and deployer requirements, GPAI regimes, Annex I sector
@@ -116,28 +117,15 @@ facts are separate from conclusions, each rule returns exact anchors, positive
 cases and exceptions are tested, limitations are visible, and impact is
 simulated against a reference inventory.
 
-## Verification executed
+## Behaviour verification
 
-The distribution passed 34 automated tests covering schemas, examples,
-inheritance, version pins, separate routing and the corrected legal cases. A
-new test also ensures that every fact declared by a pack is used by a rule or
-an inheritance policy.
+Versioned conformance cases cover matches, non-matches, missing information,
+conflicts and encoded exceptions. Continuous integration also checks schemas,
+worked examples, inheritance, pack profiles and the separation of
+organisation-owned routing. An integrity check requires every fact declared by
+a pack to be consumed by a rule or inheritance policy.
 
-The public examples produce the intended results. The fictional recruitment
-use matches the Annex III candidate, high-risk and direct-interaction rules.
-Its GDPR profile matches applicability, Article 22, the DPIA trigger and the
-DPIA completion gap. The fictional contract matches two missing clauses while
-keeping an ambiguous audit clause indeterminate.
-
-Three raw prompts from a private local inventory were also reviewed without an
-API call. Their names and text are not included in the repository:
-
-| Anonymised case | AI Act | GDPR | Interpretation |
-| --- | --- | --- | --- |
-| Company-offer recommendation | No AI Act finding | Personal-data facts remain indeterminate | The engine requests evidence about meeting reports rather than assuming no personal data |
-| Compliance reviewer that mentions recruitment only in its guardrails | No AI Act finding | Dossier data remain indeterminate | A recruitment keyword inside an exclusion is not mistaken for the agent's purpose |
-| Candidate evaluation from CVs and interviews | Annex III candidate and high-risk findings | GDPR applies and a DPIA is required; Article 22 does not match because the decision is not solely automated | AI Act and GDPR outcomes remain separate |
-
-This private sample validates the deterministic layer after manual fact
-extraction. It does not yet measure the quality of any particular LLM
-extractor.
+These checks cover deterministic engine behaviour and internal pack
+consistency. They do not establish complete legal coverage or the quality of an
+LLM extractor. Both require separate review against the relevant sources and
+evaluation corpora.

@@ -2,10 +2,10 @@
 
 [Read in English](README.md)
 
-Ce pack pédagogique montre que le modèle objets, faits et règles d’AIR ne se
-limite pas à la réglementation IA. Le contrat devient l’objet gouverné. La
-présence des clauses est établie par des faits reliés à leurs preuves, puis des
-règles déterministes les comparent à un clausier fictif.
+Ce pack pédagogique applique le modèle objets, faits et règles d’AIR à la revue
+contractuelle. Le contrat devient l’objet gouverné. La présence des clauses est
+établie par des faits reliés à leurs preuves, puis des règles déterministes les
+comparent à un clausier fictif.
 
 Ce dossier ne contient aucun modèle contractuel réel, aucune clause recommandée
 et aucun avis juridique.

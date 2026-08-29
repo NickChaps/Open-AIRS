@@ -4,6 +4,23 @@ All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.
 
+## [0.1.0-alpha.1] - 2026-08-29
+
+### Changed
+
+- Assessment summaries now distinguish rules evaluated from findings returned,
+  including when non-matches are omitted from the output.
+- Profile assessment identifiers now depend on nested result hashes and remain
+  stable when identical content is evaluated at a different time.
+- Direct `conflicted` and `not_applicable` facts now take precedence over
+  inherited values.
+- Inventory, relation, finding and fact-type validation now matches the
+  published schemas and fails closed on incompatible known values.
+- Public documentation now uses a current August 2026 adoption source and
+  separates durable conformance guarantees from dated review notes.
+- English and French prose was revised for direct language and consistent
+  terminology.
+
 ## [0.1.0-alpha] - 2026-08-29
 
 ### Added

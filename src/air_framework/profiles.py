@@ -69,11 +69,15 @@ def assess_profile(
             "content_hash": content_hash(profile),
         },
         "target": {"id": target["id"], "type": target["type"], "name": target["name"]},
-        "assessments": results,
     }
-    result_hash = content_hash(stable)
+    hash_material = {
+        **stable,
+        "assessment_result_hashes": [item["result_hash"] for item in results],
+    }
+    result_hash = content_hash(hash_material)
     return {
         "profile_assessment_id": f"urn:air:profile-assessment:{result_hash[:24]}",
         "result_hash": result_hash,
         **stable,
+        "assessments": results,
     }

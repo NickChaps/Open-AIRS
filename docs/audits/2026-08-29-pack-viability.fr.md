@@ -163,30 +163,16 @@ identifiées, chaque fait juridique est distinct d’une conclusion, chaque règ
 retourne ses ancrages, les cas positifs et les exceptions sont testés, les
 lacunes sont visibles et l’impact sur un inventaire de référence est simulé.
 
-## Vérifications exécutées
+## Vérification du comportement
 
-La distribution a passé 34 tests automatisés, dont les validations de schémas,
-les exemples, l’héritage, les versions épinglées, le routage séparé et les cas
-juridiques corrigés. Un test vérifie désormais qu’aucun fait déclaré par un
-pack ne reste inutilisé.
+Les cas de conformité versionnés couvrent les correspondances, les
+non-correspondances, les informations manquantes, les conflits et les
+exceptions encodées. L’intégration continue contrôle également les schémas,
+les exemples, l’héritage, les profils de packs et la séparation du routage
+organisationnel. Un contrôle d’intégrité exige que chaque fait déclaré dans un
+pack soit utilisé par une règle ou par une politique d’héritage.
 
-Les exemples publics donnent les résultats attendus :
-
-- l’usage fictif de recrutement déclenche le candidat annexe III, la
-  qualification haut risque et la transparence de l’interaction ;
-- le profil RGPD du même usage déclenche l’applicabilité, l’article 22, l’AIPD
-  requise et la lacune d’AIPD ;
-- le contrat fictif signale deux clauses absentes et conserve une clause
-  ambiguë comme indéterminée.
-
-Un échantillon local de trois prompts bruts a aussi été évalué manuellement,
-sans appel API. Les textes et noms ne sont pas intégrés au dépôt :
-
-| Cas anonymisé | AI Act | RGPD | Lecture |
-| --- | --- | --- | --- |
-| Recommandation d’offres à des entreprises | Aucun constat AI Act | Données personnelles indéterminées | Le moteur demande la composition réelle des comptes rendus au lieu d’inventer une absence de données |
-| Revue de conformité citant le recrutement dans ses garde-fous | Aucun constat AI Act | Données du dossier indéterminées | Le mot « recrutement » présent dans une règle d’exclusion n’est pas traité comme la finalité de l’agent |
-| Évaluation de candidats à partir de CV et d’entretiens | Candidat annexe III et haut risque | RGPD applicable et AIPD requise ; article 22 non déclenché car la décision n’est pas exclusivement automatisée | Les axes AI Act et RGPD restent distincts |
-
-Ce dernier essai valide la couche déterministe après extraction humaine des
-faits. Il ne mesure pas encore la qualité d’un extracteur LLM donné.
+Ces vérifications portent sur le comportement déterministe du moteur et la
+cohérence interne des packs. Elles ne démontrent ni l’exhaustivité juridique
+de leur couverture, ni la qualité d’un extracteur LLM. Ces deux limites restent
+à examiner séparément avec les sources et les corpus appropriés.

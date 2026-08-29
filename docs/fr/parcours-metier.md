@@ -45,6 +45,6 @@ les interprétations qui dépassent le pack et décide de ses propres voies de
 traitement. Une nouvelle version de pack est d’abord simulée sur le registre.
 Elle ne remplace la version active qu’après validation explicite.
 
-Le résultat n’est donc pas « une IA qui certifie la conformité ». C’est un
-dossier reproductible : mêmes preuves, mêmes faits, même version de règle,
-même résultat déterministe.
+Le résultat prend la forme d’un dossier reproductible : mêmes preuves, mêmes
+faits, même version de règle, même résultat déterministe. Il ne constitue pas
+une certification de conformité par une IA.

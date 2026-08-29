@@ -42,6 +42,12 @@ class RoutingTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             validate_route_profile(profile)
 
+    def test_boolean_route_priority_is_rejected(self):
+        profile = deepcopy(load("examples/organization-routing.json"))
+        profile["routes"][0]["priority"] = True
+        with self.assertRaises(ValidationError):
+            validate_route_profile(profile)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -15,18 +15,21 @@ decisions the organisation makes next.
 
 ## Why this project exists
 
-AI has moved beyond research teams. In 2025, **20% of European Union
-enterprises** used at least one AI technology, up from 13.5% in 2024. Adoption
-reached **55% among large enterprises**
-([Eurostat, 2026](https://ec.europa.eu/eurostat/web/products-statistical-reports/w/ks-01-26-009)).
+McKinsey's global survey published on 25 August 2026 collected 1,719 responses
+across 97 countries between May and June. Nearly **nine in ten respondents**
+report regular AI use in at least one business function, and **44%** report
+enterprise-wide scaling. Among organisations with more than $1 billion in
+annual revenue, **40%** report scaling agents in at least one function, up from
+27% a year earlier
+([McKinsey, 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)).
 
 At the same time, the European [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 has entered its application phase. Organisations need to know which systems
 and uses they operate, why a qualification applies, which evidence supports it
 and what has changed since the previous review.
 
-The governance problem is no longer a vendor count. One platform may expose
-several models, host dozens of configured applications commonly called
+Counting vendors does not describe the governed estate. One platform may
+expose several models, host dozens of configured applications commonly called
 “agents”, load skills and provide connectors to business systems. Each
 component can be reused across several business uses.
 
@@ -95,11 +98,11 @@ The language model **proposes facts**; it does not make the legal determination
 on its own. The same facts evaluated with the same pack version produce the
 same deterministic result.
 
-## The registry is a graph, not a flat list
+## The registry graph
 
-AIR keeps a governance inventory that is broader than the final legal
-registry. A component can be necessary to explain a use without being a
-standalone AI system in law.
+AIR keeps the components needed to explain each use in its governance
+inventory. Some matter to governance without constituting standalone AI
+systems in law. The final legal registry is a view of this graph.
 
 ```mermaid
 flowchart TB
@@ -131,7 +134,7 @@ may be inherited. A final legal classification is never copied mechanically
 from a parent to a child. It is recalculated for the assessed composition and
 use.
 
-## Four layers that remain separate
+## Four decision layers
 
 | Layer | Question | Example |
 | --- | --- | --- |
@@ -219,8 +222,8 @@ like any other `skill` object in the estate.
 | A skill found in an AI estate | Its text, version, platform and effect on the intended purpose of composed uses |
 | An AIR helper skill deployed by a team | The same fields, plus the fact that its instructions guide assessment or pack authoring |
 
-The distinction comes from where the skill is deployed and what its text does,
-not from a second object type.
+Deployment context and content determine the skill's role. Its object schema
+remains the same.
 
 ## Run the AI governance example
 
@@ -244,7 +247,7 @@ air-framework assess-profile \
 The profile command evaluates an explicit selection of packs pinned by version
 and content hash. No hidden global ruleset becomes active.
 
-## What this project does not claim
+## Scope of the alpha release
 
 AIR Framework does not certify compliance and does not replace legal, security
 or risk professionals. A result depends on the active pack versions, available
