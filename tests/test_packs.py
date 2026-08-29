@@ -256,3 +256,30 @@ class PackConformanceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class InheritanceCoverageTests(unittest.TestCase):
+    """The flagship packs must keep exercising explicit inheritance."""
+
+    def test_latest_flagship_packs_declare_inheritance(self):
+        import json
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        for pack_dir in ("eu-ai-act", "eu-gdpr-ai"):
+            versions = sorted(
+                (item.name for item in (root / "packs" / pack_dir).iterdir() if item.is_dir()),
+                key=lambda value: tuple(int(part) for part in value.split(".")),
+            )
+            latest = versions[-1]
+            pack = json.loads(
+                (root / "packs" / pack_dir / latest / "pack.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            with self.subTest(pack=pack_dir, version=latest):
+                self.assertTrue(
+                    pack.get("inheritance"),
+                    f"{pack_dir} {latest} must declare at least one inheritance "
+                    "policy or justify its removal in the changelog and this test",
+                )

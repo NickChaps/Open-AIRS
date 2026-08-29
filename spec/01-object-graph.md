@@ -36,10 +36,20 @@ Relations form a directed graph. The reference examples use:
 - `runs_on`: configured application → platform;
 - `loads_skill`: configured application → skill;
 - `can_invoke`: configured application or platform → connector;
-- `offers_model`: platform → model;
+- `offers_model`: platform → model made available;
+- `uses_model`: configured application or AI system → model actually selected;
 - `implemented_by`: concrete use → configured application or AI system;
-- `operated_by`: system, platform or use → organization;
+- `operated_by`: system, platform, application or use → organization;
 - `provided_by`: component or service → provider.
+
+The validator checks the source and target types of every reference relation
+above. Extension relation names remain allowed for forward compatibility, but
+they carry no signature guarantee until they are registered here.
+
+`offers_model` and `uses_model` answer different questions: a platform can
+offer several models while a configured application uses one of them for a
+given period. Model-dependent facts should be read from the model the
+application actually uses.
 
 For the optional LLM call, the reference orchestrator follows outgoing
 relations for up to three steps from the assessment target. This includes the
@@ -87,6 +97,40 @@ application has selected an action and only within the runtime's permissions.
 The graph can therefore show that a recruitment use combines a screening
 skill with an outbound connector without pretending that the skill itself is
 an autonomous system.
+
+## Connector actions and derived composition facts
+
+A connector can declare its exposed actions as one structured fact,
+`connector.actions`, whose value is a list of entries:
+
+| Field | Values | Meaning |
+| --- | --- | --- |
+| `id` | free string | Stable action identifier, e.g. `send_rejection_email` |
+| `kind` | `read`, `send_internal`, `write`, `execute`, `delete`, `send_external` | What the action does to the target system |
+| `approval` | `none`, `standing_user_authorization`, `per_conversation`, `per_action` | When a human approves the action |
+| `enforced_by` | `connector`, `platform`, `none` | Where the approval gate is enforced |
+| `bypassable` | boolean | Whether the gate can be bypassed |
+| `target_criticality` | `standard`, `critical` | Sensitivity of the target system |
+
+From these declarations the engine derives composition facts for the
+assessment target before pack inheritance is applied, with
+`provenance: "derived"` and the contributing connectors listed:
+
+- `composition.can_send_external`;
+- `composition.autonomous_external_send_possible`;
+- `composition.engaging_action_approval_floor` (weakest approval across
+  non-read actions).
+
+Derivation follows the captured snapshot only. A capability found on one
+connector is asserted even when other connectors are undocumented. A negative
+conclusion, such as "no external send is possible", requires every reachable
+connector to declare its actions; otherwise the derived fact stays `unknown`.
+A gate with an approval level outside the table, or marked `bypassable`, is
+treated as potentially autonomous. Direct facts always win over derived facts,
+and derived facts win over pack-declared inheritance.
+
+This keeps the division of labour stable: the model reads intent, the
+configuration proves capability and gating, and rules combine both.
 
 ## Explicit inheritance
 

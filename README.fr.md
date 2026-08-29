@@ -76,7 +76,7 @@ AIR construit un dossier commun à partir de quatre éléments :
 | **Objet** | Une chose que l’organisation veut suivre | Plateforme, système, application configurée, skill, connecteur, modèle, usage, contrat |
 | **Fait** | Une réponse précise utilisée par les règles | « L’application classe des candidats » |
 | **Preuve** | La source qui permet d’affirmer ce fait | Extrait du prompt, configuration du connecteur, réponse du responsable métier |
-| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.1.0 ou RGPD 1.1.0 |
+| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.2.0 ou RGPD 1.2.0 |
 
 Une référence exacte au texte ou au référentiel est appelée **ancrage**. Une
 photographie datée du registre est appelée **version d’inventaire** dans cette
@@ -94,6 +94,50 @@ Avec ces éléments, AIR peut produire :
 - les obligations et informations encore manquantes ;
 - un historique permettant d’expliquer chaque évolution ;
 - un circuit interne défini séparément par l’organisation.
+
+## Votre parcours pour une qualification
+
+Aucune notion technique n'est nécessaire pour utiliser le résultat. Le
+parcours tient en cinq étapes ; chacune précise ce que vous apportez et ce
+que vous recevez.
+
+```mermaid
+flowchart TB
+    subgraph S1["1 · Décrire"]
+        I1["Vous apportez : la plateforme, l'application,<br/>ses skills et connecteurs, le prompt,<br/>les réponses de questionnaire disponibles"] --> O1["Vous recevez : une photographie datée<br/>de la composition réelle"]
+    end
+    subgraph S2["2 · Lecture"]
+        I2["Rien à faire : le modèle lit<br/>la photographie et ses preuves"] --> O2["Vous recevez : finalités proposées, faits,<br/>mentions exclues, chacun avec sa source"]
+    end
+    subgraph S3["3 · Règles"]
+        I3["Rien à faire : les packs versionnés<br/>testent les faits retenus"] --> O3["Vous recevez : catégories juridiques, obligations,<br/>références exactes et questions ouvertes"]
+    end
+    subgraph S4["4 · Dossier"]
+        I4["Vous lisez : une page en langage courant"] --> O4["Vous recevez : ce qu'est l'usage, ce qui s'applique,<br/>ce qu'il faut faire et ce qui manque encore"]
+    end
+    subgraph S5["5 · Revue"]
+        I5["Vous contrôlez : seulement les exceptions<br/>et un échantillon périodique"] --> O5["Vous recevez : confirmations ou corrections,<br/>chacune produisant une nouvelle version tracée"]
+    end
+    S1 --> S2 --> S3 --> S4 --> S5
+
+    classDef bring fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef get fill:#fef3c7,stroke:#d97706,color:#78350f
+    class I1,I2,I3,I4,I5 bring
+    class O1,O2,O3,O4,O5 get
+```
+
+| Étape | Vous apportez | AIR restitue |
+| --- | --- | --- |
+| Décrire | Composition, prompts, réponses de questionnaire | Une photographie datée de ce qui existe vraiment |
+| Lecture | Rien | Finalités, faits et mentions exclues, avec preuves |
+| Règles | Rien | Catégories juridiques, obligations, références, inconnues |
+| Dossier | Quelques minutes de lecture | Un dossier défendable par usage |
+| Revue | De l'attention sur les seules exceptions | Des corrections qui deviennent de nouvelles versions |
+
+La lecture classe chaque passage pertinent avant de proposer une finalité :
+une consigne qui interdit une activité est enregistrée comme mention exclue,
+avec sa preuve, jamais comme l'activité elle-même. Un prompt qui dit « ne
+jamais trier de CV » ne crée donc aucun usage de recrutement.
 
 ## Comment fonctionne une qualification
 
@@ -240,6 +284,11 @@ La distribution contient :
 - une commande facultative `qualify` qui appelle un service compatible avec
   l’API Chat Completions, une fois pour la lecture et une fois pour la note ;
 - la vérification locale de chaque référence produite par le modèle ;
+- une taxonomie de finalités versionnée et l'extraction d'usages proposés,
+  pour que la finalité reste le centre explicite de chaque qualification ;
+- des faits de composition dérivés de façon déterministe des actions
+  déclarées par les connecteurs, pour que capacité et validations ne
+  dépendent jamais d'une supposition du modèle ;
 - les packs versionnés et leurs tests ;
 - la comparaison de deux évaluations et la simulation d’une nouvelle version
   de pack ;
@@ -249,12 +298,29 @@ La distribution contient :
 Le framework n’impose ni fournisseur de modèle, ni modèle précis, ni circuit
 d’approbation interne. La clé d’API reste dans une variable d’environnement.
 
+## Ce qui n'existe pas encore
+
+Le périmètre est volontairement explicite pour que personne ne le découvre
+trop tard :
+
+- des adaptateurs d'import qui lisent les API des plateformes et produisent
+  les photographies d'inventaire ;
+- la matérialisation automatique des usages proposés en objets du registre,
+  avec états de revue ;
+- un questionnaire résiduel dynamique qui ne demande aux personnes que les
+  faits qu'aucune API, aucun héritage et aucune lecture ne peuvent fournir ;
+- un service de registre durable et une interface de revue ;
+- des packs supplémentaires et les traductions de la taxonomie de finalités.
+
+Chacun de ces chantiers est une contribution bienvenue. La spécification dans
+[`spec/`](spec/) décrit déjà le comportement cible de la plupart d'entre eux.
+
 ## Packs fournis
 
 | Pack | Nature | Périmètre résumé |
 | --- | --- | --- |
-| [EU AI Act 1.1.0](packs/eu-ai-act/1.1.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
-| [RGPD pour les usages IA 1.1.0](packs/eu-gdpr-ai/1.1.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
+| [EU AI Act 1.2.0](packs/eu-ai-act/1.2.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
+| [RGPD pour les usages IA 1.2.0](packs/eu-gdpr-ai/1.2.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.fr.md) | Directive européenne | Gouvernance, mesures de l’article 21 et signalement des incidents, à appliquer avec le droit national concerné |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.fr.md) | Référentiel volontaire | 72 résultats du Core dans un profil choisi par l’organisation |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.fr.md) | Référentiel volontaire | 106 résultats du Core dans un profil choisi par l’organisation |
@@ -280,6 +346,10 @@ air-framework assess-profile \
 ```
 
 Cette commande rejoue les règles sur les faits déjà présents dans l’exemple.
+`evaluate` et `evaluate-profile` sont des alias de `assess` et
+`assess-profile` : ils appliquent des packs à des faits établis et ne lisent
+jamais le sujet eux-mêmes. `qualify` est la commande qui inclut la lecture
+par le modèle.
 
 ### Avec lecture et justification par un LLM
 
@@ -340,7 +410,7 @@ Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
 réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
 échantillonnés selon le risque et la politique interne.
 
-La version actuelle est `v0.1.0-alpha.5`. Les formats peuvent encore évoluer.
+La version actuelle est `v0.1.0-alpha.6`. Les formats peuvent encore évoluer.
 
 ## Licence et citation
 

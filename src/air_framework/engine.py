@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from typing import Any, Mapping
 
 from .canonical import content_hash
+from .composition import derive_composition_facts
 from .conditions import Truth, evaluate_condition
 from .errors import EvaluationError
 from .graph import InventoryGraph
@@ -59,7 +60,17 @@ def assess(
             f"Pack {metadata['id']!r} does not apply to object type {target['type']!r}"
         )
     inheritance = pack.get("inheritance", [])
-    effective_facts = graph.effective_facts(target_id, inheritance)
+    base_facts = deepcopy(target.get("facts", {}))
+    for fact_key, derived in derive_composition_facts(graph, target_id).items():
+        current = base_facts.get(fact_key)
+        if isinstance(current, Mapping) and current.get("state") in {
+            "known",
+            "conflicted",
+            "not_applicable",
+        }:
+            continue
+        base_facts[fact_key] = derived
+    effective_facts = graph.effective_facts(target_id, inheritance, base_facts=base_facts)
     _validate_effective_fact_types(effective_facts, pack)
     anchor_index = {item["id"]: item for item in pack["anchors"]}
     evaluated_findings: list[dict[str, Any]] = []

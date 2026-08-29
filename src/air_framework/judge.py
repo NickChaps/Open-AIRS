@@ -33,6 +33,7 @@ from .validation import (
     validate_inventory,
     validate_pack,
     validate_pack_profile,
+    validate_taxonomy,
 )
 from .version import __version__
 
@@ -245,6 +246,56 @@ EXTRACTION_RESPONSE_SCHEMA: dict[str, Any] = {
             },
             "additionalProperties": False,
         },
+        "proposed_uses": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "purpose_statement",
+                    "purpose_tags",
+                    "evidence",
+                    "confidence",
+                ],
+                "properties": {
+                    "purpose_statement": {"type": "string"},
+                    "purpose_tags": {"type": "array", "items": {"type": "string"}},
+                    "material_tasks": {"type": "array", "items": {"type": "string"}},
+                    "affected_people": {"type": "array", "items": {"type": "string"}},
+                    "decision_influence": {
+                        "enum": ["none", "informative", "material", "determinative"]
+                    },
+                    "evidence": {"type": "array", "items": {"type": "string"}},
+                    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                    "alternative_interpretations": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                    },
+                    "rationale": {"type": "string"},
+                },
+                "additionalProperties": False,
+            },
+        },
+        "excluded_mentions": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["candidate_use", "classification", "evidence"],
+                "properties": {
+                    "candidate_use": {"type": "string"},
+                    "classification": {
+                        "enum": [
+                            "prohibited_by_instructions",
+                            "guardrail",
+                            "example_reference",
+                            "capability_only",
+                        ]
+                    },
+                    "evidence": {"type": "array", "items": {"type": "string"}},
+                    "note": {"type": "string"},
+                },
+                "additionalProperties": False,
+            },
+        },
     },
     "additionalProperties": False,
 }
@@ -447,6 +498,7 @@ def _extraction_prompt(
     target_id: str,
     *,
     language: str,
+    taxonomy: Mapping[str, Any] | None = None,
 ) -> tuple[str, str, dict[str, Any]]:
     target = next(item for item in inventory["objects"] if item["id"] == target_id)
     context = _context(inventory, target_id)
@@ -466,6 +518,15 @@ def _extraction_prompt(
         "allowed_fact_catalogue": catalogue,
         "legal_or_method_anchors": _anchor_context(packs),
     }
+    if taxonomy is not None:
+        payload["purpose_taxonomy"] = {
+            "id": taxonomy["taxonomy"]["id"],
+            "version": taxonomy["taxonomy"]["version"],
+            "tags": [
+                {"id": tag["id"], "label": tag["label"], "definition": tag["definition"]}
+                for tag in taxonomy["tags"]
+            ],
+        }
     system = _prompt_template("extraction-system.txt")
     user = (
         "Prepare the bounded fact proposals and source analysis in "
@@ -486,14 +547,17 @@ def extract_with_llm(
     *,
     language: str = "fr",
     created_at: str | None = None,
+    taxonomy: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Call the semantic judge and return a validated extraction record."""
 
     validate_inventory(inventory)
     for pack in packs:
         validate_pack(pack)
+    if taxonomy is not None:
+        validate_taxonomy(taxonomy)
     system, user, payload = _extraction_prompt(
-        inventory, packs, target_id, language=language
+        inventory, packs, target_id, language=language, taxonomy=taxonomy
     )
     completion = client.complete_json(
         system=system,
@@ -536,7 +600,18 @@ def extract_with_llm(
         "fact_proposals": completion.value.get("fact_proposals", []),
         "analysis": completion.value.get("analysis"),
     }
-    validate_extraction_record(record)
+    proposed_uses = completion.value.get("proposed_uses")
+    excluded_mentions = completion.value.get("excluded_mentions")
+    if proposed_uses:
+        record["proposed_uses"] = proposed_uses
+        if taxonomy is not None:
+            record["taxonomy"] = {
+                "id": taxonomy["taxonomy"]["id"],
+                "version": taxonomy["taxonomy"]["version"],
+            }
+    if excluded_mentions:
+        record["excluded_mentions"] = excluded_mentions
+    validate_extraction_record(record, taxonomy=taxonomy)
     validate_extraction_context(record, inventory, packs)
     return record
 
@@ -858,6 +933,7 @@ def qualify_with_llm(
     *,
     language: str = "fr",
     assessed_at: str | None = None,
+    taxonomy: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run model extraction, deterministic packs, then model explanation."""
 
@@ -873,7 +949,12 @@ def qualify_with_llm(
         pack for pack in packs if target["type"] in pack["pack"]["applies_to"]
     ]
     extraction = extract_with_llm(
-        inventory, compatible_packs, target_id, client, language=language
+        inventory,
+        compatible_packs,
+        target_id,
+        client,
+        language=language,
+        taxonomy=taxonomy,
     )
     resolved_inventory = apply_extraction(inventory, extraction)
     profile_result = assess_profile(

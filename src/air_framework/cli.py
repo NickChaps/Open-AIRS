@@ -26,6 +26,7 @@ from .validation import (
     validate_pack_profile,
     validate_review_record,
     validate_route_profile,
+    validate_taxonomy,
 )
 
 
@@ -58,6 +59,14 @@ def build_parser() -> argparse.ArgumentParser:
         "validate-extraction", help="Validate an extraction and analysis record"
     )
     validate_extraction_parser.add_argument("extraction")
+    validate_extraction_parser.add_argument(
+        "--taxonomy", help="Purpose taxonomy file used to check proposed-use tags"
+    )
+
+    validate_taxonomy_parser = commands.add_parser(
+        "validate-taxonomy", help="Validate a versioned purpose taxonomy"
+    )
+    validate_taxonomy_parser.add_argument("taxonomy")
 
     validate_review_parser = commands.add_parser(
         "validate-review", help="Validate a human review record"
@@ -69,7 +78,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     validate_note_parser.add_argument("note")
 
-    assess_parser = commands.add_parser("assess", help="Assess one object with one pack")
+    assess_parser = commands.add_parser(
+        "assess",
+        aliases=["evaluate"],
+        help="Apply one pack to already-established facts (alias: evaluate)",
+    )
     assess_parser.add_argument("--inventory", required=True)
     assess_parser.add_argument("--pack", required=True)
     assess_parser.add_argument("--target", required=True)
@@ -118,7 +131,8 @@ def build_parser() -> argparse.ArgumentParser:
     validate_routes_parser.add_argument("profile")
 
     assess_profile_parser = commands.add_parser(
-        "assess-profile", help="Assess one object with a version-pinned pack profile"
+        "assess-profile",
+        aliases=["evaluate-profile"], help="Assess one object with a version-pinned pack profile"
     )
     assess_profile_parser.add_argument("--inventory", required=True)
     assess_profile_parser.add_argument("--profile", required=True)
@@ -141,6 +155,9 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_parser.add_argument("--target", required=True)
     qualify_parser.add_argument("--output-dir", required=True)
     qualify_parser.add_argument("--language", default="fr")
+    qualify_parser.add_argument(
+        "--taxonomy", help="Purpose taxonomy file offered to the extraction call"
+    )
     qualify_parser.add_argument("--model")
     qualify_parser.add_argument("--base-url")
     qualify_parser.add_argument("--provider-name", default="openai-compatible")
@@ -161,6 +178,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
+        if args.command in {"assess", "evaluate"}:
+            args.command = "assess"
+        elif args.command in {"assess-profile", "evaluate-profile"}:
+            args.command = "assess-profile"
         if args.command == "validate-inventory":
             validate_inventory(load_json(args.inventory))
             print(f"valid inventory: {args.inventory}")
@@ -168,8 +189,12 @@ def main(argv: list[str] | None = None) -> int:
             validate_pack(load_json(args.pack))
             print(f"valid pack: {args.pack}")
         elif args.command == "validate-extraction":
-            validate_extraction_record(load_json(args.extraction))
+            taxonomy = load_json(args.taxonomy) if args.taxonomy else None
+            validate_extraction_record(load_json(args.extraction), taxonomy=taxonomy)
             print(f"valid extraction record: {args.extraction}")
+        elif args.command == "validate-taxonomy":
+            validate_taxonomy(load_json(args.taxonomy))
+            print(f"valid taxonomy: {args.taxonomy}")
         elif args.command == "validate-review":
             validate_review_record(load_json(args.review))
             print(f"valid review record: {args.review}")
@@ -246,6 +271,7 @@ def main(argv: list[str] | None = None) -> int:
                 client,
                 language=args.language,
                 assessed_at=args.assessed_at,
+                taxonomy=load_json(args.taxonomy) if args.taxonomy else None,
             )
             write_qualification_bundle(bundle, args.output_dir)
             print(f"qualification bundle: {Path(args.output_dir).resolve()}")

@@ -110,9 +110,29 @@ RELATION_SIGNATURES = {
         {"connector"},
     ),
     "offers_model": ({"ai_platform", "ai_system"}, {"model"}),
+    "uses_model": (
+        {"configured_ai_application", "ai_system"},
+        {"model"},
+    ),
     "implemented_by": (
         {"ai_use"},
         {"configured_ai_application", "ai_platform", "ai_system"},
+    ),
+    "operated_by": (
+        {"ai_system", "ai_platform", "configured_ai_application", "ai_use", "service"},
+        {"organization"},
+    ),
+    "provided_by": (
+        {
+            "ai_system",
+            "ai_platform",
+            "configured_ai_application",
+            "skill",
+            "connector",
+            "model",
+            "service",
+        },
+        {"provider"},
     ),
 }
 
@@ -597,7 +617,132 @@ def validate_pack_profile(profile: Mapping[str, Any]) -> None:
         _require(item, "path", str, path)
 
 
-def validate_extraction_record(record: Mapping[str, Any]) -> None:
+DECISION_INFLUENCE_LEVELS = {"none", "informative", "material", "determinative"}
+
+EXCLUDED_MENTION_CLASSES = {
+    "prohibited_by_instructions",
+    "guardrail",
+    "example_reference",
+    "capability_only",
+}
+
+
+def validate_taxonomy(taxonomy: Mapping[str, Any]) -> None:
+    """Validate a versioned purpose taxonomy artefact."""
+
+    version = _require(taxonomy, "schema_version", str, "taxonomy")
+    if version != SCHEMA_VERSION:
+        raise ValidationError(
+            f"taxonomy.schema_version: expected {SCHEMA_VERSION!r}, got {version!r}"
+        )
+    metadata = _require(taxonomy, "taxonomy", dict, "taxonomy")
+    _require(metadata, "id", str, "taxonomy.taxonomy")
+    _require(metadata, "version", str, "taxonomy.taxonomy")
+    _require(metadata, "reviewed_at", str, "taxonomy.taxonomy")
+    tags = _require(taxonomy, "tags", list, "taxonomy")
+    if not tags or not all(isinstance(item, Mapping) for item in tags):
+        raise ValidationError("taxonomy.tags: expected non-empty tag objects")
+    _unique(tags, "id", "taxonomy.tags")
+    for index, tag in enumerate(tags):
+        path = f"taxonomy.tags[{index}]"
+        _require(tag, "id", str, path)
+        _require(tag, "label", str, path)
+        _require(tag, "definition", str, path)
+
+
+def _validate_purpose_blocks(
+    record: Mapping[str, Any],
+    known_evidence: set[str],
+    extractor_kind: str,
+    taxonomy: Mapping[str, Any] | None,
+) -> None:
+    proposed_uses = record.get("proposed_uses", [])
+    excluded = record.get("excluded_mentions", [])
+    if not isinstance(proposed_uses, list) or not all(
+        isinstance(item, Mapping) for item in proposed_uses
+    ):
+        raise ValidationError("extraction.proposed_uses: expected use objects")
+    if not isinstance(excluded, list) or not all(
+        isinstance(item, Mapping) for item in excluded
+    ):
+        raise ValidationError("extraction.excluded_mentions: expected mention objects")
+
+    if proposed_uses:
+        pin = record.get("taxonomy")
+        if not isinstance(pin, Mapping):
+            raise ValidationError(
+                "extraction.taxonomy: a taxonomy pin is required when uses are proposed"
+            )
+        _require(pin, "id", str, "extraction.taxonomy")
+        _require(pin, "version", str, "extraction.taxonomy")
+
+    allowed_tags: set[str] | None = None
+    if taxonomy is not None:
+        validate_taxonomy(taxonomy)
+        pin = record.get("taxonomy")
+        if isinstance(pin, Mapping):
+            metadata = taxonomy["taxonomy"]
+            if pin.get("id") != metadata["id"] or pin.get("version") != metadata["version"]:
+                raise ValidationError(
+                    "extraction.taxonomy: pinned taxonomy does not match the supplied taxonomy"
+                )
+        allowed_tags = {tag["id"] for tag in taxonomy["tags"]}
+
+    for index, use in enumerate(proposed_uses):
+        path = f"extraction.proposed_uses[{index}]"
+        _require(use, "purpose_statement", str, path)
+        tags = _require(use, "purpose_tags", list, path)
+        if not tags or not all(isinstance(item, str) and item for item in tags):
+            raise ValidationError(f"{path}.purpose_tags: expected non-empty tag ids")
+        if allowed_tags is not None:
+            unknown_tags = set(tags) - allowed_tags
+            if unknown_tags:
+                raise ValidationError(
+                    f"{path}.purpose_tags: unknown tags {sorted(unknown_tags)!r}"
+                )
+        for field in ("material_tasks", "affected_people", "alternative_interpretations"):
+            values = use.get(field, [])
+            if not isinstance(values, list) or not all(
+                isinstance(item, str) and item for item in values
+            ):
+                raise ValidationError(f"{path}.{field}: expected a list of strings")
+        influence = use.get("decision_influence")
+        if influence is not None and influence not in DECISION_INFLUENCE_LEVELS:
+            raise ValidationError(
+                f"{path}.decision_influence: unsupported value {influence!r}"
+            )
+        evidence = _require(use, "evidence", list, path)
+        if not evidence:
+            raise ValidationError(f"{path}.evidence: at least one evidence id is required")
+        unknown_evidence = set(evidence) - known_evidence
+        if unknown_evidence:
+            raise ValidationError(
+                f"{path}.evidence: ids absent from source_evidence {sorted(unknown_evidence)!r}"
+            )
+        if extractor_kind in {"llm", "hybrid"} and "confidence" not in use:
+            raise ValidationError(f"{path}.confidence: required for LLM or hybrid extraction")
+
+    for index, mention in enumerate(excluded):
+        path = f"extraction.excluded_mentions[{index}]"
+        _require(mention, "candidate_use", str, path)
+        classification = _require(mention, "classification", str, path)
+        if classification not in EXCLUDED_MENTION_CLASSES:
+            raise ValidationError(
+                f"{path}.classification: unsupported value {classification!r}"
+            )
+        evidence = _require(mention, "evidence", list, path)
+        if not evidence:
+            raise ValidationError(f"{path}.evidence: at least one evidence id is required")
+        unknown_evidence = set(evidence) - known_evidence
+        if unknown_evidence:
+            raise ValidationError(
+                f"{path}.evidence: ids absent from source_evidence {sorted(unknown_evidence)!r}"
+            )
+
+
+def validate_extraction_record(
+    record: Mapping[str, Any], taxonomy: Mapping[str, Any] | None = None
+) -> None:
     """Validate a model or human extraction record kept outside the assessment."""
 
     version = _require(record, "schema_version", str, "extraction")
@@ -668,6 +813,8 @@ def validate_extraction_record(record: Mapping[str, Any]) -> None:
             raise ValidationError(
                 f"{path}.evidence: ids absent from source_evidence {sorted(unknown_evidence)!r}"
             )
+
+    _validate_purpose_blocks(record, known_evidence, extractor_kind, taxonomy)
 
     analysis = _require(record, "analysis", dict, "extraction")
     _require(analysis, "summary", str, "extraction.analysis")

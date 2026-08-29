@@ -69,15 +69,21 @@ class InventoryGraph:
         self,
         object_id: str,
         policies: Sequence[Mapping[str, Any]],
+        base_facts: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Resolve direct facts plus pack-declared inheritance policies.
 
         Direct known facts win.  Multiple different inherited values become a
         conflict; the engine never guesses which parent is authoritative.
+        ``base_facts`` lets the engine seed deterministic derived facts between
+        the direct layer and pack-declared inheritance.
         """
 
         target = self.object(object_id)
-        resolved = deepcopy(target.get("facts", {}))
+        if base_facts is not None:
+            resolved = deepcopy(dict(base_facts))
+        else:
+            resolved = deepcopy(target.get("facts", {}))
         for policy in policies:
             fact_key = policy["fact"]
             direct = resolved.get(fact_key)

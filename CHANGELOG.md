@@ -4,6 +4,29 @@ All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.
 
+## [0.1.0-alpha.6] - 2026-08-29
+
+### Added
+
+- An explicit purpose layer: extraction records can propose uses with a
+  purpose statement, tags from a versioned purpose taxonomy, material tasks,
+  affected people and decision influence, plus excluded mentions that keep
+  prohibitions, guardrails and mere references out of the proposed uses.
+- The first purpose taxonomy release under `taxonomies/purpose/1.0.0` and a
+  `validate-taxonomy` command; `validate-extraction` and `qualify` accept
+  `--taxonomy`.
+- Deterministic composition facts derived from declared connector actions
+  (`connector.actions`): external-send capability, autonomous-send
+  possibility and the weakest approval gate across engaging actions.
+- `uses_model`, `operated_by` and `provided_by` relation signatures, so the
+  documented graph and the validator agree, including the model an
+  application actually uses.
+- `evaluate` and `evaluate-profile` aliases for `assess` and
+  `assess-profile`, and pack releases eu-ai-act 1.2.0 and eu-gdpr-ai 1.2.0
+  restoring the explicit inheritance policies dropped by 1.1.0.
+- A reader journey with explicit inputs and outputs in both READMEs, and a
+  published list of what is not built yet.
+
 ## [0.1.0-alpha.5] - 2026-08-29
 
 ### Changed

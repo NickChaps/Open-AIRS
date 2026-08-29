@@ -17,9 +17,9 @@
       "urn:air:extraction:fictional-recruiting-20260829"
     ],
     "assessment_ids": [
-      "urn:air:assessment:ad1e3623cbdab4c8ed5ebc3a",
-      "urn:air:assessment:902aedd1dd203c91d24755a2",
-      "urn:air:assessment:53dff0dfa489785d55323262"
+      "urn:air:assessment:475db1f43cefd518b09424f3",
+      "urn:air:assessment:92eb08e7cdf7b69c55bfb054",
+      "urn:air:assessment:bf1d6049bc74aa1527ea59e4"
     ]
   },
   "renderer": {
@@ -57,7 +57,7 @@
       "kind": "finding",
       "text": "The intended purpose matches Annex III point 4(a), and the supplied Article 6(3) facts do not remove the use from high-risk classification.",
       "references": {
-        "assessment_id": "urn:air:assessment:ad1e3623cbdab4c8ed5ebc3a",
+        "assessment_id": "urn:air:assessment:475db1f43cefd518b09424f3",
         "rule_ids": [
           "aiact.core.annex3-4a-recruitment-selection",
           "aiact.core.high-risk-annex3"
@@ -70,7 +70,7 @@
       "kind": "finding",
       "text": "The AI Act pack returns gaps for competent human oversight, affected-person notice and direct-interaction transparency.",
       "references": {
-        "assessment_id": "urn:air:assessment:ad1e3623cbdab4c8ed5ebc3a",
+        "assessment_id": "urn:air:assessment:475db1f43cefd518b09424f3",
         "rule_ids": [
           "aiact.core.controls-deployer-human-oversight-assigned-gap",
           "aiact.core.controls-deployer-subject-notice-gap",
@@ -85,7 +85,7 @@
       "kind": "finding",
       "text": "The GDPR pack returns an Article 22 decision with no evidenced paragraph 2 condition and a required DPIA that is not completed.",
       "references": {
-        "assessment_id": "urn:air:assessment:902aedd1dd203c91d24755a2",
+        "assessment_id": "urn:air:assessment:92eb08e7cdf7b69c55bfb054",
         "rule_ids": [
           "gdpr.ai.article22-restriction",
           "gdpr.ai.article22-condition-gap",
@@ -100,7 +100,7 @@
       "kind": "finding",
       "text": "The selected NIST profile returns gaps for two Core outcomes and for GenAI profile selection.",
       "references": {
-        "assessment_id": "urn:air:assessment:53dff0dfa489785d55323262",
+        "assessment_id": "urn:air:assessment:bf1d6049bc74aa1527ea59e4",
         "rule_ids": [
           "nist.airmf.manage-1-1-gap",
           "nist.airmf.measure-2-1-gap",

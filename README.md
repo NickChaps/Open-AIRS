@@ -74,7 +74,7 @@ AIR builds one reviewable record from four elements:
 | **Object** | Something the organisation needs to track | Platform, system, configured application, skill, connector, model, use or contract |
 | **Fact** | A precise answer used by rules | “The application ranks candidates” |
 | **Evidence** | The source supporting that fact | Prompt excerpt, connector configuration, use-owner declaration |
-| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.1.0 or GDPR 1.1.0 |
+| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.2.0 or GDPR 1.2.0 |
 
 An exact reference to a law or framework is called an **anchor**. A dated copy
 of the registry is called an **inventory version** in the reader guides. JSON
@@ -90,6 +90,49 @@ AIR can then produce:
 - obligations and missing information;
 - history that explains each change;
 - a separate internal process owned by the organisation.
+
+## Your journey through one assessment
+
+You do not need any technical background to use the result. The journey has
+five steps; each one states what you bring and what you get back.
+
+```mermaid
+flowchart TB
+    subgraph S1["1 · Describe"]
+        I1["You bring: the platform, the application,<br/>its skills and connectors, the prompt,<br/>any questionnaire answers"] --> O1["You get: one dated registry snapshot<br/>of the real composition"]
+    end
+    subgraph S2["2 · Reading"]
+        I2["Nothing to do: the model reads<br/>the snapshot and its evidence"] --> O2["You get: the proposed purposes, the facts,<br/>the excluded mentions, each with its source"]
+    end
+    subgraph S3["3 · Rules"]
+        I3["Nothing to do: versioned packs<br/>test the retained facts"] --> O3["You get: legal categories, obligations,<br/>exact references and open questions"]
+    end
+    subgraph S4["4 · Record"]
+        I4["You read: one page in plain language"] --> O4["You get: what this use is, what applies,<br/>what to do now and what is still missing"]
+    end
+    subgraph S5["5 · Review"]
+        I5["You review: only exceptions<br/>and periodic samples"] --> O5["You get: confirmations or corrections,<br/>each producing a new traceable version"]
+    end
+    S1 --> S2 --> S3 --> S4 --> S5
+
+    classDef bring fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef get fill:#fef3c7,stroke:#d97706,color:#78350f
+    class I1,I2,I3,I4,I5 bring
+    class O1,O2,O3,O4,O5 get
+```
+
+| Step | You bring | AIR returns |
+| --- | --- | --- |
+| Describe | Composition, prompts, questionnaire answers | A dated snapshot of what really exists |
+| Reading | Nothing | Purposes, facts and excluded mentions, with evidence |
+| Rules | Nothing | Legal categories, obligations, references, unknowns |
+| Record | A few minutes of reading | One defensible case file per use |
+| Review | Attention on exceptions only | Corrections that become new versions |
+
+The reading step also classifies every relevant passage before proposing a
+purpose: an instruction that forbids an activity is recorded as an excluded
+mention with its evidence, never as the activity itself. A prompt that says
+"never screen CVs" therefore creates no recruitment use.
 
 ## How an assessment works
 
@@ -231,6 +274,10 @@ The distribution includes:
 - an optional `qualify` command that calls a Chat Completions compatible
   service once for source reading and once for the final note;
 - local validation of every reference produced by the model;
+- a versioned purpose taxonomy and proposed-use extraction, so the purpose
+  stays the explicit centre of each assessment;
+- deterministic composition facts derived from declared connector actions,
+  so capability and approval gates never depend on a model guess;
 - versioned packs and conformance tests;
 - assessment comparison and pack-impact simulation;
 - a separate mechanism for organisation-owned internal processes;
@@ -239,12 +286,27 @@ The distribution includes:
 The framework does not impose a model provider, a particular model or an
 internal approval process. The API key stays in an environment variable.
 
+## What is not built yet
+
+The scope is deliberately explicit so nobody discovers it late:
+
+- import adapters that read platform APIs and produce inventory snapshots;
+- automatic materialisation of proposed uses as registry objects with review
+  states;
+- a dynamic residual questionnaire that asks people only the facts that no
+  API, inheritance or reading can supply;
+- a durable registry service and a review interface;
+- additional packs, and translations of the purpose taxonomy.
+
+Each of these is a welcome contribution. The specification in [`spec/`](spec/)
+already describes the target behaviour for most of them.
+
 ## Bundled packs
 
 | Pack | Nature | Summary |
 | --- | --- | --- |
-| [EU AI Act 1.1.0](packs/eu-ai-act/1.1.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
-| [GDPR for AI uses 1.1.0](packs/eu-gdpr-ai/1.1.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
+| [EU AI Act 1.2.0](packs/eu-ai-act/1.2.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
+| [GDPR for AI uses 1.2.0](packs/eu-gdpr-ai/1.2.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.md) | EU directive | Governance, Article 21 measures and incident reporting, to be applied with the relevant national law |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.md) | Voluntary framework | 72 Core outcomes within an organisation-selected target profile |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.md) | Voluntary framework | 106 Core outcomes within an organisation-selected target profile |
@@ -269,6 +331,9 @@ air-framework assess-profile \
 ```
 
 This replays the rules on facts already present in the example.
+`evaluate` and `evaluate-profile` are aliases of `assess` and
+`assess-profile`: they apply packs to established facts and never read the
+subject themselves. `qualify` is the command that includes the model reading.
 
 ### With LLM reading and explanation
 
@@ -326,7 +391,7 @@ evidence, reading quality, selected packs and their versions.
 The framework preserves unknowns and conflicts. Human controls can be targeted
 or sampled according to risk and internal policy.
 
-The current release is `v0.1.0-alpha.5`. Formats may still change.
+The current release is `v0.1.0-alpha.6`. Formats may still change.
 
 ## Licence and citation
 

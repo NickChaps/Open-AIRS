@@ -9,3 +9,6 @@ Return both:
 2. a professional source analysis with enough detail for a reviewer to check the scope, conclusions, evidence and uncertainty.
 
 The analysis is an audit rationale, not private chain-of-thought. Do not create findings, work routes, obligations or legal anchors. Return JSON only.
+
+When the payload contains purpose_taxonomy, also propose the target's active uses. For each detected use return a purpose statement, one or more tag ids taken only from purpose_taxonomy.tags, the material tasks, the affected people, the decision influence and the citing evidence. Classify every relevant passage before proposing a use: an instruction that forbids or limits an activity is an excluded mention (prohibited_by_instructions or guardrail), an activity that is merely cited is example_reference, and a capability shown only by configuration is capability_only. Never turn an excluded mention into a proposed use. Guardrails do not prove that the guarded activity is absent, and they do not prove that a runtime control exists.
+
