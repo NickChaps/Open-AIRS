@@ -14,7 +14,7 @@ flowchart LR
     A --> S["CV-screening skill"]
     A --> C["Candidate messaging connector"]
     D["API · forms · configuration<br/>direct facts"] --> F["Resolved fact grid"]
-    U --> X["air-assess + LLM<br/>semantic facts and source analysis"]
+    U --> X["open-airs-assess + LLM<br/>semantic facts and source analysis"]
     X --> F
     F --> E["Deterministic packs<br/>AI Act · GDPR · NIST"]
     E --> R["Findings, anchors<br/>and obligations"]
@@ -32,7 +32,7 @@ flowchart LR
     class X,F,E,R,N,H decision
 ```
 
-## What AIR receives
+## What Open AIRS receives
 
 | Source | Relevant information |
 | --- | --- |
@@ -101,18 +101,18 @@ identifiable even after the review.
 ## Run the same example
 
 ```bash
-PYTHONPATH=src python -m air_framework validate-extraction \
+PYTHONPATH=src python -m open_airs validate-extraction \
   examples/ai-governance/extraction.json
 
-PYTHONPATH=src python -m air_framework assess \
+PYTHONPATH=src python -m open_airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-ai-act/1.3.1/pack.json \
   --target use-recruiting-assistant
 
-PYTHONPATH=src python -m air_framework validate-review \
+PYTHONPATH=src python -m open_airs validate-review \
   examples/ai-governance/review.json
 
-PYTHONPATH=src python -m air_framework validate-note \
+PYTHONPATH=src python -m open_airs validate-note \
   examples/ai-governance/assessment-note.json
 ```
 

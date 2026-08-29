@@ -6,7 +6,7 @@ Consider a fictional case: a team wants an AI application to screen job
 applications and prepare replies. It runs on an enterprise platform, loads a
 screening skill and can access a messaging connector.
 
-AIR does not ask a legal reviewer to inspect platform code. It builds one case
+Open AIRS does not ask a legal reviewer to inspect platform code. It builds one case
 file that every role can review.
 
 ```mermaid
@@ -42,7 +42,7 @@ flowchart LR
     class G,D,F,Q,R,S,C,H,N action
 ```
 
-| Stage | What the person sees | What AIR retains | Who confirms |
+| Stage | What the person sees | What Open AIRS retains | Who confirms |
 | --- | --- | --- | --- |
 | 1. Describe the use | Purpose, affected people and expected actions | An `ai_use` object and source declaration | Business owner |
 | 2. Link components | Application, platform, model, skills and connectors | A dated relationship graph | Platform administrator |
@@ -57,8 +57,8 @@ flowchart LR
 
 ## What a language model may do
 
-The `air-framework qualify` command, or a product using the same interface,
-calls the LLM with the `air-assess` instructions. The model reads the prompt,
+The `open-airs qualify` command, or a product using the same interface,
+calls the LLM with the `open-airs-assess` instructions. The model reads the prompt,
 metadata, graph, configuration and
 documents that require semantic interpretation. It proposes the bounded fact
 “the instructions rank candidates,” cites the evidence and states its

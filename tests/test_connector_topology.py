@@ -6,8 +6,8 @@ import json
 import unittest
 from pathlib import Path
 
-from air_framework.graph import InventoryGraph
-from air_framework.validation import validate_inventory
+from open_airs.graph import InventoryGraph
+from open_airs.validation import validate_inventory
 
 ROOT = Path(__file__).resolve().parents[1]
 

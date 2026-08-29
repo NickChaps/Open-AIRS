@@ -1,17 +1,17 @@
 cff-version: 1.2.0
-message: "If you use AIR Framework, please cite the project and the version you evaluated."
-title: "AIR Framework: an open AI registry and governance framework"
+message: "If you use Open AIRS, please cite the project and the version you evaluated."
+title: "Open AIRS: Open AI Registry System"
 type: software
 authors:
   - family-names: Chapuis
     given-names: Nicolas
-version: 0.1.0-alpha.8
+version: 0.1.0-alpha.9
 date-released: 2026-08-29
 license: Apache-2.0
-repository-code: "https://github.com/NickChaps/AIR-Framework"
+repository-code: "https://github.com/NickChaps/Open-AIRS"
 abstract: >-
-  A domain-neutral engine for evaluating governed objects against versioned,
-  evidence-backed rule packs, with an initial focus on AI governance.
+  An open system for maintaining auditable AI registries, extracting bounded
+  semantic facts and applying versioned, evidence-backed governance rules.
 keywords:
   - ai-governance
   - ai-registry

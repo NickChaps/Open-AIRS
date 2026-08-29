@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2026-08-29)
+
+The project is renamed **Open AIRS**, short for **Open AI Registry System**.
+
+- The Python distribution and command are now `open-airs`; the import package
+  is `open_airs`.
+- The portable skills are now `open-airs-assess` and
+  `open-airs-pack-author`.
+- Repository links, schema identifiers, generated URNs, citations and public
+  documentation use the Open AIRS identity.
+- This is a pre-alpha breaking rename. Users of alpha.8 must update package
+  names, imports, commands and stored identifiers.
+
 ## 0.1.0-alpha.8 (2026-08-29)
 
 Write policies and strict connector actions, closing the review round.

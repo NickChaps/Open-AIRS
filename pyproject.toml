@@ -3,9 +3,9 @@ requires = ["hatchling==1.32.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "air-framework"
-version = "0.1.0a8"
-description = "Auditable rule-pack engine and registry model for AI governance and beyond"
+name = "open-airs"
+version = "0.1.0a9"
+description = "Auditable AI registry, semantic qualification and versioned governance rules"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
@@ -24,23 +24,23 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/NickChaps/AIR-Framework"
-Documentation = "https://github.com/NickChaps/AIR-Framework/tree/main/docs"
-Source = "https://github.com/NickChaps/AIR-Framework"
-Issues = "https://github.com/NickChaps/AIR-Framework/issues"
+Homepage = "https://github.com/NickChaps/Open-AIRS"
+Documentation = "https://github.com/NickChaps/Open-AIRS/tree/main/docs"
+Source = "https://github.com/NickChaps/Open-AIRS"
+Issues = "https://github.com/NickChaps/Open-AIRS/issues"
 
 [project.scripts]
-air-framework = "air_framework.cli:main"
+open-airs = "open_airs.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/air_framework"]
+packages = ["src/open_airs"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.hatch.build]
 include = [
-  "src/air_framework/**/*.py",
-  "src/air_framework/**/*.txt",
-  "src/air_framework/py.typed",
+  "src/open_airs/**/*.py",
+  "src/open_airs/**/*.txt",
+  "src/open_airs/py.typed",
 ]

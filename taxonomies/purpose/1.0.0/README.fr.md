@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# Taxonomie de finalités AIR 1.0.0
+# Taxonomie de finalités Open AIRS 1.0.0
 
 [Read in English](README.md)
 

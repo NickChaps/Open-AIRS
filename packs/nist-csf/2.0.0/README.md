@@ -88,7 +88,7 @@ flowchart TB
     class P result
 ```
 
-AIR keeps the framework source, the organisation’s Target Profile and the
+Open AIRS keeps the framework source, the organisation’s Target Profile and the
 resulting treatment route as distinct versioned objects.
 
 ## Coverage and known gaps
@@ -120,5 +120,5 @@ facts and conditions.
 ## Validate the pack
 
 ```bash
-air-framework validate-pack packs/nist-csf/2.0.0/pack.json
+open-airs validate-pack packs/nist-csf/2.0.0/pack.json
 ```

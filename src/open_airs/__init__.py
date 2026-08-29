@@ -1,4 +1,4 @@
-"""AIR Framework reference engine.
+"""Open AIRS reference engine.
 
 The public API deliberately stays small.  Integrators can load JSON inputs,
 validate them and call :func:`assess` without adopting the command-line tool.

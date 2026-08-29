@@ -5,8 +5,8 @@ from __future__ import annotations
 import unittest
 from copy import deepcopy
 
-from air_framework.composition import derive_composition_facts, reachable_connectors
-from air_framework.graph import InventoryGraph
+from open_airs.composition import derive_composition_facts, reachable_connectors
+from open_airs.graph import InventoryGraph
 
 
 def _fact(value, evidence=("ev-config",)):
@@ -118,8 +118,8 @@ class CompositionDerivationTests(unittest.TestCase):
         )
 
     def test_validation_and_derivation_share_one_action_vocabulary(self):
-        from air_framework import validation
-        from air_framework.composition import ACTION_KINDS, APPROVAL_LEVELS
+        from open_airs import validation
+        from open_airs.composition import ACTION_KINDS, APPROVAL_LEVELS
 
         self.assertEqual(set(ACTION_KINDS), validation.CONNECTOR_ACTION_KINDS)
         self.assertEqual(set(APPROVAL_LEVELS), validation.CONNECTOR_APPROVAL_LEVELS)
@@ -198,8 +198,8 @@ class CompositionDerivationTests(unittest.TestCase):
         """A computed capability cannot be neutralised by a direct fact; the
         fix belongs in the connector.actions declarations."""
 
-        from air_framework.engine import assess
-        from air_framework.errors import EvaluationError
+        from open_airs.engine import assess
+        from open_airs.errors import EvaluationError
 
         inventory = _inventory()
         inventory["objects"][0]["facts"]["composition.can_send_external"] = _fact(False)

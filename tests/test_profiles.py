@@ -8,8 +8,8 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.errors import ValidationError
-from air_framework.profiles import assess_profile, load_profile_packs
+from open_airs.errors import ValidationError
+from open_airs.profiles import assess_profile, load_profile_packs
 
 ROOT = Path(__file__).resolve().parents[1]
 

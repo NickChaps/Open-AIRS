@@ -113,5 +113,5 @@ and the scope provisions. Use the JSON only for machine-readable conditions.
 ## Validate the pack
 
 ```bash
-air-framework validate-pack packs/eu-nis2-baseline/1.0.0/pack.json
+open-airs validate-pack packs/eu-nis2-baseline/1.0.0/pack.json
 ```

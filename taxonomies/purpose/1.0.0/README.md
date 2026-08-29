@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# AIR purpose taxonomy 1.0.0
+# Open AIRS purpose taxonomy 1.0.0
 
 [Lire en français](README.fr.md)
 

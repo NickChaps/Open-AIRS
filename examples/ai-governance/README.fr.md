@@ -15,7 +15,7 @@ flowchart LR
     A --> S["Skill de présélection"]
     A --> C["Connecteur de messagerie"]
     D["API · formulaires · configuration<br/>faits directs"] --> F["Grille de faits résolue"]
-    U --> X["air-assess + LLM<br/>faits sémantiques et analyse de source"]
+    U --> X["open-airs-assess + LLM<br/>faits sémantiques et analyse de source"]
     X --> F
     F --> E["Packs déterministes<br/>AI Act · RGPD · NIST"]
     E --> R["Constats, ancrages<br/>et obligations"]
@@ -33,7 +33,7 @@ flowchart LR
     class X,F,E,R,N,H decision
 ```
 
-## Ce qu’AIR reçoit
+## Ce qu’Open AIRS reçoit
 
 | Source | Information utile |
 | --- | --- |
@@ -104,18 +104,18 @@ automatique d’origine reste identifiable après la revue.
 ## Rejouer le même exemple
 
 ```bash
-PYTHONPATH=src python -m air_framework validate-extraction \
+PYTHONPATH=src python -m open_airs validate-extraction \
   examples/ai-governance/extraction.json
 
-PYTHONPATH=src python -m air_framework assess \
+PYTHONPATH=src python -m open_airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-ai-act/1.3.1/pack.json \
   --target use-recruiting-assistant
 
-PYTHONPATH=src python -m air_framework validate-review \
+PYTHONPATH=src python -m open_airs validate-review \
   examples/ai-governance/review.json
 
-PYTHONPATH=src python -m air_framework validate-note \
+PYTHONPATH=src python -m open_airs validate-note \
   examples/ai-governance/assessment-note.json
 ```
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "note_id": "urn:air:note:fictional-contract-20260829",
+  "note_id": "urn:open-airs:note:fictional-contract-20260829",
   "created_at": "2026-08-29T15:50:00Z",
   "language": "en",
   "target": {
@@ -13,12 +13,12 @@
       "inventory_id": "fictional-contract-demo",
       "snapshot_id": "contract-snapshot-1"
     },
-    "extraction_ids": ["urn:air:extraction:fictional-contract-20260829"],
-    "assessment_ids": ["urn:air:assessment:cbf878130432b9c789c76a73"]
+    "extraction_ids": ["urn:open-airs:extraction:fictional-contract-20260829"],
+    "assessment_ids": ["urn:open-airs:assessment:1f0ee8959da877e576dcafd6"]
   },
   "renderer": {
     "kind": "hybrid",
-    "id": "air-assess",
+    "id": "open-airs-assess",
     "version": "0.3.0",
     "model": {
       "id": "fictional-assessment-model",
@@ -49,7 +49,7 @@
       "kind": "finding",
       "text": "The deterministic library returns gaps for intellectual-property allocation and security-incident notice.",
       "references": {
-        "assessment_id": "urn:air:assessment:cbf878130432b9c789c76a73",
+        "assessment_id": "urn:open-airs:assessment:1f0ee8959da877e576dcafd6",
         "rule_ids": [
           "contract.demo.ip-missing",
           "contract.demo.security-notice-missing"
@@ -63,7 +63,7 @@
       "text": "The supplied cooperation wording does not establish an audit or assurance right.",
       "references": {
         "fact_ids": ["clause.audit_cooperation_present"],
-        "assessment_id": "urn:air:assessment:cbf878130432b9c789c76a73",
+        "assessment_id": "urn:open-airs:assessment:1f0ee8959da877e576dcafd6",
         "rule_ids": ["contract.demo.audit-missing"],
         "anchor_ids": ["contract.demo.audit"]
       }
@@ -73,7 +73,7 @@
       "kind": "review",
       "text": "A targeted reviewer left the audit point unresolved and requested the complete wording.",
       "references": {
-        "review_id": "urn:air:review:fictional-contract-targeted-20260829"
+        "review_id": "urn:open-airs:review:fictional-contract-targeted-20260829"
       }
     }
   ],
@@ -82,7 +82,7 @@
   ],
   "review_status": {
     "status": "inconclusive",
-    "review_id": "urn:air:review:fictional-contract-targeted-20260829",
+    "review_id": "urn:open-airs:review:fictional-contract-targeted-20260829",
     "selection_reason": "The audit-cooperation fact is indeterminate."
   }
 }

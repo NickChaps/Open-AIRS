@@ -65,7 +65,7 @@ contexte réel.
 flowchart TB
     C["Contexte IA concret"] --> T["L’organisation définit<br/>les résultats cibles"]
     T --> E["Les preuves décrivent<br/>la pratique actuelle"]
-    E --> P["AIR compare l’état actuel<br/>et la cible"]
+    E --> P["Open AIRS compare l’état actuel<br/>et la cible"]
     P --> G["Les écarts reçoivent<br/>responsables et actions"]
     G --> E
 
@@ -111,5 +111,5 @@ interprétables par la machine.
 ## Valider le pack
 
 ```bash
-air-framework validate-pack packs/nist-ai-rmf/1.0.0/pack.json
+open-airs validate-pack packs/nist-ai-rmf/1.0.0/pack.json
 ```

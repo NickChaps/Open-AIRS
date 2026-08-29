@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/assessment.schema.json",
-  "title": "AIR Framework assessment record",
+  "$id": "https://github.com/NickChaps/Open-AIRS/spec/schemas/assessment.schema.json",
+  "title": "Open AIRS assessment record",
   "type": "object",
   "required": ["assessment_id", "assessed_at", "result_hash", "schema_version", "engine_version", "inventory", "pack", "target", "effective_facts", "findings", "summary"],
   "properties": {

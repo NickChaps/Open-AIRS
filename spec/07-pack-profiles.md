@@ -11,5 +11,5 @@ to ask. A route says what internal work should follow a finding. Neither changes
 the content of a public pack.
 
 When an upstream pack publishes a new version, the active profile remains on
-its current pin. The candidate version is dry-run with `air-framework impact`,
+its current pin. The candidate version is dry-run with `open-airs impact`,
 the diff is reviewed, and an authorised person publishes a new profile version.

@@ -7,7 +7,7 @@ systèmes d’IA. C’est volontaire : il doit expliquer pourquoi un périmètre
 une finalité ont été retenus.
 
 L’AI Act ne fournit pas un modèle unique de registre interne valable pour toute
-organisation. AIR rassemble les informations nécessaires aux qualifications,
+organisation. Open AIRS rassemble les informations nécessaires aux qualifications,
 à la documentation et aux obligations applicables, puis permet d’en extraire
 la vue juridique adaptée au rôle et au contexte de l’organisation.
 

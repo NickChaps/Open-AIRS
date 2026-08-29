@@ -7,10 +7,10 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.engine import assess
-from air_framework.errors import ValidationError
-from air_framework.routing import apply_routes
-from air_framework.validation import validate_route_profile
+from open_airs.engine import assess
+from open_airs.errors import ValidationError
+from open_airs.routing import apply_routes
+from open_airs.validation import validate_route_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 

@@ -7,7 +7,7 @@ trier des candidatures et préparer des réponses. Elle fonctionne sur une
 plateforme d’entreprise, charge un skill de présélection et peut accéder à un
 connecteur de messagerie.
 
-AIR ne demande pas au juriste de lire le code de la plateforme. Il construit
+Open AIRS ne demande pas au juriste de lire le code de la plateforme. Il construit
 un dossier commun que chacun peut relire.
 
 ```mermaid
@@ -43,7 +43,7 @@ flowchart LR
     class G,D,F,Q,R,S,C,H,N action
 ```
 
-| Étape | Ce que la personne voit | Ce qu’AIR conserve | Qui confirme |
+| Étape | Ce que la personne voit | Ce qu’Open AIRS conserve | Qui confirme |
 | --- | --- | --- | --- |
 | 1. Décrire l’usage | La finalité, les personnes concernées et les actions attendues | Un objet `ai_use` et la déclaration source | Responsable métier |
 | 2. Relier les composants | Application, plateforme, modèle, skills et connecteurs | Un graphe de relations daté | Administrateur de plateforme |
@@ -58,8 +58,8 @@ flowchart LR
 
 ## Ce que le modèle de langage peut faire
 
-La commande `air-framework qualify`, ou un logiciel qui utilise la même
-interface, appelle le LLM avec les instructions d’`air-assess`. Le modèle lit
+La commande `open-airs qualify`, ou un logiciel qui utilise la même
+interface, appelle le LLM avec les instructions d’`open-airs-assess`. Le modèle lit
 le prompt, les métadonnées, le graphe, la
 configuration et les documents qui demandent une interprétation sémantique. Il
 propose le fait borné « les instructions classent des candidats », cite la

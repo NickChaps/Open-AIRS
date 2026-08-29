@@ -78,7 +78,7 @@ def apply_routes(
     }
     result_hash = content_hash(stable_result)
     return {
-        "routing_id": f"urn:air:routing:{result_hash[:24]}",
+        "routing_id": f"urn:open-airs:routing:{result_hash[:24]}",
         "result_hash": result_hash,
         **stable_result,
     }

@@ -2,7 +2,7 @@
 
 # Extraction, review and controlled improvement
 
-AIR separates semantic interpretation, deterministic evaluation and human
+Open AIRS separates semantic interpretation, deterministic evaluation and human
 quality control. This separation allows an organisation to process a large
 inventory without requiring a person to approve every object before the engine
 runs.
@@ -13,7 +13,7 @@ runs.
 flowchart LR
     S["Source bundle<br/>prompt · metadata · graph · evidence"] --> G["Governance inventory"]
     G --> D["Direct facts<br/>from structured sources"]
-    G --> X["Extraction agent<br/>guided by air-assess"]
+    G --> X["Extraction agent<br/>guided by open-airs-assess"]
     P["Pinned pack<br/>fact catalogue"] --> X
     X --> I["Inferred facts + source analysis<br/>evidence · confidence"]
     D --> F["Resolved fact grid"]
@@ -48,11 +48,11 @@ extraction and engine results, then writes prose whose references are checked
 locally. It cannot change a status or create a rule, anchor or obligation. An
 organisation route is computed from the immutable findings as a separate step.
 
-## The `air-assess` skill
+## The `open-airs-assess` skill
 
-`air-assess` is a portable instruction package for the extraction and
+`open-airs-assess` is a portable instruction package for the extraction and
 explanation calls. The Python rule engine does not call it. The optional
-`air-framework qualify` command provides a reference orchestrator. A product
+`open-airs qualify` command provides a reference orchestrator. A product
 can implement the same interface with its own model gateway. The sequence is:
 
 1. establish the target and composition;
@@ -73,7 +73,7 @@ steps.
 
 | Included in this repository | Supplied by an integrating product |
 | --- | --- |
-| `air-assess` instructions and versioned prompt templates | Secure source access and secrets management |
+| `open-airs-assess` instructions and versioned prompt templates | Secure source access and secrets management |
 | OpenAI-compatible model client and two-call orchestrator | Provider selection, budget and regional controls |
 | Extraction, assessment-note and review schemas | Durable database and access control |
 | Direct and inferred fact resolution with visible conflicts | Organisation-specific source precedence rules when needed |

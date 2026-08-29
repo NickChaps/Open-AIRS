@@ -52,7 +52,7 @@ reproduced. New profiles should pin the versions in the table above.
 
 `authority_type` distinguishes binding law, regulatory guidance, voluntary
 frameworks, organisational policy and fictional examples. Findings from those
-sources remain separate in the output. AIR does not convert them into a single
+sources remain separate in the output. Open AIRS does not convert them into a single
 universal score.
 
 No public pack assigns a company traffic light or approval path. An

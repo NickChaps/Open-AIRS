@@ -56,6 +56,6 @@ incomplet ou contradictoire qui doit rester indéterminé.
 
 ## Simuler avant activation
 
-Exécutez `air-framework impact` avec le pack actif et le candidat. Relisez
+Exécutez `open-airs impact` avec le pack actif et le candidat. Relisez
 chaque constat ajouté, supprimé ou modifié. Publiez une version immuable, puis
 laissez une personne autorisée l’activer dans le produit hôte.

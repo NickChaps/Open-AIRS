@@ -35,7 +35,7 @@ confidence, the packs that defined the questions and a structured readable
 analysis.
 
 ```bash
-air-framework validate-extraction examples/ai-governance/extraction.json
+open-airs validate-extraction examples/ai-governance/extraction.json
 ```
 
 The rule engine does not call a model. The optional `qualify` command does
@@ -51,7 +51,7 @@ relations to the configured application, platform, skill and connector.
 ## 4. Validate the evidence envelope
 
 ```bash
-air-framework validate-inventory examples/ai-governance/inventory.json
+open-airs validate-inventory examples/ai-governance/inventory.json
 ```
 
 Validation checks identifiers, object types, relation targets, fact states and
@@ -60,7 +60,7 @@ evidence references. It does not claim that the evidence is true.
 ## 5. Apply the AI Act pack
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-ai-act/1.1.0/pack.json \
   --target use-recruiting-assistant \
@@ -74,7 +74,7 @@ visible in the same record.
 ## 6. Apply a pinned set of packs
 
 ```bash
-air-framework assess-profile \
+open-airs assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -93,11 +93,11 @@ environment variable. The target, its composition and linked evidence are sent
 to the selected service, which must be authorised to receive that material.
 
 ```bash
-export AIR_LLM_API_KEY="your-key"
-export AIR_LLM_MODEL="your-model"
-export AIR_LLM_BASE_URL="https://your-provider.example/v1"
+export OPEN_AIRS_LLM_API_KEY="your-key"
+export OPEN_AIRS_LLM_MODEL="your-model"
+export OPEN_AIRS_LLM_BASE_URL="https://your-provider.example/v1"
 
-air-framework qualify \
+open-airs qualify \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -117,8 +117,8 @@ the reviewer confirmed. Validation checks the review record without changing
 the automated assessment.
 
 ```bash
-air-framework validate-review examples/ai-governance/review.json
-air-framework validate-note examples/ai-governance/assessment-note.json
+open-airs validate-review examples/ai-governance/review.json
+open-airs validate-note examples/ai-governance/assessment-note.json
 ```
 
 ## 9. Apply a company workflow when useful

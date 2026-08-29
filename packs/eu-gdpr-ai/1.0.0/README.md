@@ -121,7 +121,7 @@ Every finding returns its exact Article 5, 9, 22, 25 or 35 anchor. Open
 ## Run the worked example
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-gdpr-ai/1.0.0/pack.json \
   --target use-recruiting-assistant

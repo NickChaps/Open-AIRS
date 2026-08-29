@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# Understanding AIR Framework
+# Understanding Open AIRS
 
-AIR turns a scattered AI estate into governance records that can be understood,
+Open AIRS turns a scattered AI estate into governance records that can be understood,
 verified and replayed.
 
 A record connects a business use to the application that implements it, its
@@ -16,7 +16,7 @@ on that platform loads a skill describing how to analyse CVs. It also has
 access to a connector capable of sending messages to applicants.
 
 The platform name, skill text and connector presence do not qualify the use on
-their own. AIR connects them:
+their own. Open AIRS connects them:
 
 ```mermaid
 flowchart LR
@@ -73,7 +73,7 @@ Missing information therefore never becomes an automatic “no”.
 
 Evidence records where the fact came from: declaration, platform
 configuration, prompt, skill, contract, provider documentation, API or human
-review. AIR retains the useful excerpt, capture date and confidence assigned to
+review. Open AIRS retains the useful excerpt, capture date and confidence assigned to
 the fact.
 
 ### 5. Rule pack
@@ -99,7 +99,7 @@ job applicants. Composition, intended purpose and use context produce a more
 precise qualification than the product or model name alone.
 
 A skill is a passive text object. It does not perform an action on its own, but
-its instructions may contribute to an application’s purpose. AIR therefore
+its instructions may contribute to an application’s purpose. Open AIRS therefore
 connects it to the affected application and use. Action capabilities belong to
 the operating platform and the connectors it actually authorises.
 

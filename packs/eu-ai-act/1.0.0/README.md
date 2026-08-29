@@ -133,7 +133,7 @@ Every matched rule returns the exact article or annex anchors used. Open
 ## Run the example
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-ai-act/1.0.0/pack.json \
   --target use-recruiting-assistant

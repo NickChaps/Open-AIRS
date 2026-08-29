@@ -2,13 +2,13 @@
 
 # Human review at registry scale
 
-A platform may contain thousands of configured applications and skills. AIR
+A platform may contain thousands of configured applications and skills. Open AIRS
 runs automated extraction and deterministic evaluation across the inventory.
 Reviewers concentrate on important cases, uncertainty, change and representative
 samples.
 
 The `qualify` command provides the reference model-call flow. Software that
-integrates AIR selects the model, schedules samples and presents the review
+integrates Open AIRS selects the model, schedules samples and presents the review
 queue to the relevant teams.
 
 ```mermaid
@@ -42,7 +42,7 @@ law.
 
 | Layer | Review question | Typical correction |
 | --- | --- | --- |
-| Source and composition | Did AIR receive the current prompt, metadata, platform and connector configuration? | Capture a missing source or relationship |
+| Source and composition | Did Open AIRS receive the current prompt, metadata, platform and connector configuration? | Capture a missing source or relationship |
 | Extraction | Does each proposed fact follow from the cited evidence? | Correct the fact and create a new inventory version |
 | Pack | Does the rule express the reviewed source correctly? | Publish a candidate pack and run impact analysis |
 | Route | Does the organisation send this finding to the right workflow? | Publish a new route profile |

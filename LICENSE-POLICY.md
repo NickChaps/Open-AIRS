@@ -1,6 +1,6 @@
 # Licensing policy
 
-AIR Framework uses two complementary licences.
+Open AIRS uses two complementary licences.
 
 ## Apache License 2.0
 
@@ -25,7 +25,7 @@ CC BY-SA 4.0 applies to:
 
 The ShareAlike condition keeps derived versions of the shared knowledge base open: adapted packs or guides that are redistributed must remain under CC BY-SA 4.0 with attribution. Internal use and unmodified redistribution inside a product are unaffected. The licence does not cover source code embedded as an executable or separately identified third-party material. The complete licence text is stored at [LICENSES/CC-BY-SA-4.0.txt](LICENSES/CC-BY-SA-4.0.txt).
 
-Attribution should identify **AIR Framework contributors**, link to the repository when available, link to the [CC BY-SA 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/), and indicate material changes.
+Attribution should identify **Open AIRS contributors**, link to the repository when available, link to the [CC BY-SA 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/), and indicate material changes.
 
 ## External sources
 

@@ -2,17 +2,17 @@
 """Exceptions exposed by the reference engine."""
 
 
-class AirFrameworkError(Exception):
+class OpenAirsError(Exception):
     """Base class for errors that can be shown directly to a CLI user."""
 
 
-class ValidationError(AirFrameworkError):
+class ValidationError(OpenAirsError):
     """Raised when an inventory, pack or assessment is structurally invalid."""
 
 
-class EvaluationError(AirFrameworkError):
+class EvaluationError(OpenAirsError):
     """Raised when a valid-looking rule cannot be evaluated safely."""
 
 
-class LlmError(AirFrameworkError):
+class LlmError(OpenAirsError):
     """Raised when the optional model-assisted qualification cannot complete safely."""

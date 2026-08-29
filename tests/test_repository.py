@@ -12,6 +12,19 @@ MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 
 
 class RepositoryIntegrityTests(unittest.TestCase):
+    def test_project_identity_is_open_airs(self):
+        pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        self.assertIn('name = "open-airs"', pyproject)
+        self.assertIn('open-airs = "open_airs.cli:main"', pyproject)
+        self.assertTrue((ROOT / "src/open_airs").is_dir())
+        self.assertTrue((ROOT / "skills/open-airs-assess/SKILL.md").is_file())
+        self.assertTrue((ROOT / "skills/open-airs-pack-author/SKILL.md").is_file())
+        for name in ["README.md", "README.fr.md"]:
+            with self.subTest(path=name):
+                body = (ROOT / name).read_text(encoding="utf-8")
+                self.assertIn("# Open AIRS", body)
+                self.assertIn("Open AI Registry System", body)
+
     def test_every_committed_json_file_parses(self):
         paths = [path for path in ROOT.rglob("*.json") if "reports" not in path.parts]
         self.assertGreaterEqual(len(paths), 15)
@@ -80,7 +93,7 @@ class RepositoryIntegrityTests(unittest.TestCase):
 
     def test_public_object_type_is_skill(self):
         paths = [
-            ROOT / "src/air_framework/validation.py",
+            ROOT / "src/open_airs/validation.py",
             ROOT / "spec/schemas/inventory.schema.json",
             ROOT / "spec/schemas/pack.schema.json",
             ROOT / "examples/ai-governance/inventory.json",

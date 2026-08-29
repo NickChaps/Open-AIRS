@@ -4,7 +4,7 @@
 
 [Read in English](README.md)
 
-Ce pack pédagogique applique le modèle objets, faits et règles d’AIR à la revue
+Ce pack pédagogique applique le modèle objets, faits et règles d’Open AIRS à la revue
 contractuelle. Le contrat devient l’objet gouverné. La présence des clauses est
 établie par des faits reliés à leurs preuves, puis des règles déterministes les
 comparent à un clausier fictif.
@@ -83,7 +83,7 @@ preuves et règles tout en réutilisant le même moteur.
 ## Exécuter l’exemple
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/contract-review/inventory.json \
   --pack packs/contract-review-example/1.0.0/pack.json \
   --target contract-cloud-demo

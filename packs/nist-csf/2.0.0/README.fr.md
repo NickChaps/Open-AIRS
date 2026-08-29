@@ -88,7 +88,7 @@ flowchart TB
     class P result
 ```
 
-AIR conserve séparément la source NIST, le profil cible de l’organisation et
+Open AIRS conserve séparément la source NIST, le profil cible de l’organisation et
 la voie de traitement appliquée aux écarts.
 
 ## Couverture et limites connues
@@ -120,5 +120,5 @@ premier niveau interprétables par la machine.
 ## Valider le pack
 
 ```bash
-air-framework validate-pack packs/nist-csf/2.0.0/pack.json
+open-airs validate-pack packs/nist-csf/2.0.0/pack.json
 ```

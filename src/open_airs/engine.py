@@ -192,7 +192,7 @@ def assess(
     }
     result_hash = content_hash(stable_result)
     return {
-        "assessment_id": f"urn:air:assessment:{result_hash[:24]}",
+        "assessment_id": f"urn:open-airs:assessment:{result_hash[:24]}",
         "assessed_at": assessed_at or _utc_now(),
         "result_hash": result_hash,
         **stable_result,

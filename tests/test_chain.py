@@ -8,10 +8,10 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.engine import assess
-from air_framework.errors import EvaluationError, ValidationError
-from air_framework.judge import JsonCompletion, apply_extraction, extract_with_llm
-from air_framework.validation import validate_inventory, validate_pack
+from open_airs.engine import assess
+from open_airs.errors import EvaluationError, ValidationError
+from open_airs.judge import JsonCompletion, apply_extraction, extract_with_llm
+from open_airs.validation import validate_inventory, validate_pack
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -512,8 +512,8 @@ class _MixedProfileJudge:
 
 class MixedProfileTests(unittest.TestCase):
     def test_qualify_revalidates_against_the_compatible_packs_only(self):
-        from air_framework.judge import qualify_with_llm
-        from air_framework.profiles import load_profile_packs
+        from open_airs.judge import qualify_with_llm
+        from open_airs.profiles import load_profile_packs
 
         profile, packs = load_profile_packs(
             ROOT / "examples/ai-governance/pack-profile.json"

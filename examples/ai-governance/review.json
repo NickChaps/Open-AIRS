@@ -1,8 +1,8 @@
 {
   "schema_version": "0.1.0",
-  "review_id": "urn:air:review:fictional-recruiting-sample-20260829",
+  "review_id": "urn:open-airs:review:fictional-recruiting-sample-20260829",
   "reviewed_at": "2026-08-29T15:30:00Z",
-  "assessment_id": "urn:air:assessment:96b5fad1e8ea6cfe7db7880a",
+  "assessment_id": "urn:open-airs:assessment:36ecedddac851ead9c266200",
   "target": {
     "id": "use-recruiting-assistant",
     "type": "ai_use",
@@ -11,7 +11,7 @@
   "review_type": "sample",
   "selection": {
     "strategy": "stratified",
-    "reason": "Monthly quality sample for employment uses assessed by air-assess 0.3.0.",
+    "reason": "Monthly quality sample for employment uses assessed by open-airs-assess 0.3.0.",
     "population_snapshot_id": "snapshot-2026-08-29-a",
     "stratum": "employment / configured application / high confidence"
   },
@@ -54,7 +54,7 @@
     },
     {
       "subject_type": "analysis",
-      "subject_id": "urn:air:extraction:fictional-recruiting-20260829",
+      "subject_id": "urn:open-airs:extraction:fictional-recruiting-20260829",
       "decision": "confirmed",
       "rationale": "The readable summary matches the reviewed fact proposals and does not claim an observed execution.",
       "evidence": [

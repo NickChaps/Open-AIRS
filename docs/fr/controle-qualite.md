@@ -3,12 +3,12 @@
 # La revue humaine à l’échelle d’un parc
 
 Une plateforme peut contenir des milliers d’applications configurées et de
-skills. AIR exécute l’extraction automatisée et l’évaluation déterministe sur
+skills. Open AIRS exécute l’extraction automatisée et l’évaluation déterministe sur
 le parc. Les relecteurs se concentrent sur les cas importants, l’incertitude,
 les changements et des échantillons représentatifs.
 
 La commande `qualify` fournit le flux de référence pour appeler le modèle. Le
-logiciel qui intègre AIR choisit le modèle, planifie les échantillons et
+logiciel qui intègre Open AIRS choisit le modèle, planifie les échantillons et
 présente la file de revue aux équipes concernées.
 
 ```mermaid
@@ -43,7 +43,7 @@ autonome au sens juridique.
 
 | Couche | Question de contrôle | Correction habituelle |
 | --- | --- | --- |
-| Source et composition | AIR a-t-il reçu le prompt, les métadonnées, la plateforme et les connecteurs à jour ? | Capturer la source ou la relation manquante |
+| Source et composition | Open AIRS a-t-il reçu le prompt, les métadonnées, la plateforme et les connecteurs à jour ? | Capturer la source ou la relation manquante |
 | Extraction | Chaque fait proposé découle-t-il de la preuve citée ? | Corriger le fait et créer une nouvelle version d’inventaire |
 | Pack | La règle traduit-elle correctement la source relue ? | Publier un pack candidat et simuler son impact |
 | Voie | Le constat rejoint-il le bon parcours interne ? | Publier un nouveau profil de routage |

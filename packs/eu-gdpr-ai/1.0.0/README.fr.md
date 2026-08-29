@@ -122,7 +122,7 @@ interprétables par la machine.
 ## Exécuter l’exemple
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-gdpr-ai/1.0.0/pack.json \
   --target use-recruiting-assistant

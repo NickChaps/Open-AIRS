@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# Changelog: AIR purpose taxonomy
+# Changelog: Open AIRS purpose taxonomy
 
 ## 1.0.0 (2026-08-29)
 

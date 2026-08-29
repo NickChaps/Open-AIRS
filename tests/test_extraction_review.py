@@ -7,10 +7,10 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.engine import assess
-from air_framework.errors import ValidationError
-from air_framework.profiles import assess_profile, load_profile_packs
-from air_framework.validation import (
+from open_airs.engine import assess
+from open_airs.errors import ValidationError
+from open_airs.profiles import assess_profile, load_profile_packs
+from open_airs.validation import (
     validate_assessment_note,
     validate_extraction_record,
     validate_review_record,
@@ -89,7 +89,7 @@ class ExtractionAndReviewTests(unittest.TestCase):
         statement = next(
             item for item in invalid["statements"] if item["kind"] == "finding"
         )
-        statement["references"]["assessment_id"] = "urn:air:assessment:missing"
+        statement["references"]["assessment_id"] = "urn:open-airs:assessment:missing"
         with self.assertRaises(ValidationError):
             validate_assessment_note(invalid)
 

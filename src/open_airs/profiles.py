@@ -127,7 +127,7 @@ def assess_profile(
     }
     result_hash = content_hash(hash_material)
     return {
-        "profile_assessment_id": f"urn:air:profile-assessment:{result_hash[:24]}",
+        "profile_assessment_id": f"urn:open-airs:profile-assessment:{result_hash[:24]}",
         "result_hash": result_hash,
         **stable,
         "assessments": results,

@@ -7,8 +7,8 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.engine import assess, diff_assessments, pack_impact
-from air_framework.errors import EvaluationError
+from open_airs.engine import assess, diff_assessments, pack_impact
+from open_airs.errors import EvaluationError
 
 ROOT = Path(__file__).resolve().parents[1]
 

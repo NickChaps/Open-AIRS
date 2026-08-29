@@ -9,7 +9,7 @@ is ambiguous.
 
 ```mermaid
 flowchart LR
-    C["Fictional contract"] --> X["air-assess + LLM<br/>clause analysis"]
+    C["Fictional contract"] --> X["open-airs-assess + LLM<br/>clause analysis"]
     L["Fictional clause library"] --> X
     X --> F["Presence grid<br/>evidence · confidence"]
     F --> E["Deterministic engine"]
@@ -68,18 +68,18 @@ No past assessment is edited.
 ## Run the example
 
 ```bash
-PYTHONPATH=src python -m air_framework validate-extraction \
+PYTHONPATH=src python -m open_airs validate-extraction \
   examples/contract-review/extraction.json
 
-PYTHONPATH=src python -m air_framework assess \
+PYTHONPATH=src python -m open_airs assess \
   --inventory examples/contract-review/inventory.json \
   --pack packs/contract-review-example/1.0.0/pack.json \
   --target contract-cloud-demo
 
-PYTHONPATH=src python -m air_framework validate-review \
+PYTHONPATH=src python -m open_airs validate-review \
   examples/contract-review/review.json
 
-PYTHONPATH=src python -m air_framework validate-note \
+PYTHONPATH=src python -m open_airs validate-note \
   examples/contract-review/assessment-note.json
 ```
 

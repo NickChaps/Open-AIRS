@@ -1,14 +1,14 @@
-# AIR Framework
+# Open AIRS
 
-**AI Registry & Governance Framework**
+**Open AI Registry System**
 
-[![CI](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml)
+[![CI](https://github.com/NickChaps/Open-AIRS/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/Open-AIRS/actions/workflows/ci.yml)
 [![Apache 2.0](https://img.shields.io/badge/code-Apache--2.0-4f46e5.svg)](LICENSE)
 [![Docs and packs CC BY-SA 4.0](https://img.shields.io/badge/docs%20%26%20packs-CC%20BY--SA%204.0-0f766e.svg)](LICENSE-POLICY.md)
 
 [Lire en français](README.fr.md)
 
-AIR Framework helps an organisation maintain its AI registry, assess its uses
+Open AIRS helps an organisation maintain its AI registry, assess its uses
 and explain every result. It connects deployed systems, available evidence and
 rules derived from identified sources such as the EU AI Act, GDPR, NIS2 and
 NIST publications.
@@ -71,7 +71,7 @@ is also entering its application stages. Legal, compliance, security and
 digital teams need to find a use, understand its assessment and reproduce the
 analysis that applied on a given date.
 
-AIR's answer uses generative AI inside the assessment itself, under strict
+Open AIRS uses generative AI inside the assessment itself, under strict
 bounds. A model reads the prompts, skills and configurations the way a
 careful reviewer would, because only semantic reading can tell an active
 recruitment purpose from a forbidden example in free text. But the model
@@ -82,13 +82,13 @@ Everything that follows, the legal categories, the obligations, the
 missing information, is computed by versioned deterministic rules anyone
 can audit. The model judges facts; the rules judge the law.
 
-## What AIR provides
+## What Open AIRS provides
 
-AIR keeps the actual composition, source reading and exact effect of the rules
+Open AIRS keeps the actual composition, source reading and exact effect of the rules
 in one case file. These three layers remain separate and can be reviewed or
 updated on their own schedules.
 
-AIR builds one reviewable record from four elements:
+Open AIRS builds one reviewable record from four elements:
 
 | Element | Plain meaning | Example |
 | --- | --- | --- |
@@ -102,7 +102,7 @@ of the registry is called an **inventory version** in the reader guides. JSON
 files and specifications retain the technical field names, but readers do not
 need them to understand an assessment.
 
-AIR can then produce:
+Open AIRS can then produce:
 
 - an inventory that shows the real composition of a use;
 - model-written analysis with cited evidence and visible uncertainty;
@@ -142,7 +142,7 @@ flowchart TB
     class O1,O2,O3,O4,O5 get
 ```
 
-| Step | You bring | AIR returns |
+| Step | You bring | Open AIRS returns |
 | --- | --- | --- |
 | Describe | Composition, prompts, questionnaire answers | A dated snapshot of what really exists |
 | Reading | Nothing | Purposes, facts and excluded mentions, with evidence |
@@ -200,10 +200,10 @@ rule, obligation or legal reference. A security guideline in a prompt proves
 that the instruction exists. It does not prove that the operating platform enforces the
 control.
 
-### 2. AIR keeps disagreements visible
+### 2. Open AIRS keeps disagreements visible
 
 Reliable API and configuration values remain authoritative. If the model
-contradicts an established value, AIR records a conflict. It never overwrites
+contradicts an established value, Open AIRS records a conflict. It never overwrites
 that value silently. Missing information stays unknown; it never becomes an
 automatic “no”.
 
@@ -257,7 +257,7 @@ separate and does not present them as legal non-compliance.
 ## Human control across a large estate
 
 An organisation with thousands of applications cannot manually approve every
-model reading. AIR runs the assessment, stores the evidence and then applies
+model reading. Open AIRS runs the assessment, stores the evidence and then applies
 the organisation's control policy.
 
 ```mermaid
@@ -356,7 +356,7 @@ The engine requires Python 3.11 or later.
 ```bash
 python -m pip install .
 
-air-framework assess-profile \
+open-airs assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
@@ -375,11 +375,11 @@ It sends the selected service the target, its composition and linked evidence,
 so confirm that the service is authorised to receive that material.
 
 ```bash
-export AIR_LLM_API_KEY="your-key"
-export AIR_LLM_MODEL="your-model"
-export AIR_LLM_BASE_URL="https://your-provider.example/v1"
+export OPEN_AIRS_LLM_API_KEY="your-key"
+export OPEN_AIRS_LLM_MODEL="your-model"
+export OPEN_AIRS_LLM_BASE_URL="https://your-provider.example/v1"
 
-air-framework qualify \
+open-airs qualify \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -405,11 +405,11 @@ their earlier versions. Four entry points cover the normal reading path:
 
 | Need | Start here |
 | --- | --- |
-| Understand AIR through an example and essential terms | [Understand AIR](docs/en/concepts.md) |
+| Understand Open AIRS through an example and essential terms | [Understand Open AIRS](docs/en/concepts.md) |
 | See what an AI registry contains | [The AI registry](docs/en/ai-registry.md) |
 | Run the examples and inspect the files | [Ten-minute walkthrough](docs/en/quickstart.md) |
 | Author rules or integrate the engine | [Documentation by role](docs/en/README.md) |
-| Compare AIR with neighbouring projects | [Related work](docs/en/related-work.md) |
+| Compare Open AIRS with neighbouring projects | [Related work](docs/en/related-work.md) |
 
 Technical specifications live in [`spec/`](spec/). Dated coverage reviews live
 in [`docs/audits/`](docs/audits/). They are maintenance evidence and are not
@@ -417,14 +417,14 @@ part of the initial reading path.
 
 ## Limits
 
-AIR Framework does not certify compliance and does not replace legal advice,
+Open AIRS does not certify compliance and does not replace legal advice,
 security analysis or an organisation's decision. A result depends on available
 evidence, reading quality, selected packs and their versions.
 
 The framework preserves unknowns and conflicts. Human controls can be targeted
 or sampled according to risk and internal policy.
 
-The current release is `v0.1.0-alpha.8`. Formats may still change.
+The current release is `v0.1.0-alpha.9`. Formats may still change.
 
 ## Licence and citation
 

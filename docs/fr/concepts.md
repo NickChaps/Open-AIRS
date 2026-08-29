@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# Comprendre AIR Framework
+# Comprendre Open AIRS
 
-AIR transforme un parc dispersé en dossiers de gouvernance que l’on peut
+Open AIRS transforme un parc dispersé en dossiers de gouvernance que l’on peut
 comprendre, vérifier et rejouer.
 
 Un dossier relie un usage métier à l’application qui le réalise, à sa
@@ -17,7 +17,7 @@ des CV. Elle dispose aussi d’un connecteur capable d’envoyer des messages au
 candidats.
 
 Pris séparément, le nom de la plateforme, le texte du skill ou la présence du
-connecteur ne suffisent pas à qualifier l’usage. AIR relie les éléments :
+connecteur ne suffisent pas à qualifier l’usage. Open AIRS relie les éléments :
 
 ```mermaid
 flowchart LR
@@ -75,7 +75,7 @@ L’absence d’information ne devient donc jamais automatiquement un « non ».
 
 Une preuve indique d’où vient le fait : réponse déclarative, configuration de
 plateforme, prompt, skill, contrat, documentation fournisseur, API ou revue
-humaine. AIR conserve l’extrait utile, la date de capture et la confiance
+humaine. Open AIRS conserve l’extrait utile, la date de capture et la confiance
 accordée au fait.
 
 ### 5. Pack de règles
@@ -102,7 +102,7 @@ déterminent la qualification avec davantage de précision que le seul nom du
 produit ou du modèle.
 
 Un skill est un objet textuel passif. Il n’exécute pas seul une action, mais ses
-instructions peuvent contribuer à la finalité d’une application. AIR le relie
+instructions peuvent contribuer à la finalité d’une application. Open AIRS le relie
 donc à l’application et à l’usage concernés. Les capacités d’action sont
 portées par la plateforme en fonctionnement et les connecteurs effectivement autorisés.
 

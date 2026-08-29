@@ -1,6 +1,6 @@
 # Clean-room statement
 
-AIR Framework is an independent implementation derived from public legal texts, public technical specifications, openly licensed materials and original analysis.
+Open AIRS is an independent implementation derived from public legal texts, public technical specifications, openly licensed materials and original analysis.
 
 The repository must not contain:
 

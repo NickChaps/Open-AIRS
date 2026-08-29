@@ -1,9 +1,9 @@
 {
   "schema_version": "0.1.0",
   "taxonomy": {
-    "id": "air-purpose",
+    "id": "open-airs-purpose",
     "version": "1.0.0",
-    "name": "AIR purpose taxonomy",
+    "name": "Open AIRS purpose taxonomy",
     "language": "en",
     "reviewed_at": "2026-08-29",
     "description": "Neutral purpose tags used by extraction records to describe what a composition is for. Tags describe activity, never legal conclusions: rule packs map tags and other facts to legal categories."

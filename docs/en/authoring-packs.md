@@ -59,6 +59,6 @@ Every material rule needs:
 
 ## Simulate before activation
 
-Run `air-framework impact` with the active and candidate pack. Review every
+Run `open-airs impact` with the active and candidate pack. Review every
 new, removed and changed finding. Release the candidate as a new immutable
 version, then let an authorised person activate it in the host product.

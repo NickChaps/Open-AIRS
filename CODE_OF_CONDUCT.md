@@ -1,6 +1,6 @@
 # Community conduct
 
-AIR Framework welcomes contributors from legal, compliance, policy, security,
+Open AIRS welcomes contributors from legal, compliance, policy, security,
 risk, product, research and engineering backgrounds.
 
 Be precise without being hostile. Critique rules, evidence and reasoning rather

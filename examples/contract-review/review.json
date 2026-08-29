@@ -1,8 +1,8 @@
 {
   "schema_version": "0.1.0",
-  "review_id": "urn:air:review:fictional-contract-targeted-20260829",
+  "review_id": "urn:open-airs:review:fictional-contract-targeted-20260829",
   "reviewed_at": "2026-08-29T15:45:00Z",
-  "assessment_id": "urn:air:assessment:cbf878130432b9c789c76a73",
+  "assessment_id": "urn:open-airs:assessment:1f0ee8959da877e576dcafd6",
   "target": {
     "id": "contract-cloud-demo",
     "type": "contract",

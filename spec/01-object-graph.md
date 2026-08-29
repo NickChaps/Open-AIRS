@@ -2,7 +2,7 @@
 
 # Object graph
 
-AIR Framework keeps one governance inventory and allows each rule pack to
+Open AIRS keeps one governance inventory and allows each rule pack to
 project the legal or methodological view it needs. An item can belong in the
 inventory without being an AI system in law.
 

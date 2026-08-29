@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Optional LLM orchestration around the deterministic AIR engine.
+"""Optional LLM orchestration around the deterministic Open AIRS engine.
 
 The model reads source material, proposes bounded facts and writes an
 evidence-linked explanation.  The rule engine remains a separate pure step:
@@ -43,7 +43,7 @@ def _utc_now() -> str:
 
 
 def _prompt_template(name: str) -> str:
-    return files("air_framework.prompts").joinpath(name).read_text(encoding="utf-8").strip()
+    return files("open_airs.prompts").joinpath(name).read_text(encoding="utf-8").strip()
 
 
 @dataclass(frozen=True)
@@ -153,7 +153,7 @@ class OpenAICompatibleClient:
             headers={
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json",
-                "User-Agent": f"AIR-Framework/{__version__}",
+                "User-Agent": f"Open-AIRS/{__version__}",
             },
         )
         raw_response: dict[str, Any] | None = None
@@ -591,14 +591,14 @@ def extract_with_llm(
     source_evidence = [item["id"] for item in payload["composition"]["evidence"]]
     extractor = {
         "kind": "llm",
-        "skill": {"id": "air-assess", "version": "0.3.0"},
+        "skill": {"id": "open-airs-assess", "version": "0.3.0"},
         "model": {
             "provider": client.provider_name,
             "id": completion.model or client.model,
         },
         "prompt_hash": content_hash({"system": system, "user": user}),
         "prompt_template": {
-            "id": "air-assess/extraction",
+            "id": "open-airs-assess/extraction",
             "version": "0.3.0",
             "content_hash": content_hash(system),
         },
@@ -608,7 +608,7 @@ def extract_with_llm(
         extractor["usage"] = dict(completion.usage)
     record = {
         "schema_version": "0.1.0",
-        "extraction_id": f"urn:air:extraction:{uuid.uuid4()}",
+        "extraction_id": f"urn:open-airs:extraction:{uuid.uuid4()}",
         "created_at": created_at or _utc_now(),
         "target": {"id": target["id"], "type": target["type"], "name": target["name"]},
         "inventory": {
@@ -987,7 +987,7 @@ def render_note_with_llm(
     draft = completion.value
     renderer = {
         "kind": "llm",
-        "id": "air-assess",
+        "id": "open-airs-assess",
         "version": "0.3.0",
         "model": {
             "provider": client.provider_name,
@@ -996,7 +996,7 @@ def render_note_with_llm(
         "run_id": completion.response_id or f"local-{uuid.uuid4()}",
         "prompt_hash": content_hash({"system": system, "user": user}),
         "prompt_template": {
-            "id": "air-assess/note",
+            "id": "open-airs-assess/note",
             "version": "0.3.0",
             "content_hash": content_hash(system),
         },
@@ -1024,7 +1024,7 @@ def render_note_with_llm(
         "review_status": {"status": "not_selected"},
     }
     note_hash = content_hash(stable)
-    note = {"note_id": f"urn:air:note:{note_hash[:24]}", **stable}
+    note = {"note_id": f"urn:open-airs:note:{note_hash[:24]}", **stable}
     validate_assessment_note(note)
     validate_note_context(note, extraction, profile_result)
     return note
@@ -1077,7 +1077,7 @@ def qualify_with_llm(
     )
     return {
         "schema_version": "0.1.0",
-        "run_id": f"urn:air:qualification-run:{uuid.uuid4()}",
+        "run_id": f"urn:open-airs:qualification-run:{uuid.uuid4()}",
         "target": profile_result["target"],
         "extraction": extraction,
         "resolved_inventory": resolved_inventory,
@@ -1115,7 +1115,7 @@ def client_from_environment(
     *,
     model: str | None = None,
     base_url: str | None = None,
-    api_key_env: str = "AIR_LLM_API_KEY",
+    api_key_env: str = "OPEN_AIRS_LLM_API_KEY",
     provider_name: str = "openai-compatible",
     response_format: str = "json_schema",
     reasoning_effort: str | None = None,
@@ -1125,9 +1125,9 @@ def client_from_environment(
     """Build a client without accepting secrets on the command line."""
 
     api_key = os.environ.get(api_key_env, "")
-    resolved_model = model or os.environ.get("AIR_LLM_MODEL", "")
+    resolved_model = model or os.environ.get("OPEN_AIRS_LLM_MODEL", "")
     resolved_base_url = base_url or os.environ.get(
-        "AIR_LLM_BASE_URL", "https://api.openai.com/v1"
+        "OPEN_AIRS_LLM_BASE_URL", "https://api.openai.com/v1"
     )
     return OpenAICompatibleClient(
         api_key=api_key,

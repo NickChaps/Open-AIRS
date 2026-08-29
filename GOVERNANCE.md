@@ -1,6 +1,6 @@
 # Project governance
 
-AIR Framework is maintained in public. The current maintainer makes release
+Open AIRS is maintained in public. The current maintainer makes release
 decisions and may appoint additional maintainers as sustained contributions and
 review needs grow.
 

@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# AIR Framework documentation
+# Open AIRS documentation
 
 You do not need to read the whole repository. Choose the path that matches
 your work.
@@ -9,7 +9,7 @@ your work.
 
 This path is for legal, compliance, risk, security and business teams.
 
-1. [Understand AIR through one case](concepts.md)
+1. [Understand Open AIRS through one case](concepts.md)
 2. [See the information held by the AI registry](ai-registry.md)
 3. [Read a result, its evidence and references](reading-an-assessment.md)
 4. [Understand targeted and sampled quality controls](quality-control.md)
@@ -41,13 +41,13 @@ Developers can then open:
 - the [JSON schemas](../../spec/schemas/);
 - the [condition language](../../spec/04-condition-language.md);
 - the [LLM, review and improvement flow](../../spec/08-extraction-review-and-learning.md);
-- the [Python engine](../../src/air_framework/);
+- the [Python engine](../../src/open_airs/);
 - the [tests](../../tests/).
 
 ## Situate the project
 
 - [Related work](related-work.md): the neighbouring projects, stated
-  honestly, and how AIR relates to each.
+  honestly, and how Open AIRS relates to each.
 
 ## Reference documents
 

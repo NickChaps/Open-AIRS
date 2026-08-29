@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from .engine import assess, assess_inventory, diff_assessments, pack_impact
-from .errors import AirFrameworkError
+from .errors import OpenAirsError
 from .io import dump_json, load_json
 from .judge import (
     client_from_environment,
@@ -42,7 +42,7 @@ def _write(value: Any, output: str | None, compact: bool) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="air-framework",
+        prog="open-airs",
         description="Evaluate governed objects against auditable rule packs.",
     )
     commands = parser.add_subparsers(dest="command", required=True)
@@ -161,7 +161,7 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_parser.add_argument("--model")
     qualify_parser.add_argument("--base-url")
     qualify_parser.add_argument("--provider-name", default="openai-compatible")
-    qualify_parser.add_argument("--api-key-env", default="AIR_LLM_API_KEY")
+    qualify_parser.add_argument("--api-key-env", default="OPEN_AIRS_LLM_API_KEY")
     qualify_parser.add_argument(
         "--response-format",
         choices=["json_schema", "json_object"],
@@ -276,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
             write_qualification_bundle(bundle, args.output_dir)
             print(f"qualification bundle: {Path(args.output_dir).resolve()}")
         return 0
-    except AirFrameworkError as exc:
+    except OpenAirsError as exc:
         parser.exit(2, f"error: {exc}\n")
 
 

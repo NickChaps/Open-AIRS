@@ -9,7 +9,7 @@ lorsqu’une preuve reste ambiguë.
 
 ```mermaid
 flowchart LR
-    C["Contrat fictif"] --> X["air-assess + LLM<br/>analyse des clauses"]
+    C["Contrat fictif"] --> X["open-airs-assess + LLM<br/>analyse des clauses"]
     L["Clausier fictif"] --> X
     X --> F["Grille de présence<br/>preuves · confiance"]
     F --> E["Moteur déterministe"]
@@ -68,18 +68,18 @@ preuve. Aucune évaluation passée n’est modifiée.
 ## Rejouer l’exemple
 
 ```bash
-PYTHONPATH=src python -m air_framework validate-extraction \
+PYTHONPATH=src python -m open_airs validate-extraction \
   examples/contract-review/extraction.json
 
-PYTHONPATH=src python -m air_framework assess \
+PYTHONPATH=src python -m open_airs assess \
   --inventory examples/contract-review/inventory.json \
   --pack packs/contract-review-example/1.0.0/pack.json \
   --target contract-cloud-demo
 
-PYTHONPATH=src python -m air_framework validate-review \
+PYTHONPATH=src python -m open_airs validate-review \
   examples/contract-review/review.json
 
-PYTHONPATH=src python -m air_framework validate-note \
+PYTHONPATH=src python -m open_airs validate-note \
   examples/contract-review/assessment-note.json
 ```
 

@@ -35,7 +35,7 @@ la confiance, les packs qui ont défini les questions et une analyse structurée
 langage courant.
 
 ```bash
-air-framework validate-extraction examples/ai-governance/extraction.json
+open-airs validate-extraction examples/ai-governance/extraction.json
 ```
 
 Le moteur de règles n’appelle pas de modèle. La commande facultative `qualify`
@@ -51,7 +51,7 @@ relations vers l’application, la plateforme, le skill et le connecteur.
 ## 4. Valider l’enveloppe de preuves
 
 ```bash
-air-framework validate-inventory examples/ai-governance/inventory.json
+open-airs validate-inventory examples/ai-governance/inventory.json
 ```
 
 La validation contrôle les identifiants, types d’objets, relations, états de
@@ -60,7 +60,7 @@ faits et références de preuves. Elle ne prétend pas que la preuve est vraie.
 ## 5. Appliquer le pack AI Act
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/ai-governance/inventory.json \
   --pack packs/eu-ai-act/1.1.0/pack.json \
   --target use-recruiting-assistant \
@@ -74,7 +74,7 @@ résolus restent visibles.
 ## 6. Appliquer un ensemble de packs figés
 
 ```bash
-air-framework assess-profile \
+open-airs assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -94,11 +94,11 @@ et les preuves liées sont envoyées au service choisi ; celui-ci doit être
 autorisé à recevoir ces contenus.
 
 ```bash
-export AIR_LLM_API_KEY="votre-cle"
-export AIR_LLM_MODEL="votre-modele"
-export AIR_LLM_BASE_URL="https://votre-fournisseur.example/v1"
+export OPEN_AIRS_LLM_API_KEY="votre-cle"
+export OPEN_AIRS_LLM_MODEL="votre-modele"
+export OPEN_AIRS_LLM_BASE_URL="https://votre-fournisseur.example/v1"
 
-air-framework qualify \
+open-airs qualify \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -118,8 +118,8 @@ les points confirmés par le relecteur. La validation contrôle la fiche sans
 modifier l’évaluation automatisée.
 
 ```bash
-air-framework validate-review examples/ai-governance/review.json
-air-framework validate-note examples/ai-governance/assessment-note.json
+open-airs validate-review examples/ai-governance/review.json
+open-airs validate-note examples/ai-governance/assessment-note.json
 ```
 
 ## 9. Ajouter un processus d’entreprise si utile

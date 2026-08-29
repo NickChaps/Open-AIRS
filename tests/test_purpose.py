@@ -7,8 +7,8 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
-from air_framework.errors import ValidationError
-from air_framework.validation import validate_extraction_record, validate_taxonomy
+from open_airs.errors import ValidationError
+from open_airs.validation import validate_extraction_record, validate_taxonomy
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,7 +20,7 @@ TAXONOMY = json.loads(
 def _record():
     return {
         "schema_version": "0.1.0",
-        "extraction_id": "urn:air:extraction:test",
+        "extraction_id": "urn:open-airs:extraction:test",
         "created_at": "2026-08-29T12:00:00Z",
         "target": {"id": "use-1", "type": "ai_use", "name": "Contract review"},
         "inventory": {"inventory_id": "inv-1", "snapshot_id": "snap-1"},
@@ -29,7 +29,7 @@ def _record():
         ],
         "extractor": {
             "kind": "llm",
-            "skill": {"id": "air-assess", "version": "0.3.0"},
+            "skill": {"id": "open-airs-assess", "version": "0.3.0"},
         },
         "source_evidence": ["ev-prompt"],
         "fact_proposals": [
@@ -42,7 +42,7 @@ def _record():
                 "rationale": "The prompt targets supplier contracts.",
             }
         ],
-        "taxonomy": {"id": "air-purpose", "version": "1.0.0"},
+        "taxonomy": {"id": "open-airs-purpose", "version": "1.0.0"},
         "proposed_uses": [
             {
                 "purpose_statement": "Review supplier contracts for missing clauses.",

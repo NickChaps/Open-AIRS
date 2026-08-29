@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# Documentation d’AIR Framework
+# Documentation d’Open AIRS
 
 Vous n’avez pas besoin de lire tout le dépôt. Choisissez le parcours qui
 correspond à votre besoin.
@@ -10,7 +10,7 @@ correspond à votre besoin.
 Ce parcours s’adresse aux équipes juridiques, conformité, risques, sécurité et
 métiers.
 
-1. [Comprendre AIR avec un cas concret](concepts.md)
+1. [Comprendre Open AIRS avec un cas concret](concepts.md)
 2. [Voir les informations du registre IA](registre-ia.md)
 3. [Lire un résultat, ses preuves et ses références](lire-une-evaluation.md)
 4. [Comprendre les contrôles ciblés et par échantillon](controle-qualite.md)
@@ -43,13 +43,13 @@ Les développeurs trouveront ensuite :
 - les [schémas JSON](../../spec/schemas/) ;
 - le [langage de conditions](../../spec/04-condition-language.md) ;
 - le [flux LLM, les contrôles humains et l’amélioration](../../spec/08-extraction-review-and-learning.md) ;
-- le [moteur Python](../../src/air_framework/) ;
+- le [moteur Python](../../src/open_airs/) ;
 - les [tests](../../tests/).
 
 ## Situer le projet
 
 - [Travaux proches](travaux-proches.md) : les projets voisins, énoncés
-  honnêtement, et le rapport d'AIR à chacun.
+  honnêtement, et le rapport d'Open AIRS à chacun.
 
 ## Documents de référence
 

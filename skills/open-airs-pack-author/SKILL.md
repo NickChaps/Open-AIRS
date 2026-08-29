@@ -1,14 +1,14 @@
 ---
-name: air-pack-author
-description: Create or update an auditable AIR Framework rule pack from an authorised legal, regulatory, methodological, contractual or organisational corpus. Use when asked to turn a source into facts, deterministic rules, anchors, tests and a versioned candidate with a dry-run impact report.
+name: open-airs-pack-author
+description: Create or update an auditable Open AIRS rule pack from an authorised legal, regulatory, methodological, contractual or organisational corpus. Use when asked to turn a source into facts, deterministic rules, anchors, tests and a versioned candidate with a dry-run impact report.
 license: Apache-2.0
 metadata:
-  author: AIR Framework contributors
+  author: Open AIRS contributors
   version: 0.1.0
-  compatibility: Python 3.11+, AIR Framework and lawful source access
+  compatibility: Python 3.11+, Open AIRS and lawful source access
 ---
 
-# AIR pack authoring
+# Open AIRS pack authoring
 
 Create a candidate pack that can be read by a domain specialist and executed by
 the reference engine.
@@ -51,8 +51,8 @@ pack and run the full test suite.
 ## 6. Measure impact, then release
 
 ```bash
-air-framework validate-pack packs/PACK/VERSION/pack.json
-air-framework impact \
+open-airs validate-pack packs/PACK/VERSION/pack.json
+open-airs impact \
   --inventory INVENTORY.json \
   --before-pack ACTIVE.json \
   --after-pack packs/PACK/VERSION/pack.json

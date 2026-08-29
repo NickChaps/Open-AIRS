@@ -1,14 +1,14 @@
-# AIR Framework
+# Open AIRS
 
-**AI Registry & Governance Framework**
+**Open AI Registry System**
 
-[![CI](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml)
+[![CI](https://github.com/NickChaps/Open-AIRS/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/Open-AIRS/actions/workflows/ci.yml)
 [![Licence Apache 2.0](https://img.shields.io/badge/code-Apache--2.0-4f46e5.svg)](LICENSE)
 [![Docs et packs CC BY-SA 4.0](https://img.shields.io/badge/docs%20%26%20packs-CC%20BY--SA%204.0-0f766e.svg)](LICENSE-POLICY.md)
 
 [Read in English](README.md)
 
-AIR Framework aide une organisation à tenir son registre IA, qualifier ses
+Open AIRS aide une organisation à tenir son registre IA, qualifier ses
 usages et expliquer chaque résultat. Il relie les systèmes réellement utilisés,
 les preuves disponibles et des règles issues de textes identifiés comme l’AI
 Act, le RGPD, NIS2 ou les référentiels NIST.
@@ -74,7 +74,7 @@ entre progressivement en application. Les équipes juridiques, conformité,
 sécurité et numériques doivent pouvoir retrouver un usage, comprendre sa
 qualification et reproduire l’analyse qui était valable à une date donnée.
 
-La réponse d'AIR utilise l'IA générative à l'intérieur même de la
+Open AIRS utilise l'IA générative à l'intérieur même de la
 qualification, sous des bornes strictes. Un modèle lit les prompts, les
 skills et les configurations comme le ferait un relecteur attentif, parce
 que seule une lecture sémantique distingue, dans du texte libre, une
@@ -86,13 +86,13 @@ obligations, les informations manquantes, est calculé par des règles
 déterministes versionnées que chacun peut auditer. Le modèle juge des
 faits ; les règles jugent le droit.
 
-## Ce qu’AIR apporte
+## Ce qu’Open AIRS apporte
 
-AIR conserve dans le même dossier la composition réelle de l’usage, la lecture
+Open AIRS conserve dans le même dossier la composition réelle de l’usage, la lecture
 des sources et l’effet exact des règles. Ces trois couches restent séparées et
 peuvent être relues ou remplacées à leur propre rythme.
 
-AIR construit un dossier commun à partir de quatre éléments :
+Open AIRS construit un dossier commun à partir de quatre éléments :
 
 | Élément | En langage courant | Exemple |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ documentation. Les termes techniques restent disponibles dans les fichiers
 JSON et les spécifications, mais ils ne sont pas nécessaires pour comprendre
 un dossier.
 
-Avec ces éléments, AIR peut produire :
+Avec ces éléments, Open AIRS peut produire :
 
 - un inventaire qui montre la composition réelle d’un usage ;
 - une analyse écrite par un modèle de langage, avec les preuves citées et les
@@ -149,7 +149,7 @@ flowchart TB
     class O1,O2,O3,O4,O5 get
 ```
 
-| Étape | Vous apportez | AIR restitue |
+| Étape | Vous apportez | Open AIRS restitue |
 | --- | --- | --- |
 | Décrire | Composition, prompts, réponses de questionnaire | Une photographie datée de ce qui existe vraiment |
 | Lecture | Rien | Finalités, faits et mentions exclues, avec preuves |
@@ -208,10 +208,10 @@ une règle, une obligation ou une référence juridique. Une consigne de sécuri
 écrite dans un prompt prouve l’existence de la consigne. Elle ne prouve pas
 qu’un contrôle technique est réellement activé.
 
-### 2. AIR conserve les désaccords
+### 2. Open AIRS conserve les désaccords
 
 Les données fiables reçues par API ou configuration restent prioritaires. Si
-la lecture du modèle contredit une information déjà établie, AIR conserve le
+la lecture du modèle contredit une information déjà établie, Open AIRS conserve le
 désaccord. Il ne remplace pas silencieusement la valeur existante. Une absence
 d’information reste une inconnue ; elle ne devient jamais automatiquement un
 « non ».
@@ -269,7 +269,7 @@ ses propres écarts, sans les présenter comme une non-conformité juridique.
 ## Le contrôle humain à l’échelle d’un parc
 
 Une entreprise qui possède des milliers d’applications ne peut pas demander une
-validation manuelle de chaque lecture. AIR exécute la qualification, conserve
+validation manuelle de chaque lecture. Open AIRS exécute la qualification, conserve
 les preuves et applique ensuite la politique de contrôle définie par
 l’organisation.
 
@@ -376,7 +376,7 @@ Le moteur exige Python 3.11 ou une version plus récente.
 ```bash
 python -m pip install .
 
-air-framework assess-profile \
+open-airs assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
@@ -396,11 +396,11 @@ Elle envoie au service choisi la cible, sa composition et les preuves liées :
 vérifiez donc que ce service est autorisé à recevoir ces contenus.
 
 ```bash
-export AIR_LLM_API_KEY="votre-cle"
-export AIR_LLM_MODEL="votre-modele"
-export AIR_LLM_BASE_URL="https://votre-fournisseur.example/v1"
+export OPEN_AIRS_LLM_API_KEY="votre-cle"
+export OPEN_AIRS_LLM_MODEL="votre-modele"
+export OPEN_AIRS_LLM_BASE_URL="https://votre-fournisseur.example/v1"
 
-air-framework qualify \
+open-airs qualify \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant \
@@ -426,11 +426,11 @@ leurs versions. Pour découvrir le projet, quatre entrées suffisent :
 
 | Votre besoin | Point de départ |
 | --- | --- |
-| Comprendre AIR avec un exemple et les mots essentiels | [Comprendre AIR](docs/fr/concepts.md) |
+| Comprendre Open AIRS avec un exemple et les mots essentiels | [Comprendre Open AIRS](docs/fr/concepts.md) |
 | Voir exactement ce que contient un registre IA | [Le registre IA](docs/fr/registre-ia.md) |
 | Exécuter les exemples et inspecter les fichiers | [Parcours de dix minutes](docs/fr/demarrage.md) |
 | Créer des règles ou intégrer le moteur | [Documentation par rôle](docs/fr/README.md) |
-| Situer AIR parmi les projets voisins | [Travaux proches](docs/fr/travaux-proches.md) |
+| Situer Open AIRS parmi les projets voisins | [Travaux proches](docs/fr/travaux-proches.md) |
 
 Les spécifications techniques se trouvent dans [`spec/`](spec/). Les revues
 datées de couverture se trouvent dans [`docs/audits/`](docs/audits/). Elles
@@ -439,7 +439,7 @@ initial.
 
 ## Limites
 
-AIR Framework ne certifie pas la conformité et ne remplace pas un avis
+Open AIRS ne certifie pas la conformité et ne remplace pas un avis
 juridique, une analyse de sécurité ou une décision de l’organisation. Un
 résultat dépend des preuves disponibles, de la qualité de la lecture, des packs
 choisis et de leur version.
@@ -448,7 +448,7 @@ Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
 réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
 échantillonnés selon le risque et la politique interne.
 
-La version actuelle est `v0.1.0-alpha.8`. Les formats peuvent encore évoluer.
+La version actuelle est `v0.1.0-alpha.9`. Les formats peuvent encore évoluer.
 
 ## Licence et citation
 

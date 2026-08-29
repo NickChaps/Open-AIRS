@@ -4,7 +4,7 @@
 
 [Lire en français](README.fr.md)
 
-This educational pack applies AIR’s object, fact and rule model to contract
+This educational pack applies Open AIRS’s object, fact and rule model to contract
 review. A contract becomes the governed object. Clause presence is captured as
 evidence-backed facts, then deterministic rules compare those facts with a
 fictional clause library.
@@ -83,7 +83,7 @@ evidence and rules while reusing the same engine.
 ## Run the example
 
 ```bash
-air-framework assess \
+open-airs assess \
   --inventory examples/contract-review/inventory.json \
   --pack packs/contract-review-example/1.0.0/pack.json \
   --target contract-cloud-demo

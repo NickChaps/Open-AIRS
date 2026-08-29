@@ -52,7 +52,7 @@ Les anciens répertoires de version restent immuables afin de reproduire une
 
 `authority_type` distingue droit contraignant, lignes directrices,
 référentiels volontaires, politiques d’organisation et exemples fictifs. Les
-constats issus de ces sources restent sur des axes distincts. AIR ne les réduit
+constats issus de ces sources restent sur des axes distincts. Open AIRS ne les réduit
 pas à un score universel.
 
 Aucun pack public n’attribue un feu organisationnel ou une voie d’approbation.

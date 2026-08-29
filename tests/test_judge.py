@@ -8,9 +8,9 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-from air_framework.canonical import content_hash
-from air_framework.errors import ValidationError
-from air_framework.judge import (
+from open_airs.canonical import content_hash
+from open_airs.errors import ValidationError
+from open_airs.judge import (
     JsonCompletion,
     _context,
     apply_extraction,
@@ -19,7 +19,7 @@ from air_framework.judge import (
     validate_extraction_context,
     validate_note_context,
 )
-from air_framework.profiles import assess_profile, load_profile_packs
+from open_airs.profiles import assess_profile, load_profile_packs
 
 ROOT = Path(__file__).resolve().parents[1]
 

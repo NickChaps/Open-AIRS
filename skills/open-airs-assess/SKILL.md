@@ -1,24 +1,24 @@
 ---
-name: air-assess
-description: Assess a governed object with AIR Framework rule packs. Use when asked to qualify an AI use, system, platform, configured application, skill, connector, organisation, service or contract from documents, prompts, configuration or declarations while preserving evidence, unknowns and deterministic legal or framework conclusions.
+name: open-airs-assess
+description: Assess a governed object with Open AIRS rule packs. Use when asked to qualify an AI use, system, platform, configured application, skill, connector, organisation, service or contract from documents, prompts, configuration or declarations while preserving evidence, unknowns and deterministic legal or framework conclusions.
 license: Apache-2.0
 metadata:
-  author: AIR Framework contributors
+  author: Open AIRS contributors
   version: 0.3.0
-  compatibility: Python 3.11+ and AIR Framework
+  compatibility: Python 3.11+ and Open AIRS
 ---
 
-# AIR assessment
+# Open AIRS assessment
 
 Produce an evidence-backed assessment from raw sources through deterministic
 evaluation. The skill guides the model that prepares the fact grid and the
-readable note. The `air-framework qualify` orchestrator performs these two
+readable note. The `open-airs qualify` orchestrator performs these two
 model calls. The rule engine between them does not call a model.
 
 The runtime system prompts are published in
-[`src/air_framework/prompts`](../../src/air_framework/prompts/). Their version
+[`src/open_airs/prompts`](../../src/open_airs/prompts/). Their version
 and content hash are stored with each model output. This file adds the full
-operating protocol for hosts that deploy AIR as a portable skill.
+operating protocol for hosts that deploy Open AIRS as a portable skill.
 
 ## 1. Establish the target
 
@@ -74,9 +74,9 @@ fact id outside those catalogues invalidates the extraction.
 Run:
 
 ```bash
-air-framework validate-inventory INVENTORY.json
-air-framework validate-pack PACK.json
-air-framework assess --inventory INVENTORY.json --pack PACK.json --target OBJECT_ID
+open-airs validate-inventory INVENTORY.json
+open-airs validate-pack PACK.json
+open-airs assess --inventory INVENTORY.json --pack PACK.json --target OBJECT_ID
 ```
 
 Assess the same target separately with each applicable pack. Preserve the

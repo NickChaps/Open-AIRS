@@ -7,7 +7,7 @@ needs enough context to explain why a legal system boundary and intended
 purpose were chosen.
 
 The EU AI Act does not provide one internal registry template for every
-organisation. AIR gathers the information needed for qualification,
+organisation. Open AIRS gathers the information needed for qualification,
 documentation and applicable duties, then projects the legal view that fits
 the organisation's role and context.
 
