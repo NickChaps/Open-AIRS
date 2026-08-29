@@ -98,7 +98,7 @@ class ExtractionAndReviewTests(unittest.TestCase):
             (
                 "ai-governance",
                 "examples/ai-governance/inventory.json",
-                "packs/eu-ai-act/1.3.0/pack.json",
+                "packs/eu-ai-act/1.3.1/pack.json",
                 "use-recruiting-assistant",
             ),
             (

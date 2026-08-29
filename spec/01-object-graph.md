@@ -121,16 +121,31 @@ assessment target before pack inheritance is applied, with
 - `composition.engaging_action_approval_floor` (weakest approval across
   non-read actions).
 
-Derivation follows the captured snapshot only. A capability found on one
-connector is asserted even when other connectors are undocumented. A negative
-conclusion, such as "no external send is possible", requires every reachable
-connector to declare its actions; otherwise the derived fact stays `unknown`.
-A gate with an approval level outside the table, or marked `bypassable`, is
-treated as potentially autonomous. So is a gate whose `enforced_by` is not
-`connector` or `platform`: an approval step that no technical mechanism
-imposes is a policy wish, not a demonstrable control, and the action keeps
-counting as autonomous. Direct facts always win over derived facts,
-and derived facts win over pack-declared inheritance.
+The declaration is validated strictly at inventory validation: every entry
+needs a string `id` and a listed `kind`, and the optional fields must carry
+listed values and real booleans. A malformed value such as
+`bypassable: "yes"` fails the import instead of being silently read as a
+working human gate; platform-specific vocabularies are the job of import
+adapters, which translate to this canonical form.
+
+Derivation follows the captured snapshot only, with a three-valued reading
+of each gate. Autonomy is a positive claim, so it needs positive grounds: a
+permissive approval level, a bypassable or malformed gate, or an approval
+that no technical mechanism imposes (a policy wish, not a demonstrable
+control). A gate is demonstrable only when the declaration is complete: a
+gated approval level, `enforced_by` set to `connector` or `platform`, and
+`bypassable` explicitly false. An enforced gate whose bypassability is
+simply not stated proves neither, so the derived autonomy fact stays
+`unknown` instead of becoming an established exposure or a reassurance.
+A negative conclusion, such as "no external send is possible", requires
+every reachable connector to declare its actions; otherwise the derived
+fact stays `unknown` as well.
+
+Composition facts are the engine's own computation: the engine refuses an
+assessment whose input facts already contain a `composition.*` fact, so a
+declared value can never neutralise what the captured actions establish.
+The correction path is the declaration itself. Derived facts otherwise win
+over pack-declared inheritance.
 
 This keeps the division of labour stable: the model reads intent, the
 configuration proves capability and gating, and rules combine both.

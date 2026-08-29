@@ -17,9 +17,9 @@
       "urn:air:extraction:fictional-recruiting-20260829"
     ],
     "assessment_ids": [
-      "urn:air:assessment:77a350a2b4122bb87f154d4f",
-      "urn:air:assessment:d30260bdd2297343b5e8be32",
-      "urn:air:assessment:83685aac375b32c1fa6bfefd"
+      "urn:air:assessment:96b5fad1e8ea6cfe7db7880a",
+      "urn:air:assessment:b425187135f0d676ad392a20",
+      "urn:air:assessment:2414974857a8a693f1d41db3"
     ]
   },
   "renderer": {
@@ -57,7 +57,7 @@
       "kind": "finding",
       "text": "The intended purpose matches Annex III point 4(a), and the supplied Article 6(3) facts do not remove the use from high-risk classification.",
       "references": {
-        "assessment_id": "urn:air:assessment:77a350a2b4122bb87f154d4f",
+        "assessment_id": "urn:air:assessment:96b5fad1e8ea6cfe7db7880a",
         "rule_ids": [
           "aiact.core.annex3-4a-recruitment-selection",
           "aiact.core.high-risk-annex3"
@@ -74,7 +74,7 @@
       "kind": "finding",
       "text": "The AI Act pack returns gaps for competent human oversight, affected-person notice and direct-interaction transparency.",
       "references": {
-        "assessment_id": "urn:air:assessment:77a350a2b4122bb87f154d4f",
+        "assessment_id": "urn:air:assessment:96b5fad1e8ea6cfe7db7880a",
         "rule_ids": [
           "aiact.core.controls-deployer-human-oversight-assigned-gap",
           "aiact.core.controls-deployer-subject-notice-gap",
@@ -90,9 +90,9 @@
     {
       "statement_id": "note.finding.gdpr",
       "kind": "finding",
-      "text": "The GDPR pack establishes the Article 22 decision by design (determinative purpose with an autonomously executable rejection), with no evidenced paragraph 2 condition and a required DPIA that is not completed.",
+      "text": "The GDPR pack establishes the Article 22 exposure by design (determinative purpose with an autonomously executable rejection), with no evidenced paragraph 2 condition and a required DPIA that is not completed.",
       "references": {
-        "assessment_id": "urn:air:assessment:d30260bdd2297343b5e8be32",
+        "assessment_id": "urn:air:assessment:b425187135f0d676ad392a20",
         "rule_ids": [
           "gdpr.ai.article22-restriction",
           "gdpr.ai.article22-condition-gap",
@@ -110,7 +110,7 @@
       "kind": "finding",
       "text": "The selected NIST profile returns gaps for two Core outcomes and for GenAI profile selection.",
       "references": {
-        "assessment_id": "urn:air:assessment:83685aac375b32c1fa6bfefd",
+        "assessment_id": "urn:air:assessment:2414974857a8a693f1d41db3",
         "rule_ids": [
           "nist.airmf.manage-1-1-gap",
           "nist.airmf.measure-2-1-gap",

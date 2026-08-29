@@ -9,18 +9,19 @@
   },
   "inventory": {
     "inventory_id": "fictional-enterprise-ai-inventory",
-    "snapshot_id": "snapshot-2026-08-29-a"
+    "snapshot_id": "snapshot-2026-08-29-a",
+    "content_hash": "d9f647311f0bd4ba15013ed44151c33b487b562e324b4329c4c1b26f8df63568"
   },
   "pack_inputs": [
     {
       "id": "eu-ai-act-core",
-      "version": "1.3.0",
-      "content_hash": "e6dd1af170bc6c98ab04a3d7feaccd0fa3aa7bf1ce0e0f9240b402fd2449b321"
+      "version": "1.3.1",
+      "content_hash": "e5aab152058790d3ade6b3f56ab423bd763fb1092cc23ee6593066cd0f3b82db"
     },
     {
       "id": "eu-gdpr-ai-core",
-      "version": "1.3.0",
-      "content_hash": "5c99298694e8f6ae325d8235a9096771b222aa784abda18ad5904ee616030750"
+      "version": "1.3.1",
+      "content_hash": "bed93b4f9cf9252d431fdde5c8a6f090ffc5509a4b1806ec064a0ca92e81f9b2"
     },
     {
       "id": "nist-ai-rmf-core",
@@ -49,21 +50,6 @@
     "ev-legal-review"
   ],
   "fact_proposals": [
-    {
-      "fact_id": "use.tasks",
-      "state": "known",
-      "value": [
-        "filter_applications",
-        "rank_candidates",
-        "send_rejection"
-      ],
-      "evidence": [
-        "ev-use-declaration",
-        "ev-app-prompt"
-      ],
-      "confidence": 0.99,
-      "rationale": "The declaration and instructions describe filtering, ranking and rejection messaging."
-    },
     {
       "fact_id": "aiact.annex_iii_use_cases",
       "state": "known",
@@ -116,7 +102,6 @@
       {
         "statement": "The application filters and ranks candidates for an employment decision.",
         "fact_ids": [
-          "use.tasks",
           "aiact.annex_iii_use_cases"
         ],
         "evidence": [

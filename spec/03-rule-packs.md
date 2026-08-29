@@ -56,9 +56,30 @@ The mechanics are deliberately narrow:
 - emissions are local to one pack evaluation and to the assessed object:
   they do not cross packs and are not visible to `related` conditions.
 
-An organisation can still attest a conclusion directly (a declared fact
-always wins); a bridge rule may carry such an attestation into the same
-derived fact so downstream rules have a single source.
+An organisation still attests a conclusion through the pack's dedicated
+attestation facts, never by writing the emitted fact itself: a bridge rule
+carries the attestation into the derived fact so downstream rules have a
+single source, and the write policies below make the emitted fact
+unwritable as an input.
+
+## Fact write policies
+
+A pack distinguishes three kinds of information that must not share one
+write policy, expressed with two catalogue flags:
+
+| Policy | Flags | Who may set the fact | Example |
+| --- | --- | --- | --- |
+| Extractable | none | Inventory imports, adapters, humans, and the extractor | `use.tasks`, `aiact.annex_iii_use_cases` |
+| Attestation | `derived: true` | Inventory imports and identified human decisions; never the extractor | `aiact.high_risk_confirmed`, `decision.solely_automated` |
+| Engine only | `derived: true, engine_only: true` | Rule emissions only | `aiact.high_risk_established`, `gdpr.article22_established` |
+
+`derived` keeps a fact out of the extraction catalogue, so no model is ever
+asked for it and a model proposal for it is rejected. `engine_only` goes
+further: the engine refuses to assess a target whose input facts already
+contain the fact, whether direct or inherited. A conclusion can therefore
+only exist as a rule emission, and a human who disagrees with the engine
+records that decision through the attestation facts, next to the computed
+result, never over it.
 
 ## Activation lifecycle
 

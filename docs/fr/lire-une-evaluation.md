@@ -53,6 +53,15 @@ signifie que cette condition est fausse, pas que tout l’objet est conforme.
 Le vocabulaire de `level` appartient au pack source. Une voie d’entreprise est
 un résultat séparé, avec sa propre version et sa propre empreinte.
 
+Certains faits de l'instantané sont produits par la qualification
+elle-même. Un fait de provenance `derived` a été calculé depuis les actions
+de connecteur capturées ; un fait de provenance `rule` a été émis par une
+règle nommée, et son `rule_id` dit exactement laquelle, avec les preuves
+qui l'ont satisfaite. Ce sont les conclusions propres du moteur, jamais des
+entrées : le moteur refuse une évaluation dont les entrées contiennent déjà
+une conclusion réservée au moteur. Une décision humaine entre par les faits
+d'attestation du pack et reste visible à côté du résultat calculé.
+
 La note lisible doit rester vérifiable dans les fiches structurées. Ses
 affirmations factuelles renvoient aux faits et aux preuves ; ses affirmations
 normatives renvoient aux constats et ancrages du moteur. Elle fournit une

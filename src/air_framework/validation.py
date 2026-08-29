@@ -342,6 +342,86 @@ def condition_fact_keys(expression: Mapping[str, Any]) -> set[str]:
     return set()
 
 
+def _related_fact_keys(expression: Mapping[str, Any]) -> set[str]:
+    """Collect fact ids read on OTHER objects, inside related conditions."""
+
+    if "fact" in expression:
+        return set()
+    if "not" in expression:
+        return _related_fact_keys(expression["not"])
+    if "all" in expression or "any" in expression:
+        operator = "all" if "all" in expression else "any"
+        return {
+            key
+            for child in expression[operator]
+            for key in _related_fact_keys(child)
+        }
+    if "related" in expression:
+        return condition_fact_keys(expression["related"]["where"])
+    return set()
+
+
+CONNECTOR_ACTION_KINDS = {
+    "read",
+    "send_internal",
+    "write",
+    "execute",
+    "delete",
+    "send_external",
+}
+CONNECTOR_APPROVAL_LEVELS = {
+    "none",
+    "standing_user_authorization",
+    "per_conversation",
+    "per_action",
+}
+CONNECTOR_ENFORCEMENT = {"connector", "platform", "none"}
+CONNECTOR_CRITICALITY = {"standard", "critical"}
+
+
+def _validate_connector_actions(value: Any, path: str) -> None:
+    """Reject malformed action declarations instead of letting them soothe.
+
+    An invalid value such as ``bypassable: "yes"`` must fail the import, not
+    be silently read as a working human gate by the composition derivation.
+    """
+
+    if not isinstance(value, list):
+        raise ValidationError(f"{path}: expected a list of action objects")
+    seen_ids: set[str] = set()
+    for index, action in enumerate(value):
+        entry = f"{path}[{index}]"
+        if not isinstance(action, Mapping):
+            raise ValidationError(f"{entry}: expected an action object")
+        action_id = action.get("id")
+        if not isinstance(action_id, str) or not action_id:
+            raise ValidationError(f"{entry}.id: a non-empty string id is required")
+        if action_id in seen_ids:
+            raise ValidationError(f"{entry}.id: duplicate action id {action_id!r}")
+        seen_ids.add(action_id)
+        kind = action.get("kind")
+        if kind not in CONNECTOR_ACTION_KINDS:
+            raise ValidationError(f"{entry}.kind: unsupported value {kind!r}")
+        if "approval" in action and action["approval"] not in CONNECTOR_APPROVAL_LEVELS:
+            raise ValidationError(
+                f"{entry}.approval: unsupported value {action['approval']!r}"
+            )
+        if "enforced_by" in action and action["enforced_by"] not in CONNECTOR_ENFORCEMENT:
+            raise ValidationError(
+                f"{entry}.enforced_by: unsupported value {action['enforced_by']!r}"
+            )
+        if "bypassable" in action and not isinstance(action["bypassable"], bool):
+            raise ValidationError(f"{entry}.bypassable: expected a boolean")
+        if (
+            "target_criticality" in action
+            and action["target_criticality"] not in CONNECTOR_CRITICALITY
+        ):
+            raise ValidationError(
+                f"{entry}.target_criticality: unsupported value "
+                f"{action['target_criticality']!r}"
+            )
+
+
 def validate_inventory(inventory: Mapping[str, Any]) -> None:
     """Validate the framework's inventory envelope and referential integrity."""
 
@@ -402,6 +482,12 @@ def validate_inventory(inventory: Mapping[str, Any]) -> None:
                     raise ValidationError(
                         f"{path}.facts[{key!r}]: unknown evidence id {evidence_id!r}"
                     )
+        if object_type == "connector":
+            actions_fact = facts.get("connector.actions")
+            if isinstance(actions_fact, Mapping) and actions_fact.get("state") == "known":
+                _validate_connector_actions(
+                    actions_fact.get("value"), f"{path}.facts['connector.actions']"
+                )
 
     for index, item in enumerate(relations):
         path = f"inventory.relations[{index}]"
@@ -497,6 +583,14 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
         derived = fact.get("derived", False)
         if not isinstance(derived, bool):
             raise ValidationError(f"{path}.derived: expected a boolean")
+        engine_only = fact.get("engine_only", False)
+        if not isinstance(engine_only, bool):
+            raise ValidationError(f"{path}.engine_only: expected a boolean")
+        if engine_only and not derived:
+            raise ValidationError(
+                f"{path}: engine_only facts must also be marked derived, so no "
+                "extractor is ever asked for them"
+            )
         fact_types_by_id[fact["id"]] = fact_type
         if derived:
             derived_fact_ids.add(fact["id"])
@@ -579,6 +673,9 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
             fact_id = emission.get("fact")
             if isinstance(fact_id, str):
                 last_emitter_index[fact_id] = index
+    engine_only_ids = {
+        item["id"] for item in fact_catalog if item.get("engine_only") is True
+    }
     for index, rule in enumerate(rules):
         consumed = condition_fact_keys(rule.get("when", {}))
         for fact_id in sorted(consumed & set(last_emitter_index)):
@@ -588,6 +685,14 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
                     f"fact {fact_id!r} but is not ordered after every rule that "
                     "emits it; reorder the rules so emissions precede consumers"
                 )
+        related_keys = _related_fact_keys(rule.get("when", {}))
+        forbidden = sorted(related_keys & engine_only_ids)
+        if forbidden:
+            raise ValidationError(
+                f"pack.rules[{index}]: rule {rule.get('id')!r} reads engine-only "
+                f"facts {forbidden!r} inside a related condition; emissions are "
+                "local to the assessed object and never exist on related objects"
+            )
 
     for index, policy in enumerate(inheritance):
         path = f"pack.inheritance[{index}]"

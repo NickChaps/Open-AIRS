@@ -3,57 +3,143 @@
   "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/inventory.schema.json",
   "title": "AIR Framework inventory snapshot",
   "type": "object",
-  "required": ["schema_version", "inventory_id", "snapshot_id", "captured_at", "objects", "relations", "evidence"],
+  "required": [
+    "schema_version",
+    "inventory_id",
+    "snapshot_id",
+    "captured_at",
+    "objects",
+    "relations",
+    "evidence"
+  ],
   "properties": {
-    "schema_version": {"const": "0.1.0"},
-    "inventory_id": {"type": "string", "minLength": 1},
-    "snapshot_id": {"type": "string", "minLength": 1},
-    "captured_at": {"type": "string", "format": "date-time"},
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "inventory_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "objects": {
       "type": "array",
-      "items": {"$ref": "#/$defs/object"}
+      "items": {
+        "$ref": "#/$defs/object"
+      }
     },
     "relations": {
       "type": "array",
-      "items": {"$ref": "#/$defs/relation"}
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
     },
     "evidence": {
       "type": "array",
-      "items": {"$ref": "#/$defs/evidence"}
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
     }
   },
   "additionalProperties": false,
   "$defs": {
     "object_type": {
-      "enum": ["ai_system", "ai_platform", "configured_ai_application", "skill", "connector", "model", "ai_use", "organization", "provider", "service", "contract", "clause_library", "generic"]
+      "enum": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "skill",
+        "connector",
+        "model",
+        "ai_use",
+        "organization",
+        "provider",
+        "service",
+        "contract",
+        "clause_library",
+        "generic"
+      ]
     },
     "fact": {
       "type": "object",
-      "required": ["state"],
+      "required": [
+        "state"
+      ],
       "properties": {
-        "state": {"enum": ["known", "unknown", "conflicted", "not_applicable"]},
+        "state": {
+          "enum": [
+            "known",
+            "unknown",
+            "conflicted",
+            "not_applicable"
+          ]
+        },
         "value": {},
-        "evidence": {"type": "array", "items": {"type": "string"}},
-        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-        "extractor": {"type": "object"},
-        "note": {"type": "string"}
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "extractor": {
+          "type": "object"
+        },
+        "note": {
+          "type": "string"
+        }
       },
       "allOf": [
         {
           "if": {
-            "properties": {"state": {"const": "known"}},
-            "required": ["state"]
+            "properties": {
+              "state": {
+                "const": "known"
+              }
+            },
+            "required": [
+              "state"
+            ]
           },
-          "then": {"required": ["value"]}
+          "then": {
+            "required": [
+              "value"
+            ]
+          }
         },
         {
           "if": {
-            "properties": {"state": {"enum": ["known", "conflicted"]}},
-            "required": ["state"]
+            "properties": {
+              "state": {
+                "enum": [
+                  "known",
+                  "conflicted"
+                ]
+              }
+            },
+            "required": [
+              "state"
+            ]
           },
           "then": {
-            "required": ["evidence"],
-            "properties": {"evidence": {"minItems": 1}}
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
           }
         }
       ],
@@ -61,45 +147,166 @@
     },
     "object": {
       "type": "object",
-      "required": ["id", "type", "name", "facts"],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "facts"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "type": {"$ref": "#/$defs/object_type"},
-        "name": {"type": "string", "minLength": 1},
-        "description": {"type": "string"},
-        "external_ids": {"type": "object"},
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "#/$defs/object_type"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "external_ids": {
+          "type": "object"
+        },
         "evidence": {
           "type": "array",
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
-        "facts": {"type": "object", "additionalProperties": {"$ref": "#/$defs/fact"}}
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/fact"
+          }
+        }
       },
       "additionalProperties": true
     },
     "relation": {
       "type": "object",
-      "required": ["id", "source", "type", "target"],
+      "required": [
+        "id",
+        "source",
+        "type",
+        "target"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "source": {"type": "string", "minLength": 1},
-        "type": {"type": "string", "minLength": 1},
-        "target": {"type": "string", "minLength": 1},
-        "evidence": {"type": "array", "items": {"type": "string"}}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
       "additionalProperties": true
     },
     "evidence": {
       "type": "object",
-      "required": ["id", "kind", "source", "summary"],
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "summary"
+      ],
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "kind": {"type": "string", "minLength": 1},
-        "source": {"type": "string", "minLength": 1},
-        "summary": {"type": "string", "minLength": 1},
-        "locator": {"type": "string"},
-        "captured_at": {"type": "string", "format": "date-time"},
-        "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "type": "string"
+        },
+        "captured_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "additionalProperties": true
+    },
+    "connector_action": {
+      "type": "object",
+      "description": "Canonical shape of one entry in a connector's connector.actions fact value. The Python validator enforces it for connector objects; import adapters translate platform vocabularies to this form.",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "read",
+            "send_internal",
+            "write",
+            "execute",
+            "delete",
+            "send_external"
+          ]
+        },
+        "approval": {
+          "enum": [
+            "none",
+            "standing_user_authorization",
+            "per_conversation",
+            "per_action"
+          ]
+        },
+        "enforced_by": {
+          "enum": [
+            "connector",
+            "platform",
+            "none"
+          ]
+        },
+        "bypassable": {
+          "type": "boolean"
+        },
+        "target_criticality": {
+          "enum": [
+            "standard",
+            "critical"
+          ]
+        }
       },
       "additionalProperties": true
     }

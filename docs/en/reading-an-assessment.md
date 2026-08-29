@@ -53,6 +53,15 @@ condition is false, not that the entire object is compliant.
 The `level` vocabulary belongs to the source pack. A company route is a
 separate output with its own version and hash.
 
+Some facts in the snapshot are produced by the assessment itself. A fact
+whose provenance is `derived` was computed from the captured connector
+actions; a fact whose provenance is `rule` was emitted by a named rule, and
+its `rule_id` tells you exactly which one, with the evidence that satisfied
+it. These are the engine's own conclusions, never inputs: the engine
+refuses an assessment whose inputs already contain an engine-only
+conclusion. A human decision enters through the pack's attestation facts
+and stays visible next to the computed result.
+
 The readable note should be checked against the structured records. Its factual
 claims resolve to fact and evidence ids; its normative claims resolve to engine
 findings and anchors. The note contains a reviewable rationale, not private

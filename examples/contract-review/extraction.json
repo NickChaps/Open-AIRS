@@ -9,24 +9,39 @@
   },
   "inventory": {
     "inventory_id": "fictional-contract-demo",
-    "snapshot_id": "contract-snapshot-1"
+    "snapshot_id": "contract-snapshot-1",
+    "content_hash": "f8ee2a2a8e1eca693edfedc4d63d3fefd115bb7d17994515fea7ce788a84f9de"
   },
   "pack_inputs": [
-    {"id": "fictional-contract-review", "version": "1.0.0", "content_hash": "8a311d6c0e2c98e09e0f926d53387c30f6a5ea158d2cca85979338c72dc9eb6b"}
+    {
+      "id": "fictional-contract-review",
+      "version": "1.0.0",
+      "content_hash": "8a311d6c0e2c98e09e0f926d53387c30f6a5ea158d2cca85979338c72dc9eb6b"
+    }
   ],
   "extractor": {
     "kind": "llm",
-    "skill": {"id": "air-assess", "version": "0.3.0"},
-    "model": {"id": "fictional-assessment-model", "version": "2026-08"},
+    "skill": {
+      "id": "air-assess",
+      "version": "0.3.0"
+    },
+    "model": {
+      "id": "fictional-assessment-model",
+      "version": "2026-08"
+    },
     "run_id": "fictional-run-contract-001"
   },
-  "source_evidence": ["ev-contract"],
+  "source_evidence": [
+    "ev-contract"
+  ],
   "fact_proposals": [
     {
       "fact_id": "clause.confidentiality_present",
       "state": "known",
       "value": true,
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.99,
       "rationale": "The agreement contains mutual confidentiality obligations."
     },
@@ -34,7 +49,9 @@
       "fact_id": "clause.data_processing_present",
       "state": "known",
       "value": true,
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.98,
       "rationale": "The agreement addresses data-processing roles and instructions."
     },
@@ -42,7 +59,9 @@
       "fact_id": "clause.intellectual_property_present",
       "state": "known",
       "value": false,
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.97,
       "rationale": "No ownership or licensing provision for deliverables is identified."
     },
@@ -50,14 +69,18 @@
       "fact_id": "clause.security_incident_notice_present",
       "state": "known",
       "value": false,
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.97,
       "rationale": "No defined security-incident notification mechanism is identified."
     },
     {
       "fact_id": "clause.audit_cooperation_present",
       "state": "unknown",
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.72,
       "rationale": "General cooperation language may cover assurance, but the wording does not establish an audit right clearly."
     },
@@ -65,7 +88,9 @@
       "fact_id": "clause.liability_allocation_present",
       "state": "known",
       "value": true,
-      "evidence": ["ev-contract"],
+      "evidence": [
+        "ev-contract"
+      ],
       "confidence": 0.98,
       "rationale": "The agreement contains caps and exclusions that allocate liability."
     }
@@ -81,7 +106,9 @@
           "clause.data_processing_present",
           "clause.liability_allocation_present"
         ],
-        "evidence": ["ev-contract"]
+        "evidence": [
+          "ev-contract"
+        ]
       },
       {
         "statement": "Intellectual-property allocation and security-incident notice are absent.",
@@ -89,12 +116,18 @@
           "clause.intellectual_property_present",
           "clause.security_incident_notice_present"
         ],
-        "evidence": ["ev-contract"]
+        "evidence": [
+          "ev-contract"
+        ]
       },
       {
         "statement": "The general cooperation wording does not establish audit cooperation clearly.",
-        "fact_ids": ["clause.audit_cooperation_present"],
-        "evidence": ["ev-contract"]
+        "fact_ids": [
+          "clause.audit_cooperation_present"
+        ],
+        "evidence": [
+          "ev-contract"
+        ]
       }
     ],
     "unknowns": [

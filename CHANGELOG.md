@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2026-08-29)
+
+Write policies and strict connector actions, closing the review round.
+
+- Three fact write policies are now explicit and enforced: extractable
+  (anyone), attestation (`derived`, humans and imports but never the
+  extractor), engine-only (`derived` + `engine_only`, rule emissions only).
+  The engine refuses an assessment whose input facts already contain an
+  engine-only conclusion, with a message pointing to the attestation facts.
+- Connector action declarations are validated strictly at inventory
+  validation: string `id`, listed `kind`, listed optional values, boolean
+  `bypassable`. A malformed value such as `bypassable: "yes"` fails the
+  import instead of reading as a working human gate; the derivation also
+  treats any gate without an explicit `bypassable: false` as autonomous.
+- `apply_extraction` accepts optional `taxonomy` and `packs` and re-runs
+  the full record checks when they are supplied, for records that do not
+  come from `extract_with_llm`.
+- Packs eu-ai-act and eu-gdpr-ai 1.3.1: `engine_only` on the emitted
+  conclusions; the Article 22 finding is retitled "Article 22 exposure is
+  established" and states that an actually taken decision is a separate
+  execution-level question. No rule-logic changes.
+- The connector-topologies example migrates to the structured
+  `connector.actions` convention, and the recruiting example's review
+  record no longer confirms a fact the inventory does not carry.
+- Gate reading becomes three-valued: an enforced gate whose bypassability
+  is not stated leaves the derived autonomy fact unknown instead of
+  establishing an exposure, while permissive, bypassable, malformed or
+  unenforced declarations still count as autonomous.
+- The engine also refuses `composition.*` facts supplied as input, so a
+  declared value can never neutralise what the captured actions establish.
+- `apply_extraction` fails closed: it requires the packs the record was
+  produced against (and the taxonomy when uses are proposed) unless the
+  caller explicitly passes `trusted_prevalidated=True`; the `qualify`
+  pipeline revalidates against the same compatible packs it extracted
+  with, fixing a regression on profiles containing non-applicable packs.
+- Cross-pack coherence: selecting packs that disagree on a fact's write
+  policy is an error; engine-only facts are banned inside `related`
+  conditions; duplicate connector action ids are rejected; the shipped
+  extraction records carry the inventory content hash so the full external
+  revalidation path works on the examples as published.
+- Known limitation, on the roadmap: `pack_impact` stops at the first
+  inventory that the new write policies reject instead of reporting the
+  incompatibility per object.
+
 ## 0.1.0-alpha.7 (2026-08-29)
 
 The qualification chain becomes derived instead of declared.

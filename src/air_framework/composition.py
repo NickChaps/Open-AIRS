@@ -103,38 +103,39 @@ def _known_actions(
     return actions, evidence, complete
 
 
-def _is_autonomous(action: Mapping[str, Any]) -> bool:
-    """An action counts as potentially autonomous unless a real gate is shown.
+_GATE_AUTONOMOUS = "autonomous"
+_GATE_GATED = "gated"
+_GATE_UNKNOWN = "unknown"
 
-    A declared approval step only counts as a gate when a technical mechanism
-    (``enforced_by``: connector or platform) imposes it. An approval that
-    nothing enforces is a policy wish, so the action stays autonomous.
+
+def _gate_state(action: Mapping[str, Any]) -> str:
+    """Three-valued reading of one action's human gate.
+
+    Autonomy is a positive claim, so it needs positive grounds: a permissive
+    approval level, an explicitly or malformedly bypassable gate, or an
+    approval that no technical mechanism imposes (a policy wish). A gate is
+    demonstrable only when the declaration is complete: a gated approval,
+    ``enforced_by`` connector or platform, and ``bypassable`` explicitly
+    false. An enforced gate whose bypassability is simply not stated proves
+    neither, so it stays unknown instead of becoming a reassuring gate or an
+    established autonomy.
     """
 
-    if action.get("bypassable") is True:
-        return True
+    bypassable = action.get("bypassable")
+    if bypassable is not None and not isinstance(bypassable, bool):
+        return _GATE_AUTONOMOUS
+    if bypassable is True:
+        return _GATE_AUTONOMOUS
     approval = action.get("approval")
     if approval not in APPROVAL_LEVELS:
-        return True
+        return _GATE_AUTONOMOUS
     if approval in _AUTONOMOUS_APPROVALS:
-        return True
-    return action.get("enforced_by") not in ENFORCEMENT_MECHANISMS
-
-
-def _floor_level(action: Mapping[str, Any]) -> str:
-    """Weakest defensible approval level for one engaging action."""
-
-    if action.get("bypassable") is True:
-        return "none"
-    approval = action.get("approval")
-    if approval not in APPROVAL_LEVELS:
-        return "none"
-    if (
-        approval not in _AUTONOMOUS_APPROVALS
-        and action.get("enforced_by") not in ENFORCEMENT_MECHANISMS
-    ):
-        return "none"
-    return approval
+        return _GATE_AUTONOMOUS
+    if action.get("enforced_by") not in ENFORCEMENT_MECHANISMS:
+        return _GATE_AUTONOMOUS
+    if bypassable is False:
+        return _GATE_GATED
+    return _GATE_UNKNOWN
 
 
 def derive_composition_facts(
@@ -176,6 +177,10 @@ def derive_composition_facts(
         "At least one reachable connector does not declare connector.actions, "
         "so the absence of a capability cannot be established."
     )
+    gate_note = (
+        "A declared gate does not state whether it can be bypassed, so "
+        "autonomy can be neither established nor excluded."
+    )
 
     external_sends = [action for _, action in actions if action.get("kind") == "send_external"]
     if external_sends:
@@ -185,9 +190,11 @@ def derive_composition_facts(
     else:
         facts["composition.can_send_external"] = unknown(incomplete_note)
 
-    autonomous_sends = [action for action in external_sends if _is_autonomous(action)]
-    if autonomous_sends:
+    send_gates = [_gate_state(action) for action in external_sends]
+    if _GATE_AUTONOMOUS in send_gates:
         facts["composition.autonomous_external_send_possible"] = known(True)
+    elif _GATE_UNKNOWN in send_gates:
+        facts["composition.autonomous_external_send_possible"] = unknown(gate_note)
     elif complete:
         facts["composition.autonomous_external_send_possible"] = known(False)
     else:
@@ -195,11 +202,22 @@ def derive_composition_facts(
 
     engaging = [action for _, action in actions if action.get("kind") != "read"]
     if engaging:
-        floor = min(
-            (_floor_level(action) for action in engaging),
-            key=lambda level: _APPROVAL_ORDER[level],
-        )
-        if complete or floor == "none":
+        floors: list[str] = []
+        floor_unknown = False
+        for action in engaging:
+            state = _gate_state(action)
+            if state == _GATE_AUTONOMOUS:
+                floors.append("none")
+            elif state == _GATE_GATED:
+                floors.append(action["approval"])
+            else:
+                floor_unknown = True
+        floor = min(floors, key=lambda level: _APPROVAL_ORDER[level]) if floors else None
+        if floor == "none":
+            facts["composition.engaging_action_approval_floor"] = known(floor)
+        elif floor_unknown:
+            facts["composition.engaging_action_approval_floor"] = unknown(gate_note)
+        elif complete:
             facts["composition.engaging_action_approval_floor"] = known(floor)
         else:
             facts["composition.engaging_action_approval_floor"] = unknown(incomplete_note)

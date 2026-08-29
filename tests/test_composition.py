@@ -117,6 +117,42 @@ class CompositionDerivationTests(unittest.TestCase):
             facts["composition.autonomous_external_send_possible"]["state"], "unknown"
         )
 
+    def test_validation_and_derivation_share_one_action_vocabulary(self):
+        from air_framework import validation
+        from air_framework.composition import ACTION_KINDS, APPROVAL_LEVELS
+
+        self.assertEqual(set(ACTION_KINDS), validation.CONNECTOR_ACTION_KINDS)
+        self.assertEqual(set(APPROVAL_LEVELS), validation.CONNECTOR_APPROVAL_LEVELS)
+
+    def test_malformed_bypassable_counts_as_autonomous(self):
+        """A malformed declaration such as the string "yes" must never read
+        as a working gate; it also fails inventory validation upstream."""
+
+        inventory = _inventory()
+        actions = inventory["objects"][3]["facts"]["connector.actions"]["value"]
+        actions[1]["bypassable"] = "yes"
+        graph = InventoryGraph(inventory)
+        facts = derive_composition_facts(graph, "use-1")
+        self.assertTrue(
+            facts["composition.autonomous_external_send_possible"]["value"]
+        )
+
+    def test_missing_bypassable_on_an_enforced_gate_stays_unknown(self):
+        """An enforced per-action gate whose bypassability is not stated
+        proves neither a gate nor autonomy: the derived fact stays unknown
+        instead of becoming an established exposure or a reassurance."""
+
+        inventory = _inventory()
+        actions = inventory["objects"][3]["facts"]["connector.actions"]["value"]
+        actions[1].pop("bypassable", None)
+        graph = InventoryGraph(inventory)
+        facts = derive_composition_facts(graph, "use-1")
+        autonomous = facts["composition.autonomous_external_send_possible"]
+        self.assertEqual("unknown", autonomous["state"])
+        self.assertIn("bypassed", autonomous["note"])
+        floor = facts["composition.engaging_action_approval_floor"]
+        self.assertEqual("unknown", floor["state"])
+
     def test_unenforced_approval_is_not_a_demonstrable_gate(self):
         """A per-action approval that nothing technically imposes is a policy
         wish, so the action still counts as autonomous."""
@@ -158,8 +194,12 @@ class CompositionDerivationTests(unittest.TestCase):
         graph = InventoryGraph(inventory)
         self.assertEqual(derive_composition_facts(graph, "use-1"), {})
 
-    def test_direct_fact_wins_over_derived_in_engine(self):
+    def test_supplied_composition_fact_is_refused_by_the_engine(self):
+        """A computed capability cannot be neutralised by a direct fact; the
+        fix belongs in the connector.actions declarations."""
+
         from air_framework.engine import assess
+        from air_framework.errors import EvaluationError
 
         inventory = _inventory()
         inventory["objects"][0]["facts"]["composition.can_send_external"] = _fact(False)
@@ -217,21 +257,15 @@ class CompositionDerivationTests(unittest.TestCase):
                 }
             ],
         }
-        declared = assess(inventory, pack, "use-1", assessed_at="2026-08-29T12:00:00Z")
-        self.assertEqual(
-            declared["effective_facts"]["composition.can_send_external"]["value"], False
-        )
-        self.assertEqual(declared["findings"], [])
+        with self.assertRaises(EvaluationError) as caught:
+            assess(inventory, pack, "use-1", assessed_at="2026-08-29T12:00:00Z")
+        self.assertIn("composition.can_send_external", str(caught.exception))
+        self.assertIn("connector.actions", str(caught.exception))
 
-        derived_inventory = _inventory()
-        derived = assess(
-            derived_inventory, pack, "use-1", assessed_at="2026-08-29T12:00:00Z"
-        )
-        derived_fact = derived["effective_facts"]["composition.can_send_external"]
-        self.assertTrue(derived_fact["value"])
-        self.assertEqual(derived_fact["provenance"], "derived")
-        self.assertEqual(derived["findings"][0]["status"], "matched")
-
+        del inventory["objects"][0]["facts"]["composition.can_send_external"]
+        derived = assess(inventory, pack, "use-1", assessed_at="2026-08-29T12:00:00Z")
+        statuses = {item["rule_id"]: item["status"] for item in derived["findings"]}
+        self.assertEqual("matched", statuses["test.rule.external-send"])
 
 if __name__ == "__main__":
     unittest.main()

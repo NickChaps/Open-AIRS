@@ -32,6 +32,14 @@ configuration. It does not prove that an action occurred. Actual executions,
 credentials, permission sets and human confirmation gates need their own
 evidence.
 
+Each connector also declares its exposed actions as the structured
+`connector.actions` fact (action id, kind, approval level, enforcement,
+bypassability), the convention defined in
+[the object-graph specification](../../spec/01-object-graph.md). The engine
+derives composition facts from these declarations, and the inventory
+validator rejects malformed entries instead of reading them as working
+gates.
+
 When the same catalogue connector has different permissions or controls on two
 platforms, represent each installation as a separate connector object and keep
 the shared catalogue identifier in `external_ids`.

@@ -74,6 +74,30 @@ def assess(
         graph.effective_facts(target_id, inheritance, base_facts=base_facts)
     )
     _validate_effective_fact_types(effective_facts, pack)
+    supplied_composition = sorted(
+        key
+        for key, fact in effective_facts.items()
+        if key.startswith("composition.")
+        and not (isinstance(fact, Mapping) and fact.get("provenance") == "derived")
+    )
+    if supplied_composition:
+        raise EvaluationError(
+            "Composition facts are computed from the declared connector "
+            f"actions, never supplied as input: {supplied_composition!r}. "
+            "Correct the connector.actions declarations instead."
+        )
+    engine_only_ids = {
+        item["id"]
+        for item in pack.get("fact_catalog", [])
+        if item.get("engine_only") is True
+    }
+    supplied_conclusions = sorted(engine_only_ids & set(effective_facts))
+    if supplied_conclusions:
+        raise EvaluationError(
+            "Engine-only facts must be derived by rules, never supplied as "
+            f"input: {supplied_conclusions!r}. Record a human decision through "
+            "the pack's attestation facts instead."
+        )
     anchor_index = {item["id"]: item for item in pack["anchors"]}
     evaluated_findings: list[dict[str, Any]] = []
     for rule in pack["rules"]:

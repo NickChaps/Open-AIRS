@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "review_id": "urn:air:review:fictional-recruiting-sample-20260829",
   "reviewed_at": "2026-08-29T15:30:00Z",
-  "assessment_id": "urn:air:assessment:77a350a2b4122bb87f154d4f",
+  "assessment_id": "urn:air:assessment:96b5fad1e8ea6cfe7db7880a",
   "target": {
     "id": "use-recruiting-assistant",
     "type": "ai_use",
@@ -27,28 +27,41 @@
       "subject_id": "use.tasks",
       "decision": "confirmed",
       "rationale": "The instructions and use declaration support filtering, ranking and rejection messaging.",
-      "evidence": ["ev-app-prompt", "ev-use-declaration"]
+      "evidence": [
+        "ev-app-prompt",
+        "ev-use-declaration"
+      ]
     },
     {
       "subject_type": "fact",
-      "subject_id": "decision.solely_automated",
+      "subject_id": "purpose.decision_influence",
       "decision": "confirmed",
-      "rationale": "The connector configuration contains no separate human confirmation gate.",
-      "evidence": ["ev-connector-config"]
+      "rationale": "The instructions give the composition a determinative influence on rejections, and the connector configuration imposes no technically enforced human gate.",
+      "evidence": [
+        "ev-app-prompt",
+        "ev-connector-config"
+      ]
     },
     {
       "subject_type": "finding",
       "subject_id": "EU-AIACT-HIGH-RISK-ANNEX-III",
       "decision": "confirmed",
-      "rationale": "The cited recruitment purpose and Article 6(3) facts support the deterministic finding.",
-      "evidence": ["ev-use-declaration", "ev-legal-review"]
+      "rationale": "The recruitment purpose and the Article 6(3) screening facts support the derived high-risk classification; no conclusion was supplied as input.",
+      "evidence": [
+        "ev-use-declaration",
+        "ev-legal-review"
+      ]
     },
     {
       "subject_type": "analysis",
       "subject_id": "urn:air:extraction:fictional-recruiting-20260829",
       "decision": "confirmed",
       "rationale": "The readable summary matches the reviewed fact proposals and does not claim an observed execution.",
-      "evidence": ["ev-app-prompt", "ev-connector-config", "ev-use-declaration"]
+      "evidence": [
+        "ev-app-prompt",
+        "ev-connector-config",
+        "ev-use-declaration"
+      ]
     }
   ],
   "error_categories": [],

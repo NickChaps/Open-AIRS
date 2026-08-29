@@ -38,17 +38,38 @@
       "id": "connector-company-search",
       "type": "connector",
       "name": "Company knowledge search (fictional)",
-      "external_ids": {"catalog_id": "company.search.v1"},
+      "external_ids": {
+        "catalog_id": "company.search.v1"
+      },
       "facts": {
         "connector.actions": {
           "state": "known",
-          "value": ["search", "read"],
-          "evidence": ["ev-company-connector"]
+          "value": [
+            {
+              "id": "search",
+              "kind": "read",
+              "approval": "none",
+              "enforced_by": "platform",
+              "bypassable": false
+            },
+            {
+              "id": "read",
+              "kind": "read",
+              "approval": "none",
+              "enforced_by": "platform",
+              "bypassable": false
+            }
+          ],
+          "evidence": [
+            "ev-company-connector"
+          ]
         },
         "connector.access_scope": {
           "state": "known",
           "value": "enterprise_shared",
-          "evidence": ["ev-company-connector"]
+          "evidence": [
+            "ev-company-connector"
+          ]
         }
       }
     },
@@ -56,17 +77,31 @@
       "id": "connector-case-export",
       "type": "connector",
       "name": "Case export action (fictional)",
-      "external_ids": {"catalog_id": "casework.export.v2"},
+      "external_ids": {
+        "catalog_id": "casework.export.v2"
+      },
       "facts": {
         "connector.actions": {
           "state": "known",
-          "value": ["export_case"],
-          "evidence": ["ev-private-connector"]
+          "value": [
+            {
+              "id": "export_case",
+              "kind": "write",
+              "approval": "per_conversation",
+              "enforced_by": "platform",
+              "bypassable": false
+            }
+          ],
+          "evidence": [
+            "ev-private-connector"
+          ]
         },
         "connector.access_scope": {
           "state": "known",
           "value": "application_specific",
-          "evidence": ["ev-private-connector"]
+          "evidence": [
+            "ev-private-connector"
+          ]
         }
       }
     }
@@ -77,42 +112,54 @@
       "source": "app-research",
       "type": "runs_on",
       "target": "platform-atlas",
-      "evidence": ["ev-atlas-inventory"]
+      "evidence": [
+        "ev-atlas-inventory"
+      ]
     },
     {
       "id": "rel-casework-atlas",
       "source": "app-casework",
       "type": "runs_on",
       "target": "platform-atlas",
-      "evidence": ["ev-atlas-inventory"]
+      "evidence": [
+        "ev-atlas-inventory"
+      ]
     },
     {
       "id": "rel-payroll-meridian",
       "source": "app-payroll",
       "type": "runs_on",
       "target": "platform-meridian",
-      "evidence": ["ev-meridian-inventory"]
+      "evidence": [
+        "ev-meridian-inventory"
+      ]
     },
     {
       "id": "rel-atlas-company-search",
       "source": "platform-atlas",
       "type": "can_invoke",
       "target": "connector-company-search",
-      "evidence": ["ev-company-connector"]
+      "evidence": [
+        "ev-company-connector"
+      ]
     },
     {
       "id": "rel-meridian-company-search",
       "source": "platform-meridian",
       "type": "can_invoke",
       "target": "connector-company-search",
-      "evidence": ["ev-company-connector"]
+      "evidence": [
+        "ev-company-connector"
+      ]
     },
     {
       "id": "rel-casework-private-export",
       "source": "app-casework",
       "type": "can_invoke",
       "target": "connector-case-export",
-      "evidence": ["ev-private-connector"]
+      "evidence": [
+        "ev-private-connector"
+      ]
     }
   ],
   "evidence": [

@@ -383,6 +383,23 @@ def _fact_catalogue(
             if target_type in rule.get("applies_to", pack["pack"]["applies_to"]):
                 _walk_fact_values(rule.get("when"), values)
 
+    write_policies: dict[str, tuple[bool, bool]] = {}
+    for pack in packs:
+        if target_type not in pack["pack"]["applies_to"]:
+            continue
+        for fact in pack.get("fact_catalog", []):
+            policy = (
+                fact.get("derived") is True,
+                fact.get("engine_only") is True,
+            )
+            existing_policy = write_policies.setdefault(fact["id"], policy)
+            if existing_policy != policy:
+                raise ValidationError(
+                    f"Selected packs disagree on the write policy of fact "
+                    f"{fact['id']!r} (derived/engine_only); one pack would let "
+                    "an extractor propose what another reserves to the engine."
+                )
+
     catalogue: dict[str, dict[str, Any]] = {}
     for pack in packs:
         if target_type not in pack["pack"]["applies_to"]:
@@ -738,11 +755,38 @@ def apply_extraction(
     extraction: Mapping[str, Any],
     *,
     captured_at: str | None = None,
+    taxonomy: Mapping[str, Any] | None = None,
+    packs: Sequence[Mapping[str, Any]] | None = None,
+    trusted_prevalidated: bool = False,
 ) -> dict[str, Any]:
-    """Create a new snapshot without silently overwriting reliable direct facts."""
+    """Create a new snapshot without silently overwriting reliable direct facts.
+
+    Applying a record writes its proposals into the registry, so the record
+    must be fully checked first. Pass the `packs` the record was produced
+    against, and the `taxonomy` when the record proposes uses: the full
+    checks then run here, whatever produced the record. Only a caller that
+    has just validated the record itself, as the `qualify` pipeline does
+    through `extract_with_llm`, may skip them with
+    `trusted_prevalidated=True`.
+    """
 
     validate_inventory(inventory)
-    validate_extraction_record(extraction)
+    validate_extraction_record(extraction, taxonomy=taxonomy)
+    if not trusted_prevalidated:
+        if packs is None:
+            raise ValidationError(
+                "apply_extraction needs the packs the record was produced "
+                "against, so proposals outside their catalogues are rejected "
+                "before they enter the registry. Pass packs=..., or "
+                "trusted_prevalidated=True for a record you just validated."
+            )
+        if taxonomy is None and extraction.get("proposed_uses"):
+            raise ValidationError(
+                "The record proposes uses, so the pinned taxonomy is required "
+                "to verify its tags before they enter the registry."
+            )
+    if packs is not None:
+        validate_extraction_context(extraction, inventory, packs)
     output = deepcopy(inventory)
     target = next(
         (
@@ -1018,7 +1062,9 @@ def qualify_with_llm(
         language=language,
         taxonomy=taxonomy,
     )
-    resolved_inventory = apply_extraction(inventory, extraction)
+    resolved_inventory = apply_extraction(
+        inventory, extraction, taxonomy=taxonomy, packs=compatible_packs
+    )
     profile_result = assess_profile(
         resolved_inventory,
         profile,

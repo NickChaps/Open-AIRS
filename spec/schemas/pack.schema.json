@@ -125,9 +125,38 @@
             "type": "boolean",
             "default": false,
             "description": "True for facts produced by the engine (rule emissions, composition derivation, applied purpose layer). Derived facts are never offered to an extractor and extractor proposals for them are rejected."
+          },
+          "engine_only": {
+            "type": "boolean",
+            "default": false,
+            "description": "True for conclusions that only rule emissions may set. Requires derived=true. The engine refuses an assessment whose input facts already contain such a fact; human decisions go through the pack's attestation facts instead."
           }
         },
-        "additionalProperties": true
+        "additionalProperties": true,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "engine_only": {
+                  "const": true
+                }
+              },
+              "required": [
+                "engine_only"
+              ]
+            },
+            "then": {
+              "properties": {
+                "derived": {
+                  "const": true
+                }
+              },
+              "required": [
+                "derived"
+              ]
+            }
+          }
+        ]
       }
     },
     "inheritance": {

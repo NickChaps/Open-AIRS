@@ -206,7 +206,7 @@ class JudgePipelineTests(unittest.TestCase):
         modified["analysis"]["observations"][0]["fact_ids"] = [
             "clause.confidentiality_present"
         ]
-        resolved = apply_extraction(self.inventory, modified)
+        resolved = apply_extraction(self.inventory, modified, packs=[self.pack])
         fact = resolved["objects"][0]["facts"]["clause.confidentiality_present"]
         self.assertEqual(fact["state"], "conflicted")
         self.assertEqual(len(fact["candidate_values"]), 2)
@@ -224,7 +224,7 @@ class JudgePipelineTests(unittest.TestCase):
         modified["analysis"]["observations"][0]["fact_ids"] = [
             "clause.confidentiality_present"
         ]
-        resolved = apply_extraction(self.inventory, modified)
+        resolved = apply_extraction(self.inventory, modified, packs=[self.pack])
         fact = resolved["objects"][0]["facts"]["clause.confidentiality_present"]
         self.assertEqual(fact["state"], "known")
         self.assertTrue(fact["value"])

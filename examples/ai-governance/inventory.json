@@ -76,14 +76,14 @@
           "state": "known",
           "value": [
             {
-              "name": "read_inbox",
+              "id": "read_inbox",
               "kind": "read",
               "approval": "none",
               "enforced_by": "platform",
               "bypassable": false
             },
             {
-              "name": "send_rejection_email",
+              "id": "send_rejection_email",
               "kind": "send_external",
               "approval": "none",
               "enforced_by": "platform",

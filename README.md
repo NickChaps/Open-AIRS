@@ -50,6 +50,16 @@ flowchart LR
     class U1,U2,U3 use
 ```
 
+What makes this estate hard to govern is that these platforms are
+generative. The purpose of an application does not live in a database
+field: it lives in free text, a prompt, a reusable skill, a use
+declaration, written and rewritten in natural language by whoever
+configures it. And a generative application is not limited to its declared
+function: give it a messaging connector with a standing authorisation and
+it can send whatever someone asks it to send. No keyword list or fixed
+parser can classify such an estate, and reading thousands of prompts by
+hand does not survive the first reorganisation.
+
 The scale is already visible. McKinsey's survey published on 25 August 2026
 reports regular AI use in at least one function by almost nine respondents in
 ten, enterprise-wide scaling by 44%, and agent scaling in at least one function
@@ -60,6 +70,17 @@ The [EU AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-fra
 is also entering its application stages. Legal, compliance, security and
 digital teams need to find a use, understand its assessment and reproduce the
 analysis that applied on a given date.
+
+AIR's answer uses generative AI inside the assessment itself, under strict
+bounds. A model reads the prompts, skills and configurations the way a
+careful reviewer would, because only semantic reading can tell an active
+recruitment purpose from a forbidden example in free text. But the model
+may only propose facts from a fixed catalogue, each with cited evidence
+and visible confidence, and the conclusions of the law, classifications,
+findings and obligations, are never requested from it.
+Everything that follows, the legal categories, the obligations, the
+missing information, is computed by versioned deterministic rules anyone
+can audit. The model judges facts; the rules judge the law.
 
 ## What AIR provides
 
@@ -74,7 +95,7 @@ AIR builds one reviewable record from four elements:
 | **Object** | Something the organisation needs to track | Platform, system, configured application, skill, connector, model, use or contract |
 | **Fact** | A precise answer used by rules | “The application ranks candidates” |
 | **Evidence** | The source supporting that fact | Prompt excerpt, connector configuration, use-owner declaration |
-| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.3.0 or GDPR 1.3.0 |
+| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.3.1 or GDPR 1.3.1 |
 
 An exact reference to a law or framework is called an **anchor**. A dated copy
 of the registry is called an **inventory version** in the reader guides. JSON
@@ -316,8 +337,8 @@ already describes the target behaviour for most of them.
 
 | Pack | Nature | Summary |
 | --- | --- | --- |
-| [EU AI Act 1.3.0](packs/eu-ai-act/1.3.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
-| [GDPR for AI uses 1.3.0](packs/eu-gdpr-ai/1.3.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
+| [EU AI Act 1.3.1](packs/eu-ai-act/1.3.1/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
+| [GDPR for AI uses 1.3.1](packs/eu-gdpr-ai/1.3.1/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.md) | EU directive | Governance, Article 21 measures and incident reporting, to be applied with the relevant national law |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.md) | Voluntary framework | 72 Core outcomes within an organisation-selected target profile |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.md) | Voluntary framework | 106 Core outcomes within an organisation-selected target profile |
@@ -403,7 +424,7 @@ evidence, reading quality, selected packs and their versions.
 The framework preserves unknowns and conflicts. Human controls can be targeted
 or sampled according to risk and internal policy.
 
-The current release is `v0.1.0-alpha.7`. Formats may still change.
+The current release is `v0.1.0-alpha.8`. Formats may still change.
 
 ## Licence and citation
 

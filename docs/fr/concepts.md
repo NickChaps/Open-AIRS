@@ -108,6 +108,13 @@ portées par la plateforme en fonctionnement et les connecteurs effectivement au
 
 ## Ce que fait le modèle de langage
 
+Un parc génératif ne peut être lu que sémantiquement : la finalité d'un
+agent ou d'un skill vit dans du texte libre en langage naturel, que chacun
+peut réécrire, et aucune liste de mots-clés ni analyseur figé ne le classe
+de façon fiable. C'est pour cela qu'un modèle de langage se trouve au cœur
+de la qualification, et pour cela que tout ce qu'il produit est borné et
+auditable.
+
 Le LLM lit des contenus peu structurés et répond aux questions précises du pack
 avec leurs preuves : « cette instruction classe des candidats », « cette
 configuration impose une confirmation humaine » ou « la preuve est

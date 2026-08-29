@@ -105,6 +105,12 @@ the operating platform and the connectors it actually authorises.
 
 ## What the language model does
 
+A generative estate can only be read semantically: the purpose of an agent
+or a skill lives in free natural-language text that anyone can rewrite, so
+no keyword list or fixed parser classifies it reliably. That is why a
+language model sits inside the assessment, and why everything it produces
+is bounded and auditable.
+
 The LLM reads unstructured material and answers the pack's precise questions
 with evidence: “these instructions rank applicants”, “this configuration
 enforces human confirmation”, or “the evidence is insufficient”. It also

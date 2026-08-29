@@ -51,6 +51,17 @@ flowchart LR
     class U1,U2,U3 use
 ```
 
+Ce qui rend ce parc difficile à gouverner, c'est que ces plateformes sont
+génératives. La finalité d'une application ne vit pas dans un champ de base
+de données : elle vit en texte libre, un prompt, un skill réutilisable, une
+déclaration d'usage, écrits et réécrits en langage naturel par la personne
+qui configure. Et une application générative ne se limite pas à sa fonction
+déclarée : donnez-lui un connecteur de messagerie avec une autorisation
+permanente, et elle peut envoyer ce qu'on lui demande d'envoyer. Aucune
+liste de mots-clés ni analyseur figé ne peut classer un tel parc, et lire
+des milliers de prompts à la main ne survit pas à la première
+réorganisation.
+
 La croissance est déjà visible. Dans son enquête publiée le 25 août 2026,
 McKinsey rapporte que près de neuf répondants sur dix utilisent régulièrement
 l’IA dans au moins une fonction, que 44 % déclarent un déploiement à l’échelle
@@ -62,6 +73,18 @@ Dans le même temps, l’[AI Act européen](https://digital-strategy.ec.europa.e
 entre progressivement en application. Les équipes juridiques, conformité,
 sécurité et numériques doivent pouvoir retrouver un usage, comprendre sa
 qualification et reproduire l’analyse qui était valable à une date donnée.
+
+La réponse d'AIR utilise l'IA générative à l'intérieur même de la
+qualification, sous des bornes strictes. Un modèle lit les prompts, les
+skills et les configurations comme le ferait un relecteur attentif, parce
+que seule une lecture sémantique distingue, dans du texte libre, une
+finalité de recrutement active d'un exemple interdit. Mais ce modèle ne
+peut que proposer des faits issus d'un catalogue fermé, chacun avec ses
+preuves citées et sa confiance visible, et les conclusions du droit, les
+classifications, constats et obligations, ne lui sont jamais demandées. Tout ce qui suit, les catégories légales, les
+obligations, les informations manquantes, est calculé par des règles
+déterministes versionnées que chacun peut auditer. Le modèle juge des
+faits ; les règles jugent le droit.
 
 ## Ce qu’AIR apporte
 
@@ -76,7 +99,7 @@ AIR construit un dossier commun à partir de quatre éléments :
 | **Objet** | Une chose que l’organisation veut suivre | Plateforme, système, application configurée, skill, connecteur, modèle, usage, contrat |
 | **Fait** | Une réponse précise utilisée par les règles | « L’application classe des candidats » |
 | **Preuve** | La source qui permet d’affirmer ce fait | Extrait du prompt, configuration du connecteur, réponse du responsable métier |
-| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.3.0 ou RGPD 1.3.0 |
+| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.3.1 ou RGPD 1.3.1 |
 
 Une référence exacte au texte ou au référentiel est appelée **ancrage**. Une
 photographie datée du registre est appelée **version d’inventaire** dans cette
@@ -333,8 +356,8 @@ Chacun de ces chantiers est une contribution bienvenue. La spécification dans
 
 | Pack | Nature | Périmètre résumé |
 | --- | --- | --- |
-| [EU AI Act 1.3.0](packs/eu-ai-act/1.3.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
-| [RGPD pour les usages IA 1.3.0](packs/eu-gdpr-ai/1.3.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
+| [EU AI Act 1.3.1](packs/eu-ai-act/1.3.1/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
+| [RGPD pour les usages IA 1.3.1](packs/eu-gdpr-ai/1.3.1/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.fr.md) | Directive européenne | Gouvernance, mesures de l’article 21 et signalement des incidents, à appliquer avec le droit national concerné |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.fr.md) | Référentiel volontaire | 72 résultats du Core dans un profil choisi par l’organisation |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.fr.md) | Référentiel volontaire | 106 résultats du Core dans un profil choisi par l’organisation |
@@ -425,7 +448,7 @@ Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
 réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
 échantillonnés selon le risque et la politique interne.
 
-La version actuelle est `v0.1.0-alpha.7`. Les formats peuvent encore évoluer.
+La version actuelle est `v0.1.0-alpha.8`. Les formats peuvent encore évoluer.
 
 ## Licence et citation
 

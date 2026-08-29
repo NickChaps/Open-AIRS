@@ -67,7 +67,6 @@ Key semantic proposals are visible before the rules run:
 
 | Proposed fact | Value | Confidence | Evidence |
 | --- | --- | ---: | --- |
-| Tasks | Filter applications, rank candidates, send rejection | 0.99 | Use declaration, application instructions |
 | Annex III use case | Recruitment and selection, point 4(a) | 0.98 | Use declaration, legal triage note |
 | Human oversight assigned | No | 0.96 | Application instructions, legal triage note |
 | Proposed use (purpose layer) | Candidate screening with determinative influence | 0.97 | Instructions, connector configuration, use declaration |
@@ -81,10 +80,10 @@ receive a model-confidence score.
 
 | Pack | Result | Main anchors or consequence |
 | --- | --- | --- |
-| AI Act 1.3.0 | Annex III 4(a) candidate and high-risk classification | Article 6 and Annex III |
-| AI Act 1.3.0 | Human oversight, affected-person notice and AI-interaction disclosure gaps | Articles 26 and 50 |
-| GDPR AI 1.3.0 | Article 22 decision with no evidenced Article 22(2) condition | Article 22 |
-| GDPR AI 1.3.0 | DPIA required and missing | Article 35 |
+| AI Act 1.3.1 | Annex III 4(a) candidate and high-risk classification | Article 6 and Annex III |
+| AI Act 1.3.1 | Human oversight, affected-person notice and AI-interaction disclosure gaps | Articles 26 and 50 |
+| GDPR AI 1.3.1 | Article 22 exposure by design with no evidenced Article 22(2) condition | Article 22 |
+| GDPR AI 1.3.1 | DPIA required and missing | Article 35 |
 | NIST AI RMF 1.1.0 | Two selected Core outcomes unmet and GenAI profile not selected | Selected organisation profile |
 
 The organisation's fictional route profile maps the high-risk finding to
@@ -107,7 +106,7 @@ PYTHONPATH=src python -m air_framework validate-extraction \
 
 PYTHONPATH=src python -m air_framework assess \
   --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.3.0/pack.json \
+  --pack packs/eu-ai-act/1.3.1/pack.json \
   --target use-recruiting-assistant
 
 PYTHONPATH=src python -m air_framework validate-review \

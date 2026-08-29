@@ -47,8 +47,8 @@ class ProfileTests(unittest.TestCase):
         }
         self.assertEqual(
             {
-                "eu-ai-act-core": "1.3.0",
-                "eu-gdpr-ai-core": "1.3.0",
+                "eu-ai-act-core": "1.3.1",
+                "eu-gdpr-ai-core": "1.3.1",
                 "nist-ai-rmf-core": "1.1.0",
             },
             versions,

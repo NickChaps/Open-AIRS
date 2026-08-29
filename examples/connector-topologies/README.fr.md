@@ -32,6 +32,14 @@ capturée de la plateforme. Cette relation ne prouve pas qu’une action a eu li
 exécutions, identifiants, droits et validations humaines demandent leurs propres
 preuves.
 
+Chaque connecteur déclare aussi ses actions exposées via le fait structuré
+`connector.actions` (identifiant d'action, type, niveau d'approbation,
+mécanisme d'enforcement, contournabilité), la convention définie dans
+[la spécification du graphe d'objets](../../spec/01-object-graph.md). Le
+moteur en dérive les faits de composition, et le validateur d'inventaire
+rejette les entrées malformées au lieu de les lire comme des gardes
+fonctionnelles.
+
 Si un connecteur du même catalogue possède des droits ou contrôles différents
 sur deux plateformes, chaque installation devient un objet connecteur distinct.
 L’identifiant commun du catalogue reste dans `external_ids`.
