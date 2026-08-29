@@ -340,6 +340,10 @@ trop tard :
 - un questionnaire résiduel dynamique qui ne demande aux personnes que les
   faits qu'aucune API, aucun héritage et aucune lecture ne peuvent fournir ;
 - un service de registre durable et une interface de revue ;
+- un adaptateur de télémétrie d'exécution qui lit les journaux d'actions
+  des connecteurs, au niveau des actions et jamais du contenu des
+  conversations, pour comparer une exposition établie par conception à
+  l'exécution observée sans surveiller ce que les personnes écrivent ;
 - une matrice complète des obligations par acteur (applicable, satisfaite,
   manquante ou indéterminée pour chaque obligation), au-delà des constats
   d'écart actuels ;

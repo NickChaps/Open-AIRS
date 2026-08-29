@@ -323,6 +323,10 @@ The scope is deliberately explicit so nobody discovers it late:
 - a dynamic residual questionnaire that asks people only the facts that no
   API, inheritance or reading can supply;
 - a durable registry service and a review interface;
+- an execution-telemetry adapter that reads connector action logs, at the
+  action level and never conversation content, so an exposure established
+  by design can be compared with observed execution without surveilling
+  what people write;
 - a full obligations matrix per actor (applicable, satisfied, missing or
   indeterminate for each obligation), beyond today's gap findings;
 - roll-up of use, agent and skill exposures to their parent platform;
