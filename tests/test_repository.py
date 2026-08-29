@@ -93,19 +93,50 @@ class RepositoryIntegrityTests(unittest.TestCase):
                 self.assertIn("skill", body)
 
     def test_public_markdown_avoids_recurring_ai_tells(self):
-        false_contrasts = re.compile(
-            r"\b(?:not just|not only|rather than|instead of|pas seulement|"
-            r"pas uniquement|plutôt que|au lieu de)\b|"
+        """Flag the density and the exact cadences that read as generated text.
+
+        Calibration: single words and ordinary contrasts ("rather than",
+        "instead of") are legitimate prose. What this test rejects is the
+        signature material: em-dash density, the "not just X, it's Y"
+        template, assistant leakage and a few high-signal filler phrases.
+        """
+
+        max_em_dashes_per_file = 2
+        contrast_templates = re.compile(
+            r"\bnot just\b[^.\n]{0,80}\b(?:it'?s|but)\b|"
+            r"\bnot only\b[^.\n]{0,80}\bbut also\b|"
+            r"\bpas seulement\b[^.\n]{0,80}\bmais\b|"
             r"^#{1,6} .*[,;:]\s*(?:not|pas)\b",
             re.IGNORECASE | re.MULTILINE,
+        )
+        assistant_leakage = re.compile(
+            r"\bAs an AI(?:,| assistant| language model)|"
+            r"\bas a large language model\b|"
+            r"\bWould you like me to\b|"
+            r"\bLet me know if\b|"
+            r"\bI hope this helps\b|"
+            r"\bGreat question\b|"
+            r"^Certainly[,!]",
+            re.IGNORECASE | re.MULTILINE,
+        )
+        filler_phrases = re.compile(
+            r"\bdelve\b|\bgame.changer\b|\bin conclusion\b|"
+            r"\bit(?:'|’)?s worth noting\b|\bit is worth noting\b",
+            re.IGNORECASE,
         )
         for path in ROOT.rglob("*.md"):
             if ".git" in path.parts:
                 continue
             body = path.read_text(encoding="utf-8")
             with self.subTest(path=path):
-                self.assertNotIn("—", body)
-                self.assertIsNone(false_contrasts.search(body))
+                self.assertLessEqual(
+                    body.count("—"),
+                    max_em_dashes_per_file,
+                    "em-dash density reads as generated text",
+                )
+                self.assertIsNone(contrast_templates.search(body))
+                self.assertIsNone(assistant_leakage.search(body))
+                self.assertIsNone(filler_phrases.search(body))
 
 
 if __name__ == "__main__":
