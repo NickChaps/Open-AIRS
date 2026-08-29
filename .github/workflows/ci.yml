@@ -26,6 +26,6 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Validate examples through the CLI
         run: |
-          air-framework validate-inventory examples/ai-governance/inventory.json
-          air-framework validate-inventory examples/contract-review/inventory.json
-          for pack in packs/*/*/pack.json; do air-framework validate-pack "$pack"; done
+          open-airs validate-inventory examples/ai-governance/inventory.json
+          open-airs validate-inventory examples/contract-review/inventory.json
+          for pack in packs/*/*/pack.json; do open-airs validate-pack "$pack"; done
