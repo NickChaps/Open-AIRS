@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Revue fictive d’un contrat SaaS · 1.0.0
 
 [Read in English](README.md)

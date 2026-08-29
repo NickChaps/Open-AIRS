@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Socle européen NIS2 au niveau de la directive · 1.1.0
 
 [Read in English](README.md)

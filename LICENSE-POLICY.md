@@ -8,19 +8,24 @@ The root [Apache License 2.0](LICENSE) applies to:
 
 - source code and command-line tools;
 - machine-readable schemas and specifications;
-- rule packs and independently authored anchor metadata;
 - automated tests and fixtures;
 - fictional examples;
 - skills and their scripts;
 - CI and development configuration.
 
-Unless a file states otherwise, files outside `docs/` are covered by Apache-2.0.
+Unless a file states otherwise, files outside `docs/` and `packs/` are covered by Apache-2.0.
 
-## Creative Commons Attribution 4.0
+## Creative Commons Attribution-ShareAlike 4.0
 
-CC BY 4.0 applies to human-readable guides, essays and diagrams under `docs/`, and to explanatory Markdown files under `spec/` that carry an explicit `CC-BY-4.0` SPDX header. It does not cover source code embedded as an executable or separately identified third-party material. The complete licence text is stored at [LICENSES/CC-BY-4.0.txt](LICENSES/CC-BY-4.0.txt).
+CC BY-SA 4.0 applies to:
 
-Attribution should identify **AIR Framework contributors**, link to the repository when available, link to the [CC BY 4.0 licence](https://creativecommons.org/licenses/by/4.0/), and indicate material changes.
+- human-readable guides, essays and diagrams under `docs/`;
+- explanatory Markdown files under `spec/` that carry an explicit `CC-BY-SA-4.0` SPDX header;
+- rule packs under `packs/`, including independently authored anchor metadata and pack documentation.
+
+The ShareAlike condition keeps derived versions of the shared knowledge base open: adapted packs or guides that are redistributed must remain under CC BY-SA 4.0 with attribution. Internal use and unmodified redistribution inside a product are unaffected. The licence does not cover source code embedded as an executable or separately identified third-party material. The complete licence text is stored at [LICENSES/CC-BY-SA-4.0.txt](LICENSES/CC-BY-SA-4.0.txt).
+
+Attribution should identify **AIR Framework contributors**, link to the repository when available, link to the [CC BY-SA 4.0 licence](https://creativecommons.org/licenses/by-sa/4.0/), and indicate material changes.
 
 ## External sources
 

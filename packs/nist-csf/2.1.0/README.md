@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # NIST Cybersecurity Framework 2.0 full Core · 2.1.0
 
 [Lire en français](README.fr.md)

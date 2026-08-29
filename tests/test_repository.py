@@ -30,13 +30,13 @@ class RepositoryIntegrityTests(unittest.TestCase):
                 with self.subTest(path=path, target=raw_target):
                     self.assertTrue((path.parent / target).resolve().exists())
 
-    def test_cc_by_documentation_is_marked(self):
-        for folder in [ROOT / "docs", ROOT / "spec"]:
+    def test_cc_by_sa_documentation_is_marked(self):
+        for folder in [ROOT / "docs", ROOT / "spec", ROOT / "packs"]:
             for path in folder.rglob("*.md"):
                 with self.subTest(path=path):
                     self.assertTrue(
                         path.read_text(encoding="utf-8").startswith(
-                            "<!-- SPDX-License-Identifier: CC-BY-4.0 -->"
+                            "<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->"
                         )
                     )
 

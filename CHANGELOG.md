@@ -4,6 +4,15 @@ All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.
 
+## [0.1.0-alpha.5] - 2026-08-29
+
+### Changed
+
+- Relicensed reader documentation, explanatory specification texts and rule
+  packs from CC BY 4.0 (docs) and Apache-2.0 (packs) to CC BY-SA 4.0, so that
+  redistributed adaptations of the shared knowledge base remain open. Code,
+  schemas, tests, examples and skills remain under Apache-2.0.
+
 ## [0.1.0-alpha.4] - 2026-08-29
 
 ### Added

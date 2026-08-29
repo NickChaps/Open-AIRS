@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Socle RGPD pour les traitements IA · 1.0.0
 
 [Read in English](README.md)

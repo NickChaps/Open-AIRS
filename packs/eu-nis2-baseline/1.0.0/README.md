@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # NIS2 EU baseline · 1.0.0
 
 [Lire en français](README.fr.md)

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # NIST AI RMF 1.0 full Core outcomes · 1.1.0
 
 [Lire en français](README.fr.md)

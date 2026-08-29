@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Socle fonctionnel du NIST Cybersecurity Framework 2.0
 
 [Read in English](README.md)

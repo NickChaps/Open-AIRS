@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml)
 [![Licence Apache 2.0](https://img.shields.io/badge/code-Apache--2.0-4f46e5.svg)](LICENSE)
-[![Documentation CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-0f766e.svg)](LICENSE-POLICY.md)
+[![Docs et packs CC BY-SA 4.0](https://img.shields.io/badge/docs%20%26%20packs-CC%20BY--SA%204.0-0f766e.svg)](LICENSE-POLICY.md)
 
 [Read in English](README.md)
 
@@ -340,12 +340,13 @@ Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
 réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
 échantillonnés selon le risque et la politique interne.
 
-La version actuelle est `v0.1.0-alpha.4`. Les formats peuvent encore évoluer.
+La version actuelle est `v0.1.0-alpha.5`. Les formats peuvent encore évoluer.
 
 ## Licence et citation
 
-Le code, les schémas, les packs, les tests, les exemples et les skills sont
-publiés sous [Apache 2.0](LICENSE). Les guides et textes explicatifs sont sous
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.fr). Les sources
+Le code, les schémas, les tests, les exemples et les skills sont publiés sous
+[Apache 2.0](LICENSE). Les guides, textes explicatifs et packs de règles sont
+sous [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr) :
+les adaptations partagées de la base de connaissances restent ouvertes. Les sources
 externes conservent leurs propres droits. Consultez [LICENSE-POLICY.md](LICENSE-POLICY.md),
 [CITATION.cff](CITATION.cff) et la [déclaration clean-room](CLEAN_ROOM.md).

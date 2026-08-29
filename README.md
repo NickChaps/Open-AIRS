@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml/badge.svg)](https://github.com/NickChaps/AIR-Framework/actions/workflows/ci.yml)
 [![Apache 2.0](https://img.shields.io/badge/code-Apache--2.0-4f46e5.svg)](LICENSE)
-[![Documentation CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-0f766e.svg)](LICENSE-POLICY.md)
+[![Docs and packs CC BY-SA 4.0](https://img.shields.io/badge/docs%20%26%20packs-CC%20BY--SA%204.0-0f766e.svg)](LICENSE-POLICY.md)
 
 [Lire en français](README.fr.md)
 
@@ -326,12 +326,13 @@ evidence, reading quality, selected packs and their versions.
 The framework preserves unknowns and conflicts. Human controls can be targeted
 or sampled according to risk and internal policy.
 
-The current release is `v0.1.0-alpha.4`. Formats may still change.
+The current release is `v0.1.0-alpha.5`. Formats may still change.
 
 ## Licence and citation
 
-Code, schemas, packs, tests, examples and skills are published under
-[Apache 2.0](LICENSE). Reader documentation is published under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). External sources
+Code, schemas, tests, examples and skills are published under
+[Apache 2.0](LICENSE). Reader documentation and rule packs are published under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), so shared
+adaptations of the knowledge base stay open. External sources
 retain their own rights. See [LICENSE-POLICY.md](LICENSE-POLICY.md),
 [CITATION.cff](CITATION.cff) and the [clean-room statement](CLEAN_ROOM.md).

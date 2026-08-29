@@ -2,7 +2,7 @@
   "schema_version": "0.1.0",
   "review_id": "urn:air:review:fictional-recruiting-sample-20260829",
   "reviewed_at": "2026-08-29T15:30:00Z",
-  "assessment_id": "urn:air:assessment:e899004c532bae1122af51c1",
+  "assessment_id": "urn:air:assessment:ad1e3623cbdab4c8ed5ebc3a",
   "target": {
     "id": "use-recruiting-assistant",
     "type": "ai_use",

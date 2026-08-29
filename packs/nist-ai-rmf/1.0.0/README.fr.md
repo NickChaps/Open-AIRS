@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Résultats socles du NIST AI RMF · 1.0.0
 
 [Read in English](README.md)

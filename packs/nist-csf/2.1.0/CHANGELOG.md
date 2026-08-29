@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Changelog
 
 ## 2.1.0 - 2026-08-29

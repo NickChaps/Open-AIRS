@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # Qualification et préparation à l’AI Act européen · 1.1.0
 
 [Read in English](README.md)

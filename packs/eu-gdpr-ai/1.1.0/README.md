@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # EU GDPR for AI processing · 1.1.0
 
 [Lire en français](README.fr.md)

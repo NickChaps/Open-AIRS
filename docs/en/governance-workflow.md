@@ -1,4 +1,4 @@
-<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
 # From a business request to a traceable decision
 

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # EU AI Act core qualification · 1.0.0
 
 [Lire en français](README.fr.md)

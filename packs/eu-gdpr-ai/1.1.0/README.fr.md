@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # RGPD appliqué aux traitements IA · 1.1.0
 
 [Read in English](README.md)
