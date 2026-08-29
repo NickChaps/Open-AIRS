@@ -97,11 +97,12 @@ class RepositoryIntegrityTests(unittest.TestCase):
 
         Calibration: single words and ordinary contrasts ("rather than",
         "instead of") are legitimate prose. What this test rejects is the
-        signature material: em-dash density, the "not just X, it's Y"
-        template, assistant leakage and a few high-signal filler phrases.
+        signature material: the em dash, which house style bans outright,
+        the "not just X, it's Y" template, assistant leakage and a few
+        high-signal filler phrases.
         """
 
-        max_em_dashes_per_file = 2
+        max_em_dashes_per_file = 0
         contrast_templates = re.compile(
             r"\bnot just\b[^.\n]{0,80}\b(?:it'?s|but)\b|"
             r"\bnot only\b[^.\n]{0,80}\bbut also\b|"
