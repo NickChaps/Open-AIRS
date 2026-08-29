@@ -1,0 +1,3047 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "eu-gdpr-ai-core",
+    "name": "EU GDPR for AI processing",
+    "version": "1.3.0",
+    "authority_type": "binding_law",
+    "jurisdiction": "European Union / EEA",
+    "language": "en",
+    "source_version": "Regulation (EU) 2016/679 and EDPB Opinion 28/2024 for marked guidance findings",
+    "effective_from": "2018-05-25",
+    "reviewed_at": "2026-08-29",
+    "applies_to": [
+      "ai_system",
+      "ai_platform",
+      "configured_ai_application",
+      "ai_use",
+      "connector",
+      "model",
+      "organization"
+    ],
+    "coverage": [
+      "material and territorial scope candidate",
+      "Articles 5, 6, 9, 10 and 12 to 22",
+      "Articles 24 to 30 and 32 to 39",
+      "Chapter V international transfers",
+      "AI-model anonymity, development lawfulness and legitimate-interest guidance from EDPB Opinion 28/2024",
+      "Article 22 exposure by design: a determinative or material decision purpose combined with an autonomously executable external action establishes the solely-automated path without a declared conclusion, and the satellite Article 22 rules consume the emitted qualification."
+    ],
+    "known_gaps": [
+      "Member State law, supervisory-authority lists, employment rules and sector-specific restrictions require jurisdiction profiles.",
+      "The pack does not encode every Article 23 restriction, every derogation, certification, code of conduct or enforcement provision.",
+      "Data-subject rights are applicability-aware operational checks; a matched gap does not decide a fact-specific legal exception.",
+      "EDPB Opinion 28/2024 findings are labelled regulatory guidance inside this binding-law pack."
+    ],
+    "notice": "The pack keeps GDPR findings separate from AI Act classification. It is a structured review aid, not legal advice."
+  },
+  "fact_catalog": [
+    {
+      "id": "data.personal_processed",
+      "type": "boolean",
+      "question": "Does the activity process personal data?"
+    },
+    {
+      "id": "processing.established_in_eea",
+      "type": "boolean",
+      "question": "Is the relevant controller or processor established in the EEA for this processing?"
+    },
+    {
+      "id": "processing.offers_goods_services_to_people_in_eea",
+      "type": "boolean",
+      "question": "Does a non-EEA activity offer goods or services to people in the EEA?"
+    },
+    {
+      "id": "processing.monitors_people_in_eea",
+      "type": "boolean",
+      "question": "Does a non-EEA activity monitor the behaviour of people in the EEA?"
+    },
+    {
+      "id": "processing.purely_personal_household",
+      "type": "boolean",
+      "question": "Is the processing by a natural person purely personal or household activity?"
+    },
+    {
+      "id": "processing.competent_authority_law_enforcement",
+      "type": "boolean",
+      "question": "Is the processing by a competent authority for a law-enforcement purpose outside GDPR scope?"
+    },
+    {
+      "id": "gdpr.applicable_confirmed",
+      "type": "boolean",
+      "question": "Has GDPR applicability been confirmed for this processing record?"
+    },
+    {
+      "id": "gdpr.roles",
+      "type": "array",
+      "question": "Which GDPR roles apply, such as controller, joint controller or processor?"
+    },
+    {
+      "id": "controls.purpose_specified_and_compatible",
+      "type": "boolean",
+      "question": "Are purposes specified, explicit, legitimate and compatible with later processing?"
+    },
+    {
+      "id": "controls.data_minimisation",
+      "type": "boolean",
+      "question": "Are personal data adequate, relevant and limited to what is necessary?"
+    },
+    {
+      "id": "controls.data_accuracy",
+      "type": "boolean",
+      "question": "Are data accuracy and correction measures in place?"
+    },
+    {
+      "id": "controls.storage_limitation",
+      "type": "boolean",
+      "question": "Are retention limits defined and enforced?"
+    },
+    {
+      "id": "controls.integrity_confidentiality",
+      "type": "boolean",
+      "question": "Are integrity and confidentiality protected with appropriate security?"
+    },
+    {
+      "id": "controls.accountability_evidence",
+      "type": "boolean",
+      "question": "Can the controller demonstrate compliance with the Article 5 principles?"
+    },
+    {
+      "id": "controls.article6_legal_basis",
+      "type": "boolean",
+      "question": "Is at least one Article 6 legal basis established for each processing purpose?"
+    },
+    {
+      "id": "data.special_categories_processed",
+      "type": "boolean",
+      "question": "Are Article 9 special categories of personal data processed?"
+    },
+    {
+      "id": "gdpr.article9_condition_established",
+      "type": "boolean",
+      "question": "Is an Article 9(2) condition established for special-category processing?"
+    },
+    {
+      "id": "data.criminal_conviction_or_offence_data",
+      "type": "boolean",
+      "question": "Are personal data about criminal convictions or offences processed?"
+    },
+    {
+      "id": "controls.article10_authority_or_law",
+      "type": "boolean",
+      "question": "Is Article 10 processing under official authority or authorised by Union or Member State law with safeguards?"
+    },
+    {
+      "id": "data.obtained_from_data_subject",
+      "type": "boolean",
+      "question": "Are the personal data obtained directly from the data subject?"
+    },
+    {
+      "id": "controls.article13_notice",
+      "type": "boolean",
+      "question": "Is the Article 13 information supplied for direct collection?"
+    },
+    {
+      "id": "controls.article14_notice",
+      "type": "boolean",
+      "question": "Is the Article 14 information supplied for indirect collection or is a documented exception established?"
+    },
+    {
+      "id": "processing.automated_decision_or_profiling",
+      "type": "boolean",
+      "question": "Does the activity involve automated decision-making or profiling that requires specific transparency?"
+    },
+    {
+      "id": "controls.automated_logic_significance_consequences_notice",
+      "type": "boolean",
+      "question": "Is meaningful information about logic, significance and envisaged consequences supplied where required?"
+    },
+    {
+      "id": "controls.right_access",
+      "type": "boolean",
+      "question": "Can data subjects exercise the right of access?"
+    },
+    {
+      "id": "controls.right_rectification",
+      "type": "boolean",
+      "question": "Can data subjects exercise the right to rectification?"
+    },
+    {
+      "id": "controls.right_erasure",
+      "type": "boolean",
+      "question": "Can data subjects exercise the right to erasure where applicable?"
+    },
+    {
+      "id": "controls.right_restriction",
+      "type": "boolean",
+      "question": "Can data subjects exercise the right to restriction where applicable?"
+    },
+    {
+      "id": "controls.right_portability",
+      "type": "boolean",
+      "question": "Can data subjects exercise data portability where applicable?"
+    },
+    {
+      "id": "controls.right_objection",
+      "type": "boolean",
+      "question": "Can data subjects exercise the right to object where applicable?"
+    },
+    {
+      "id": "decision.solely_automated",
+      "type": "boolean",
+      "question": "Is the decision solely automated? Declared by the organisation when attested, or established by design through the derived path (an influential decision purpose plus an autonomously executable action); never proposed by an extractor.",
+      "derived": true
+    },
+    {
+      "id": "decision.legal_or_similarly_significant_effect",
+      "type": "boolean",
+      "question": "Does that decision produce legal or similarly significant effects on a person?"
+    },
+    {
+      "id": "decision.contract_necessity_established",
+      "type": "boolean",
+      "question": "Is the decision necessary for entering into or performing a contract with the person?"
+    },
+    {
+      "id": "decision.authorized_by_union_or_member_state_law",
+      "type": "boolean",
+      "question": "Is the decision authorised by applicable Union or Member State law with suitable safeguards?"
+    },
+    {
+      "id": "decision.explicit_consent_obtained",
+      "type": "boolean",
+      "question": "Is the decision based on explicit consent?"
+    },
+    {
+      "id": "decision.based_on_special_categories",
+      "type": "boolean",
+      "question": "Is the decision based on Article 9 special categories?"
+    },
+    {
+      "id": "decision.article22_4_special_category_condition_established",
+      "type": "boolean",
+      "question": "Is the specific Article 22(4) and Article 9 condition established?"
+    },
+    {
+      "id": "controls.article22_human_intervention_view_contest",
+      "type": "boolean",
+      "question": "Are at least human intervention, expression of view and contest rights implemented where required?"
+    },
+    {
+      "id": "processing.uses_processor",
+      "type": "boolean",
+      "question": "Does a controller engage a processor for the activity?"
+    },
+    {
+      "id": "controls.article28_processor_terms",
+      "type": "boolean",
+      "question": "Are Article 28 processor terms and instructions in place?"
+    },
+    {
+      "id": "controls.article24_controller_responsibility",
+      "type": "boolean",
+      "question": "Has the controller implemented and periodically reviewed measures that demonstrate GDPR compliance?"
+    },
+    {
+      "id": "processing.has_joint_controllers",
+      "type": "boolean",
+      "question": "Do two or more controllers jointly determine purposes and means?"
+    },
+    {
+      "id": "controls.article26_joint_controller_arrangement",
+      "type": "boolean",
+      "question": "Does a transparent Article 26 arrangement allocate responsibilities and make its essence available to data subjects?"
+    },
+    {
+      "id": "article27.representative_required",
+      "type": "boolean",
+      "question": "Does Article 27 require an EU representative for the non-EEA controller or processor?"
+    },
+    {
+      "id": "controls.article27_representative_designated",
+      "type": "boolean",
+      "question": "Is the required EU representative designated in writing and available to authorities and data subjects?"
+    },
+    {
+      "id": "controls.article30_records",
+      "type": "boolean",
+      "question": "Are required records of processing activities maintained?"
+    },
+    {
+      "id": "controls.article32_security",
+      "type": "boolean",
+      "question": "Are Article 32 risk-appropriate technical and organisational security measures implemented?"
+    },
+    {
+      "id": "controls.article33_breach_process",
+      "type": "boolean",
+      "question": "Can qualifying personal-data breaches be assessed, documented and notified to the authority within the required period?"
+    },
+    {
+      "id": "controls.article34_data_subject_breach_process",
+      "type": "boolean",
+      "question": "Can high-risk breaches be communicated to affected people unless an exception applies?"
+    },
+    {
+      "id": "processing.systematic_extensive_evaluation",
+      "type": "boolean",
+      "question": "Does the processing systematically and extensively evaluate personal aspects using automation for significant decisions?"
+    },
+    {
+      "id": "processing.large_scale_special_or_criminal_data",
+      "type": "boolean",
+      "question": "Does it process special-category or criminal data on a large scale?"
+    },
+    {
+      "id": "processing.systematic_public_monitoring_large_scale",
+      "type": "boolean",
+      "question": "Does it systematically monitor a publicly accessible area on a large scale?"
+    },
+    {
+      "id": "processing.other_likely_high_risk",
+      "type": "boolean",
+      "question": "Is the processing otherwise likely to create high risk based on nature, scope, context and purposes or an authority list?"
+    },
+    {
+      "id": "controls.dpia_completed",
+      "type": "boolean",
+      "question": "Was a data protection impact assessment completed before the high-risk processing?"
+    },
+    {
+      "id": "controls.dpia_kept_under_review",
+      "type": "boolean",
+      "question": "Is the DPIA reviewed when risk or processing changes?"
+    },
+    {
+      "id": "dpia.residual_high_risk",
+      "type": "boolean",
+      "question": "Does the DPIA show residual high risk without mitigating measures?"
+    },
+    {
+      "id": "controls.prior_consultation_completed",
+      "type": "boolean",
+      "question": "Was the supervisory authority consulted before processing where Article 36 requires it?"
+    },
+    {
+      "id": "controls.data_protection_by_design",
+      "type": "boolean",
+      "question": "Are data protection by design and by default measures implemented?"
+    },
+    {
+      "id": "dpo.required",
+      "type": "boolean",
+      "question": "Do the Article 37 criteria or applicable Member State law require a data protection officer?"
+    },
+    {
+      "id": "controls.dpo_designated_and_involved",
+      "type": "boolean",
+      "question": "Is a DPO designated, resourced, independent and involved where required?"
+    },
+    {
+      "id": "processing.transfers_personal_data_outside_eea",
+      "type": "boolean",
+      "question": "Are personal data transferred to a third country or international organisation?"
+    },
+    {
+      "id": "controls.chapter_v_transfer_mechanism",
+      "type": "boolean",
+      "question": "Is a valid Chapter V transfer route and its required safeguards established?"
+    },
+    {
+      "id": "model.trained_or_updated_with_personal_data",
+      "type": "boolean",
+      "question": "Was the AI model developed, trained or updated using personal data?"
+    },
+    {
+      "id": "model.claimed_anonymous",
+      "type": "boolean",
+      "question": "Is the resulting AI model claimed to be anonymous?"
+    },
+    {
+      "id": "controls.model_anonymity_assessment",
+      "type": "boolean",
+      "question": "Does a case-specific assessment show that identification and extraction risks are insignificant?"
+    },
+    {
+      "id": "controls.model_training_processing_lawful",
+      "type": "boolean",
+      "question": "Is the development processing evidenced as lawful?"
+    },
+    {
+      "id": "processing.relies_on_legitimate_interest",
+      "type": "boolean",
+      "question": "Does development or deployment rely on legitimate interests?"
+    },
+    {
+      "id": "controls.legitimate_interest_three_step_test",
+      "type": "boolean",
+      "question": "Are interest, strict necessity and rights-balancing documented for the concrete processing?"
+    },
+    {
+      "id": "purpose.decision_influence",
+      "type": "string",
+      "question": "Highest decision influence among the composition's active uses (none, informative, material, determinative). Applied from a validated extraction's proposed uses; never proposed directly as a fact.",
+      "derived": true
+    },
+    {
+      "id": "composition.autonomous_external_send_possible",
+      "type": "boolean",
+      "question": "Derived from captured connector actions: can the composition send externally with no technically enforced human gate?",
+      "derived": true
+    },
+    {
+      "id": "gdpr.article22_established",
+      "type": "boolean",
+      "question": "Derived: is the Article 22 qualification established? Emitted by the Article 22 restriction rule, by declaration or by design.",
+      "derived": true
+    }
+  ],
+  "inheritance": [
+    {
+      "id": "gdpr.use.platform.privacy-by-design",
+      "fact": "controls.data_protection_by_design",
+      "path": [
+        "implemented_by",
+        "runs_on"
+      ],
+      "object_types": [
+        "ai_platform"
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "id": "gdpr.scope",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 2 and 3",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Material and territorial scope, including exclusions and extra-territorial application."
+    },
+    {
+      "id": "gdpr.art5",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 5",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Processing principles and controller accountability."
+    },
+    {
+      "id": "gdpr.art6",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 6",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Lawfulness of processing and legal bases."
+    },
+    {
+      "id": "gdpr.arts9-10",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 9 and 10",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Special-category and criminal-conviction data conditions."
+    },
+    {
+      "id": "gdpr.arts12-14",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 12 to 14",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Transparent information for direct and indirect data collection."
+    },
+    {
+      "id": "gdpr.arts15-21",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 15 to 21",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Access, rectification, erasure, restriction, portability and objection rights."
+    },
+    {
+      "id": "gdpr.art22",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Article 22",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Rights and conditions for solely automated decisions with legal or similarly significant effects."
+    },
+    {
+      "id": "gdpr.arts24-30",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 24 to 30",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Controller responsibility, data protection by design and default, joint controllers, representatives, processors and processing records."
+    },
+    {
+      "id": "gdpr.arts32-34",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 32 to 34",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Security and personal-data breach duties."
+    },
+    {
+      "id": "gdpr.arts35-36",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 35 and 36",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "DPIA triggers, contents, review and prior consultation."
+    },
+    {
+      "id": "gdpr.arts37-39",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Articles 37 to 39",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "DPO designation, position and tasks."
+    },
+    {
+      "id": "gdpr.chapter-v",
+      "source": "Regulation (EU) 2016/679",
+      "locator": "Chapter V",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "summary": "Transfers to third countries or international organisations."
+    },
+    {
+      "id": "edpb.opinion28-2024",
+      "source": "European Data Protection Board Opinion 28/2024",
+      "locator": "Sections 3 and 4",
+      "url": "https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf",
+      "summary": "Case-specific AI-model anonymity and legitimate-interest analysis for model development and deployment."
+    }
+  ],
+  "rules": [
+    {
+      "id": "gdpr.ai.scope-candidate",
+      "title": "GDPR scope candidate",
+      "kind": "legal_qualification",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "data.personal_processed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "any": [
+              {
+                "fact": {
+                  "key": "processing.established_in_eea",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.offers_goods_services_to_people_in_eea",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.monitors_people_in_eea",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "processing.purely_personal_household",
+              "operator": "eq",
+              "value": false
+            }
+          },
+          {
+            "fact": {
+              "key": "processing.competent_authority_law_enforcement",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-SCOPE",
+        "level": "gdpr_applicability_candidate",
+        "title": "GDPR applicability should be confirmed",
+        "summary": "Personal-data processing and a territorial connection are established, with no supplied household or competent-authority law-enforcement exclusion."
+      },
+      "anchors": [
+        "gdpr.scope"
+      ]
+    },
+    {
+      "id": "gdpr.ai.controls-purpose-specified-and-compatible-gap",
+      "title": "Purpose limitation is not established",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.purpose_specified_and_compatible",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-PURPOSE",
+        "level": "gdpr_obligation_gap",
+        "title": "Purpose limitation is not established",
+        "summary": "Purposes must be specified, explicit, legitimate and compatible with later processing."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-PURPOSE",
+          "title": "Purpose limitation is not established"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-data-minimisation-gap",
+      "title": "Data minimisation is not established",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.data_minimisation",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-MINIMISATION",
+        "level": "gdpr_obligation_gap",
+        "title": "Data minimisation is not established",
+        "summary": "Personal data must be adequate, relevant and limited to what is necessary."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-MINIMISATION",
+          "title": "Data minimisation is not established"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-data-accuracy-gap",
+      "title": "Data accuracy controls are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.data_accuracy",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-ACCURACY",
+        "level": "gdpr_obligation_gap",
+        "title": "Data accuracy controls are missing",
+        "summary": "Reasonable steps must keep personal data accurate and correct inaccuracies."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-ACCURACY",
+          "title": "Data accuracy controls are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-storage-limitation-gap",
+      "title": "Retention controls are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.storage_limitation",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-STORAGE",
+        "level": "gdpr_obligation_gap",
+        "title": "Retention controls are missing",
+        "summary": "Identifiable personal data must not be kept longer than necessary without an applicable basis."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-STORAGE",
+          "title": "Retention controls are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-integrity-confidentiality-gap",
+      "title": "Integrity or confidentiality controls are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.integrity_confidentiality",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-SECURITY",
+        "level": "gdpr_obligation_gap",
+        "title": "Integrity or confidentiality controls are missing",
+        "summary": "The processing must protect personal data against unauthorised or unlawful use, loss, destruction or damage."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-SECURITY",
+          "title": "Integrity or confidentiality controls are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-accountability-evidence-gap",
+      "title": "Accountability evidence is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.accountability_evidence",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART5-ACCOUNTABILITY",
+        "level": "gdpr_obligation_gap",
+        "title": "Accountability evidence is missing",
+        "summary": "The controller must be able to demonstrate compliance with the principles."
+      },
+      "anchors": [
+        "gdpr.art5"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART5-ACCOUNTABILITY",
+          "title": "Accountability evidence is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article6-legal-basis-gap",
+      "title": "Article 6 legal basis is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.article6_legal_basis",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART6",
+        "level": "gdpr_obligation_gap",
+        "title": "Article 6 legal basis is missing",
+        "summary": "A legal basis must be established for each processing purpose."
+      },
+      "anchors": [
+        "gdpr.art6"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART6",
+          "title": "Article 6 legal basis is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-data-protection-by-design-gap",
+      "title": "Data protection by design and default is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.data_protection_by_design",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART25",
+        "level": "gdpr_obligation_gap",
+        "title": "Data protection by design and default is missing",
+        "summary": "Article 25 measures must be integrated into means, design and default settings."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART25",
+          "title": "Data protection by design and default is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article30-records-gap",
+      "title": "Processing records are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.article30_records",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART30",
+        "level": "gdpr_obligation_gap",
+        "title": "Processing records are missing",
+        "summary": "Required Article 30 records must describe the processing and its safeguards."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART30",
+          "title": "Processing records are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article32-security-gap",
+      "title": "Risk-appropriate security is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.article32_security",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART32",
+        "level": "gdpr_obligation_gap",
+        "title": "Risk-appropriate security is missing",
+        "summary": "Article 32 security measures must reflect risk, state of the art, cost, nature, scope, context and purposes."
+      },
+      "anchors": [
+        "gdpr.arts32-34"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART32",
+          "title": "Risk-appropriate security is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article33-breach-process-gap",
+      "title": "Supervisory breach process is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.article33_breach_process",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART33",
+        "level": "gdpr_obligation_gap",
+        "title": "Supervisory breach process is missing",
+        "summary": "The organisation needs a process for assessment, documentation and Article 33 notification where required."
+      },
+      "anchors": [
+        "gdpr.arts32-34"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART33",
+          "title": "Supervisory breach process is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article34-data-subject-breach-process-gap",
+      "title": "Affected-person breach process is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.article34_data_subject_breach_process",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART34",
+        "level": "gdpr_obligation_gap",
+        "title": "Affected-person breach process is missing",
+        "summary": "The organisation needs a process for Article 34 communication where a breach creates high risk."
+      },
+      "anchors": [
+        "gdpr.arts32-34"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART34",
+          "title": "Affected-person breach process is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.gdpr-article9-condition-established-gap",
+      "title": "Special-category condition is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "data.special_categories_processed",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "gdpr.article9_condition_established",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART9",
+        "level": "gdpr_legal_basis_gap",
+        "title": "Special-category condition is missing",
+        "summary": "Article 9 data are processed but no Article 9(2) condition is established."
+      },
+      "anchors": [
+        "gdpr.arts9-10"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART9",
+          "title": "Special-category condition is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article10-authority-or-law-gap",
+      "title": "Article 10 authority or law is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "data.criminal_conviction_or_offence_data",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article10_authority_or_law",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART10",
+        "level": "gdpr_legal_basis_gap",
+        "title": "Article 10 authority or law is missing",
+        "summary": "Criminal-conviction or offence data are processed without established official authority or an applicable legal authorisation with safeguards."
+      },
+      "anchors": [
+        "gdpr.arts9-10"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART10",
+          "title": "Article 10 authority or law is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article13-notice-gap",
+      "title": "Direct-collection notice is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "data.obtained_from_data_subject",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article13_notice",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART13",
+        "level": "gdpr_transparency_gap",
+        "title": "Direct-collection notice is missing",
+        "summary": "Personal data are obtained from the person and the Article 13 information is not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts12-14"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART13",
+          "title": "Direct-collection notice is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article14-notice-gap",
+      "title": "Indirect-collection notice or exception is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "data.obtained_from_data_subject",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article14_notice",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART14",
+        "level": "gdpr_transparency_gap",
+        "title": "Indirect-collection notice or exception is missing",
+        "summary": "Personal data are obtained elsewhere and neither the Article 14 information nor a documented exception is evidenced."
+      },
+      "anchors": [
+        "gdpr.arts12-14"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART14",
+          "title": "Indirect-collection notice or exception is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-automated-logic-significance-consequences-notice-gap",
+      "title": "Automated-decision information is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.automated_decision_or_profiling",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.automated_logic_significance_consequences_notice",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-AUTOMATED-TRANSPARENCY",
+        "level": "gdpr_transparency_gap",
+        "title": "Automated-decision information is missing",
+        "summary": "The processing involves covered automated decision-making or profiling but meaningful information about logic, significance and consequences is not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts12-14"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-AUTOMATED-TRANSPARENCY",
+          "title": "Automated-decision information is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-access-gap",
+      "title": "Access procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_access",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART15",
+        "level": "data_subject_right_gap",
+        "title": "Access procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 15 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART15",
+          "title": "Access procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-rectification-gap",
+      "title": "Rectification procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_rectification",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART16",
+        "level": "data_subject_right_gap",
+        "title": "Rectification procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 16 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART16",
+          "title": "Rectification procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-erasure-gap",
+      "title": "Erasure procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_erasure",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART17",
+        "level": "data_subject_right_gap",
+        "title": "Erasure procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 17 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART17",
+          "title": "Erasure procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-restriction-gap",
+      "title": "Restriction procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_restriction",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART18",
+        "level": "data_subject_right_gap",
+        "title": "Restriction procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 18 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART18",
+          "title": "Restriction procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-portability-gap",
+      "title": "Portability procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_portability",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART20",
+        "level": "data_subject_right_gap",
+        "title": "Portability procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 20 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART20",
+          "title": "Portability procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-right-objection-gap",
+      "title": "Objection procedure is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "controls.right_objection",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART21",
+        "level": "data_subject_right_gap",
+        "title": "Objection procedure is missing",
+        "summary": "The organisation cannot evidence an operational route for Article 21 where the right applies."
+      },
+      "anchors": [
+        "gdpr.arts15-21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART21",
+          "title": "Objection procedure is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.article22-restriction",
+      "title": "Article 22 solely automated decision",
+      "kind": "legal_qualification",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "any": [
+              {
+                "fact": {
+                  "key": "decision.solely_automated",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "purpose.decision_influence",
+                      "operator": "in",
+                      "value": [
+                        "material",
+                        "determinative"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "composition.autonomous_external_send_possible",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "decision.legal_or_similarly_significant_effect",
+              "operator": "eq",
+              "value": true
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22",
+        "level": "article_22_decision",
+        "title": "Article 22 decision is established",
+        "summary": "A solely automated decision with legal or similarly significant effects is established, by declaration or by design: an influential decision purpose whose engaging action runs with no technically enforced human gate. A paragraph 2 condition and Article 22(3) safeguards must be demonstrated."
+      },
+      "anchors": [
+        "gdpr.art22"
+      ],
+      "emits": [
+        {
+          "fact": "gdpr.article22_established",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "gdpr.ai.article22-condition-gap",
+      "title": "Article 22 condition is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.article22_established",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "not": {
+              "any": [
+                {
+                  "fact": {
+                    "key": "decision.contract_necessity_established",
+                    "operator": "eq",
+                    "value": true
+                  }
+                },
+                {
+                  "fact": {
+                    "key": "decision.authorized_by_union_or_member_state_law",
+                    "operator": "eq",
+                    "value": true
+                  }
+                },
+                {
+                  "fact": {
+                    "key": "decision.explicit_consent_obtained",
+                    "operator": "eq",
+                    "value": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-CONDITION",
+        "level": "gdpr_restriction_gap",
+        "title": "No Article 22(2) condition is established",
+        "summary": "Contract necessity, applicable law and explicit consent are all evidenced as absent."
+      },
+      "anchors": [
+        "gdpr.art22"
+      ],
+      "obligations": [
+        {
+          "code": "SUSPEND-AUTOMATED-DECISION",
+          "title": "Do not rely on the solely automated decision until a lawful condition and safeguards are established."
+        }
+      ]
+    },
+    {
+      "id": "gdpr.ai.controls-article22-human-intervention-view-contest-gap",
+      "title": "Article 22 safeguards are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.article22_established",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "any": [
+                  {
+                    "fact": {
+                      "key": "decision.contract_necessity_established",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "decision.explicit_consent_obtained",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article22_human_intervention_view_contest",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-SAFEGUARDS",
+        "level": "gdpr_safeguard_gap",
+        "title": "Article 22 safeguards are missing",
+        "summary": "A contract or consent condition is asserted but human intervention, expression of view and contest rights are not evidenced."
+      },
+      "anchors": [
+        "gdpr.art22"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ARTICLE-22-SAFEGUARDS",
+          "title": "Article 22 safeguards are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.decision-article22-4-special-category-condition-established-gap",
+      "title": "Special-category automated-decision condition is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.article22_established",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "decision.based_on_special_categories",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "decision.article22_4_special_category_condition_established",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-22-4",
+        "level": "gdpr_restriction_gap",
+        "title": "Special-category automated-decision condition is missing",
+        "summary": "The Article 22 decision relies on special-category data without the required Article 22(4) condition and safeguards."
+      },
+      "anchors": [
+        "gdpr.art22"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ARTICLE-22-4",
+          "title": "Special-category automated-decision condition is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article24-controller-responsibility-gap",
+      "title": "Controller responsibility measures are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "gdpr.roles",
+                  "operator": "contains",
+                  "value": "controller"
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article24_controller_responsibility",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART24",
+        "level": "gdpr_governance_gap",
+        "title": "Controller responsibility measures are missing",
+        "summary": "The controller cannot evidence Article 24 measures and periodic review proportionate to the processing risks."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART24",
+          "title": "Controller responsibility measures are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article26-joint-controller-arrangement-gap",
+      "title": "Joint-controller arrangement is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.has_joint_controllers",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article26_joint_controller_arrangement",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART26",
+        "level": "gdpr_governance_gap",
+        "title": "Joint-controller arrangement is missing",
+        "summary": "Joint determination is established but the Article 26 allocation and accessible essence are not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART26",
+          "title": "Joint-controller arrangement is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article27-representative-designated-gap",
+      "title": "Required EU representative is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "article27.representative_required",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article27_representative_designated",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART27",
+        "level": "gdpr_governance_gap",
+        "title": "Required EU representative is missing",
+        "summary": "Article 27 is confirmed as applicable but a written EU representative designation is not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART27",
+          "title": "Required EU representative is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-article28-processor-terms-gap",
+      "title": "Processor terms are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.uses_processor",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "gdpr.roles",
+                  "operator": "contains",
+                  "value": "controller"
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article28_processor_terms",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART28",
+        "level": "gdpr_contract_gap",
+        "title": "Processor terms are missing",
+        "summary": "A controller uses a processor but Article 28 terms and documented instructions are not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts24-30"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART28",
+          "title": "Processor terms are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.dpia-trigger",
+      "title": "DPIA trigger",
+      "kind": "legal_qualification",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "gdpr.applicable_confirmed",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "any": [
+              {
+                "fact": {
+                  "key": "processing.systematic_extensive_evaluation",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.large_scale_special_or_criminal_data",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.systematic_public_monitoring_large_scale",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.other_likely_high_risk",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-35-TRIGGER",
+        "level": "dpia_required",
+        "title": "A data protection impact assessment is required",
+        "summary": "At least one Article 35 high-risk trigger is established."
+      },
+      "anchors": [
+        "gdpr.arts35-36"
+      ]
+    },
+    {
+      "id": "gdpr.ai.controls-dpia-completed-gap",
+      "title": "Required DPIA is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "any": [
+                  {
+                    "fact": {
+                      "key": "processing.systematic_extensive_evaluation",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "processing.large_scale_special_or_criminal_data",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "processing.systematic_public_monitoring_large_scale",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "processing.other_likely_high_risk",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.dpia_completed",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-35",
+        "level": "gdpr_dpia_gap",
+        "title": "Required DPIA is missing",
+        "summary": "The processing meets a DPIA trigger but no completed pre-processing assessment is evidenced."
+      },
+      "anchors": [
+        "gdpr.arts35-36"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ARTICLE-35",
+          "title": "Required DPIA is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-dpia-kept-under-review-gap",
+      "title": "DPIA review is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "gdpr.applicable_confirmed",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "any": [
+                      {
+                        "fact": {
+                          "key": "processing.systematic_extensive_evaluation",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.large_scale_special_or_criminal_data",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.systematic_public_monitoring_large_scale",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.other_likely_high_risk",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "controls.dpia_completed",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.dpia_kept_under_review",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-35-REVIEW",
+        "level": "gdpr_dpia_gap",
+        "title": "DPIA review is missing",
+        "summary": "A DPIA exists but the process to review it when risk or processing changes is not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts35-36"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ARTICLE-35-REVIEW",
+          "title": "DPIA review is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-prior-consultation-completed-gap",
+      "title": "Required prior consultation is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "gdpr.applicable_confirmed",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "any": [
+                      {
+                        "fact": {
+                          "key": "processing.systematic_extensive_evaluation",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.large_scale_special_or_criminal_data",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.systematic_public_monitoring_large_scale",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "processing.other_likely_high_risk",
+                          "operator": "eq",
+                          "value": true
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "dpia.residual_high_risk",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.prior_consultation_completed",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ARTICLE-36",
+        "level": "gdpr_dpia_gap",
+        "title": "Required prior consultation is missing",
+        "summary": "The DPIA identifies residual high risk and Article 36 consultation is not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts35-36"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ARTICLE-36",
+          "title": "Required prior consultation is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-dpo-designated-and-involved-gap",
+      "title": "Required DPO governance is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "dpo.required",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.dpo_designated_and_involved",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-ART37-39",
+        "level": "gdpr_governance_gap",
+        "title": "Required DPO governance is missing",
+        "summary": "The DPO criteria are met but designation, independence, resources or involvement are not evidenced."
+      },
+      "anchors": [
+        "gdpr.arts37-39"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-ART37-39",
+          "title": "Required DPO governance is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.controls-chapter-v-transfer-mechanism-gap",
+      "title": "International-transfer mechanism is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "connector",
+        "model",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "processing.transfers_personal_data_outside_eea",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.chapter_v_transfer_mechanism",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-GDPR-CHAPTER-V",
+        "level": "gdpr_transfer_gap",
+        "title": "International-transfer mechanism is missing",
+        "summary": "A Chapter V transfer is established but the applicable transfer route and safeguards are not evidenced."
+      },
+      "anchors": [
+        "gdpr.chapter-v"
+      ],
+      "obligations": [
+        {
+          "code": "EU-GDPR-CHAPTER-V",
+          "title": "International-transfer mechanism is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.guidance.controls-model-training-processing-lawful-gap",
+      "title": "Model-development lawfulness is not established",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "model",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "gdpr.applicable_confirmed",
+                  "operator": "eq",
+                  "value": true
+                }
+              },
+              {
+                "fact": {
+                  "key": "model.trained_or_updated_with_personal_data",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.model_training_processing_lawful",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EDPB-OPINION-28-2024-LAWFULNESS",
+        "level": "regulatory_guidance_gap",
+        "title": "Model-development lawfulness is not established",
+        "summary": "Personal data were used for model development, but lawful processing is not evidenced. EDPB Opinion 28/2024 notes that unlawful development may affect later deployment unless the model is duly anonymised."
+      },
+      "anchors": [
+        "edpb.opinion28-2024"
+      ],
+      "obligations": [
+        {
+          "code": "EDPB-OPINION-28-2024-LAWFULNESS",
+          "title": "Model-development lawfulness is not established"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.guidance.controls-model-anonymity-assessment-gap",
+      "title": "AI-model anonymity claim lacks assessment",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "model",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "gdpr.applicable_confirmed",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "model.trained_or_updated_with_personal_data",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "model.claimed_anonymous",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.model_anonymity_assessment",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EDPB-OPINION-28-2024-ANONYMITY",
+        "level": "regulatory_guidance_gap",
+        "title": "AI-model anonymity claim lacks assessment",
+        "summary": "The anonymity claim lacks a case-specific assessment of identification and extraction risks described by EDPB Opinion 28/2024."
+      },
+      "anchors": [
+        "edpb.opinion28-2024"
+      ],
+      "obligations": [
+        {
+          "code": "EDPB-OPINION-28-2024-ANONYMITY",
+          "title": "AI-model anonymity claim lacks assessment"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "gdpr.ai.guidance.controls-legitimate-interest-three-step-test-gap",
+      "title": "Legitimate-interest assessment is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "model",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "gdpr.applicable_confirmed",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "model.trained_or_updated_with_personal_data",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "processing.relies_on_legitimate_interest",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.legitimate_interest_three_step_test",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EDPB-OPINION-28-2024-LIA",
+        "level": "regulatory_guidance_gap",
+        "title": "Legitimate-interest assessment is missing",
+        "summary": "The asserted basis lacks the documented interest, strict-necessity and rights-balancing analysis described by EDPB Opinion 28/2024."
+      },
+      "anchors": [
+        "edpb.opinion28-2024"
+      ],
+      "obligations": [
+        {
+          "code": "EDPB-OPINION-28-2024-LIA",
+          "title": "Legitimate-interest assessment is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    }
+  ]
+}

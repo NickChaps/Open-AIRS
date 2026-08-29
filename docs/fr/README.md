@@ -46,6 +46,11 @@ Les développeurs trouveront ensuite :
 - le [moteur Python](../../src/air_framework/) ;
 - les [tests](../../tests/).
 
+## Situer le projet
+
+- [Travaux proches](travaux-proches.md) : les projets voisins, énoncés
+  honnêtement, et le rapport d'AIR à chacun.
+
 ## Documents de référence
 
 Les spécifications, licences, anciennes versions de packs, changelogs et audits

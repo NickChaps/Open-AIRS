@@ -6,6 +6,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 from typing import Any
 
+from .canonical import content_hash
 from .errors import ValidationError
 
 SCHEMA_VERSION = "0.1.0"
@@ -485,12 +486,20 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
     anchor_ids = {item["id"] for item in anchors}
     fact_ids = {item["id"] for item in fact_catalog}
 
+    fact_types_by_id: dict[str, str] = {}
+    derived_fact_ids: set[str] = set()
     for index, fact in enumerate(fact_catalog):
         path = f"pack.fact_catalog[{index}]"
         fact_type = _require(fact, "type", str, path)
         if fact_type not in FACT_TYPES:
             raise ValidationError(f"{path}.type: unsupported value {fact_type!r}")
         _require(fact, "question", str, path)
+        derived = fact.get("derived", False)
+        if not isinstance(derived, bool):
+            raise ValidationError(f"{path}.derived: expected a boolean")
+        fact_types_by_id[fact["id"]] = fact_type
+        if derived:
+            derived_fact_ids.add(fact["id"])
 
     for index, anchor in enumerate(anchors):
         path = f"pack.anchors[{index}]"
@@ -531,6 +540,54 @@ def validate_pack(pack: Mapping[str, Any]) -> None:
         unknown_anchors = [item for item in rule_anchors if item not in anchor_ids]
         if unknown_anchors:
             raise ValidationError(f"{path}.anchors: unknown ids {unknown_anchors!r}")
+        emissions = rule.get("emits", [])
+        if not isinstance(emissions, list) or not all(
+            isinstance(item, Mapping) for item in emissions
+        ):
+            raise ValidationError(f"{path}.emits: expected a list of emission objects")
+        for emit_index, emission in enumerate(emissions):
+            emit_path = f"{path}.emits[{emit_index}]"
+            fact_id = _require(emission, "fact", str, emit_path)
+            if fact_id not in fact_ids:
+                raise ValidationError(f"{emit_path}.fact: undeclared fact id {fact_id!r}")
+            if fact_id not in derived_fact_ids:
+                raise ValidationError(
+                    f"{emit_path}.fact: {fact_id!r} must be marked 'derived' in the "
+                    "fact catalog so it is never requested from an extractor"
+                )
+            if "value" not in emission:
+                raise ValidationError(f"{emit_path}.value: a value is required")
+            if not fact_value_matches_type(emission["value"], fact_types_by_id[fact_id]):
+                raise ValidationError(
+                    f"{emit_path}.value: expected type "
+                    f"{fact_types_by_id[fact_id]!r} for fact {fact_id!r}"
+                )
+            when = emission.get("when", "matched")
+            if when not in {"matched", "not_matched"}:
+                raise ValidationError(
+                    f"{emit_path}.when: expected 'matched' or 'not_matched'"
+                )
+            unknown_keys = set(emission) - {"fact", "value", "when"}
+            if unknown_keys:
+                raise ValidationError(
+                    f"{emit_path}: unsupported keys {sorted(unknown_keys)!r}"
+                )
+
+    last_emitter_index: dict[str, int] = {}
+    for index, rule in enumerate(rules):
+        for emission in rule.get("emits", []):
+            fact_id = emission.get("fact")
+            if isinstance(fact_id, str):
+                last_emitter_index[fact_id] = index
+    for index, rule in enumerate(rules):
+        consumed = condition_fact_keys(rule.get("when", {}))
+        for fact_id in sorted(consumed & set(last_emitter_index)):
+            if index <= last_emitter_index[fact_id]:
+                raise ValidationError(
+                    f"pack.rules[{index}]: rule {rule.get('id')!r} consumes emitted "
+                    f"fact {fact_id!r} but is not ordered after every rule that "
+                    "emits it; reorder the rules so emissions precede consumers"
+                )
 
     for index, policy in enumerate(inheritance):
         path = f"pack.inheritance[{index}]"
@@ -675,6 +732,9 @@ def _validate_purpose_blocks(
             )
         _require(pin, "id", str, "extraction.taxonomy")
         _require(pin, "version", str, "extraction.taxonomy")
+        pin_hash = pin.get("content_hash")
+        if pin_hash is not None and not isinstance(pin_hash, str):
+            raise ValidationError("extraction.taxonomy.content_hash: expected a string")
 
     allowed_tags: set[str] | None = None
     if taxonomy is not None:
@@ -685,6 +745,12 @@ def _validate_purpose_blocks(
             if pin.get("id") != metadata["id"] or pin.get("version") != metadata["version"]:
                 raise ValidationError(
                     "extraction.taxonomy: pinned taxonomy does not match the supplied taxonomy"
+                )
+            pin_hash = pin.get("content_hash")
+            if pin_hash is not None and pin_hash != content_hash(taxonomy):
+                raise ValidationError(
+                    "extraction.taxonomy.content_hash: pinned hash does not match "
+                    "the supplied taxonomy content"
                 )
         allowed_tags = {tag["id"] for tag in taxonomy["tags"]}
 

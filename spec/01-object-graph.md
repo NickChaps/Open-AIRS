@@ -126,7 +126,10 @@ connector is asserted even when other connectors are undocumented. A negative
 conclusion, such as "no external send is possible", requires every reachable
 connector to declare its actions; otherwise the derived fact stays `unknown`.
 A gate with an approval level outside the table, or marked `bypassable`, is
-treated as potentially autonomous. Direct facts always win over derived facts,
+treated as potentially autonomous. So is a gate whose `enforced_by` is not
+`connector` or `platform`: an approval step that no technical mechanism
+imposes is a policy wish, not a demonstrable control, and the action keeps
+counting as autonomous. Direct facts always win over derived facts,
 and derived facts win over pack-declared inheritance.
 
 This keeps the division of labour stable: the model reads intent, the

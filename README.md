@@ -74,7 +74,7 @@ AIR builds one reviewable record from four elements:
 | **Object** | Something the organisation needs to track | Platform, system, configured application, skill, connector, model, use or contract |
 | **Fact** | A precise answer used by rules | “The application ranks candidates” |
 | **Evidence** | The source supporting that fact | Prompt excerpt, connector configuration, use-owner declaration |
-| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.2.0 or GDPR 1.2.0 |
+| **Rule pack** | A reviewed version of questions, conditions and references | EU AI Act 1.3.0 or GDPR 1.3.0 |
 
 An exact reference to a law or framework is called an **anchor**. A dated copy
 of the registry is called an **inventory version** in the reader guides. JSON
@@ -223,10 +223,12 @@ Its analysis explains why those sources describe candidate screening, how the
 connector changes the use and which information remains unknown.
 
 The engine then applies the selected packs. In the bundled example, the EU AI
-Act pack matches the Annex III employment route and the related high-risk
-rules. The GDPR pack finds a solely automated decision with a significant
-effect, no established Article 22 exception, and a required DPIA whose
-completion is not evidenced. The selected NIST profile keeps its own gaps
+Act pack matches the Annex III employment route, derives the high-risk
+classification from the Article 6(3) outcome and fires the related
+obligations. The GDPR pack establishes the Article 22 exposure by design,
+from the determinative purpose and a rejection the connector can send with
+no enforced human gate, with a significant effect, no established Article
+22 exception, and a required DPIA whose completion is not evidenced. The selected NIST profile keeps its own gaps
 separate and does not present them as legal non-compliance.
 
 [Open the complete worked example without running code](examples/ai-governance/README.md).
@@ -278,6 +280,10 @@ The distribution includes:
   stays the explicit centre of each assessment;
 - deterministic composition facts derived from declared connector actions,
   so capability and approval gates never depend on a model guess;
+- a derived qualification chain: rules emit legal facts (Annex III route,
+  Article 6(3) outcome, high-risk status, Article 22 exposure) that
+  downstream obligation rules consume, so no assessment needs a pre-filled
+  legal conclusion;
 - versioned packs and conformance tests;
 - assessment comparison and pack-impact simulation;
 - a separate mechanism for organisation-owned internal processes;
@@ -296,6 +302,11 @@ The scope is deliberately explicit so nobody discovers it late:
 - a dynamic residual questionnaire that asks people only the facts that no
   API, inheritance or reading can supply;
 - a durable registry service and a review interface;
+- a full obligations matrix per actor (applicable, satisfied, missing or
+  indeterminate for each obligation), beyond today's gap findings;
+- roll-up of use, agent and skill exposures to their parent platform;
+- a public evaluation corpus of tricky extractions: prohibitions, examples,
+  ambiguities, unused capabilities and real uses;
 - additional packs, and translations of the purpose taxonomy.
 
 Each of these is a welcome contribution. The specification in [`spec/`](spec/)
@@ -305,8 +316,8 @@ already describes the target behaviour for most of them.
 
 | Pack | Nature | Summary |
 | --- | --- | --- |
-| [EU AI Act 1.2.0](packs/eu-ai-act/1.2.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
-| [GDPR for AI uses 1.2.0](packs/eu-gdpr-ai/1.2.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
+| [EU AI Act 1.3.0](packs/eu-ai-act/1.3.0/README.md) | EU law | Article 5, Annex III, Article 6, operator duties, transparency and general-purpose AI models |
+| [GDPR for AI uses 1.3.0](packs/eu-gdpr-ai/1.3.0/README.md) | EU law | Scope, principles, roles, rights, Article 22, DPIAs, security and transfers |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.md) | EU directive | Governance, Article 21 measures and incident reporting, to be applied with the relevant national law |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.md) | Voluntary framework | 72 Core outcomes within an organisation-selected target profile |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.md) | Voluntary framework | 106 Core outcomes within an organisation-selected target profile |
@@ -377,6 +388,7 @@ their earlier versions. Four entry points cover the normal reading path:
 | See what an AI registry contains | [The AI registry](docs/en/ai-registry.md) |
 | Run the examples and inspect the files | [Ten-minute walkthrough](docs/en/quickstart.md) |
 | Author rules or integrate the engine | [Documentation by role](docs/en/README.md) |
+| Compare AIR with neighbouring projects | [Related work](docs/en/related-work.md) |
 
 Technical specifications live in [`spec/`](spec/). Dated coverage reviews live
 in [`docs/audits/`](docs/audits/). They are maintenance evidence and are not
@@ -391,7 +403,7 @@ evidence, reading quality, selected packs and their versions.
 The framework preserves unknowns and conflicts. Human controls can be targeted
 or sampled according to risk and internal policy.
 
-The current release is `v0.1.0-alpha.6`. Formats may still change.
+The current release is `v0.1.0-alpha.7`. Formats may still change.
 
 ## Licence and citation
 

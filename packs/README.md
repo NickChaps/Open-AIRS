@@ -30,8 +30,8 @@ flowchart LR
 
 | Pack | Version | Authority | Scope | Human-readable guide |
 | --- | --- | --- | --- | --- |
-| EU AI Act core | 1.2.0 | Binding EU regulation | All Article 5 routes, all Annex III cases, Article 6, operator readiness, Article 50 and GPAI | [Open](eu-ai-act/1.2.0/README.md) |
-| EU GDPR AI core | 1.2.0 | Binding EU regulation with marked EDPB guidance | Scope, principles, rights, Article 22, DPIA, security, transfers and AI-model guidance | [Open](eu-gdpr-ai/1.2.0/README.md) |
+| EU AI Act core | 1.3.0 | Binding EU regulation | All Article 5 routes, all Annex III cases, Article 6, operator readiness, Article 50 and GPAI | [Open](eu-ai-act/1.3.0/README.md) |
+| EU GDPR AI core | 1.3.0 | Binding EU regulation with marked EDPB guidance | Scope, principles, rights, Article 22, DPIA, security, transfers and AI-model guidance | [Open](eu-gdpr-ai/1.3.0/README.md) |
 | NIS2 EU baseline | 1.1.0 | EU directive plus national overlays | Article 20, all ten Article 21 measure families and Article 23 reporting | [Open](eu-nis2-baseline/1.1.0/README.md) |
 | NIST AI RMF | 1.1.0 | Voluntary framework | All 72 Core outcomes through a selected target profile | [Open](nist-ai-rmf/1.1.0/README.md) |
 | NIST CSF | 2.1.0 | Voluntary framework | All 106 current Core outcomes through a selected Target Profile | [Open](nist-csf/2.1.0/README.md) |

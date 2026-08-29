@@ -30,8 +30,8 @@ flowchart LR
 
 | Pack | Version | Autorité | Périmètre | Guide lisible |
 | --- | --- | --- | --- | --- |
-| Socle AI Act UE | 1.2.0 | Règlement européen contraignant | Toutes les voies de l’article 5, tous les cas annexe III, article 6, opérateurs, article 50 et GPAI | [Ouvrir](eu-ai-act/1.2.0/README.fr.md) |
-| Socle RGPD IA | 1.1.0 | Règlement européen avec lignes EDPB identifiées | Périmètre, principes, droits, article 22, AIPD, sécurité, transferts et modèles IA | [Ouvrir](eu-gdpr-ai/1.2.0/README.fr.md) |
+| Socle AI Act UE | 1.3.0 | Règlement européen contraignant | Toutes les voies de l’article 5, tous les cas annexe III, article 6, opérateurs, article 50 et GPAI | [Ouvrir](eu-ai-act/1.3.0/README.fr.md) |
+| Socle RGPD IA | 1.3.0 | Règlement européen avec lignes EDPB identifiées | Périmètre, principes, droits, article 22, AIPD, sécurité, transferts et modèles IA | [Ouvrir](eu-gdpr-ai/1.3.0/README.fr.md) |
 | Socle NIS2 UE | 1.1.0 | Directive européenne et profils nationaux | Article 20, dix familles de l’article 21 et déclarations de l’article 23 | [Ouvrir](eu-nis2-baseline/1.1.0/README.fr.md) |
 | NIST AI RMF | 1.1.0 | Référentiel volontaire | 72 résultats du Core dans un profil cible sélectionné | [Ouvrir](nist-ai-rmf/1.1.0/README.fr.md) |
 | NIST CSF | 2.1.0 | Référentiel volontaire | 106 résultats actuels du Core dans un profil cible sélectionné | [Ouvrir](nist-csf/2.1.0/README.fr.md) |

@@ -17,9 +17,9 @@
       "urn:air:extraction:fictional-recruiting-20260829"
     ],
     "assessment_ids": [
-      "urn:air:assessment:475db1f43cefd518b09424f3",
-      "urn:air:assessment:92eb08e7cdf7b69c55bfb054",
-      "urn:air:assessment:bf1d6049bc74aa1527ea59e4"
+      "urn:air:assessment:77a350a2b4122bb87f154d4f",
+      "urn:air:assessment:d30260bdd2297343b5e8be32",
+      "urn:air:assessment:83685aac375b32c1fa6bfefd"
     ]
   },
   "renderer": {
@@ -32,17 +32,17 @@
     },
     "run_id": "fictional-note-recruiting-001"
   },
-  "summary": "The configured application screens and ranks job applicants and can send rejection messages without a separate human confirmation gate. The AI Act pack classifies the use as high-risk under Annex III point 4(a) and returns oversight and transparency gaps. The GDPR pack returns an Article 22 condition gap and a missing DPIA. The selected NIST profile returns three governance gaps.",
+  "summary": "The configured application screens and ranks job applicants and can send rejection messages without a technically enforced human gate. The AI Act pack derives the high-risk classification from the Annex III route and the Article 6(3) outcome, and returns oversight and transparency gaps. The GDPR pack establishes the Article 22 exposure by design and returns a condition gap and a missing DPIA. The selected NIST profile returns three governance gaps.",
   "scope": "Recruitment use composed of the configured application, the enterprise platform, the CV-screening skill and the candidate-messaging connector.",
   "statements": [
     {
       "statement_id": "note.fact.recruitment-action",
       "kind": "fact",
-      "text": "The application filters and ranks candidates and can send a rejection message without a separate human confirmation gate.",
+      "text": "The application filters and ranks candidates with determinative influence, and the connector can send the rejection with no technically enforced human gate.",
       "references": {
         "fact_ids": [
           "use.tasks",
-          "decision.solely_automated",
+          "purpose.decision_influence",
           "controls.deployer.human_oversight_assigned"
         ],
         "evidence": [
@@ -57,12 +57,16 @@
       "kind": "finding",
       "text": "The intended purpose matches Annex III point 4(a), and the supplied Article 6(3) facts do not remove the use from high-risk classification.",
       "references": {
-        "assessment_id": "urn:air:assessment:475db1f43cefd518b09424f3",
+        "assessment_id": "urn:air:assessment:77a350a2b4122bb87f154d4f",
         "rule_ids": [
           "aiact.core.annex3-4a-recruitment-selection",
           "aiact.core.high-risk-annex3"
         ],
-        "anchor_ids": ["aiact.art6", "aiact.annex3", "aiact.timeline"]
+        "anchor_ids": [
+          "aiact.art6",
+          "aiact.annex3",
+          "aiact.timeline"
+        ]
       }
     },
     {
@@ -70,29 +74,35 @@
       "kind": "finding",
       "text": "The AI Act pack returns gaps for competent human oversight, affected-person notice and direct-interaction transparency.",
       "references": {
-        "assessment_id": "urn:air:assessment:475db1f43cefd518b09424f3",
+        "assessment_id": "urn:air:assessment:77a350a2b4122bb87f154d4f",
         "rule_ids": [
           "aiact.core.controls-deployer-human-oversight-assigned-gap",
           "aiact.core.controls-deployer-subject-notice-gap",
           "aiact.core.controls-ai-interaction-disclosure-gap",
           "aiact.core.controls-article50-clear-timely-accessible-gap"
         ],
-        "anchor_ids": ["aiact.arts26-27", "aiact.art50"]
+        "anchor_ids": [
+          "aiact.arts26-27",
+          "aiact.art50"
+        ]
       }
     },
     {
       "statement_id": "note.finding.gdpr",
       "kind": "finding",
-      "text": "The GDPR pack returns an Article 22 decision with no evidenced paragraph 2 condition and a required DPIA that is not completed.",
+      "text": "The GDPR pack establishes the Article 22 decision by design (determinative purpose with an autonomously executable rejection), with no evidenced paragraph 2 condition and a required DPIA that is not completed.",
       "references": {
-        "assessment_id": "urn:air:assessment:92eb08e7cdf7b69c55bfb054",
+        "assessment_id": "urn:air:assessment:d30260bdd2297343b5e8be32",
         "rule_ids": [
           "gdpr.ai.article22-restriction",
           "gdpr.ai.article22-condition-gap",
           "gdpr.ai.dpia-trigger",
           "gdpr.ai.controls-dpia-completed-gap"
         ],
-        "anchor_ids": ["gdpr.art22", "gdpr.arts35-36"]
+        "anchor_ids": [
+          "gdpr.art22",
+          "gdpr.arts35-36"
+        ]
       }
     },
     {
@@ -100,7 +110,7 @@
       "kind": "finding",
       "text": "The selected NIST profile returns gaps for two Core outcomes and for GenAI profile selection.",
       "references": {
-        "assessment_id": "urn:air:assessment:bf1d6049bc74aa1527ea59e4",
+        "assessment_id": "urn:air:assessment:83685aac375b32c1fa6bfefd",
         "rule_ids": [
           "nist.airmf.manage-1-1-gap",
           "nist.airmf.measure-2-1-gap",
@@ -118,7 +128,9 @@
       "kind": "unknown",
       "text": "The supplied evidence does not establish how often rejection messages were sent in production.",
       "references": {
-        "fact_ids": ["use.tasks"]
+        "fact_ids": [
+          "use.tasks"
+        ]
       }
     },
     {

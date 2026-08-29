@@ -222,6 +222,11 @@ class AssessmentTests(unittest.TestCase):
     def test_gdpr_article22_special_category_restriction_is_encoded(self):
         inventory = deepcopy(load("examples/ai-governance/inventory.json"))
         use = next(item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant")
+        use["facts"]["decision.solely_automated"] = {
+            "state": "known",
+            "value": True,
+            "evidence": ["ev-legal-review"],
+        }
         use["facts"]["data.special_categories_processed"] = {
             "state": "known",
             "value": True,

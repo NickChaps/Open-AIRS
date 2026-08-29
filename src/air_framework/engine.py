@@ -70,7 +70,9 @@ def assess(
         }:
             continue
         base_facts[fact_key] = derived
-    effective_facts = graph.effective_facts(target_id, inheritance, base_facts=base_facts)
+    effective_facts = dict(
+        graph.effective_facts(target_id, inheritance, base_facts=base_facts)
+    )
     _validate_effective_fact_types(effective_facts, pack)
     anchor_index = {item["id"]: item for item in pack["anchors"]}
     evaluated_findings: list[dict[str, Any]] = []
@@ -89,6 +91,25 @@ def assess(
             Truth.FALSE: "not_matched",
             Truth.UNKNOWN: "indeterminate",
         }[trace.truth]
+        for emission in rule.get("emits", []):
+            if status != emission.get("when", "matched"):
+                continue
+            fact_key = emission["fact"]
+            current = effective_facts.get(fact_key)
+            if isinstance(current, Mapping) and current.get("state") in {
+                "known",
+                "conflicted",
+                "not_applicable",
+            }:
+                continue
+            effective_facts[fact_key] = {
+                "state": "known",
+                "value": deepcopy(emission["value"]),
+                "evidence": sorted(trace.evidence),
+                "provenance": "rule",
+                "rule_id": rule["id"],
+                "derivation": "rule_emission.v1",
+            }
         finding = {
             "rule_id": rule["id"],
             "status": status,

@@ -44,6 +44,11 @@ Developers can then open:
 - the [Python engine](../../src/air_framework/);
 - the [tests](../../tests/).
 
+## Situate the project
+
+- [Related work](related-work.md): the neighbouring projects, stated
+  honestly, and how AIR relates to each.
+
 ## Reference documents
 
 Specifications, licences, earlier pack versions, changelogs and dated audits

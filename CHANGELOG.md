@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.1.0-alpha.7 (2026-08-29)
+
+The qualification chain becomes derived instead of declared.
+
+- Rules can emit derived legal facts (`emits`): gap-filling only, typed and
+  ordered by pack validation, recorded with rule provenance and evidence in
+  the assessment snapshot.
+- EU AI Act 1.3.0: the Article 6(3) rule emits its outcome both ways, the
+  historical classification rule consumes it (covering a previously missed
+  derogation corner), emits `aiact.high_risk_established` plus the route,
+  and all 35 obligation rules consume the derived conclusion. Purpose tags
+  can establish the Annex III employment routes.
+- EU GDPR AI 1.3.0: Article 22 exposure by design, from a material or
+  determinative purpose combined with a derived autonomous external send;
+  the satellite Article 22 rules consume the emitted qualification.
+- Extractors can no longer propose legal conclusions: catalogue facts
+  flagged `derived` stay out of the extraction catalogue and proposals for
+  them are rejected.
+- Applied extractions synthesise `purpose.*` facts from validated proposed
+  uses, so the purpose layer now feeds the engine.
+- Composition derivation treats an approval gate that nothing technically
+  enforces (`enforced_by` outside connector/platform) as autonomous.
+- Taxonomy pins carry a content hash; model-proposed uses without an
+  offered taxonomy are rejected with a clear error.
+- The worked recruiting example no longer declares `high_risk_confirmed`,
+  `high_risk_route` or `decision.solely_automated`; the engine derives all
+  three conclusions, with zero indeterminate findings.
+- New bilingual related-work page situating AIR among FINOS AIGF and CALM,
+  Compliance Cards, COMPL-AI, VerifyWise, the Microsoft Agent Governance
+  Toolkit, AIR Blackbox, ML-BOM/AIBOM and OSCAL, from verified sources.
+- The Python distribution is renamed `air-framework` (the previous working
+  name collided with the FINOS AI Governance Framework domain).
+
 All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.

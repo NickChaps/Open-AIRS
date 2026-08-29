@@ -76,7 +76,7 @@ AIR construit un dossier commun à partir de quatre éléments :
 | **Objet** | Une chose que l’organisation veut suivre | Plateforme, système, application configurée, skill, connecteur, modèle, usage, contrat |
 | **Fait** | Une réponse précise utilisée par les règles | « L’application classe des candidats » |
 | **Preuve** | La source qui permet d’affirmer ce fait | Extrait du prompt, configuration du connecteur, réponse du responsable métier |
-| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.2.0 ou RGPD 1.2.0 |
+| **Pack de règles** | Une version relue de questions, conditions et références | AI Act 1.3.0 ou RGPD 1.3.0 |
 
 Une référence exacte au texte ou au référentiel est appelée **ancrage**. Une
 photographie datée du registre est appelée **version d’inventaire** dans cette
@@ -232,10 +232,13 @@ présélection de candidats, quel rôle joue le connecteur et quelles informatio
 restent inconnues.
 
 Le moteur applique ensuite les packs. Dans l’exemple livré, le pack AI Act
-retient le cas de recrutement de l’annexe III et les règles associées au haut
-risque. Le pack RGPD constate une décision exclusivement automatisée produisant
-un effet significatif, sans exception établie au titre de l’article 22, ainsi
-qu’une AIPD requise dont l’achèvement n’est pas prouvé. Le profil NIST conserve
+retient le cas de recrutement de l’annexe III, dérive la classification à
+haut risque du résultat de l’article 6(3) et déclenche les obligations
+associées. Le pack RGPD établit l’exposition à l’article 22 par conception,
+à partir de la finalité déterminante et d’un refus que le connecteur peut
+envoyer sans garde humaine imposée, avec un effet significatif, sans
+exception établie, ainsi qu’une AIPD requise dont l’achèvement n’est pas
+prouvé. Le profil NIST conserve
 ses propres écarts, sans les présenter comme une non-conformité juridique.
 
 [Ouvrir le cas complet, sans lancer de code](examples/ai-governance/README.fr.md).
@@ -284,6 +287,10 @@ La distribution contient :
 - une commande facultative `qualify` qui appelle un service compatible avec
   l’API Chat Completions, une fois pour la lecture et une fois pour la note ;
 - la vérification locale de chaque référence produite par le modèle ;
+- une chaîne de qualification dérivée : les règles émettent des faits
+  juridiques (voie annexe III, résultat de l'article 6(3), statut haut
+  risque, exposition article 22) que les règles d'obligation consomment,
+  si bien qu'aucune évaluation n'exige de conclusion juridique préremplie ;
 - une taxonomie de finalités versionnée et l'extraction d'usages proposés,
   pour que la finalité reste le centre explicite de chaque qualification ;
 - des faits de composition dérivés de façon déterministe des actions
@@ -310,6 +317,13 @@ trop tard :
 - un questionnaire résiduel dynamique qui ne demande aux personnes que les
   faits qu'aucune API, aucun héritage et aucune lecture ne peuvent fournir ;
 - un service de registre durable et une interface de revue ;
+- une matrice complète des obligations par acteur (applicable, satisfaite,
+  manquante ou indéterminée pour chaque obligation), au-delà des constats
+  d'écart actuels ;
+- la consolidation des expositions des usages, agents et skills vers leur
+  plateforme parente ;
+- un corpus public d'évaluation des extractions difficiles : interdictions,
+  exemples, ambiguïtés, capacités non utilisées et usages réels ;
 - des packs supplémentaires et les traductions de la taxonomie de finalités.
 
 Chacun de ces chantiers est une contribution bienvenue. La spécification dans
@@ -319,8 +333,8 @@ Chacun de ces chantiers est une contribution bienvenue. La spécification dans
 
 | Pack | Nature | Périmètre résumé |
 | --- | --- | --- |
-| [EU AI Act 1.2.0](packs/eu-ai-act/1.2.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
-| [RGPD pour les usages IA 1.2.0](packs/eu-gdpr-ai/1.2.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
+| [EU AI Act 1.3.0](packs/eu-ai-act/1.3.0/README.fr.md) | Droit européen | Article 5, annexe III, article 6, obligations des opérateurs, transparence et modèles d’IA à usage général |
+| [RGPD pour les usages IA 1.3.0](packs/eu-gdpr-ai/1.3.0/README.fr.md) | Droit européen | Applicabilité, principes, rôles, droits, article 22, AIPD, sécurité et transferts |
 | [NIS2 1.1.0](packs/eu-nis2-baseline/1.1.0/README.fr.md) | Directive européenne | Gouvernance, mesures de l’article 21 et signalement des incidents, à appliquer avec le droit national concerné |
 | [NIST AI RMF 1.1.0](packs/nist-ai-rmf/1.1.0/README.fr.md) | Référentiel volontaire | 72 résultats du Core dans un profil choisi par l’organisation |
 | [NIST CSF 2.1.0](packs/nist-csf/2.1.0/README.fr.md) | Référentiel volontaire | 106 résultats du Core dans un profil choisi par l’organisation |
@@ -393,6 +407,7 @@ leurs versions. Pour découvrir le projet, quatre entrées suffisent :
 | Voir exactement ce que contient un registre IA | [Le registre IA](docs/fr/registre-ia.md) |
 | Exécuter les exemples et inspecter les fichiers | [Parcours de dix minutes](docs/fr/demarrage.md) |
 | Créer des règles ou intégrer le moteur | [Documentation par rôle](docs/fr/README.md) |
+| Situer AIR parmi les projets voisins | [Travaux proches](docs/fr/travaux-proches.md) |
 
 Les spécifications techniques se trouvent dans [`spec/`](spec/). Les revues
 datées de couverture se trouvent dans [`docs/audits/`](docs/audits/). Elles
@@ -410,7 +425,7 @@ Le framework conserve toute inconnue ou tout désaccord. Il ne produit pas de
 réponse rassurante sans preuve. Les contrôles humains peuvent être ciblés ou
 échantillonnés selon le risque et la politique interne.
 
-La version actuelle est `v0.1.0-alpha.6`. Les formats peuvent encore évoluer.
+La version actuelle est `v0.1.0-alpha.7`. Les formats peuvent encore évoluer.
 
 ## Licence et citation
 

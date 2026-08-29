@@ -37,6 +37,8 @@ APPROVAL_LEVELS = (
 _AUTONOMOUS_APPROVALS = {"none", "standing_user_authorization"}
 _APPROVAL_ORDER = {level: index for index, level in enumerate(APPROVAL_LEVELS)}
 
+ENFORCEMENT_MECHANISMS = ("connector", "platform")
+
 _CONNECTOR_PATHS: dict[str, tuple[tuple[str, ...], ...]] = {
     "ai_use": (
         ("implemented_by", "can_invoke"),
@@ -102,14 +104,21 @@ def _known_actions(
 
 
 def _is_autonomous(action: Mapping[str, Any]) -> bool:
-    """An action counts as potentially autonomous unless a real gate is shown."""
+    """An action counts as potentially autonomous unless a real gate is shown.
+
+    A declared approval step only counts as a gate when a technical mechanism
+    (``enforced_by``: connector or platform) imposes it. An approval that
+    nothing enforces is a policy wish, so the action stays autonomous.
+    """
 
     if action.get("bypassable") is True:
         return True
     approval = action.get("approval")
     if approval not in APPROVAL_LEVELS:
         return True
-    return approval in _AUTONOMOUS_APPROVALS
+    if approval in _AUTONOMOUS_APPROVALS:
+        return True
+    return action.get("enforced_by") not in ENFORCEMENT_MECHANISMS
 
 
 def _floor_level(action: Mapping[str, Any]) -> str:
@@ -119,6 +128,11 @@ def _floor_level(action: Mapping[str, Any]) -> str:
         return "none"
     approval = action.get("approval")
     if approval not in APPROVAL_LEVELS:
+        return "none"
+    if (
+        approval not in _AUTONOMOUS_APPROVALS
+        and action.get("enforced_by") not in ENFORCEMENT_MECHANISMS
+    ):
         return "none"
     return approval
 

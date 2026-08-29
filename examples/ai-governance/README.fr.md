@@ -74,7 +74,7 @@ règles :
 | Tâches | Filtrer, classer et envoyer un refus | 0,99 | Déclaration d’usage, instructions |
 | Cas annexe III | Recrutement et sélection, point 4(a) | 0,98 | Déclaration, note de triage juridique |
 | Supervision humaine attribuée | Non | 0,96 | Instructions, note de triage juridique |
-| Décision exclusivement automatisée | Oui | 0,97 | Instructions, politique du connecteur |
+| Usage proposé (couche finalité) | Présélection de candidats, influence déterminante | 0,97 | Instructions, configuration du connecteur, déclaration d’usage |
 | Effet important | Oui | 0,95 | Note de triage juridique |
 | AIPD réalisée | Non | 0,99 | Déclaration d’usage |
 
@@ -85,10 +85,10 @@ de score de confiance du modèle.
 
 | Pack | Résultat | Principal ancrage ou effet |
 | --- | --- | --- |
-| AI Act 1.1.0 | Candidat annexe III 4(a) et qualification à haut risque | Article 6 et annexe III |
-| AI Act 1.1.0 | Lacunes de supervision, d’information de la personne et de transparence IA | Articles 26 et 50 |
-| RGPD IA 1.1.0 | Décision relevant de l’article 22 sans condition de l’article 22(2) établie | Article 22 |
-| RGPD IA 1.1.0 | AIPD requise et absente | Article 35 |
+| AI Act 1.3.0 | Candidat annexe III 4(a) et qualification à haut risque | Article 6 et annexe III |
+| AI Act 1.3.0 | Lacunes de supervision, d’information de la personne et de transparence IA | Articles 26 et 50 |
+| RGPD IA 1.3.0 | Décision relevant de l’article 22 sans condition de l’article 22(2) établie | Article 22 |
+| RGPD IA 1.3.0 | AIPD requise et absente | Article 35 |
 | NIST AI RMF 1.1.0 | Deux résultats Core sélectionnés non atteints et profil GenAI non sélectionné | Profil choisi par l’organisation |
 
 Le profil fictif de l’organisation envoie le constat haut risque vers
@@ -110,7 +110,7 @@ PYTHONPATH=src python -m air_framework validate-extraction \
 
 PYTHONPATH=src python -m air_framework assess \
   --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.1.0/pack.json \
+  --pack packs/eu-ai-act/1.3.0/pack.json \
   --target use-recruiting-assistant
 
 PYTHONPATH=src python -m air_framework validate-review \

@@ -12,14 +12,32 @@
     "snapshot_id": "snapshot-2026-08-29-a"
   },
   "pack_inputs": [
-    {"id": "eu-ai-act-core", "version": "1.1.0", "content_hash": "64ee6f93cd407d78c152e830d8ab7beef23225b9bf78130229974e5f55ee824b"},
-    {"id": "eu-gdpr-ai-core", "version": "1.1.0", "content_hash": "f6298053692c5a4eeb3eacf102c58a8912d1a734a981a73ef208193bd5fab2af"},
-    {"id": "nist-ai-rmf-core", "version": "1.1.0", "content_hash": "a554d34bb319c934550616f6657cdf0ff7a50916e73fcfb3cb77c49cabfaa0c1"}
+    {
+      "id": "eu-ai-act-core",
+      "version": "1.3.0",
+      "content_hash": "e6dd1af170bc6c98ab04a3d7feaccd0fa3aa7bf1ce0e0f9240b402fd2449b321"
+    },
+    {
+      "id": "eu-gdpr-ai-core",
+      "version": "1.3.0",
+      "content_hash": "5c99298694e8f6ae325d8235a9096771b222aa784abda18ad5904ee616030750"
+    },
+    {
+      "id": "nist-ai-rmf-core",
+      "version": "1.1.0",
+      "content_hash": "a554d34bb319c934550616f6657cdf0ff7a50916e73fcfb3cb77c49cabfaa0c1"
+    }
   ],
   "extractor": {
     "kind": "hybrid",
-    "skill": {"id": "air-assess", "version": "0.3.0"},
-    "model": {"id": "fictional-assessment-model", "version": "2026-08"},
+    "skill": {
+      "id": "air-assess",
+      "version": "0.3.0"
+    },
+    "model": {
+      "id": "fictional-assessment-model",
+      "version": "2026-08"
+    },
     "run_id": "fictional-run-recruiting-001"
   },
   "source_evidence": [
@@ -34,16 +52,28 @@
     {
       "fact_id": "use.tasks",
       "state": "known",
-      "value": ["filter_applications", "rank_candidates", "send_rejection"],
-      "evidence": ["ev-use-declaration", "ev-app-prompt"],
+      "value": [
+        "filter_applications",
+        "rank_candidates",
+        "send_rejection"
+      ],
+      "evidence": [
+        "ev-use-declaration",
+        "ev-app-prompt"
+      ],
       "confidence": 0.99,
       "rationale": "The declaration and instructions describe filtering, ranking and rejection messaging."
     },
     {
       "fact_id": "aiact.annex_iii_use_cases",
       "state": "known",
-      "value": ["annex3.4a.recruitment_selection"],
-      "evidence": ["ev-use-declaration", "ev-legal-review"],
+      "value": [
+        "annex3.4a.recruitment_selection"
+      ],
+      "evidence": [
+        "ev-use-declaration",
+        "ev-legal-review"
+      ],
       "confidence": 0.98,
       "rationale": "The intended purpose is recruitment and selection of natural persons."
     },
@@ -51,23 +81,20 @@
       "fact_id": "controls.deployer.human_oversight_assigned",
       "state": "known",
       "value": false,
-      "evidence": ["ev-app-prompt", "ev-legal-review"],
+      "evidence": [
+        "ev-app-prompt",
+        "ev-legal-review"
+      ],
       "confidence": 0.96,
       "rationale": "No competent human oversight role or confirmation step is established in the supplied material."
-    },
-    {
-      "fact_id": "decision.solely_automated",
-      "state": "known",
-      "value": true,
-      "evidence": ["ev-app-prompt", "ev-connector-config"],
-      "confidence": 0.97,
-      "rationale": "The application can issue the rejection message without a separate human gate."
     },
     {
       "fact_id": "decision.legal_or_similarly_significant_effect",
       "state": "known",
       "value": true,
-      "evidence": ["ev-legal-review"],
+      "evidence": [
+        "ev-legal-review"
+      ],
       "confidence": 0.95,
       "rationale": "A rejection determines access to an employment opportunity."
     },
@@ -75,29 +102,50 @@
       "fact_id": "controls.dpia_completed",
       "state": "known",
       "value": false,
-      "evidence": ["ev-use-declaration"],
+      "evidence": [
+        "ev-use-declaration"
+      ],
       "confidence": 0.99,
       "rationale": "The use owner declares that no DPIA has been completed."
     }
   ],
   "analysis": {
-    "summary": "The configured application ranks job applicants and can send rejection messages without a separate human confirmation gate. The composition supports an Annex III recruitment mapping and a solely automated decision with a significant effect.",
+    "summary": "The configured application ranks job applicants and can send rejection messages without a technically enforced human gate. The composition supports an Annex III recruitment mapping; the engine derives the high-risk classification and the Article 22 exposure from these facts.",
     "scope": "Recruitment use composed of the configured application, its screening skill, the enterprise platform and the candidate-messaging connector.",
     "observations": [
       {
         "statement": "The application filters and ranks candidates for an employment decision.",
-        "fact_ids": ["use.tasks", "aiact.annex_iii_use_cases"],
-        "evidence": ["ev-app-prompt", "ev-use-declaration", "ev-legal-review"]
+        "fact_ids": [
+          "use.tasks",
+          "aiact.annex_iii_use_cases"
+        ],
+        "evidence": [
+          "ev-app-prompt",
+          "ev-use-declaration",
+          "ev-legal-review"
+        ]
       },
       {
-        "statement": "The connector permits rejection messaging without a separate human confirmation step.",
-        "fact_ids": ["controls.deployer.human_oversight_assigned", "decision.solely_automated"],
-        "evidence": ["ev-app-prompt", "ev-connector-config", "ev-legal-review"]
+        "statement": "The connector permits rejection messaging with no technically enforced human confirmation step; the solely-automated exposure follows from this composition, not from a declared conclusion.",
+        "fact_ids": [
+          "controls.deployer.human_oversight_assigned"
+        ],
+        "evidence": [
+          "ev-app-prompt",
+          "ev-connector-config",
+          "ev-legal-review"
+        ]
       },
       {
         "statement": "No completed DPIA is evidenced for the significant automated recruitment decision.",
-        "fact_ids": ["decision.legal_or_similarly_significant_effect", "controls.dpia_completed"],
-        "evidence": ["ev-use-declaration", "ev-legal-review"]
+        "fact_ids": [
+          "decision.legal_or_similarly_significant_effect",
+          "controls.dpia_completed"
+        ],
+        "evidence": [
+          "ev-use-declaration",
+          "ev-legal-review"
+        ]
       }
     ],
     "unknowns": [
@@ -106,5 +154,45 @@
     "cautions": [
       "Safety instructions in the prompt are not treated as evidence of a runtime control."
     ]
-  }
+  },
+  "taxonomy": {
+    "id": "air-purpose",
+    "version": "1.0.0",
+    "content_hash": "9b8ce3032cf369a59877db8bd64ac68a44944ea1e1734e29f0d0e658fc618181"
+  },
+  "proposed_uses": [
+    {
+      "purpose_statement": "Screen and rank incoming job applications, then send rejection messages to screened-out candidates.",
+      "purpose_tags": [
+        "candidate_selection",
+        "recruitment"
+      ],
+      "material_tasks": [
+        "filter_applications",
+        "rank_candidates",
+        "send_rejection"
+      ],
+      "affected_people": [
+        "job applicants"
+      ],
+      "decision_influence": "determinative",
+      "evidence": [
+        "ev-app-prompt",
+        "ev-connector-config",
+        "ev-use-declaration"
+      ],
+      "confidence": 0.97,
+      "alternative_interpretations": []
+    }
+  ],
+  "excluded_mentions": [
+    {
+      "candidate_use": "General correspondence drafting",
+      "classification": "capability_only",
+      "evidence": [
+        "ev-connector-config"
+      ],
+      "note": "The connector could send other external messages, but no instruction requests any use beyond rejection messaging."
+    }
+  ]
 }

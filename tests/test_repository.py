@@ -133,7 +133,7 @@ class RepositoryIntegrityTests(unittest.TestCase):
                 self.assertLessEqual(
                     body.count("—"),
                     max_em_dashes_per_file,
-                    "em-dash density reads as generated text",
+                    "house style bans em dashes in published prose",
                 )
                 self.assertIsNone(contrast_templates.search(body))
                 self.assertIsNone(assistant_leakage.search(body))

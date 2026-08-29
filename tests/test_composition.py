@@ -117,6 +117,28 @@ class CompositionDerivationTests(unittest.TestCase):
             facts["composition.autonomous_external_send_possible"]["state"], "unknown"
         )
 
+    def test_unenforced_approval_is_not_a_demonstrable_gate(self):
+        """A per-action approval that nothing technically imposes is a policy
+        wish, so the action still counts as autonomous."""
+
+        for enforced_by in ["none", "policy", None]:
+            inventory = _inventory()
+            actions = inventory["objects"][3]["facts"]["connector.actions"]["value"]
+            if enforced_by is None:
+                actions[1].pop("enforced_by", None)
+            else:
+                actions[1]["enforced_by"] = enforced_by
+            graph = InventoryGraph(inventory)
+            facts = derive_composition_facts(graph, "use-1")
+            with self.subTest(enforced_by=enforced_by):
+                self.assertTrue(
+                    facts["composition.autonomous_external_send_possible"]["value"]
+                )
+                self.assertEqual(
+                    facts["composition.engaging_action_approval_floor"]["value"],
+                    "none",
+                )
+
     def test_bypassable_or_unlisted_approval_counts_as_autonomous(self):
         inventory = _inventory()
         actions = inventory["objects"][3]["facts"]["connector.actions"]["value"]

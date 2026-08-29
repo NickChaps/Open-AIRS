@@ -31,11 +31,32 @@ active purpose the sources establish:
 | `alternative_interpretations` | Competing readings a reviewer should see |
 
 A composition may carry several uses. Tags come only from a **versioned
-taxonomy** pinned in the record (`taxonomy.id`, `taxonomy.version`), so a tag
-keeps one meaning over time and packs can map tags to legal categories
+taxonomy** pinned in the record (`taxonomy.id`, `taxonomy.version`, and the
+`content_hash` of the exact taxonomy file offered to the extractor), so a
+tag keeps one meaning over time and packs can map tags to legal categories
 without guessing. Tags are neutral activity labels: `candidate_selection`
 describes an activity; only a rule pack may conclude what that activity means
 under a given law.
+
+## From uses to engine facts
+
+Applying an extraction synthesises neutral facts on the target from its
+validated uses, so rule packs can react to what a composition is for:
+
+| Fact | Value |
+| --- | --- |
+| `purpose.tags` | Sorted union of every use's tags |
+| `purpose.statement` | The use statements, joined |
+| `purpose.decision_influence` | The highest influence across uses |
+| `purpose.affected_people` | Sorted union, when any use names people |
+
+These facts follow the same gap-filling and conflict rules as any model
+proposal, and they are flagged `derived` in pack catalogues: an extractor
+can never propose them directly, only through the validated purpose layer.
+Packs consume them like any fact; the EU AI Act pack, for example, accepts
+employment purpose tags as an Annex III point 4 route, and the GDPR pack
+combines `purpose.decision_influence` with derived connector capability to
+establish an Article 22 exposure by design.
 
 ## Role and polarity: the guardrail rule
 

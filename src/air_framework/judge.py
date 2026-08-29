@@ -389,6 +389,11 @@ def _fact_catalogue(
             continue
         pack_id = pack["pack"]["id"]
         for fact in pack.get("fact_catalog", []):
+            if fact.get("derived") is True:
+                # Derived facts are produced by the engine (rule emissions,
+                # composition, applied purpose layer); an extractor may never
+                # propose them, so they are kept out of the allowed catalogue.
+                continue
             existing = catalogue.get(fact["id"])
             if existing is not None and existing["type"] != fact["type"]:
                 raise ValidationError(
@@ -603,12 +608,17 @@ def extract_with_llm(
     proposed_uses = completion.value.get("proposed_uses")
     excluded_mentions = completion.value.get("excluded_mentions")
     if proposed_uses:
+        if taxonomy is None:
+            raise ValidationError(
+                "The model proposed uses but no purpose taxonomy was offered; "
+                "supply a taxonomy so tags keep a pinned, versioned meaning."
+            )
         record["proposed_uses"] = proposed_uses
-        if taxonomy is not None:
-            record["taxonomy"] = {
-                "id": taxonomy["taxonomy"]["id"],
-                "version": taxonomy["taxonomy"]["version"],
-            }
+        record["taxonomy"] = {
+            "id": taxonomy["taxonomy"]["id"],
+            "version": taxonomy["taxonomy"]["version"],
+            "content_hash": content_hash(taxonomy),
+        }
     if excluded_mentions:
         record["excluded_mentions"] = excluded_mentions
     validate_extraction_record(record, taxonomy=taxonomy)
@@ -673,6 +683,56 @@ def validate_extraction_context(
         )
 
 
+_INFLUENCE_ORDER = ("none", "informative", "material", "determinative")
+
+
+def _purpose_fact_proposals(extraction: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Turn validated proposed uses into neutral facts the engine can consume.
+
+    The purpose layer stays the audit trail; these synthesised facts are the
+    operational bridge, so rule packs can react to what a composition is for
+    without ever letting an extractor assert them directly.
+    """
+
+    uses = extraction.get("proposed_uses") or []
+    if not uses:
+        return []
+    tags = sorted({tag for use in uses for tag in use.get("purpose_tags", [])})
+    statements = [use["purpose_statement"] for use in uses]
+    people = sorted({item for use in uses for item in use.get("affected_people", [])})
+    influence = max(
+        (use.get("decision_influence", "none") for use in uses),
+        key=lambda level: _INFLUENCE_ORDER.index(level),
+    )
+    evidence = sorted({item for use in uses for item in use.get("evidence", [])})
+    confidences = [
+        use["confidence"] for use in uses if isinstance(use.get("confidence"), (int, float))
+    ]
+    confidence = min(confidences) if len(confidences) == len(uses) else None
+    rationale = "Synthesised from the validated proposed uses of this extraction."
+
+    def proposal(fact_id: str, value: Any) -> dict[str, Any]:
+        item: dict[str, Any] = {
+            "fact_id": fact_id,
+            "state": "known",
+            "value": value,
+            "evidence": list(evidence),
+            "rationale": rationale,
+        }
+        if confidence is not None:
+            item["confidence"] = confidence
+        return item
+
+    proposals = [
+        proposal("purpose.tags", tags),
+        proposal("purpose.statement", "; ".join(statements)),
+        proposal("purpose.decision_influence", influence),
+    ]
+    if people:
+        proposals.append(proposal("purpose.affected_people", people))
+    return proposals
+
+
 def apply_extraction(
     inventory: Mapping[str, Any],
     extraction: Mapping[str, Any],
@@ -713,7 +773,9 @@ def apply_extraction(
         "model": extraction["extractor"].get("model"),
         "prompt_hash": extraction["extractor"].get("prompt_hash"),
     }
-    for proposal in extraction["fact_proposals"]:
+    for proposal in list(extraction["fact_proposals"]) + _purpose_fact_proposals(
+        extraction
+    ):
         fact_id = proposal["fact_id"]
         existing = facts.get(fact_id)
         proposed = {

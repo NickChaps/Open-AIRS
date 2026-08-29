@@ -201,6 +201,11 @@
         "version": {
           "type": "string",
           "minLength": 1
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "Canonical content hash of the exact taxonomy file offered to the extractor."
         }
       },
       "additionalProperties": false

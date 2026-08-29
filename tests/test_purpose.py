@@ -114,6 +114,12 @@ class PurposeLayerTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             validate_extraction_record(record, taxonomy=TAXONOMY)
 
+    def test_pin_content_hash_must_match_supplied_taxonomy(self):
+        record = _record()
+        record["taxonomy"]["content_hash"] = "0" * 64
+        with self.assertRaises(ValidationError):
+            validate_extraction_record(record, taxonomy=TAXONOMY)
+
     def test_excluded_mention_classification_is_bounded(self):
         record = _record()
         record["excluded_mentions"][0]["classification"] = "just_a_thought"
