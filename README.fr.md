@@ -258,7 +258,7 @@ professionnels du droit, de la sécurité ou des risques. Un résultat dépend d
 la version des packs actifs, des preuves disponibles et de la qualité des faits
 transmis au moteur.
 
-Le dépôt contient la distribution de référence `v0.1.0-alpha`. Les schémas et
+Le dépôt contient la distribution de référence `v0.1.0-alpha.1`. Les schémas et
 interfaces en ligne de commande peuvent encore évoluer. Consultez la
 [déclaration clean-room](CLEAN_ROOM.md), les [décisions fondatrices](spec/00-project-decisions.md),
 les [dépendances auditées](DEPENDENCIES.md) et le [guide de contribution](CONTRIBUTING.md).

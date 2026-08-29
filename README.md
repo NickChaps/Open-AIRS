@@ -253,7 +253,7 @@ AIR Framework does not certify compliance and does not replace legal, security
 or risk professionals. A result depends on the active pack versions, available
 evidence and the quality of facts supplied to the engine.
 
-This repository contains the `v0.1.0-alpha` reference distribution. Schemas and
+This repository contains the `v0.1.0-alpha.1` reference distribution. Schemas and
 command-line interfaces may still change. See the [clean-room statement](CLEAN_ROOM.md),
 [foundational decisions](spec/00-project-decisions.md), [audited dependencies](DEPENDENCIES.md)
 and [contribution guide](CONTRIBUTING.md).
