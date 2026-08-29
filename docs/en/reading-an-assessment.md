@@ -2,6 +2,25 @@
 
 # How to read an assessment
 
+```mermaid
+flowchart TB
+    T["Target<br/>exact object and boundary"] --> P["Pack<br/>authority · version · hash"]
+    P --> S{"Rule status"}
+    S -->|"matched"| M["Condition established<br/>review finding and obligations"]
+    S -->|"indeterminate"| U["Evidence missing or conflicted<br/>open the trace"]
+    S -->|"not_matched"| N["This condition is false<br/>no global compliance conclusion"]
+    M --> A["Anchors and evidence"]
+    U --> A
+    N --> A
+
+    classDef identity fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef status fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef trace fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class T,P identity
+    class S,M,U,N status
+    class A trace
+```
+
 Start with five fields:
 
 1. `target`: the exact object and system boundary assessed;

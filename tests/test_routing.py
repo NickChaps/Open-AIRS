@@ -23,8 +23,15 @@ class RoutingTests(unittest.TestCase):
     def test_profile_validates_and_routes_without_mutating_finding(self):
         profile = load("examples/organization-routing.json")
         validate_route_profile(profile)
+        inventory = load("examples/ai-governance/inventory.json")
+        use = next(
+            item for item in inventory["objects"] if item["id"] == "use-recruiting-assistant"
+        )
+        use["facts"]["interaction.authorized_law_enforcement_exception"] = {
+            "state": "unknown"
+        }
         assessment = assess(
-            load("examples/ai-governance/inventory.json"),
+            inventory,
             load("packs/eu-ai-act/1.0.0/pack.json"),
             "use-recruiting-assistant",
             assessed_at="2026-08-29T12:00:00Z",

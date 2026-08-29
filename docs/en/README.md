@@ -15,15 +15,16 @@ question closest to your work.
    legal finding from an evidence gap or an internal route.
 5. Review [Sources and coverage](sources-and-coverage.md) before relying on a
    pack.
-6. Open the [dated pack viability review](../audits/2026-08-29-pack-viability.md)
-   to see the latest source check, corrections and residual limits.
+6. Open the [dated pack coverage review](../audits/2026-08-29-pack-viability.md)
+   to see the latest source check and residual limits.
 
 ## I configure governance
 
 1. Read [Objects, facts and rules in plain language](concepts.md).
 2. Learn how to [author and release a pack](authoring-packs.md).
 3. Keep company decisions in [organisation-owned routes](../../spec/06-organization-routing.md).
-4. Dry-run every pack update before activation.
+4. Review the [connector topology example](../../examples/connector-topologies/README.md).
+5. Dry-run every pack update before activation.
 
 ## I integrate or develop
 

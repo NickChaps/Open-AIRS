@@ -37,6 +37,40 @@ Relations form a directed graph. The reference examples use:
 - `operated_by`: system, platform or use → organization;
 - `provided_by`: component or service → provider.
 
+## Connector scope
+
+Connector scope is expressed by the source of `can_invoke`:
+
+```mermaid
+flowchart LR
+    A1["Application A"] -->|runs_on| P1["Platform 1"]
+    A2["Application B"] -->|runs_on| P1
+    A3["Application C"] -->|runs_on| P2["Platform 2"]
+    P1 -->|can_invoke| C1["Shared connector"]
+    P2 -->|can_invoke| C1
+    A2 -->|can_invoke| C2["Application-specific connector"]
+
+    classDef app fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef platform fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef connector fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class A1,A2,A3 app
+    class P1,P2 platform
+    class C1,C2 connector
+```
+
+- platform → connector exposes a capability to applications on that platform;
+- several platforms → one connector models a shared company capability;
+- application → connector models a capability reserved for that application.
+
+Availability and execution remain distinct. `can_invoke` records a capability
+exposed by the captured configuration. Execution logs require separate evidence.
+If permissions, credentials, actions or human gates differ between installations,
+each installation is a separate connector object. A shared catalogue identifier
+can be retained in `external_ids`.
+
+The complete example is in
+[`examples/connector-topologies`](../examples/connector-topologies/README.md).
+
 A skill never invokes a connector. A runtime invokes a connector after an
 application has selected an action and only within the runtime's permissions.
 The graph can therefore show that a recruitment use combines a screening

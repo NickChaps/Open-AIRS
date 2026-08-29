@@ -1,0 +1,148 @@
+{
+  "schema_version": "0.1.0",
+  "inventory_id": "fictional-connector-topology",
+  "snapshot_id": "snapshot-2026-08-29-connectors",
+  "captured_at": "2026-08-29T14:00:00Z",
+  "objects": [
+    {
+      "id": "platform-atlas",
+      "type": "ai_platform",
+      "name": "Atlas AI Workspace (fictional)",
+      "facts": {}
+    },
+    {
+      "id": "platform-meridian",
+      "type": "ai_platform",
+      "name": "Meridian AI Studio (fictional)",
+      "facts": {}
+    },
+    {
+      "id": "app-research",
+      "type": "configured_ai_application",
+      "name": "Research assistant (fictional)",
+      "facts": {}
+    },
+    {
+      "id": "app-casework",
+      "type": "configured_ai_application",
+      "name": "Casework assistant (fictional)",
+      "facts": {}
+    },
+    {
+      "id": "app-payroll",
+      "type": "configured_ai_application",
+      "name": "Payroll assistant (fictional)",
+      "facts": {}
+    },
+    {
+      "id": "connector-company-search",
+      "type": "connector",
+      "name": "Company knowledge search (fictional)",
+      "external_ids": {"catalog_id": "company.search.v1"},
+      "facts": {
+        "connector.actions": {
+          "state": "known",
+          "value": ["search", "read"],
+          "evidence": ["ev-company-connector"]
+        },
+        "connector.access_scope": {
+          "state": "known",
+          "value": "enterprise_shared",
+          "evidence": ["ev-company-connector"]
+        }
+      }
+    },
+    {
+      "id": "connector-case-export",
+      "type": "connector",
+      "name": "Case export action (fictional)",
+      "external_ids": {"catalog_id": "casework.export.v2"},
+      "facts": {
+        "connector.actions": {
+          "state": "known",
+          "value": ["export_case"],
+          "evidence": ["ev-private-connector"]
+        },
+        "connector.access_scope": {
+          "state": "known",
+          "value": "application_specific",
+          "evidence": ["ev-private-connector"]
+        }
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel-research-atlas",
+      "source": "app-research",
+      "type": "runs_on",
+      "target": "platform-atlas",
+      "evidence": ["ev-atlas-inventory"]
+    },
+    {
+      "id": "rel-casework-atlas",
+      "source": "app-casework",
+      "type": "runs_on",
+      "target": "platform-atlas",
+      "evidence": ["ev-atlas-inventory"]
+    },
+    {
+      "id": "rel-payroll-meridian",
+      "source": "app-payroll",
+      "type": "runs_on",
+      "target": "platform-meridian",
+      "evidence": ["ev-meridian-inventory"]
+    },
+    {
+      "id": "rel-atlas-company-search",
+      "source": "platform-atlas",
+      "type": "can_invoke",
+      "target": "connector-company-search",
+      "evidence": ["ev-company-connector"]
+    },
+    {
+      "id": "rel-meridian-company-search",
+      "source": "platform-meridian",
+      "type": "can_invoke",
+      "target": "connector-company-search",
+      "evidence": ["ev-company-connector"]
+    },
+    {
+      "id": "rel-casework-private-export",
+      "source": "app-casework",
+      "type": "can_invoke",
+      "target": "connector-case-export",
+      "evidence": ["ev-private-connector"]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-atlas-inventory",
+      "kind": "configuration",
+      "source": "Fictional Atlas application inventory",
+      "summary": "The research and casework applications run on the Atlas tenant.",
+      "captured_at": "2026-08-29T13:40:00Z"
+    },
+    {
+      "id": "ev-meridian-inventory",
+      "kind": "configuration",
+      "source": "Fictional Meridian application inventory",
+      "summary": "The payroll application runs on the Meridian tenant.",
+      "captured_at": "2026-08-29T13:42:00Z"
+    },
+    {
+      "id": "ev-company-connector",
+      "kind": "configuration",
+      "source": "Fictional enterprise connector catalogue",
+      "summary": "The same read-only company search capability is installed on both governed platforms.",
+      "captured_at": "2026-08-29T13:45:00Z"
+    },
+    {
+      "id": "ev-private-connector",
+      "kind": "configuration",
+      "source": "Fictional Casework application configuration",
+      "summary": "The export action is available only to the Casework application.",
+      "captured_at": "2026-08-29T13:47:00Z"
+    }
+  ]
+}

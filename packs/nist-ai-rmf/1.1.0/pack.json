@@ -1,0 +1,4645 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "nist-ai-rmf-core",
+    "name": "NIST AI RMF 1.0 full Core outcomes",
+    "version": "1.1.0",
+    "authority_type": "voluntary_framework",
+    "jurisdiction": "International voluntary use; published by NIST (United States)",
+    "language": "en",
+    "source_version": "NIST AI 100-1 (2023), with NIST AI 600-1 profile marker",
+    "effective_from": "2023-01-26",
+    "reviewed_at": "2026-08-29",
+    "applies_to": [
+      "ai_system",
+      "ai_platform",
+      "configured_ai_application",
+      "ai_use",
+      "organization"
+    ],
+    "coverage": [
+      "all 72 subcategory outcomes in the NIST AI RMF 1.0 Core",
+      "profile-scoped assessment across GOVERN, MAP, MEASURE and MANAGE",
+      "Generative AI Profile selection marker"
+    ],
+    "known_gaps": [
+      "The Playbook actions are guidance and are not encoded as mandatory outcomes.",
+      "NIST AI 600-1 is represented by a selection marker; its suggested actions remain a separate profile.",
+      "AI RMF 1.0 is under revision and this pinned version must be reviewed when NIST publishes a successor.",
+      "Organisation-specific target profiles, tolerances, owners and due dates are not supplied."
+    ],
+    "notice": "NIST AI RMF is voluntary. Findings describe gaps against selected outcomes and do not establish legal non-compliance or certification."
+  },
+  "fact_catalog": [
+    {
+      "id": "nist.airmf.selected_outcomes",
+      "type": "array",
+      "question": "Which NIST AI RMF 1.0 subcategory identifiers belong to this target profile?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_3.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_4.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_5.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.5 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_6.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.6 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_1_7.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 1.7 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_2_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 2.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_2_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 2.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_2_3.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 2.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_3_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 3.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_3_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 3.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_4_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 4.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_4_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 4.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_4_3.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 4.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_5_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 5.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_5_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 5.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_6_1.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 6.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.govern_6_2.met",
+      "type": "boolean",
+      "question": "Is the selected GOVERN 6.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_1_1.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 1.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_1_2.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 1.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_1_3.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 1.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_1_4.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 1.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_2_1.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 2.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_2_2.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 2.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_2_3.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 2.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_2_4.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 2.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_3_1.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 3.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_3_2.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 3.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_4_1.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 4.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_4_2.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 4.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.manage_4_3.met",
+      "type": "boolean",
+      "question": "Is the selected MANAGE 4.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_1.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_2.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_3.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_4.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_5.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.5 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_1_6.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 1.6 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_2_1.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 2.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_2_2.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 2.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_2_3.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 2.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_3_1.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 3.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_3_2.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 3.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_3_3.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 3.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_3_4.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 3.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_3_5.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 3.5 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_4_1.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 4.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_4_2.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 4.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_5_1.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 5.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.map_5_2.met",
+      "type": "boolean",
+      "question": "Is the selected MAP 5.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_1_1.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 1.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_1_2.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 1.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_1_3.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 1.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_1.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_2.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_3.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_4.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.4 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_5.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.5 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_6.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.6 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_7.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.7 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_8.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.8 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_9.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.9 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_10.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.10 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_11.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.11 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_12.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.12 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_2_13.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 2.13 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_3_1.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 3.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_3_2.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 3.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_3_3.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 3.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_4_1.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 4.1 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_4_2.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 4.2 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "nist.airmf.outcome.measure_4_3.met",
+      "type": "boolean",
+      "question": "Is the selected MEASURE 4.3 outcome achieved and supported by evidence?"
+    },
+    {
+      "id": "ai.generative",
+      "type": "boolean",
+      "question": "Does the target use generative AI?"
+    },
+    {
+      "id": "nist.gai.profile_selected",
+      "type": "boolean",
+      "question": "Has the organisation selected the relevant NIST AI 600-1 Generative AI Profile outcomes and actions?"
+    }
+  ],
+  "inheritance": [],
+  "anchors": [
+    {
+      "id": "nist.airmf.core",
+      "source": "NIST AI Risk Management Framework 1.0",
+      "locator": "NIST AI 100-1, AI RMF Core",
+      "url": "https://doi.org/10.6028/NIST.AI.100-1",
+      "summary": "The voluntary AI RMF Core contains 72 outcomes across GOVERN, MAP, MEASURE and MANAGE."
+    },
+    {
+      "id": "nist.airmf.playbook",
+      "source": "NIST AI RMF Playbook",
+      "locator": "Official Playbook, AI RMF Core",
+      "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
+      "summary": "The Playbook provides optional actions, documentation prompts and references for each Core outcome."
+    },
+    {
+      "id": "nist.airmf.gai",
+      "source": "NIST AI RMF Generative Artificial Intelligence Profile",
+      "locator": "NIST AI 600-1",
+      "url": "https://doi.org/10.6028/NIST.AI.600-1",
+      "summary": "The cross-sectoral profile identifies generative-AI risks and suggested actions mapped to AI RMF outcomes."
+    },
+    {
+      "id": "nist.airmf.status",
+      "source": "NIST AI Risk Management Framework official page",
+      "locator": "Framework status reviewed 2026-08-29",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "summary": "NIST is revising AI RMF 1.0, so this pack pins the current published Core."
+    }
+  ],
+  "rules": [
+    {
+      "id": "nist.airmf.profile-selection-missing",
+      "title": "AI RMF target profile is missing",
+      "kind": "profile_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "any": [
+          {
+            "not": {
+              "fact": {
+                "key": "nist.airmf.selected_outcomes",
+                "operator": "exists"
+              }
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "eq",
+              "value": []
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-PROFILE-MISSING",
+        "level": "framework_gap",
+        "title": "No AI RMF outcomes have been selected",
+        "summary": "A target profile is needed before the framework can report meaningful outcome gaps for this object."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "DEFINE-AI-RMF-PROFILE",
+          "title": "Select the AI RMF outcomes that fit the object, context and risk tolerance."
+        }
+      ]
+    },
+    {
+      "id": "nist.airmf.govern-1-1-gap",
+      "title": "GOVERN 1.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.1 is below the selected target",
+        "summary": "Legal and regulatory requirements involving AI are understood, managed, and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-1",
+          "title": "Assign, implement and evidence the selected GOVERN 1.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-2-gap",
+      "title": "GOVERN 1.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.2 is below the selected target",
+        "summary": "The characteristics of trustworthy AI are integrated into organizational policies, processes, and procedures."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-2",
+          "title": "Assign, implement and evidence the selected GOVERN 1.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-3-gap",
+      "title": "GOVERN 1.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-3-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.3 is below the selected target",
+        "summary": "Processes and procedures are in place to determine the needed level of risk management activities based on the organization's risk tolerance."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-3",
+          "title": "Assign, implement and evidence the selected GOVERN 1.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-4-gap",
+      "title": "GOVERN 1.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-4-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.4 is below the selected target",
+        "summary": "The risk management process and its outcomes are established through transparent policies, procedures, and other controls based on organizational risk priorities."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-4",
+          "title": "Assign, implement and evidence the selected GOVERN 1.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-5-gap",
+      "title": "GOVERN 1.5 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.5"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_5.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-5-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.5 is below the selected target",
+        "summary": "Ongoing monitoring and periodic review of the risk management process and its outcomes are planned, organizational roles and responsibilities are clearly defined, including determining the frequency of periodic review."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-5",
+          "title": "Assign, implement and evidence the selected GOVERN 1.5 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.5 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.5 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.5 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-6-gap",
+      "title": "GOVERN 1.6 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.6"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_6.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-6-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.6 is below the selected target",
+        "summary": "Mechanisms are in place to inventory AI systems and are resourced according to organizational risk priorities."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-6",
+          "title": "Assign, implement and evidence the selected GOVERN 1.6 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.6 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.6 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.6 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-1-7-gap",
+      "title": "GOVERN 1.7 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 1.7"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_1_7.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-1-7-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 1.7 is below the selected target",
+        "summary": "Processes and procedures are in place for decommissioning and phasing out of AI systems safely and in a manner that does not increase risks or decrease the organization’s trustworthiness."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-1-7",
+          "title": "Assign, implement and evidence the selected GOVERN 1.7 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 1.7 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 1.7 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 1.7 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-2-1-gap",
+      "title": "GOVERN 2.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 2.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_2_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-2-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 2.1 is below the selected target",
+        "summary": "Roles and responsibilities and lines of communication related to mapping, measuring, and managing AI risks are documented and are clear to individuals and teams throughout the organization."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-2-1",
+          "title": "Assign, implement and evidence the selected GOVERN 2.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 2.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 2.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 2.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-2-2-gap",
+      "title": "GOVERN 2.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 2.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_2_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-2-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 2.2 is below the selected target",
+        "summary": "The organization’s personnel and partners receive AI risk management training to enable them to perform their duties and responsibilities consistent with related policies, procedures, and agreements."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-2-2",
+          "title": "Assign, implement and evidence the selected GOVERN 2.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 2.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 2.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 2.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-2-3-gap",
+      "title": "GOVERN 2.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 2.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_2_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-2-3-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 2.3 is below the selected target",
+        "summary": "Executive leadership of the organization takes responsibility for decisions about risks associated with AI system development and deployment."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-2-3",
+          "title": "Assign, implement and evidence the selected GOVERN 2.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 2.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 2.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 2.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-3-1-gap",
+      "title": "GOVERN 3.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 3.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_3_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-3-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 3.1 is below the selected target",
+        "summary": "Decision-makings related to mapping, measuring, and managing AI risks throughout the lifecycle is informed by a diverse team (e.g., diversity of demographics, disciplines, experience, expertise, and backgrounds)."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-3-1",
+          "title": "Assign, implement and evidence the selected GOVERN 3.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 3.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 3.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 3.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-3-2-gap",
+      "title": "GOVERN 3.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 3.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_3_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-3-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 3.2 is below the selected target",
+        "summary": "Policies and procedures are in place to define and differentiate roles and responsibilities for human-AI configurations and oversight of AI systems."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-3-2",
+          "title": "Assign, implement and evidence the selected GOVERN 3.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 3.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 3.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 3.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-4-1-gap",
+      "title": "GOVERN 4.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 4.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_4_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-4-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 4.1 is below the selected target",
+        "summary": "Organizational policies, and practices are in place to foster a critical thinking and safety-first mindset in the design, development, deployment, and uses of AI systems to minimize negative impacts."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-4-1",
+          "title": "Assign, implement and evidence the selected GOVERN 4.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 4.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 4.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 4.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-4-2-gap",
+      "title": "GOVERN 4.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 4.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_4_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-4-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 4.2 is below the selected target",
+        "summary": "Organizational teams document the risks and potential impacts of the AI technology they design, develop, deploy, evaluate and use, and communicate about the impacts more broadly."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-4-2",
+          "title": "Assign, implement and evidence the selected GOVERN 4.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 4.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 4.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 4.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-4-3-gap",
+      "title": "GOVERN 4.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 4.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_4_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-4-3-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 4.3 is below the selected target",
+        "summary": "Organizational practices are in place to enable AI testing, identification of incidents, and information sharing."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-4-3",
+          "title": "Assign, implement and evidence the selected GOVERN 4.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 4.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 4.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 4.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-5-1-gap",
+      "title": "GOVERN 5.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 5.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_5_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-5-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 5.1 is below the selected target",
+        "summary": "Organizational policies and practices are in place to collect, consider, prioritize, and integrate feedback from those external to the team that developed or deployed the AI system regarding the potential individual and societal impacts related to AI risks."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-5-1",
+          "title": "Assign, implement and evidence the selected GOVERN 5.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 5.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 5.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 5.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-5-2-gap",
+      "title": "GOVERN 5.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 5.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_5_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-5-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 5.2 is below the selected target",
+        "summary": "Mechanisms are established to enable AI actors to regularly incorporate adjudicated feedback from relevant AI actors into system design and implementation."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-5-2",
+          "title": "Assign, implement and evidence the selected GOVERN 5.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 5.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 5.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 5.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-6-1-gap",
+      "title": "GOVERN 6.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 6.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_6_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-6-1-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 6.1 is below the selected target",
+        "summary": "Policies and procedures are in place that address AI risks associated with third-party entities, including risks of infringement of a third party’s intellectual property or other rights."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-6-1",
+          "title": "Assign, implement and evidence the selected GOVERN 6.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 6.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 6.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 6.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.govern-6-2-gap",
+      "title": "GOVERN 6.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "GOVERN 6.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.govern_6_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GOVERN-6-2-GAP",
+        "level": "framework_gap",
+        "title": "GOVERN 6.2 is below the selected target",
+        "summary": "Contingency processes are in place to handle failures or incidents in third-party data or AI systems deemed to be high-risk."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-GOVERN-6-2",
+          "title": "Assign, implement and evidence the selected GOVERN 6.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "GOVERN 6.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "GOVERN 6.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "GOVERN 6.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-1-1-gap",
+      "title": "MANAGE 1.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 1.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_1_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-1-1-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 1.1 is below the selected target",
+        "summary": "A determination is made as to whether the AI system achieves its intended purpose and stated objectives and whether its development or deployment should proceed."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-1-1",
+          "title": "Assign, implement and evidence the selected MANAGE 1.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 1.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 1.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 1.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-1-2-gap",
+      "title": "MANAGE 1.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 1.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_1_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-1-2-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 1.2 is below the selected target",
+        "summary": "Treatment of documented AI risks is prioritized based on impact, likelihood, or available resources or methods."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-1-2",
+          "title": "Assign, implement and evidence the selected MANAGE 1.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 1.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 1.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 1.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-1-3-gap",
+      "title": "MANAGE 1.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 1.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_1_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-1-3-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 1.3 is below the selected target",
+        "summary": "Responses to the AI risks deemed high priority as identified by the Map function, are developed, planned, and documented. Risk response options can include mitigating, transferring, avoiding, or accepting."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-1-3",
+          "title": "Assign, implement and evidence the selected MANAGE 1.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 1.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 1.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 1.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-1-4-gap",
+      "title": "MANAGE 1.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 1.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_1_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-1-4-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 1.4 is below the selected target",
+        "summary": "Negative residual risks (defined as the sum of all unmitigated risks) to both downstream acquirers of AI systems and end users are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-1-4",
+          "title": "Assign, implement and evidence the selected MANAGE 1.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 1.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 1.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 1.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-2-1-gap",
+      "title": "MANAGE 2.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 2.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_2_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-2-1-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 2.1 is below the selected target",
+        "summary": "Resources required to manage AI risks are taken into account, along with viable non-AI alternative systems, approaches, or methods – to reduce the magnitude or likelihood of potential impacts."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-2-1",
+          "title": "Assign, implement and evidence the selected MANAGE 2.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 2.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 2.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 2.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-2-2-gap",
+      "title": "MANAGE 2.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 2.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_2_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-2-2-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 2.2 is below the selected target",
+        "summary": "Mechanisms are in place and applied to sustain the value of deployed AI systems."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-2-2",
+          "title": "Assign, implement and evidence the selected MANAGE 2.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 2.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 2.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 2.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-2-3-gap",
+      "title": "MANAGE 2.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 2.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_2_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-2-3-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 2.3 is below the selected target",
+        "summary": "Procedures are followed to respond to and recover from a previously unknown risk when it is identified."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-2-3",
+          "title": "Assign, implement and evidence the selected MANAGE 2.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 2.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 2.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 2.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-2-4-gap",
+      "title": "MANAGE 2.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 2.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_2_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-2-4-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 2.4 is below the selected target",
+        "summary": "Mechanisms are in place and applied, responsibilities are assigned and understood to supersede, disengage, or deactivate AI systems that demonstrate performance or outcomes inconsistent with intended use."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-2-4",
+          "title": "Assign, implement and evidence the selected MANAGE 2.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 2.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 2.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 2.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-3-1-gap",
+      "title": "MANAGE 3.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 3.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_3_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-3-1-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 3.1 is below the selected target",
+        "summary": "AI risks and benefits from third-party resources are regularly monitored, and risk controls are applied and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-3-1",
+          "title": "Assign, implement and evidence the selected MANAGE 3.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 3.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 3.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 3.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-3-2-gap",
+      "title": "MANAGE 3.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 3.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_3_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-3-2-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 3.2 is below the selected target",
+        "summary": "Pre-trained models which are used for development are monitored as part of AI system regular  monitoring and maintenance."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-3-2",
+          "title": "Assign, implement and evidence the selected MANAGE 3.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 3.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 3.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 3.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-4-1-gap",
+      "title": "MANAGE 4.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 4.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_4_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-4-1-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 4.1 is below the selected target",
+        "summary": "Post-deployment AI system monitoring plans are implemented, including mechanisms for capturing and evaluating input from users and other relevant AI actors, appeal and override, decommissioning, incident response, recovery, and change management."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-4-1",
+          "title": "Assign, implement and evidence the selected MANAGE 4.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 4.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 4.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 4.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-4-2-gap",
+      "title": "MANAGE 4.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 4.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_4_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-4-2-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 4.2 is below the selected target",
+        "summary": "Measurable activities for continual improvements are integrated into AI system updates and include regular engagement with interested parties, including relevant AI actors."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-4-2",
+          "title": "Assign, implement and evidence the selected MANAGE 4.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 4.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 4.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 4.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.manage-4-3-gap",
+      "title": "MANAGE 4.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MANAGE 4.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.manage_4_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MANAGE-4-3-GAP",
+        "level": "framework_gap",
+        "title": "MANAGE 4.3 is below the selected target",
+        "summary": "Incidents and errors are communicated to relevant AI actors including affected communities. Processes for tracking, responding to, and recovering from incidents and errors are followed and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MANAGE-4-3",
+          "title": "Assign, implement and evidence the selected MANAGE 4.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MANAGE 4.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MANAGE 4.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MANAGE 4.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-1-gap",
+      "title": "MAP 1.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-1-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.1 is below the selected target",
+        "summary": "Intended purpose, potentially beneficial uses, context-specific laws, norms and expectations, and prospective settings in which the AI system will be deployed are understood and documented. Considerations include: specific set or types of users along with their expectations; potential positive and negative impacts of system uses to individuals, communities, organizations, society, and the planet; assumptions and related limitations about AI system purposes; uses and risks across the development or product AI lifecycle; TEVV and system metrics."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-1",
+          "title": "Assign, implement and evidence the selected MAP 1.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-2-gap",
+      "title": "MAP 1.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-2-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.2 is below the selected target",
+        "summary": "Inter-disciplinary AI actors, competencies, skills and capacities for establishing context reflect demographic diversity and broad domain and user experience expertise, and their participation is documented. Opportunities for interdisciplinary collaboration are prioritized."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-2",
+          "title": "Assign, implement and evidence the selected MAP 1.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-3-gap",
+      "title": "MAP 1.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-3-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.3 is below the selected target",
+        "summary": "The organization’s mission and relevant goals for the AI technology are understood and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-3",
+          "title": "Assign, implement and evidence the selected MAP 1.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-4-gap",
+      "title": "MAP 1.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-4-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.4 is below the selected target",
+        "summary": "The business value or context of business use has been clearly defined or – in the case of assessing existing AI systems – re-evaluated."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-4",
+          "title": "Assign, implement and evidence the selected MAP 1.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-5-gap",
+      "title": "MAP 1.5 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.5"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_5.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-5-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.5 is below the selected target",
+        "summary": "Organizational risk tolerances are determined and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-5",
+          "title": "Assign, implement and evidence the selected MAP 1.5 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.5 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.5 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.5 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-1-6-gap",
+      "title": "MAP 1.6 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 1.6"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_1_6.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-1-6-GAP",
+        "level": "framework_gap",
+        "title": "MAP 1.6 is below the selected target",
+        "summary": "System requirements (e.g., “the system shall respect the privacy of its users”) are elicited from and understood by relevant AI actors.  Design decisions take socio-technical implications into account to address AI risks."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-1-6",
+          "title": "Assign, implement and evidence the selected MAP 1.6 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 1.6 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 1.6 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 1.6 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-2-1-gap",
+      "title": "MAP 2.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 2.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_2_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-2-1-GAP",
+        "level": "framework_gap",
+        "title": "MAP 2.1 is below the selected target",
+        "summary": "The specific task, and methods used to implement the task, that the AI system will support is defined (e.g., classifiers, generative models, recommenders)."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-2-1",
+          "title": "Assign, implement and evidence the selected MAP 2.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 2.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 2.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 2.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-2-2-gap",
+      "title": "MAP 2.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 2.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_2_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-2-2-GAP",
+        "level": "framework_gap",
+        "title": "MAP 2.2 is below the selected target",
+        "summary": "Information about the AI system’s knowledge limits and how system output may be utilized and overseen by humans is documented. Documentation provides sufficient information to assist relevant AI actors when making informed decisions and taking subsequent actions."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-2-2",
+          "title": "Assign, implement and evidence the selected MAP 2.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 2.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 2.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 2.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-2-3-gap",
+      "title": "MAP 2.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 2.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_2_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-2-3-GAP",
+        "level": "framework_gap",
+        "title": "MAP 2.3 is below the selected target",
+        "summary": "Scientific integrity and TEVV considerations are identified and documented, including those related to experimental design, data collection and selection (e.g., availability, representativeness, suitability), system trustworthiness, and construct validation."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-2-3",
+          "title": "Assign, implement and evidence the selected MAP 2.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 2.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 2.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 2.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-3-1-gap",
+      "title": "MAP 3.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 3.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_3_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-3-1-GAP",
+        "level": "framework_gap",
+        "title": "MAP 3.1 is below the selected target",
+        "summary": "Potential benefits of intended AI system functionality and performance are examined and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-3-1",
+          "title": "Assign, implement and evidence the selected MAP 3.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 3.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 3.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 3.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-3-2-gap",
+      "title": "MAP 3.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 3.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_3_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-3-2-GAP",
+        "level": "framework_gap",
+        "title": "MAP 3.2 is below the selected target",
+        "summary": "Potential costs, including non-monetary costs, which result from expected or realized AI errors or system functionality and trustworthiness - as connected to organizational risk tolerance - are examined and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-3-2",
+          "title": "Assign, implement and evidence the selected MAP 3.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 3.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 3.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 3.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-3-3-gap",
+      "title": "MAP 3.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 3.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_3_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-3-3-GAP",
+        "level": "framework_gap",
+        "title": "MAP 3.3 is below the selected target",
+        "summary": "Targeted application scope is specified and documented based on the system’s capability, established context, and AI system categorization."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-3-3",
+          "title": "Assign, implement and evidence the selected MAP 3.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 3.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 3.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 3.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-3-4-gap",
+      "title": "MAP 3.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 3.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_3_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-3-4-GAP",
+        "level": "framework_gap",
+        "title": "MAP 3.4 is below the selected target",
+        "summary": "Processes for operator and practitioner proficiency with AI system performance and trustworthiness – and relevant technical standards and certifications – are defined, assessed and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-3-4",
+          "title": "Assign, implement and evidence the selected MAP 3.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 3.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 3.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 3.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-3-5-gap",
+      "title": "MAP 3.5 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 3.5"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_3_5.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-3-5-GAP",
+        "level": "framework_gap",
+        "title": "MAP 3.5 is below the selected target",
+        "summary": "Processes for human oversight are defined, assessed, and documented in accordance with organizational policies from GOVERN function."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-3-5",
+          "title": "Assign, implement and evidence the selected MAP 3.5 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 3.5 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 3.5 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 3.5 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-4-1-gap",
+      "title": "MAP 4.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 4.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_4_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-4-1-GAP",
+        "level": "framework_gap",
+        "title": "MAP 4.1 is below the selected target",
+        "summary": "Approaches for mapping AI technology and legal risks of its components – including the use of third-party data or software – are in place, followed, and documented, as are risks of infringement of a third-party’s intellectual property or other rights."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-4-1",
+          "title": "Assign, implement and evidence the selected MAP 4.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 4.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 4.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 4.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-4-2-gap",
+      "title": "MAP 4.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 4.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_4_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-4-2-GAP",
+        "level": "framework_gap",
+        "title": "MAP 4.2 is below the selected target",
+        "summary": "Internal risk controls for components of the AI system including third-party AI technologies are identified and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-4-2",
+          "title": "Assign, implement and evidence the selected MAP 4.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 4.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 4.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 4.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-5-1-gap",
+      "title": "MAP 5.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 5.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_5_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-5-1-GAP",
+        "level": "framework_gap",
+        "title": "MAP 5.1 is below the selected target",
+        "summary": "Likelihood and magnitude of each identified impact (both potentially beneficial and harmful) based on expected use, past uses of AI systems in similar contexts, public incident reports, feedback from those external to the team that developed or deployed the AI system, or other data are identified and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-5-1",
+          "title": "Assign, implement and evidence the selected MAP 5.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 5.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 5.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 5.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.map-5-2-gap",
+      "title": "MAP 5.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MAP 5.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.map_5_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MAP-5-2-GAP",
+        "level": "framework_gap",
+        "title": "MAP 5.2 is below the selected target",
+        "summary": "Practices and personnel for supporting regular engagement with relevant AI actors and integrating feedback about positive, negative, and unanticipated impacts are in place and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MAP-5-2",
+          "title": "Assign, implement and evidence the selected MAP 5.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MAP 5.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MAP 5.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MAP 5.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-1-1-gap",
+      "title": "MEASURE 1.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 1.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_1_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-1-1-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 1.1 is below the selected target",
+        "summary": "Approaches and metrics for measurement of AI risks enumerated during the Map function are selected for implementation starting with the most significant AI risks. The risks or trustworthiness characteristics that will not – or cannot – be measured are properly documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-1-1",
+          "title": "Assign, implement and evidence the selected MEASURE 1.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 1.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 1.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 1.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-1-2-gap",
+      "title": "MEASURE 1.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 1.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_1_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-1-2-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 1.2 is below the selected target",
+        "summary": "Appropriateness of AI metrics and effectiveness of existing controls is regularly assessed and updated including reports of errors and impacts on affected communities."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-1-2",
+          "title": "Assign, implement and evidence the selected MEASURE 1.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 1.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 1.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 1.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-1-3-gap",
+      "title": "MEASURE 1.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 1.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_1_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-1-3-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 1.3 is below the selected target",
+        "summary": "Internal experts who did not serve as front-line developers for the system and/or independent assessors are involved in regular assessments and updates. Domain experts, users, AI actors external to the team that developed or deployed the AI system, and affected communities are consulted in support of assessments as necessary per organizational risk tolerance."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-1-3",
+          "title": "Assign, implement and evidence the selected MEASURE 1.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 1.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 1.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 1.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-1-gap",
+      "title": "MEASURE 2.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-1-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.1 is below the selected target",
+        "summary": "Test sets, metrics, and details about the tools used during test, evaluation, validation, and verification (TEVV) are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-1",
+          "title": "Assign, implement and evidence the selected MEASURE 2.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-2-gap",
+      "title": "MEASURE 2.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-2-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.2 is below the selected target",
+        "summary": "Evaluations involving human subjects meet applicable requirements (including human subject protection) and are representative of the relevant population."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-2",
+          "title": "Assign, implement and evidence the selected MEASURE 2.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-3-gap",
+      "title": "MEASURE 2.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-3-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.3 is below the selected target",
+        "summary": "AI system performance or assurance criteria are measured qualitatively or quantitatively and demonstrated for conditions similar to deployment setting(s). Measures are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-3",
+          "title": "Assign, implement and evidence the selected MEASURE 2.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-4-gap",
+      "title": "MEASURE 2.4 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.4"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_4.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-4-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.4 is below the selected target",
+        "summary": "The functionality and behavior of the AI system and its components – as identified in the MAP function – are monitored when in production."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-4",
+          "title": "Assign, implement and evidence the selected MEASURE 2.4 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.4 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.4 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.4 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-5-gap",
+      "title": "MEASURE 2.5 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.5"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_5.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-5-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.5 is below the selected target",
+        "summary": "The AI system to be deployed is demonstrated to be valid and reliable. Limitations of the generalizability beyond the conditions under which the technology was developed are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-5",
+          "title": "Assign, implement and evidence the selected MEASURE 2.5 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.5 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.5 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.5 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-6-gap",
+      "title": "MEASURE 2.6 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.6"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_6.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-6-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.6 is below the selected target",
+        "summary": "AI system is evaluated regularly for safety risks – as identified in the MAP function. The AI system to be deployed is demonstrated to be safe, its residual negative risk does not exceed the risk tolerance, and can fail safely, particularly if made to operate beyond its knowledge limits. Safety metrics implicate system reliability and robustness, real-time monitoring, and response times for AI system failures."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-6",
+          "title": "Assign, implement and evidence the selected MEASURE 2.6 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.6 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.6 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.6 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-7-gap",
+      "title": "MEASURE 2.7 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.7"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_7.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-7-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.7 is below the selected target",
+        "summary": "AI system security and resilience – as identified in the MAP function – are evaluated and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-7",
+          "title": "Assign, implement and evidence the selected MEASURE 2.7 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.7 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.7 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.7 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-8-gap",
+      "title": "MEASURE 2.8 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.8"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_8.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-8-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.8 is below the selected target",
+        "summary": "Risks associated with transparency and accountability – as identified in the MAP function – are examined and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-8",
+          "title": "Assign, implement and evidence the selected MEASURE 2.8 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.8 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.8 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.8 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-9-gap",
+      "title": "MEASURE 2.9 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.9"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_9.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-9-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.9 is below the selected target",
+        "summary": "The AI model is explained, validated, and documented, and  AI system output is interpreted within its context – as identified in the MAP function – and to inform responsible use and governance."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-9",
+          "title": "Assign, implement and evidence the selected MEASURE 2.9 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.9 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.9 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.9 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-10-gap",
+      "title": "MEASURE 2.10 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.10"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_10.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-10-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.10 is below the selected target",
+        "summary": "Privacy risk of the AI system – as identified in the MAP function – is examined and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-10",
+          "title": "Assign, implement and evidence the selected MEASURE 2.10 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.10 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.10 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.10 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-11-gap",
+      "title": "MEASURE 2.11 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.11"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_11.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-11-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.11 is below the selected target",
+        "summary": "Fairness and bias – as identified in the MAP function – are evaluated and results are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-11",
+          "title": "Assign, implement and evidence the selected MEASURE 2.11 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.11 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.11 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.11 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-12-gap",
+      "title": "MEASURE 2.12 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.12"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_12.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-12-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.12 is below the selected target",
+        "summary": "Environmental impact and sustainability of AI model training and management activities – as identified in the MAP function – are assessed and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-12",
+          "title": "Assign, implement and evidence the selected MEASURE 2.12 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.12 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.12 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.12 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-2-13-gap",
+      "title": "MEASURE 2.13 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 2.13"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_2_13.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-2-13-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 2.13 is below the selected target",
+        "summary": "Effectiveness of the employed TEVV metrics and processes in the MEASURE function are evaluated and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-2-13",
+          "title": "Assign, implement and evidence the selected MEASURE 2.13 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 2.13 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 2.13 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 2.13 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-3-1-gap",
+      "title": "MEASURE 3.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 3.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_3_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-3-1-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 3.1 is below the selected target",
+        "summary": "Approaches, personnel, and documentation are in place to regularly identify and track existing, unanticipated, and emergent AI risks based on factors such as intended and actual performance in deployed contexts."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-3-1",
+          "title": "Assign, implement and evidence the selected MEASURE 3.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 3.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 3.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 3.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-3-2-gap",
+      "title": "MEASURE 3.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 3.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_3_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-3-2-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 3.2 is below the selected target",
+        "summary": "Risk tracking approaches are considered for settings where AI risks are difficult to assess using currently available measurement techniques or where metrics are not yet available."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-3-2",
+          "title": "Assign, implement and evidence the selected MEASURE 3.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 3.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 3.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 3.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-3-3-gap",
+      "title": "MEASURE 3.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 3.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_3_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-3-3-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 3.3 is below the selected target",
+        "summary": "Feedback processes for end users and impacted communities to report problems and appeal system outcomes are established and integrated into AI system evaluation metrics."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-3-3",
+          "title": "Assign, implement and evidence the selected MEASURE 3.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 3.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 3.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 3.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-4-1-gap",
+      "title": "MEASURE 4.1 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 4.1"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_4_1.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-4-1-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 4.1 is below the selected target",
+        "summary": "Measurement approaches for identifying AI risks are connected to deployment context(s) and informed through consultation with domain experts and other end users. Approaches are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-4-1",
+          "title": "Assign, implement and evidence the selected MEASURE 4.1 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 4.1 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 4.1 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 4.1 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-4-2-gap",
+      "title": "MEASURE 4.2 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 4.2"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_4_2.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-4-2-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 4.2 is below the selected target",
+        "summary": "Measurement results regarding AI system trustworthiness in deployment context(s) and across AI lifecycle are informed by input from domain experts and other relevant AI actors to validate whether the system is performing consistently as intended. Results are documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-4-2",
+          "title": "Assign, implement and evidence the selected MEASURE 4.2 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 4.2 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 4.2 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 4.2 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.measure-4-3-gap",
+      "title": "MEASURE 4.3 target outcome gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "contains",
+              "value": "MEASURE 4.3"
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.airmf.outcome.measure_4_3.met",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-MEASURE-4-3-GAP",
+        "level": "framework_gap",
+        "title": "MEASURE 4.3 is below the selected target",
+        "summary": "Measurable performance improvements or declines based on consultations with relevant AI actors including affected communities, and field data about context-relevant risks and trustworthiness characteristics, are identified and documented."
+      },
+      "anchors": [
+        "nist.airmf.core",
+        "nist.airmf.playbook"
+      ],
+      "obligations": [
+        {
+          "code": "CLOSE-MEASURE-4-3",
+          "title": "Assign, implement and evidence the selected MEASURE 4.3 outcome."
+        }
+      ],
+      "reason": {
+        "matched": "MEASURE 4.3 belongs to the selected target profile and is evidenced as unmet.",
+        "indeterminate": "MEASURE 4.3 is selected but the evidence does not establish whether it is achieved.",
+        "not_matched": "MEASURE 4.3 is outside this target profile or is evidenced as achieved."
+      }
+    },
+    {
+      "id": "nist.airmf.gai-profile-selection-gap",
+      "title": "Generative AI Profile selection gap",
+      "kind": "framework_gap",
+      "applies_to": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "ai_use",
+        "organization"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nist.airmf.selected_outcomes",
+              "operator": "exists"
+            }
+          },
+          {
+            "fact": {
+              "key": "ai.generative",
+              "operator": "eq",
+              "value": true
+            }
+          },
+          {
+            "fact": {
+              "key": "nist.gai.profile_selected",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "NIST-AIRMF-GAI-PROFILE-GAP",
+        "level": "framework_gap",
+        "title": "Generative-AI-specific risks are outside the target profile",
+        "summary": "The target uses generative AI, but relevant NIST AI 600-1 risks and actions have not been selected for review."
+      },
+      "anchors": [
+        "nist.airmf.gai"
+      ],
+      "obligations": [
+        {
+          "code": "SELECT-NIST-AI-600-1",
+          "title": "Select the applicable GAI risks and actions for the target profile."
+        }
+      ]
+    }
+  ]
+}

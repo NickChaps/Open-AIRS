@@ -9,6 +9,28 @@ screening skill and can access a messaging connector.
 AIR does not ask a legal reviewer to inspect platform code. It builds one case
 file that every role can review.
 
+```mermaid
+flowchart LR
+    B["Business owner<br/>describes the use"] --> T["Platform owner<br/>confirms composition"]
+    T --> X["Assisted extraction<br/>proposes bounded facts"]
+    X --> V["Competent reviewer<br/>validates sensitive facts"]
+    V --> E["Deterministic engine<br/>applies pinned packs"]
+    E --> D{"Result"}
+    D -->|"evidence missing"| Q["Evidence request"]
+    D -->|"finding"| R["Legal, privacy or security review"]
+    D -->|"no selected gap"| M["Monitoring and change review"]
+    Q --> V
+    R --> H["Decision and assigned actions"]
+    M --> H
+
+    classDef person fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef system fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef action fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class B,T,V person
+    class X,E,D system
+    class Q,R,M,H action
+```
+
 | Stage | What the person sees | What AIR retains | Who confirms |
 | --- | --- | --- | --- |
 | 1. Describe the use | Purpose, affected people and expected actions | An `ai_use` object and source declaration | Business owner |

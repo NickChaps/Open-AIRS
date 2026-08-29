@@ -15,8 +15,8 @@ Commencez par la question la plus proche de votre travail.
    distinguer un constat juridique, une preuve manquante et une voie interne.
 5. Vérifiez [les sources et la couverture](sources-et-couverture.md) avant de
    vous appuyer sur un pack.
-6. Consultez la [revue datée de viabilité des packs](../audits/2026-08-29-pack-viability.fr.md)
-   pour voir les dernières vérifications, corrections et limites résiduelles.
+6. Consultez la [revue datée de couverture des packs](../audits/2026-08-29-pack-viability.fr.md)
+   pour voir les dernières vérifications et limites résiduelles.
 
 ## Je paramètre la gouvernance
 
@@ -24,7 +24,8 @@ Commencez par la question la plus proche de votre travail.
 2. Apprenez à [créer et publier un pack](creer-un-pack.md).
 3. Conservez les décisions de l’entreprise dans des
    [voies séparées](../../spec/06-organization-routing.md).
-4. Simulez chaque mise à jour de pack avant son activation.
+4. Consultez l’[exemple de topologies de connecteurs](../../examples/connector-topologies/README.fr.md).
+5. Simulez chaque mise à jour de pack avant son activation.
 
 ## J’intègre ou je développe
 

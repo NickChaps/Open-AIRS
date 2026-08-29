@@ -28,20 +28,23 @@ flowchart LR
 
 | Pack | Version | Autorité | Périmètre | Guide lisible |
 | --- | --- | --- | --- | --- |
-| Socle AI Act UE | 1.0.0 | Règlement européen contraignant | Pratiques interdites sélectionnées, entrées haut risque, transparence et culture IA | [Ouvrir](eu-ai-act/1.0.0/README.fr.md) |
-| Socle RGPD IA | 1.0.0 | Règlement européen contraignant | Données personnelles, articles 9 et 22, AIPD et conception | [Ouvrir](eu-gdpr-ai/1.0.0/README.fr.md) |
-| Socle NIS2 UE | 1.0.0 | Directive européenne et profils nationaux | Gouvernance de direction, mesures de risque sélectionnées et incidents | [Ouvrir](eu-nis2-baseline/1.0.0/README.fr.md) |
-| NIST AI RMF | 1.0.0 | Référentiel volontaire | GOVERN, MAP, MEASURE, MANAGE et marqueur IA générative | [Ouvrir](nist-ai-rmf/1.0.0/README.fr.md) |
-| NIST CSF | 2.0.0 | Référentiel volontaire | Six fonctions cyber de premier niveau | [Ouvrir](nist-csf/2.0.0/README.fr.md) |
+| Socle AI Act UE | 1.1.0 | Règlement européen contraignant | Toutes les voies de l’article 5, tous les cas annexe III, article 6, opérateurs, article 50 et GPAI | [Ouvrir](eu-ai-act/1.1.0/README.fr.md) |
+| Socle RGPD IA | 1.1.0 | Règlement européen avec lignes EDPB identifiées | Périmètre, principes, droits, article 22, AIPD, sécurité, transferts et modèles IA | [Ouvrir](eu-gdpr-ai/1.1.0/README.fr.md) |
+| Socle NIS2 UE | 1.1.0 | Directive européenne et profils nationaux | Article 20, dix familles de l’article 21 et déclarations de l’article 23 | [Ouvrir](eu-nis2-baseline/1.1.0/README.fr.md) |
+| NIST AI RMF | 1.1.0 | Référentiel volontaire | 72 résultats du Core dans un profil cible sélectionné | [Ouvrir](nist-ai-rmf/1.1.0/README.fr.md) |
+| NIST CSF | 2.1.0 | Référentiel volontaire | 106 résultats actuels du Core dans un profil cible sélectionné | [Ouvrir](nist-csf/2.1.0/README.fr.md) |
 | Revue contractuelle | 1.0.0 | Exemple fictif | Présence de clauses d’un clausier fictif | [Ouvrir](contract-review-example/1.0.0/README.fr.md) |
 
 Chaque guide explique la source, les questions, le chemin de décision, les
 résultats, les limites et un exemple. Un juriste ou une personne de la
 conformité ne devrait pas avoir à ouvrir `pack.json` pour comprendre le pack.
 
-La [revue datée de viabilité](../docs/audits/2026-08-29-pack-viability.fr.md)
+La [revue datée de couverture](../docs/audits/2026-08-29-pack-viability.fr.md)
 consigne les sources officielles vérifiées, les corrections effectuées et les
 limites résiduelles des packs juridiques et méthodologiques.
+
+Les anciens répertoires de version restent immuables afin de reproduire une
+évaluation passée. Les nouveaux profils doivent figer les versions du tableau.
 
 ## L’autorité reste visible
 

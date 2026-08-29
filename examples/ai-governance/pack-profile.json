@@ -2,15 +2,15 @@
   "schema_version": "0.1.0",
   "profile": {
     "id": "fictional-ai-governance-baseline",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "name": "Fictional AI governance baseline",
     "reviewed_at": "2026-08-29"
   },
   "packs": [
-    {"id": "eu-ai-act-core", "version": "1.0.0", "path": "../../packs/eu-ai-act/1.0.0/pack.json", "content_hash": "533e450d224e0ddc8f8a9c49564531859715ad2312056fe56f8844c9dffc94ad"},
-    {"id": "eu-gdpr-ai-core", "version": "1.0.0", "path": "../../packs/eu-gdpr-ai/1.0.0/pack.json", "content_hash": "3881a0ddf7de004847210ac52435a0422dd0a7729b745b3d7358f376cfa28259"},
-    {"id": "eu-nis2-baseline", "version": "1.0.0", "path": "../../packs/eu-nis2-baseline/1.0.0/pack.json", "content_hash": "877c661973a412c3890fe7986e037f7771d8f903e48094a1c08915dc72fcd8d7"},
-    {"id": "nist-ai-rmf-core", "version": "1.0.0", "path": "../../packs/nist-ai-rmf/1.0.0/pack.json", "content_hash": "15884daab175fb0d94218960c9d8c901297f821baa9e6ded103f0570664d9f80"},
-    {"id": "nist-csf-core", "version": "2.0.0", "path": "../../packs/nist-csf/2.0.0/pack.json", "content_hash": "2b2d47b63b35ac231d69ec07e24e21795d382cb3806240c2779ae55072cf2ae2"}
+    {"id": "eu-ai-act-core", "version": "1.1.0", "path": "../../packs/eu-ai-act/1.1.0/pack.json", "content_hash": "64ee6f93cd407d78c152e830d8ab7beef23225b9bf78130229974e5f55ee824b"},
+    {"id": "eu-gdpr-ai-core", "version": "1.1.0", "path": "../../packs/eu-gdpr-ai/1.1.0/pack.json", "content_hash": "f6298053692c5a4eeb3eacf102c58a8912d1a734a981a73ef208193bd5fab2af"},
+    {"id": "eu-nis2-baseline", "version": "1.1.0", "path": "../../packs/eu-nis2-baseline/1.1.0/pack.json", "content_hash": "a1a9341e8272b2fcb1b7812ae9fd5923693950364d87bbfb85d398fecf69124f"},
+    {"id": "nist-ai-rmf-core", "version": "1.1.0", "path": "../../packs/nist-ai-rmf/1.1.0/pack.json", "content_hash": "a554d34bb319c934550616f6657cdf0ff7a50916e73fcfb3cb77c49cabfaa0c1"},
+    {"id": "nist-csf-core", "version": "2.1.0", "path": "../../packs/nist-csf/2.1.0/pack.json", "content_hash": "878845f6f3e90de2d0d828fad6bfab0814f6075c803f74e8b2045dfb11b2270e"}
   ]
 }

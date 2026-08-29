@@ -31,6 +31,24 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(
             {"eu-ai-act-core", "eu-gdpr-ai-core", "nist-ai-rmf-core"}, pack_ids
         )
+        versions = {
+            item["pack"]["id"]: item["pack"]["version"]
+            for item in result["assessments"]
+        }
+        self.assertEqual(
+            {
+                "eu-ai-act-core": "1.1.0",
+                "eu-gdpr-ai-core": "1.1.0",
+                "nist-ai-rmf-core": "1.1.0",
+            },
+            versions,
+        )
+        self.assertTrue(
+            all(
+                assessment["summary"]["indeterminate"] == 0
+                for assessment in result["assessments"]
+            )
+        )
 
     def test_wrong_content_hash_breaks_a_pack_pin(self):
         source = ROOT / "examples/ai-governance/pack-profile.json"

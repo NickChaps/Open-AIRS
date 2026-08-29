@@ -169,11 +169,11 @@ du drift.
 
 | Pack | Autorité | Ce qu’il apporte |
 | --- | --- | --- |
-| **[EU AI Act](packs/eu-ai-act/1.0.0/README.fr.md)** | Droit européen contraignant | Pratiques interdites, périmètres à haut risque et obligations couvertes par la version du pack. |
-| **[EU GDPR · profil IA](packs/eu-gdpr-ai/1.0.0/README.fr.md)** | Droit européen contraignant | Données personnelles, catégories particulières, décisions automatisées et garanties associées. |
-| **[EU NIS2 · socle](packs/eu-nis2-baseline/1.0.0/README.fr.md)** | Directive européenne à compléter nationalement | Mesures de gestion des risques et points de gouvernance cyber. |
-| **[NIST AI RMF + profil GenAI](packs/nist-ai-rmf/1.0.0/README.fr.md)** | Référentiel volontaire | Fonctions Govern, Map, Measure et Manage pour les risques IA. |
-| **[NIST CSF 2.0](packs/nist-csf/2.0.0/README.fr.md)** | Référentiel volontaire | Gouvernance et gestion des risques de cybersécurité. |
+| **[EU AI Act](packs/eu-ai-act/1.1.0/README.fr.md)** | Droit européen contraignant | Toutes les voies de l’article 5, tous les cas annexe III, préparation des opérateurs, article 50 et GPAI. |
+| **[EU GDPR · profil IA](packs/eu-gdpr-ai/1.1.0/README.fr.md)** | Droit européen avec lignes EDPB identifiées | Périmètre, principes, droits, décisions automatisées, AIPD, sécurité, transferts et modèles IA. |
+| **[EU NIS2 · socle](packs/eu-nis2-baseline/1.1.0/README.fr.md)** | Directive européenne à compléter nationalement | Article 20, dix familles de l’article 21 et déclarations d’incident de l’article 23. |
+| **[NIST AI RMF + profil GenAI](packs/nist-ai-rmf/1.1.0/README.fr.md)** | Référentiel volontaire | 72 résultats du Core dans un profil cible choisi par l’organisation. |
+| **[NIST CSF 2.0](packs/nist-csf/2.1.0/README.fr.md)** | Référentiel volontaire | 106 résultats actuels du Core dans un profil cible choisi par l’organisation. |
 | **[Revue contractuelle fictive](packs/contract-review-example/1.0.0/README.fr.md)** | Exemple pédagogique | Démonstration du même moteur sur un contrat et un clausier fictifs. |
 
 Chaque pack publie les faits attendus, les conditions déterministes, les
@@ -200,10 +200,11 @@ simulée sur le parc avant activation.
 | comprendre les concepts sans prérequis technique | **[Concepts d’AIR Framework](CONCEPTS.md)** |
 | voir un parcours complet, du besoin métier à la décision | [Parcours métier](docs/fr/parcours-metier.md) |
 | savoir ce que contient un registre IA utile | [Contenu du registre IA](docs/fr/registre-ia.md) |
+| modéliser des connecteurs partagés ou réservés à une application | [Exemple de topologies de connecteurs](examples/connector-topologies/README.fr.md) |
 | exécuter un exemple en dix minutes | [Démarrage rapide](docs/fr/demarrage.md) |
 | lire correctement un résultat | [Lire une évaluation](docs/fr/lire-une-evaluation.md) |
 | vérifier la couverture et les sources | [Sources et couverture](docs/fr/sources-et-couverture.md) |
-| consulter l’audit actuel des packs | [Revue de viabilité des packs du 29 août 2026](docs/audits/2026-08-29-pack-viability.fr.md) |
+| consulter l’audit actuel des packs | [Revue de couverture des packs du 29 août 2026](docs/audits/2026-08-29-pack-viability.fr.md) |
 | créer un nouveau pack | [Créer et publier un pack](docs/fr/creer-un-pack.md) |
 | intégrer le moteur | [Spécification du graphe d’objets](spec/01-object-graph.md) |
 
@@ -236,10 +237,10 @@ Python 3.11 ou supérieur.
 ```bash
 python -m pip install .
 
-air-framework validate-pack packs/eu-ai-act/1.0.0/pack.json
+air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
 air-framework assess \
   --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.0.0/pack.json \
+  --pack packs/eu-ai-act/1.1.0/pack.json \
   --target use-recruiting-assistant
 
 air-framework assess-profile \
@@ -258,7 +259,7 @@ professionnels du droit, de la sécurité ou des risques. Un résultat dépend d
 la version des packs actifs, des preuves disponibles et de la qualité des faits
 transmis au moteur.
 
-Le dépôt contient la distribution de référence `v0.1.0-alpha.1`. Les schémas et
+Le dépôt contient la distribution de référence `v0.1.0-alpha.2`. Les schémas et
 interfaces en ligne de commande peuvent encore évoluer. Consultez la
 [déclaration clean-room](CLEAN_ROOM.md), les [décisions fondatrices](spec/00-project-decisions.md),
 les [dépendances auditées](DEPENDENCIES.md) et le [guide de contribution](CONTRIBUTING.md).

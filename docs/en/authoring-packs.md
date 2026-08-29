@@ -2,6 +2,34 @@
 
 # Authoring and releasing a pack
 
+```mermaid
+flowchart LR
+    S["Official or controlled source"] --> C["Coverage and exclusions"]
+    C --> F["Bounded factual questions"]
+    F --> R["Deterministic conditions<br/>findings · obligations · anchors"]
+    R --> T["Positive · negative<br/>incomplete fixtures"]
+    T --> I["Dry-run on the registry"]
+    I --> D{"Impact accepted?"}
+    D -->|"revise"| C
+    D -->|"approved"| V["Immutable version"]
+
+    classDef source fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef author fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef release fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class S,C source
+    class F,R,T,I,D author
+    class V release
+```
+
+## The files a reviewer receives
+
+| File | Human purpose | Machine purpose |
+| --- | --- | --- |
+| `README.md` and `README.fr.md` | Explain the authority, decision path, coverage and limits | None |
+| `pack.json` | Inspect questions, rules and anchors when needed | Executable pack consumed by the engine |
+| `CHANGELOG.md` | Understand the difference from the previous version | Supports release review |
+| Conformance fixtures | Review concrete expected outcomes | Prevent regressions in positive, negative and incomplete cases |
+
 ## Identify the authority and scope
 
 Record whether the source is binding law, guidance, a voluntary framework,

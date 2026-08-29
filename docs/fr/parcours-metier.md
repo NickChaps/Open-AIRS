@@ -10,6 +10,28 @@ connecteur de messagerie.
 AIR ne demande pas au juriste de lire le code de la plateforme. Il construit
 un dossier commun que chacun peut relire.
 
+```mermaid
+flowchart LR
+    B["Responsable métier<br/>décrit l’usage"] --> T["Responsable plateforme<br/>confirme la composition"]
+    T --> X["Extraction assistée<br/>propose des faits bornés"]
+    X --> V["Relecteur compétent<br/>valide les faits sensibles"]
+    V --> E["Moteur déterministe<br/>applique les packs figés"]
+    E --> D{"Résultat"}
+    D -->|"preuve manquante"| Q["Demande de preuve"]
+    D -->|"constat"| R["Revue juridique, données ou sécurité"]
+    D -->|"aucun écart sélectionné"| M["Suivi et revue des changements"]
+    Q --> V
+    R --> H["Décision et actions attribuées"]
+    M --> H
+
+    classDef person fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef system fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef action fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class B,T,V person
+    class X,E,D system
+    class Q,R,M,H action
+```
+
 | Étape | Ce que la personne voit | Ce qu’AIR conserve | Qui confirme |
 | --- | --- | --- | --- |
 | 1. Décrire l’usage | La finalité, les personnes concernées et les actions attendues | Un objet `ai_use` et la déclaration source | Responsable métier |

@@ -1,178 +1,120 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 
-# Revue de viabilité des packs · 29 août 2026
+# Revue de couverture des packs · 29 août 2026
 
 [Read in English](2026-08-29-pack-viability.md)
 
-Cette revue vérifie si les packs livrés avec AIR Framework représentent
-correctement les textes et référentiels qu’ils annoncent, dans les limites
-publiées. Elle porte sur les sources, les faits demandés, la logique des règles,
-les ancrages retournés et les limites affichées.
-
-Elle ne constitue pas une consultation juridique et ne transforme pas un pack
-de triage en certification de conformité.
-
-## Conclusion
-
-| Pack | Conclusion au 29 août 2026 | Usage raisonnable |
-| --- | --- | --- |
-| AI Act européen | **Viable pour le triage alpha du périmètre encodé** | Détecter certains usages interdits, qualifier les voies haut risque couvertes, examiner le rôle fournisseur et quelques obligations ciblées |
-| RGPD pour l’IA | **Viable comme filtre initial de protection des données** | Repérer les analyses Article 9, Article 22, AIPD et privacy by design à ouvrir |
-| NIS2 | **Viable uniquement avec une surcouche nationale** | Poser un socle européen après qualification de l’entité selon le droit national applicable |
-| NIST AI RMF 1.0 | **Source actuelle, profil volontaire et synthétique** | Vérifier l’existence des quatre fonctions et amorcer un profil organisationnel plus précis |
-| NIST CSF 2.0 | **Source actuelle, socle d’intégration volontaire** | Relier un profil Current/Target propre à l’organisation aux six fonctions du CSF |
+Ce document consigne les packs publics, leurs sources officielles, leur
+couverture exécutable et leurs limites à la date de revue. Les constats
+juridiques soutiennent la qualification et la préparation. Ils ne constituent
+ni une certification réglementaire ni une consultation juridique.
 
 ```mermaid
 flowchart LR
-    S["Source officielle<br/>et version"] --> F["Faits bornés<br/>avec preuves"]
-    F --> R["Règles<br/>déterministes"]
-    R --> A["Constats et<br/>ancrages"]
-    A --> L["Limites publiées<br/>et revue humaine"]
+    S["Source officielle<br/>avec date de revue"] --> F["Catalogue de faits<br/>reliés aux preuves"]
+    F --> R["Règles déterministes<br/>avec ancrages exacts"]
+    R --> O["Qualification,<br/>obligation ou écart de profil"]
+    O --> L["Couverture publiée<br/>et limites restantes"]
 
     classDef source fill:#dbeafe,stroke:#2563eb,color:#172554
-    classDef work fill:#ecfeff,stroke:#0891b2,color:#164e63
-    classDef result fill:#ede9fe,stroke:#7c3aed,color:#3b0764
-    classDef limit fill:#fef3c7,stroke:#d97706,color:#78350f
-    class S source
-    class F,R work
-    class A result
-    class L limit
+    classDef engine fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef output fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class S,F source
+    class R engine
+    class O,L output
 ```
 
-## AI Act européen
+## Distribution actuelle
 
-### Sources vérifiées
+| Pack | Version | Faits | Règles | Couverture exécutable | Principale limite restante |
+| --- | --- | ---: | ---: | --- | --- |
+| Socle AI Act UE | 1.1.0 | 124 | 94 | Qualification et préparation des opérateurs | Droit produit annexe I et chapitres procéduraux |
+| Socle RGPD IA | 1.1.0 | 68 | 41 | Traitements IA et responsabilité | Analyse juridique du cas et droit national |
+| Socle NIS2 UE | 1.1.0 | 31 | 27 | Gouvernance, mesures et incidents au niveau de la directive | Transposition nationale et profils sectoriels détaillés |
+| NIST AI RMF | 1.1.0 | 75 | 74 | 72 résultats du Core AI RMF 1.0 | Profil cible de l’organisation et future révision NIST |
+| NIST CSF | 2.1.0 | 107 | 107 | 106 résultats actuels du Core CSF 2.0 | Profil cible, niveaux de mise en œuvre et références |
 
-- règlement (UE) 2024/1689 ;
-- règlement modificatif (UE) 2026/1744 ;
-- texte consolidé au 27 juillet 2026 ;
-- calendrier d’application publié par la Commission européenne.
+## Socle AI Act UE 1.1.0
 
-### Corrections effectuées pendant la revue
+Le pack est ancré sur le règlement (UE) 2024/1689 consolidé au 27 juillet 2026
+après le règlement (UE) 2026/1744.
 
-1. La règle de chaîne de valeur couvre désormais les trois hypothèses de
-   l’article 25(1) : apposition du nom ou de la marque sur un système à haut
-   risque existant, modification substantielle laissant le système à haut
-   risque, et changement de finalité transformant un système en système à haut
-   risque.
-2. Le fait relatif à la modification substantielle inclut maintenant les
-   conditions « système déjà à haut risque » et « demeure à haut risque ». Une
-   simple modification ne suffit plus à déclencher ce constat.
-3. La règle de transparence de l’article 50(1) demande si l’exception limitée
-   prévue pour certains systèmes autorisés par la loi en matière d’infractions
-   est applicable. Une exception inconnue rend le résultat indéterminé ; elle
-   n’est pas supposée absente.
-4. Les règles relatives aux pratiques interdites, au haut risque et à
-   l’interaction directe exigent maintenant que la composition réponde à la
-   définition d’un système d’IA. Une automatisation non-IA ne peut plus
-   déclencher ces qualifications par simple ressemblance de finalité.
+| Domaine | Couverture |
+| --- | --- |
+| Périmètre et rôles | Test de système d’IA, rôles des opérateurs, finalité et changements de rôle dans la chaîne de valeur |
+| Pratiques interdites | 10 voies de l’article 5, dont les deux voies applicables le 2 décembre 2026 |
+| Qualification haut risque | Entrée par les produits annexe I, 25 cas annexe III et test d’exception de l’article 6(3) |
+| Exigences haut risque | Articles 9 à 15 et préparation des fournisseurs, mandataires, importateurs, distributeurs, déployeurs et accords de chaîne de valeur concernés |
+| Personnes et supervision | Information des travailleurs et personnes concernées, supervision humaine et analyse des droits fondamentaux de l’article 27 |
+| Transparence | Toutes les voies de l’article 50 : interaction, marquage synthétique, émotion ou biométrie, deep fakes et texte d’intérêt public |
+| GPAI | Obligations des modèles à usage général et des modèles à risque systémique, articles 51 à 55 |
+| Dates d’application | Entrée en vigueur et calendrier par étapes jusqu’au 2 août 2028 dans les métadonnées |
 
-### Limites qui demeurent
+Le pack ne décompose pas chaque texte produit de l’annexe I, procédure
+d’organisme notifié, pouvoir de surveillance, dispositif de bac à sable,
+sanction, voie de recours, norme harmonisée ou futur document de la Commission.
+Ces éléments demandent des profils dédiés ou de nouvelles versions relues.
 
-Le pack encode neuf règles de triage. Il ne couvre pas encore la majorité des
-domaines de l’annexe III, les obligations exhaustives des fournisseurs et
-déployeurs, les régimes GPAI, les textes produit de l’annexe I ni les nouvelles
-interdictions de 2026. Il est donc adapté à une première qualification du
-périmètre publié, pas à une déclaration de conformité globale.
+## Socle RGPD IA 1.1.0
 
-## RGPD pour l’IA
+La couche contraignante s’ancre sur le règlement (UE) 2016/679. L’avis EDPB
+28/2024 apparaît séparément comme ligne directrice réglementaire.
 
-### Source vérifiée
+Le pack couvre les périmètres matériel et territorial, les rôles, les principes
+de l’article 5, les articles 6, 9 et 10, l’information et les droits, l’article
+22, la gouvernance des responsables et sous-traitants, les registres, la
+sécurité, les violations, les articles 24 à 30 et 35, la consultation
+préalable, le DPO, les transferts et les questions de
+développement des modèles issues de l’avis EDPB.
 
-- règlement (UE) 2016/679, notamment ses articles 5, 9, 22, 25 et 35.
+Le pack ne choisit pas une base légale, ne décide pas une exception de
+l’article 14, ne prouve pas l’anonymat, ne réalise pas une AIPD et ne tranche
+pas les conditions de droit national. Il identifie les questions et lacunes à
+documenter.
 
-### Correction effectuée pendant la revue
+## Socle NIS2 UE 1.1.0
 
-Une règle distincte encode désormais l’article 22(4). Lorsqu’une décision
-exclusivement automatisée produisant un effet juridique ou similaire repose
-sur des catégories particulières de données, le moteur vérifie séparément :
+Le pack s’ancre sur la directive (UE) 2022/2555 et porte un marqueur
+d’applicabilité du règlement d’exécution (UE) 2024/2690.
 
-- qu’une condition de l’article 9(2)(a) ou 9(2)(g) est établie ;
-- que des garanties adaptées protègent les droits, libertés et intérêts de la
-  personne.
+Il couvre la preuve de classification de l’entité, l’analyse d’équivalence de
+l’article 4, la gouvernance de l’article 20, les dix familles de l’article
+21(2), la proportionnalité, les fournisseurs, la correction et toute la
+séquence de l’article 23 : alerte sous 24 heures, notification sous 72 heures,
+rapports intermédiaires, rapport final sous un mois et voie pour l’incident en
+cours.
 
-Une condition générale de l’article 9 ne suffit donc plus à résoudre ce cas
-particulier.
+NIS2 s’applique par transposition nationale. Classification, autorité
+compétente, canal de déclaration, délais locaux et contrôle demandent un profil
+juridictionnel relu. Les contrôles détaillés de l’annexe du règlement 2024/2690
+restent une analyse séparée.
 
-Le fait « AIPD terminée » est également devenu opérant : le pack distingue le
-déclenchement de l’obligation d’AIPD de la lacune constatée lorsqu’aucune AIPD
-adaptée n’est démontrée avant le traitement.
+## Profils NIST
 
-### Limites qui demeurent
+NIST AI RMF 1.0 est représenté par les 72 résultats du Core répartis entre
+GOVERN, MAP, MEASURE et MANAGE. NIST CSF 2.0 est représenté par ses 106
+résultats actuels, six fonctions et 22 catégories.
 
-Le pack ne remplace ni le registre des traitements, ni une AIPD, ni une analyse
-des transferts, durées de conservation, contrats de sous-traitance, notices ou
-droits des personnes. Il sert à ouvrir les bonnes analyses à partir de faits
-traçables.
-
-## NIS2
-
-### Sources vérifiées
-
-- directive (UE) 2022/2555, articles 20, 21 et 23, annexes I et II ;
-- règlement d’exécution (UE) 2024/2690, identifié comme extension non encodée.
-
-Le pack reprend correctement la validation et la supervision par l’organe de
-direction, sa formation, un sous-ensemble des mesures de l’article 21, la
-sécurité de la chaîne d’approvisionnement et l’existence d’un processus de
-notification des incidents.
-
-La directive doit être transposée. AIR ne déduit donc pas le statut d’entité
-essentielle ou importante depuis un nom, un secteur ou une taille. Cette
-qualification et les canaux de notification doivent venir d’un profil national
-révisé. Les délais détaillés de l’article 23 et le règlement d’exécution
-2024/2690 restent explicitement hors de ce socle.
-
-## NIST AI RMF 1.0
-
-Les sources NIST AI 100-1 et NIST AI 600-1 restent les versions épinglées par
-ce pack. NIST indique toutefois que l’AI RMF 1.0 est en cours de révision. Une
-future publication devra donc créer une nouvelle version de pack, avec
-simulation d’impact, sans remplacer silencieusement la version 1.0.
-
-Les cinq règles actuelles vérifient uniquement l’existence d’un socle GOVERN,
-MAP, MEASURE, MANAGE et la prise en compte du profil GenAI. Une organisation
-doit préciser ses résultats cibles, mesures et seuils avant d’en tirer une
-évaluation de maturité.
-
-## NIST CSF 2.0
-
-NIST CSF 2.0 reste la version officielle courante. Le pack pose une question de
-haut niveau pour chacune des six fonctions : GOVERN, IDENTIFY, PROTECT, DETECT,
-RESPOND et RECOVER.
-
-Ces six réponses n’ont de sens que si l’organisation définit auparavant son
-profil cible et les résultats sous-jacents attendus. Le pack est un point
-d’intégration stable ; il ne représente pas à lui seul l’ensemble du CSF Core,
-les Implementation Tiers ou les Informative References.
+Les deux packs demandent un profil cible explicitement sélectionné par
+l’organisation. Un résultat absent de la sélection ne produit aucun écart.
+NIST AI 600-1, les actions du Playbook, les niveaux de mise en œuvre CSF, les
+exemples et références restent des matériaux de profil distincts. NIST a
+annoncé la révision d’AI RMF 1.0 ; le Core actuel reste figé jusqu’à la
+publication d’un successeur dans une nouvelle version relue.
 
 ## Sources officielles
 
-- [AI Act consolidé au 27 juillet 2026](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:02024R1689-20260727)
+- [AI Act consolidé au 27 juillet 2026](https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/fra)
 - [Règlement (UE) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/fra)
 - [RGPD](https://eur-lex.europa.eu/eli/reg/2016/679/oj/fra)
+- [Avis EDPB 28/2024](https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_fr)
 - [Directive NIS2](https://eur-lex.europa.eu/eli/dir/2022/2555/oj/fra)
 - [Règlement d’exécution (UE) 2024/2690](https://eur-lex.europa.eu/eli/reg_impl/2024/2690/oj/fra)
-- [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)
-- [NIST CSF 2.0](https://www.nist.gov/cyberframework)
+- [NIST AI RMF 1.0](https://doi.org/10.6028/NIST.AI.100-1)
+- [Playbook NIST AI RMF](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/)
+- [Profil Generative AI NIST AI 600-1](https://doi.org/10.6028/NIST.AI.600-1)
+- [NIST Cybersecurity Framework 2.0](https://doi.org/10.6028/NIST.CSWP.29)
 
-## Critère de publication
-
-Une évolution de pack est publiable lorsque ses sources et sa portée sont
-identifiées, chaque fait juridique est distinct d’une conclusion, chaque règle
-retourne ses ancrages, les cas positifs et les exceptions sont testés, les
-lacunes sont visibles et l’impact sur un inventaire de référence est simulé.
-
-## Vérification du comportement
-
-Les cas de conformité versionnés couvrent les correspondances, les
-non-correspondances, les informations manquantes, les conflits et les
-exceptions encodées. L’intégration continue contrôle également les schémas,
-les exemples, l’héritage, les profils de packs et la séparation du routage
-organisationnel. Un contrôle d’intégrité exige que chaque fait déclaré dans un
-pack soit utilisé par une règle ou par une politique d’héritage.
-
-Ces vérifications portent sur le comportement déterministe du moteur et la
-cohérence interne des packs. Elles ne démontrent ni l’exhaustivité juridique
-de leur couverture, ni la qualité d’un extracteur LLM. Ces deux limites restent
-à examiner séparément avec les sources et les corpus appropriés.
+Les anciens répertoires restent immuables pour reproduire les évaluations
+historiques. Les nouveaux profils doivent figer les versions de cette revue et
+conserver leurs empreintes de contenu.

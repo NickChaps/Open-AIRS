@@ -166,11 +166,11 @@ retaining the full history for audit, impact simulation and drift analysis.
 
 | Pack | Authority | Contribution |
 | --- | --- | --- |
-| **[EU AI Act](packs/eu-ai-act/1.0.0/README.md)** | Binding European law | Prohibited practices, high-risk scopes and obligations covered by the pack version. |
-| **[EU GDPR · AI profile](packs/eu-gdpr-ai/1.0.0/README.md)** | Binding European law | Personal data, special categories, automated decisions and related safeguards. |
-| **[EU NIS2 · baseline](packs/eu-nis2-baseline/1.0.0/README.md)** | European directive requiring national overlays | Cyber risk-management measures and governance checks. |
-| **[NIST AI RMF + GenAI Profile](packs/nist-ai-rmf/1.0.0/README.md)** | Voluntary framework | Govern, Map, Measure and Manage functions for AI risk. |
-| **[NIST CSF 2.0](packs/nist-csf/2.0.0/README.md)** | Voluntary framework | Cybersecurity governance and risk management. |
+| **[EU AI Act](packs/eu-ai-act/1.1.0/README.md)** | Binding European law | All Article 5 routes, all Annex III cases, high-risk operator readiness, Article 50 and GPAI. |
+| **[EU GDPR · AI profile](packs/eu-gdpr-ai/1.1.0/README.md)** | Binding European law with marked EDPB guidance | Scope, principles, rights, automated decisions, DPIA, security, transfers and AI-model questions. |
+| **[EU NIS2 · baseline](packs/eu-nis2-baseline/1.1.0/README.md)** | European directive requiring national overlays | Article 20, all ten Article 21 measure families and Article 23 incident reporting. |
+| **[NIST AI RMF + GenAI Profile](packs/nist-ai-rmf/1.1.0/README.md)** | Voluntary framework | All 72 Core outcomes through an organisation-selected target profile. |
+| **[NIST CSF 2.0](packs/nist-csf/2.1.0/README.md)** | Voluntary framework | All 106 current Core outcomes through an organisation-selected Target Profile. |
 | **[Fictional contract review](packs/contract-review-example/1.0.0/README.md)** | Teaching example | The same engine applied to a fictional contract and clause library. |
 
 Each pack publishes its fact definitions, deterministic conditions, sources,
@@ -197,10 +197,11 @@ before activation.
 | understand the model without a technical prerequisite | **[AIR Framework concepts](CONCEPTS.md)** |
 | follow a complete path from business need to decision | [Governance workflow](docs/en/governance-workflow.md) |
 | understand what a useful AI registry contains | [AI registry guide](docs/en/ai-registry.md) |
+| model shared and application-specific connectors | [Connector topology example](examples/connector-topologies/README.md) |
 | run an example in ten minutes | [Quickstart](docs/en/quickstart.md) |
 | read an assessment correctly | [Reading an assessment](docs/en/reading-an-assessment.md) |
 | verify source coverage | [Sources and coverage](docs/en/sources-and-coverage.md) |
-| inspect the current pack audit | [Rule-pack viability review, 29 August 2026](docs/audits/2026-08-29-pack-viability.md) |
+| inspect the current pack audit | [Rule-pack coverage review, 29 August 2026](docs/audits/2026-08-29-pack-viability.md) |
 | create a new pack | [Authoring and releasing a pack](docs/en/authoring-packs.md) |
 | integrate the engine | [Object graph specification](spec/01-object-graph.md) |
 
@@ -232,10 +233,10 @@ The reference engine has no runtime dependency beyond Python 3.11+.
 ```bash
 python -m pip install .
 
-air-framework validate-pack packs/eu-ai-act/1.0.0/pack.json
+air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
 air-framework assess \
   --inventory examples/ai-governance/inventory.json \
-  --pack packs/eu-ai-act/1.0.0/pack.json \
+  --pack packs/eu-ai-act/1.1.0/pack.json \
   --target use-recruiting-assistant
 
 air-framework assess-profile \
@@ -253,7 +254,7 @@ AIR Framework does not certify compliance and does not replace legal, security
 or risk professionals. A result depends on the active pack versions, available
 evidence and the quality of facts supplied to the engine.
 
-This repository contains the `v0.1.0-alpha.1` reference distribution. Schemas and
+This repository contains the `v0.1.0-alpha.2` reference distribution. Schemas and
 command-line interfaces may still change. See the [clean-room statement](CLEAN_ROOM.md),
 [foundational decisions](spec/00-project-decisions.md), [audited dependencies](DEPENDENCIES.md)
 and [contribution guide](CONTRIBUTING.md).

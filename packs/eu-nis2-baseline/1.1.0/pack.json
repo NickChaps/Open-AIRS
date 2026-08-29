@@ -1,0 +1,1971 @@
+{
+  "schema_version": "0.1.0",
+  "pack": {
+    "id": "eu-nis2-baseline",
+    "name": "EU NIS2 directive-level baseline",
+    "version": "1.1.0",
+    "authority_type": "binding_law",
+    "jurisdiction": "European Union with Member State transposition",
+    "language": "en",
+    "source_version": "Directive (EU) 2022/2555 and Commission Implementing Regulation (EU) 2024/2690 applicability marker",
+    "effective_from": "2024-10-18",
+    "reviewed_at": "2026-08-29",
+    "applies_to": [
+      "organization",
+      "service",
+      "ai_platform",
+      "ai_system"
+    ],
+    "coverage": [
+      "entity classification and national-transposition evidence",
+      "Article 20 management governance and training",
+      "all ten Article 21(2) minimum measure families, proportionality, supply-chain review and correction",
+      "Article 23 significant-incident test and complete staged reporting sequence",
+      "Implementing Regulation (EU) 2024/2690 applicability and assessment marker"
+    ],
+    "known_gaps": [
+      "Entity scope and enforcement depend on the applicable Member State transposition and authority decisions.",
+      "Sector-specific Union-law equivalence under Article 4 needs a dedicated legal analysis.",
+      "The detailed Annex controls and sector thresholds in Regulation (EU) 2024/2690 are signalled but not decomposed into every sub-requirement in this directive-level pack.",
+      "National notification channels, forms and additional timelines require jurisdiction profiles."
+    ],
+    "notice": "This pack provides the EU directive-level baseline. It does not replace the applicable national law or competent-authority guidance."
+  },
+  "fact_catalog": [
+    {
+      "id": "nis2.entity_classification",
+      "type": "string",
+      "question": "Is the organisation classified as an essential entity, important entity, outside scope or unresolved under the applicable national transposition?"
+    },
+    {
+      "id": "nis2.scope_basis",
+      "type": "array",
+      "question": "Which Annex I, Annex II, special-entity or Member State identification bases support scope?"
+    },
+    {
+      "id": "nis2.national_transposition_identified",
+      "type": "boolean",
+      "question": "Has the applicable Member State transposition and competent authority been identified?"
+    },
+    {
+      "id": "nis2.article4_sector_specific_displacement",
+      "type": "boolean",
+      "question": "Does sector-specific Union law displace Articles 21 and 23 under the Article 4 equivalence test?"
+    },
+    {
+      "id": "controls.management_body_approves_and_oversees",
+      "type": "boolean",
+      "question": "Does the management body approve and oversee Article 21 measures?"
+    },
+    {
+      "id": "controls.management_body_training",
+      "type": "boolean",
+      "question": "Do management-body members complete the required cybersecurity training?"
+    },
+    {
+      "id": "controls.employee_training_offered",
+      "type": "boolean",
+      "question": "Is regular cybersecurity training offered to employees?"
+    },
+    {
+      "id": "controls.article21.proportionality_assessed",
+      "type": "boolean",
+      "question": "Are measures selected using exposure, size, likelihood, severity, societal and economic impact?"
+    },
+    {
+      "id": "controls.article21.risk_and_information_security_policy",
+      "type": "boolean",
+      "question": "Are risk-analysis and information-system-security policies implemented?"
+    },
+    {
+      "id": "controls.article21.incident_handling",
+      "type": "boolean",
+      "question": "Is incident handling implemented?"
+    },
+    {
+      "id": "controls.article21.business_continuity",
+      "type": "boolean",
+      "question": "Are business continuity, backup, disaster recovery and crisis management implemented?"
+    },
+    {
+      "id": "controls.article21.supply_chain_security",
+      "type": "boolean",
+      "question": "Is supply-chain security implemented for direct suppliers and service providers?"
+    },
+    {
+      "id": "controls.article21.secure_acquisition_development_maintenance",
+      "type": "boolean",
+      "question": "Is security integrated into acquisition, development and maintenance, including vulnerability handling and disclosure?"
+    },
+    {
+      "id": "controls.article21.effectiveness_assessment",
+      "type": "boolean",
+      "question": "Are policies and procedures used to assess the effectiveness of cybersecurity measures?"
+    },
+    {
+      "id": "controls.article21.cyber_hygiene_and_training",
+      "type": "boolean",
+      "question": "Are basic cyber-hygiene practices and cybersecurity training implemented?"
+    },
+    {
+      "id": "controls.article21.cryptography_and_encryption",
+      "type": "boolean",
+      "question": "Are policies and procedures for cryptography and appropriate encryption implemented?"
+    },
+    {
+      "id": "controls.article21.hr_access_asset_management",
+      "type": "boolean",
+      "question": "Are human-resources security, access control and asset management implemented?"
+    },
+    {
+      "id": "controls.article21.authentication_and_secure_communications",
+      "type": "boolean",
+      "question": "Are appropriate multi-factor or continuous authentication and secure communications implemented?"
+    },
+    {
+      "id": "controls.article21.supplier_vulnerabilities_and_quality_reviewed",
+      "type": "boolean",
+      "question": "Does supply-chain review address supplier vulnerabilities, product quality and secure development?"
+    },
+    {
+      "id": "controls.article21.corrective_action_process",
+      "type": "boolean",
+      "question": "Can identified non-compliance be corrected without undue delay?"
+    },
+    {
+      "id": "incident.significant",
+      "type": "boolean",
+      "question": "Does an incident meet the Article 23 significant-impact test?"
+    },
+    {
+      "id": "incident.ongoing_at_final_report_due",
+      "type": "boolean",
+      "question": "Is the significant incident still ongoing when the final report would be due?"
+    },
+    {
+      "id": "controls.article23.early_warning_24h",
+      "type": "boolean",
+      "question": "Can an early warning be submitted within 24 hours of awareness?"
+    },
+    {
+      "id": "controls.article23.notification_72h",
+      "type": "boolean",
+      "question": "Can an incident notification with initial assessment be submitted within 72 hours?"
+    },
+    {
+      "id": "controls.article23.intermediate_updates",
+      "type": "boolean",
+      "question": "Can intermediate status reports be supplied when requested?"
+    },
+    {
+      "id": "controls.article23.final_report_one_month",
+      "type": "boolean",
+      "question": "Can a final report be submitted within one month of the incident notification?"
+    },
+    {
+      "id": "controls.article23.ongoing_progress_and_final",
+      "type": "boolean",
+      "question": "Can an ongoing-incident progress report and later final report be supplied on the required schedule?"
+    },
+    {
+      "id": "controls.article23.recipient_incident_notice",
+      "type": "boolean",
+      "question": "Can service recipients be notified without undue delay when a significant incident is likely to adversely affect service?"
+    },
+    {
+      "id": "controls.article23.significant_threat_guidance",
+      "type": "boolean",
+      "question": "Can potentially affected recipients receive measures or remedies for a significant cyber threat?"
+    },
+    {
+      "id": "nis2.implementing_regulation_2024_2690_applies",
+      "type": "boolean",
+      "question": "Is the entity one of the digital, infrastructure, managed-service or trust-service providers covered by Implementing Regulation (EU) 2024/2690?"
+    },
+    {
+      "id": "controls.implementing_regulation_2024_2690_assessed",
+      "type": "boolean",
+      "question": "Has the entity assessed and documented the detailed technical requirements and incident-significance criteria in Regulation (EU) 2024/2690?"
+    }
+  ],
+  "inheritance": [],
+  "anchors": [
+    {
+      "id": "nis2.scope",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Articles 2 to 4 and Annexes I and II",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Scope, essential and important entity classification, and sector-specific Union-law equivalence."
+    },
+    {
+      "id": "nis2.art20",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 20",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Management-body approval, oversight, liability context and training."
+    },
+    {
+      "id": "nis2.art21",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 21",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Risk-proportionate all-hazards measures and the ten minimum measure families."
+    },
+    {
+      "id": "nis2.art23",
+      "source": "Directive (EU) 2022/2555",
+      "locator": "Article 23",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng",
+      "summary": "Significant-incident test, recipient communications and staged reporting."
+    },
+    {
+      "id": "nis2.impl2024-2690",
+      "source": "Commission Implementing Regulation (EU) 2024/2690",
+      "locator": "Articles 1 to 4 and Annex",
+      "url": "https://eur-lex.europa.eu/eli/reg_impl/2024/2690/oj/eng",
+      "summary": "Detailed technical and methodological requirements and incident-significance criteria for listed digital and trust-service entities."
+    }
+  ],
+  "rules": [
+    {
+      "id": "nis2.baseline.in-scope",
+      "title": "NIS2 entity classification",
+      "kind": "legal_qualification",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "fact": {
+          "key": "nis2.entity_classification",
+          "operator": "in",
+          "value": [
+            "essential",
+            "important"
+          ]
+        }
+      },
+      "finding": {
+        "code": "EU-NIS2-IN-SCOPE",
+        "level": "nis2_in_scope",
+        "title": "Essential or important entity",
+        "summary": "The applicable national transposition classifies the entity as essential or important. Article 4 and national details still need to be retained."
+      },
+      "anchors": [
+        "nis2.scope"
+      ]
+    },
+    {
+      "id": "nis2.baseline.scope-basis-missing",
+      "title": "NIS2 scope basis is missing",
+      "kind": "scope_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nis2.entity_classification",
+              "operator": "in",
+              "value": [
+                "essential",
+                "important"
+              ]
+            }
+          },
+          {
+            "fact": {
+              "key": "nis2.scope_basis",
+              "operator": "eq",
+              "value": []
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-SCOPE-BASIS",
+        "level": "nis2_scope_gap",
+        "title": "The entity classification has no recorded scope basis",
+        "summary": "An essential or important classification should identify the relevant Annex, special-entity provision or Member State decision."
+      },
+      "anchors": [
+        "nis2.scope"
+      ],
+      "obligations": [
+        {
+          "code": "DOCUMENT-NIS2-SCOPE",
+          "title": "Record the legal and factual basis for the entity classification."
+        }
+      ]
+    },
+    {
+      "id": "nis2.baseline.nis2-national-transposition-identified-gap",
+      "title": "National NIS2 implementation is not identified",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "fact": {
+              "key": "nis2.entity_classification",
+              "operator": "in",
+              "value": [
+                "essential",
+                "important"
+              ]
+            }
+          },
+          {
+            "fact": {
+              "key": "nis2.national_transposition_identified",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-NATIONAL-OVERLAY",
+        "level": "nis2_scope_gap",
+        "title": "National NIS2 implementation is not identified",
+        "summary": "The EU Directive requires a Member State transposition, competent authority and reporting channel to operationalise the duties."
+      },
+      "anchors": [
+        "nis2.scope"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-NATIONAL-OVERLAY",
+          "title": "National NIS2 implementation is not identified"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-management-body-approves-and-oversees-gap",
+      "title": "Management approval or oversight is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.management_body_approves_and_oversees",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART20-APPROVAL",
+        "level": "nis2_governance_gap",
+        "title": "Management approval or oversight is missing",
+        "summary": "Article 20 requires the management body to approve and oversee the cybersecurity measures."
+      },
+      "anchors": [
+        "nis2.art20"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART20-APPROVAL",
+          "title": "Management approval or oversight is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-management-body-training-gap",
+      "title": "Management cybersecurity training is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.management_body_training",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART20-MANAGEMENT-TRAINING",
+        "level": "nis2_governance_gap",
+        "title": "Management cybersecurity training is missing",
+        "summary": "Members of the management body must follow training under Article 20."
+      },
+      "anchors": [
+        "nis2.art20"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART20-MANAGEMENT-TRAINING",
+          "title": "Management cybersecurity training is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-employee-training-offered-gap",
+      "title": "Regular employee cybersecurity training is not offered",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.employee_training_offered",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART20-EMPLOYEE-TRAINING",
+        "level": "nis2_governance_gap",
+        "title": "Regular employee cybersecurity training is not offered",
+        "summary": "Article 20 asks Member States to encourage regular employee training; the organisation has no evidenced programme."
+      },
+      "anchors": [
+        "nis2.art20"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART20-EMPLOYEE-TRAINING",
+          "title": "Regular employee cybersecurity training is not offered"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-proportionality-assessed-gap",
+      "title": "Article 21 proportionality assessment is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.proportionality_assessed",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-PROPORTIONALITY",
+        "level": "nis2_measure_gap",
+        "title": "Article 21 proportionality assessment is missing",
+        "summary": "The selected measures are not evidenced as proportionate to exposure, size, likelihood, severity and impact."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-PROPORTIONALITY",
+          "title": "Article 21 proportionality assessment is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-risk-and-information-security-policy-gap",
+      "title": "Risk and information-security policies are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.risk_and_information_security_policy",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-A",
+        "level": "nis2_measure_gap",
+        "title": "Risk and information-security policies are missing",
+        "summary": "The minimum measure family in Article 21(2)(a) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-A",
+          "title": "Risk and information-security policies are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-incident-handling-gap",
+      "title": "Incident handling is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.incident_handling",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-B",
+        "level": "nis2_measure_gap",
+        "title": "Incident handling is missing",
+        "summary": "The minimum measure family in Article 21(2)(b) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-B",
+          "title": "Incident handling is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-business-continuity-gap",
+      "title": "Business continuity and crisis management are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.business_continuity",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-C",
+        "level": "nis2_measure_gap",
+        "title": "Business continuity and crisis management are missing",
+        "summary": "The minimum measure family in Article 21(2)(c) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-C",
+          "title": "Business continuity and crisis management are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-supply-chain-security-gap",
+      "title": "Supply-chain security is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.supply_chain_security",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-D",
+        "level": "nis2_measure_gap",
+        "title": "Supply-chain security is missing",
+        "summary": "The minimum measure family in Article 21(2)(d) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-D",
+          "title": "Supply-chain security is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-secure-acquisition-development-maintenance-gap",
+      "title": "Secure acquisition, development or maintenance is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.secure_acquisition_development_maintenance",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-E",
+        "level": "nis2_measure_gap",
+        "title": "Secure acquisition, development or maintenance is missing",
+        "summary": "The minimum measure family in Article 21(2)(e) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-E",
+          "title": "Secure acquisition, development or maintenance is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-effectiveness-assessment-gap",
+      "title": "Effectiveness assessment is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.effectiveness_assessment",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-F",
+        "level": "nis2_measure_gap",
+        "title": "Effectiveness assessment is missing",
+        "summary": "The minimum measure family in Article 21(2)(f) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-F",
+          "title": "Effectiveness assessment is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-cyber-hygiene-and-training-gap",
+      "title": "Cyber hygiene or training is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.cyber_hygiene_and_training",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-G",
+        "level": "nis2_measure_gap",
+        "title": "Cyber hygiene or training is missing",
+        "summary": "The minimum measure family in Article 21(2)(g) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-G",
+          "title": "Cyber hygiene or training is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-cryptography-and-encryption-gap",
+      "title": "Cryptography and encryption governance is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.cryptography_and_encryption",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-H",
+        "level": "nis2_measure_gap",
+        "title": "Cryptography and encryption governance is missing",
+        "summary": "The minimum measure family in Article 21(2)(h) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-H",
+          "title": "Cryptography and encryption governance is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-hr-access-asset-management-gap",
+      "title": "Human-resources, access or asset security is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.hr_access_asset_management",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-I",
+        "level": "nis2_measure_gap",
+        "title": "Human-resources, access or asset security is missing",
+        "summary": "The minimum measure family in Article 21(2)(i) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-I",
+          "title": "Human-resources, access or asset security is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-authentication-and-secure-communications-gap",
+      "title": "Authentication or secure communications are missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.authentication_and_secure_communications",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-2-J",
+        "level": "nis2_measure_gap",
+        "title": "Authentication or secure communications are missing",
+        "summary": "The minimum measure family in Article 21(2)(j) is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-2-J",
+          "title": "Authentication or secure communications are missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-supplier-vulnerabilities-and-quality-reviewed-gap",
+      "title": "Supplier vulnerability and quality review is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.supplier_vulnerabilities_and_quality_reviewed",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-3",
+        "level": "nis2_measure_gap",
+        "title": "Supplier vulnerability and quality review is missing",
+        "summary": "Article 21(3) requires the entity to consider supplier-specific vulnerabilities and overall product and cybersecurity quality."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-3",
+          "title": "Supplier vulnerability and quality review is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article21-corrective-action-process-gap",
+      "title": "Article 21 corrective-action process is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "fact": {
+                  "key": "nis2.entity_classification",
+                  "operator": "in",
+                  "value": [
+                    "essential",
+                    "important"
+                  ]
+                }
+              },
+              {
+                "fact": {
+                  "key": "nis2.article4_sector_specific_displacement",
+                  "operator": "eq",
+                  "value": false
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article21.corrective_action_process",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART21-4",
+        "level": "nis2_measure_gap",
+        "title": "Article 21 corrective-action process is missing",
+        "summary": "The entity cannot evidence correction without undue delay when it finds a measure is not met."
+      },
+      "anchors": [
+        "nis2.art21"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART21-4",
+          "title": "Article 21 corrective-action process is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-early-warning-24h-gap",
+      "title": "24-hour early warning is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.early_warning_24h",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-24H",
+        "level": "nis2_reporting_gap",
+        "title": "24-hour early warning is not operational",
+        "summary": "A significant incident is established but the Article 23(4)(a) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-24H",
+          "title": "24-hour early warning is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-notification-72h-gap",
+      "title": "72-hour incident notification is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.notification_72h",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-72H",
+        "level": "nis2_reporting_gap",
+        "title": "72-hour incident notification is not operational",
+        "summary": "A significant incident is established but the Article 23(4)(b) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-72H",
+          "title": "72-hour incident notification is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-intermediate-updates-gap",
+      "title": "Requested intermediate reporting is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.intermediate_updates",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-INTERMEDIATE",
+        "level": "nis2_reporting_gap",
+        "title": "Requested intermediate reporting is not operational",
+        "summary": "A significant incident is established but the Article 23(4)(c) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-INTERMEDIATE",
+          "title": "Requested intermediate reporting is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-final-report-one-month-gap",
+      "title": "One-month final report is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.final_report_one_month",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-FINAL",
+        "level": "nis2_reporting_gap",
+        "title": "One-month final report is not operational",
+        "summary": "A significant incident is established but the Article 23(4)(d) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-FINAL",
+          "title": "One-month final report is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-recipient-incident-notice-gap",
+      "title": "Affected service-recipient notice is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.recipient_incident_notice",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-RECIPIENT",
+        "level": "nis2_reporting_gap",
+        "title": "Affected service-recipient notice is not operational",
+        "summary": "A significant incident is established but the Article 23(1) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-RECIPIENT",
+          "title": "Affected service-recipient notice is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-significant-threat-guidance-gap",
+      "title": "Significant-threat guidance for recipients is not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.significant",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.significant_threat_guidance",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-THREAT",
+        "level": "nis2_reporting_gap",
+        "title": "Significant-threat guidance for recipients is not operational",
+        "summary": "A significant incident is established but the Article 23(2) capability is evidenced as absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-THREAT",
+          "title": "Significant-threat guidance for recipients is not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-article23-ongoing-progress-and-final-gap",
+      "title": "Ongoing-incident progress and final reporting are not operational",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "fact": {
+                          "key": "nis2.entity_classification",
+                          "operator": "in",
+                          "value": [
+                            "essential",
+                            "important"
+                          ]
+                        }
+                      },
+                      {
+                        "fact": {
+                          "key": "nis2.article4_sector_specific_displacement",
+                          "operator": "eq",
+                          "value": false
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "fact": {
+                      "key": "incident.significant",
+                      "operator": "eq",
+                      "value": true
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "incident.ongoing_at_final_report_due",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.article23.ongoing_progress_and_final",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-ART23-ONGOING",
+        "level": "nis2_reporting_gap",
+        "title": "Ongoing-incident progress and final reporting are not operational",
+        "summary": "The incident remains ongoing at the final-report date, but the progress and later final report route is absent."
+      },
+      "anchors": [
+        "nis2.art23"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-ART23-ONGOING",
+          "title": "Ongoing-incident progress and final reporting are not operational"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    },
+    {
+      "id": "nis2.baseline.controls-implementing-regulation-2024-2690-assessed-gap",
+      "title": "Regulation 2024/2690 detailed assessment is missing",
+      "kind": "obligation_gap",
+      "applies_to": [
+        "organization",
+        "service",
+        "ai_platform",
+        "ai_system"
+      ],
+      "when": {
+        "all": [
+          {
+            "all": [
+              {
+                "all": [
+                  {
+                    "fact": {
+                      "key": "nis2.entity_classification",
+                      "operator": "in",
+                      "value": [
+                        "essential",
+                        "important"
+                      ]
+                    }
+                  },
+                  {
+                    "fact": {
+                      "key": "nis2.article4_sector_specific_displacement",
+                      "operator": "eq",
+                      "value": false
+                    }
+                  }
+                ]
+              },
+              {
+                "fact": {
+                  "key": "nis2.implementing_regulation_2024_2690_applies",
+                  "operator": "eq",
+                  "value": true
+                }
+              }
+            ]
+          },
+          {
+            "fact": {
+              "key": "controls.implementing_regulation_2024_2690_assessed",
+              "operator": "eq",
+              "value": false
+            }
+          }
+        ]
+      },
+      "finding": {
+        "code": "EU-NIS2-IMPLEMENTING-2024-2690",
+        "level": "nis2_implementing_gap",
+        "title": "Regulation 2024/2690 detailed assessment is missing",
+        "summary": "The entity is in a listed digital or trust-service category, but the detailed Annex requirements and incident criteria have not been assessed."
+      },
+      "anchors": [
+        "nis2.impl2024-2690"
+      ],
+      "obligations": [
+        {
+          "code": "EU-NIS2-IMPLEMENTING-2024-2690",
+          "title": "Regulation 2024/2690 detailed assessment is missing"
+        }
+      ],
+      "reason": {
+        "matched": "The obligation gate is established and the corresponding control is evidenced as absent.",
+        "indeterminate": "The obligation gate or control evidence is missing or conflicted.",
+        "not_matched": "The obligation does not apply on the supplied facts or the control is evidenced as present."
+      }
+    }
+  ]
+}

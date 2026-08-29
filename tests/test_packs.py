@@ -149,17 +149,109 @@ class PackConformanceTests(unittest.TestCase):
             validate_inventory(inventory)
 
     def test_binding_packs_have_official_anchors(self):
-        for relative in [
-            "packs/eu-ai-act/1.0.0/pack.json",
-            "packs/eu-gdpr-ai/1.0.0/pack.json",
-            "packs/eu-nis2-baseline/1.0.0/pack.json",
-        ]:
-            pack = json.loads((ROOT / relative).read_text(encoding="utf-8"))
-            self.assertEqual("binding_law", pack["pack"]["authority_type"])
-            self.assertTrue(pack["anchors"])
-            self.assertTrue(
-                all(anchor["url"].startswith("https://eur-lex.europa.eu/") for anchor in pack["anchors"])
+        for path in ROOT.glob("packs/*/*/pack.json"):
+            pack = json.loads(path.read_text(encoding="utf-8"))
+            if pack["pack"]["authority_type"] != "binding_law":
+                continue
+            with self.subTest(path=path):
+                self.assertTrue(pack["anchors"])
+                binding_anchors = [
+                    anchor
+                    for anchor in pack["anchors"]
+                    if anchor["source"].startswith(("Regulation", "Directive", "Commission"))
+                ]
+                self.assertTrue(binding_anchors)
+                self.assertTrue(
+                    all(
+                        anchor["url"].startswith("https://eur-lex.europa.eu/")
+                        for anchor in binding_anchors
+                    )
+                )
+
+    def test_ai_act_1_1_covers_current_core_routes(self):
+        pack = json.loads(
+            (ROOT / "packs/eu-ai-act/1.1.0/pack.json").read_text(encoding="utf-8")
+        )
+        article5 = [
+            item
+            for item in pack["rules"]
+            if item["finding"]["level"]
+            in {"prohibited_practice", "prohibited_from_2026_12_02"}
+        ]
+        annex3 = [
+            item
+            for item in pack["rules"]
+            if item["finding"]["level"] == "annex_iii_candidate"
+        ]
+        self.assertEqual(10, len(article5))
+        self.assertEqual(25, len(annex3))
+        self.assertTrue(
+            {
+                "EU-AIACT-ART22-MANDATE",
+                "EU-AIACT-ART23-CHECKS",
+                "EU-AIACT-ART24-CHECKS",
+                "EU-AIACT-ART25-4",
+                "EU-AIACT-ART26-OVERSIGHT",
+                "EU-AIACT-ART27",
+                "EU-AIACT-ART50-1",
+                "EU-AIACT-ART53-A",
+                "EU-AIACT-ART55-D",
+            }.issubset({item["finding"]["code"] for item in pack["rules"]})
+        )
+
+    def test_nis2_1_1_covers_all_measure_families_and_reporting_stages(self):
+        pack = json.loads(
+            (ROOT / "packs/eu-nis2-baseline/1.1.0/pack.json").read_text(
+                encoding="utf-8"
             )
+        )
+        codes = {item["finding"]["code"] for item in pack["rules"]}
+        self.assertTrue(
+            {f"EU-NIS2-ART21-2-{letter}" for letter in "ABCDEFGHIJ"}.issubset(codes)
+        )
+        self.assertTrue(
+            {
+                "EU-NIS2-ART23-24H",
+                "EU-NIS2-ART23-72H",
+                "EU-NIS2-ART23-INTERMEDIATE",
+                "EU-NIS2-ART23-FINAL",
+                "EU-NIS2-ART23-ONGOING",
+            }.issubset(codes)
+        )
+
+    def test_gdpr_1_1_covers_core_controller_and_processor_governance(self):
+        pack = json.loads(
+            (ROOT / "packs/eu-gdpr-ai/1.1.0/pack.json").read_text(encoding="utf-8")
+        )
+        codes = {item["finding"]["code"] for item in pack["rules"]}
+        self.assertTrue(
+            {
+                "EU-GDPR-ART24",
+                "EU-GDPR-ART25",
+                "EU-GDPR-ART26",
+                "EU-GDPR-ART27",
+                "EU-GDPR-ART28",
+                "EU-GDPR-ART30",
+                "EU-GDPR-ARTICLE-22",
+                "EU-GDPR-ARTICLE-35",
+            }.issubset(codes)
+        )
+
+    def test_nist_packs_expose_every_current_core_outcome(self):
+        ai_rmf = json.loads(
+            (ROOT / "packs/nist-ai-rmf/1.1.0/pack.json").read_text(encoding="utf-8")
+        )
+        csf = json.loads(
+            (ROOT / "packs/nist-csf/2.1.0/pack.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            72,
+            sum(item["title"].endswith("target outcome gap") for item in ai_rmf["rules"]),
+        )
+        self.assertEqual(
+            106,
+            sum(item["title"].endswith("target outcome gap") for item in csf["rules"]),
+        )
 
 
 if __name__ == "__main__":

@@ -2,6 +2,25 @@
 
 # Comment lire une évaluation
 
+```mermaid
+flowchart TB
+    T["Cible<br/>objet exact et périmètre"] --> P["Pack<br/>autorité · version · empreinte"]
+    P --> S{"État de la règle"}
+    S -->|"correspondance"| M["Condition établie<br/>relire le constat et les obligations"]
+    S -->|"indéterminé"| U["Preuve absente ou contradictoire<br/>ouvrir la trace"]
+    S -->|"non-correspondance"| N["Cette condition est fausse<br/>aucune conclusion globale"]
+    M --> A["Ancrages et preuves"]
+    U --> A
+    N --> A
+
+    classDef identity fill:#dbeafe,stroke:#2563eb,color:#172554
+    classDef status fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef trace fill:#ecfeff,stroke:#0891b2,color:#164e63
+    class T,P identity
+    class S,M,U,N status
+    class A trace
+```
+
 Commencez par cinq champs :
 
 1. `target` : l’objet exact et le périmètre évalué ;
