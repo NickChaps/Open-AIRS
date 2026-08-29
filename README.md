@@ -74,12 +74,23 @@ AIR Framework provides a reproducible way to govern that complexity.
 ```mermaid
 flowchart LR
     S["APIs · forms · documents<br/>configurations · declarations"] --> G["Registry<br/>objects + relationships"]
-    G --> L["LLM-assisted<br/>reading"]
-    L --> F["Bounded facts<br/>+ evidence + confidence"]
-    H["Human validation"] --> F
+    G --> D["Direct facts<br/>normalised from structured sources"]
+    K["air-assess skill<br/>questions + protocol"] --> L["LLM assessment<br/>semantic reading"]
+    G --> L
+    P["Versioned packs<br/>fact catalogues + rules + anchors"] --> L
+    L --> I["Inferred facts + source analysis<br/>evidence + confidence"]
+    D --> F["Resolved fact grid<br/>known · unknown · conflicted"]
+    I --> F
     F --> E["Deterministic engine"]
-    P["Versioned packs<br/>AI Act · GDPR · NIS2 · NIST"] --> E
+    P --> E
     E --> R["Findings · obligations<br/>unknowns · anchors"]
+    R --> N["Readable case file<br/>analysis + deterministic result"]
+    N --> Q{"Review policy"}
+    Q -->|"material · uncertain · sampled"| H["Human review"]
+    Q -->|"not selected"| C["Current assessment"]
+    H -->|"confirmed"| C
+    H -->|"corrected"| G2["Versioned correction<br/>and reassessment"]
+    G2 --> G
     R --> O["Organisation-owned<br/>review routes"]
 
     classDef input fill:#f8fafc,stroke:#64748b,color:#0f172a
@@ -87,16 +98,36 @@ flowchart LR
     classDef facts fill:#ecfeff,stroke:#0891b2,color:#164e63
     classDef rules fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
-    class S,H input
-    class G registry
-    class L,F facts
+    class S,H,K input
+    class G,G2 registry
+    class D,L,I,F,N facts
     class E,P rules
-    class R,O result
+    class R,O,Q,C result
 ```
 
-The language model **proposes facts**; it does not make the legal determination
-on its own. The same facts evaluated with the same pack version produce the
-same deterministic result.
+Structured API and configuration values can populate facts directly. The
+language model handles semantic reading and bounded judgements, then writes an
+evidence-linked source analysis. AIR resolves direct and inferred values into
+one grid before the deterministic engine applies pinned rules and supplies the
+stable findings, anchors and obligations. The same resolved facts evaluated
+with the same pack version produce the same result.
+
+Human review is a control layer around the automated pipeline. An organisation
+can require it for material or uncertain cases and use stratified samples for
+the rest of a large inventory. A correction creates a new source snapshot or a
+candidate extractor, pack, route or explanation version, then a new assessment;
+prior versions remain available. See [human review at registry
+scale](docs/en/quality-control.md).
+
+`air-assess` is used by the host LLM or agent at the semantic-reading stage.
+The dependency-free Python engine does not call a model: its CLI begins with an
+inventory that already contains structured facts. This boundary lets each
+organisation choose its model and execution environment while keeping the
+fact, evidence and review records portable.
+
+The alpha ships the skill, record formats, validators and deterministic engine.
+The host product supplies model invocation, fact resolution, periodic sampling,
+storage, access control and the reviewer interface.
 
 ## The registry graph
 
@@ -153,11 +184,17 @@ An AIR assessment keeps together:
 
 - the target and exact registry snapshot;
 - direct, inherited, unknown and conflicting facts;
-- evidence and confidence for every fact;
+- evidence for every established fact and confidence when a model inferred it;
 - the version and content hash of the applied pack;
 - the matched rule, explanation and exact anchors;
 - obligations, evidence gaps and unknowns;
 - a stable identifier used to compare assessments.
+
+The extraction record carries the model’s semantic fact proposals and source
+analysis. A separate assessment note turns facts and deterministic findings
+into readable prose whose material statements reference their evidence, rules
+and anchors. The review record captures why a case was selected, what a person
+confirmed or corrected and which versioned action followed.
 
 A host product may display the latest assessment in the registry while
 retaining the full history for audit, impact simulation and drift analysis.
@@ -197,9 +234,12 @@ before activation.
 | understand the model without a technical prerequisite | **[AIR Framework concepts](CONCEPTS.md)** |
 | follow a complete path from business need to decision | [Governance workflow](docs/en/governance-workflow.md) |
 | understand what a useful AI registry contains | [AI registry guide](docs/en/ai-registry.md) |
+| understand human review and sampling at scale | [Quality-control guide](docs/en/quality-control.md) |
+| see the AI-governance result without running code | [Worked AI-governance example](examples/ai-governance/README.md) |
+| see contract review without running code | [Worked contract-review example](examples/contract-review/README.md) |
 | model shared and application-specific connectors | [Connector topology example](examples/connector-topologies/README.md) |
 | run an example in ten minutes | [Quickstart](docs/en/quickstart.md) |
-| read an assessment correctly | [Reading an assessment](docs/en/reading-an-assessment.md) |
+| read facts, findings and the auditable narrative | [Reading an assessment](docs/en/reading-an-assessment.md) |
 | verify source coverage | [Sources and coverage](docs/en/sources-and-coverage.md) |
 | inspect the current pack audit | [Rule-pack coverage review, 29 August 2026](docs/audits/2026-08-29-pack-viability.md) |
 | create a new pack | [Authoring and releasing a pack](docs/en/authoring-packs.md) |
@@ -233,6 +273,7 @@ The reference engine has no runtime dependency beyond Python 3.11+.
 ```bash
 python -m pip install .
 
+air-framework validate-extraction examples/ai-governance/extraction.json
 air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
 air-framework assess \
   --inventory examples/ai-governance/inventory.json \
@@ -243,6 +284,9 @@ air-framework assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
+
+air-framework validate-note examples/ai-governance/assessment-note.json
+air-framework validate-review examples/ai-governance/review.json
 ```
 
 The profile command evaluates an explicit selection of packs pinned by version
@@ -254,7 +298,7 @@ AIR Framework does not certify compliance and does not replace legal, security
 or risk professionals. A result depends on the active pack versions, available
 evidence and the quality of facts supplied to the engine.
 
-This repository contains the `v0.1.0-alpha.2` reference distribution. Schemas and
+This repository contains the `v0.1.0-alpha.3` reference distribution. Schemas and
 command-line interfaces may still change. See the [clean-room statement](CLEAN_ROOM.md),
 [foundational decisions](spec/00-project-decisions.md), [audited dependencies](DEPENDENCIES.md)
 and [contribution guide](CONTRIBUTING.md).

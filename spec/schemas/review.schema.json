@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NickChaps/AIR-Framework/spec/schemas/review.schema.json",
+  "title": "AIR Framework human review record",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "review_id",
+    "reviewed_at",
+    "assessment_id",
+    "target",
+    "review_type",
+    "selection",
+    "reviewer",
+    "outcome",
+    "adjudications",
+    "error_categories",
+    "actions"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "review_id": {"type": "string", "minLength": 1},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "assessment_id": {"type": "string", "minLength": 1},
+    "target": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"$ref": "#/$defs/object_type"},
+        "name": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "review_type": {"enum": ["mandatory", "targeted", "sample", "appeal", "change"]},
+    "selection": {
+      "type": "object",
+      "required": ["strategy", "reason"],
+      "properties": {
+        "strategy": {
+          "enum": [
+            "rule_trigger",
+            "low_confidence",
+            "unknown_or_conflict",
+            "change",
+            "random",
+            "stratified",
+            "manual"
+          ]
+        },
+        "reason": {"type": "string", "minLength": 1},
+        "population_snapshot_id": {"type": "string"},
+        "stratum": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "reviewer": {
+      "type": "object",
+      "required": ["role"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "organization": {"type": "string"},
+        "pseudonymous_id": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "outcome": {"enum": ["confirmed", "corrected", "inconclusive"]},
+    "adjudications": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["subject_type", "subject_id", "decision", "rationale"],
+        "properties": {
+          "subject_type": {"enum": ["fact", "finding", "analysis"]},
+          "subject_id": {"type": "string", "minLength": 1},
+          "decision": {"enum": ["confirmed", "corrected", "disputed", "unresolved"]},
+          "rationale": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "previous": {},
+          "adjudicated": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "error_categories": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["source", "composition", "extraction", "pack", "routing", "explanation"]
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "enum": [
+              "new_inventory_snapshot",
+              "extractor_candidate",
+              "pack_candidate",
+              "route_candidate",
+              "evidence_request",
+              "no_change"
+            ]
+          },
+          "reference": {"type": "string"},
+          "summary": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "object_type": {
+      "enum": [
+        "ai_system",
+        "ai_platform",
+        "configured_ai_application",
+        "skill",
+        "connector",
+        "model",
+        "ai_use",
+        "organization",
+        "provider",
+        "service",
+        "contract",
+        "clause_library",
+        "generic"
+      ]
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.1.0",
+  "note_id": "urn:air:note:fictional-contract-20260829",
+  "created_at": "2026-08-29T15:50:00Z",
+  "language": "en",
+  "target": {
+    "id": "contract-cloud-demo",
+    "type": "contract",
+    "name": "Cloud services agreement (fictional)"
+  },
+  "inputs": {
+    "inventory": {
+      "inventory_id": "fictional-contract-demo",
+      "snapshot_id": "contract-snapshot-1"
+    },
+    "extraction_ids": ["urn:air:extraction:fictional-contract-20260829"],
+    "assessment_ids": ["urn:air:assessment:d8a041070c24ea4c998e18d4"]
+  },
+  "renderer": {
+    "kind": "hybrid",
+    "id": "air-assess",
+    "version": "0.2.0",
+    "model": {
+      "id": "fictional-assessment-model",
+      "version": "2026-08"
+    },
+    "run_id": "fictional-note-contract-001"
+  },
+  "summary": "The agreement contains confidentiality, data-processing and liability provisions. Intellectual-property allocation and security-incident notice are absent. Audit cooperation remains indeterminate because the available wording is ambiguous.",
+  "scope": "Presence review of six clause families in a fictional cloud-services agreement against the fictional clause library 1.0.",
+  "statements": [
+    {
+      "statement_id": "note.fact.contract-clauses",
+      "kind": "fact",
+      "text": "Confidentiality, data-processing and liability clauses are present, while intellectual-property allocation and security-incident notice are absent.",
+      "references": {
+        "fact_ids": [
+          "clause.confidentiality_present",
+          "clause.data_processing_present",
+          "clause.liability_allocation_present",
+          "clause.intellectual_property_present",
+          "clause.security_incident_notice_present"
+        ],
+        "evidence": ["ev-contract"]
+      }
+    },
+    {
+      "statement_id": "note.finding.contract-gaps",
+      "kind": "finding",
+      "text": "The deterministic library returns gaps for intellectual-property allocation and security-incident notice.",
+      "references": {
+        "assessment_id": "urn:air:assessment:d8a041070c24ea4c998e18d4",
+        "rule_ids": [
+          "contract.demo.ip-missing",
+          "contract.demo.security-notice-missing"
+        ],
+        "anchor_ids": ["contract.demo.ip", "contract.demo.security"]
+      }
+    },
+    {
+      "statement_id": "note.unknown.contract-audit",
+      "kind": "unknown",
+      "text": "The supplied cooperation wording does not establish an audit or assurance right.",
+      "references": {
+        "fact_ids": ["clause.audit_cooperation_present"],
+        "assessment_id": "urn:air:assessment:d8a041070c24ea4c998e18d4",
+        "rule_ids": ["contract.demo.audit-missing"],
+        "anchor_ids": ["contract.demo.audit"]
+      }
+    },
+    {
+      "statement_id": "note.review.contract-targeted",
+      "kind": "review",
+      "text": "A targeted reviewer left the audit point unresolved and requested the complete wording.",
+      "references": {
+        "review_id": "urn:air:review:fictional-contract-targeted-20260829"
+      }
+    }
+  ],
+  "cautions": [
+    "This example checks clause presence and does not assess enforceability or drafting quality."
+  ],
+  "review_status": {
+    "status": "inconclusive",
+    "review_id": "urn:air:review:fictional-contract-targeted-20260829",
+    "selection_reason": "The audit-cooperation fact is indeterminate."
+  }
+}

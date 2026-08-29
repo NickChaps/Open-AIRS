@@ -75,12 +75,23 @@ AIR Framework propose une manière reproductible de gérer cette complexité.
 ```mermaid
 flowchart LR
     S["API · formulaires · documents<br/>configurations · déclarations"] --> G["Registre<br/>objets + relations"]
-    G --> L["Lecture assistée<br/>par un LLM"]
-    L --> F["Faits bornés<br/>+ preuves + confiance"]
-    H["Validation humaine"] --> F
+    G --> D["Faits directs<br/>normalisés depuis les sources structurées"]
+    K["Skill air-assess<br/>questions + protocole"] --> L["Évaluation LLM<br/>lecture sémantique"]
+    G --> L
+    P["Packs versionnés<br/>catalogues + règles + ancrages"] --> L
+    L --> I["Faits inférés + analyse de source<br/>preuves + confiance"]
+    D --> F["Grille de faits résolue<br/>connus · inconnus · contradictoires"]
+    I --> F
     F --> E["Moteur déterministe"]
-    P["Packs versionnés<br/>AI Act · RGPD · NIS2 · NIST"] --> E
+    P --> E
     E --> R["Constats · obligations<br/>inconnues · ancrages"]
+    R --> N["Dossier lisible<br/>analyse + résultat déterministe"]
+    N --> Q{"Politique de revue"}
+    Q -->|"matériel · incertain · échantillonné"| H["Revue humaine"]
+    Q -->|"non sélectionné"| C["Évaluation courante"]
+    H -->|"confirmé"| C
+    H -->|"corrigé"| G2["Correction versionnée<br/>et nouvelle évaluation"]
+    G2 --> G
     R --> O["Voies de traitement<br/>propres à l’organisation"]
 
     classDef input fill:#f8fafc,stroke:#64748b,color:#0f172a
@@ -88,16 +99,38 @@ flowchart LR
     classDef facts fill:#ecfeff,stroke:#0891b2,color:#164e63
     classDef rules fill:#ede9fe,stroke:#7c3aed,color:#3b0764
     classDef result fill:#fef3c7,stroke:#d97706,color:#78350f
-    class S,H input
-    class G registry
-    class L,F facts
+    class S,H,K input
+    class G,G2 registry
+    class D,L,I,F,N facts
     class E,P rules
-    class R,O result
+    class R,O,Q,C result
 ```
 
-Le modèle de langage **propose des faits**, il ne rend pas seul le jugement
-juridique. Les mêmes faits et la même version d’un pack produisent le même
-résultat déterministe.
+Les valeurs structurées issues des API et des configurations peuvent alimenter
+directement les faits. Le modèle de langage traite la lecture sémantique et les
+jugements bornés, puis rédige une analyse de source reliée aux preuves. AIR
+résout les valeurs directes et inférées dans une même grille avant que le moteur
+déterministe applique les règles figées et fournisse les constats, ancrages et
+obligations stables. Les mêmes faits résolus et la même version d’un pack
+produisent le même résultat.
+
+La revue humaine forme une couche de contrôle autour du pipeline automatisé.
+L’organisation peut l’imposer pour les cas matériels ou incertains et utiliser
+des échantillons stratifiés sur le reste du parc. Une correction crée un
+nouveau snapshot de source ou une version candidate de l’extracteur, du pack,
+de la voie ou de l’explication, puis une nouvelle évaluation. Les versions
+antérieures restent consultables. Voir [la revue humaine à l’échelle d’un parc](docs/fr/controle-qualite.md).
+
+`air-assess` guide le LLM ou l’agent hôte au moment de la lecture sémantique.
+Le moteur Python sans dépendance n’appelle aucun modèle : sa ligne de commande
+part d’un inventaire qui contient déjà des faits structurés. Chaque organisation
+peut ainsi choisir son modèle et son environnement tout en conservant des fiches
+de faits, de preuves et de revue portables.
+
+La version alpha livre le skill, les formats de fiches, les validateurs et le
+moteur déterministe. Le produit hôte fournit l’appel au modèle, la résolution
+des faits, l’échantillonnage périodique, le stockage, les droits d’accès et
+l’interface de revue.
 
 ## Le graphe du registre
 
@@ -155,11 +188,18 @@ Une évaluation AIR conserve ensemble :
 
 - la cible et le snapshot exact du registre ;
 - les faits directs, hérités, inconnus ou contradictoires ;
-- la preuve et la confiance associées à chaque fait ;
+- la preuve de chaque fait établi et la confiance lorsqu’un modèle l’a inféré ;
 - la version et l’empreinte du pack appliqué ;
 - la règle déclenchée, son explication et ses ancrages exacts ;
 - les obligations, lacunes de preuve et inconnues ;
 - un identifiant stable permettant de comparer deux évaluations.
+
+La fiche d’extraction conserve les propositions sémantiques du modèle et son
+analyse de source. Une fiche d’analyse séparée transforme les faits et constats
+déterministes en texte lisible dont chaque affirmation matérielle renvoie à ses
+preuves, règles et ancrages. La fiche de revue indique pourquoi le cas a été
+sélectionné, ce que la personne a confirmé ou corrigé et quelle action versionnée
+en découle.
 
 Le produit hôte peut afficher la dernière version dans le registre tout en
 gardant l’historique complet pour l’audit, la simulation d’impact et l’analyse
@@ -200,9 +240,12 @@ simulée sur le parc avant activation.
 | comprendre les concepts sans prérequis technique | **[Concepts d’AIR Framework](CONCEPTS.md)** |
 | voir un parcours complet, du besoin métier à la décision | [Parcours métier](docs/fr/parcours-metier.md) |
 | savoir ce que contient un registre IA utile | [Contenu du registre IA](docs/fr/registre-ia.md) |
+| comprendre la revue humaine et l’échantillonnage à grande échelle | [Guide de contrôle qualité](docs/fr/controle-qualite.md) |
+| voir le résultat de gouvernance IA sans lancer de code | [Exemple complet de gouvernance IA](examples/ai-governance/README.fr.md) |
+| voir la revue contractuelle sans lancer de code | [Exemple complet de revue contractuelle](examples/contract-review/README.fr.md) |
 | modéliser des connecteurs partagés ou réservés à une application | [Exemple de topologies de connecteurs](examples/connector-topologies/README.fr.md) |
 | exécuter un exemple en dix minutes | [Démarrage rapide](docs/fr/demarrage.md) |
-| lire correctement un résultat | [Lire une évaluation](docs/fr/lire-une-evaluation.md) |
+| lire les faits, constats et l’analyse auditable | [Lire une évaluation](docs/fr/lire-une-evaluation.md) |
 | vérifier la couverture et les sources | [Sources et couverture](docs/fr/sources-et-couverture.md) |
 | consulter l’audit actuel des packs | [Revue de couverture des packs du 29 août 2026](docs/audits/2026-08-29-pack-viability.fr.md) |
 | créer un nouveau pack | [Créer et publier un pack](docs/fr/creer-un-pack.md) |
@@ -237,6 +280,7 @@ Python 3.11 ou supérieur.
 ```bash
 python -m pip install .
 
+air-framework validate-extraction examples/ai-governance/extraction.json
 air-framework validate-pack packs/eu-ai-act/1.1.0/pack.json
 air-framework assess \
   --inventory examples/ai-governance/inventory.json \
@@ -247,6 +291,9 @@ air-framework assess-profile \
   --inventory examples/ai-governance/inventory.json \
   --profile examples/ai-governance/pack-profile.json \
   --target use-recruiting-assistant
+
+air-framework validate-note examples/ai-governance/assessment-note.json
+air-framework validate-review examples/ai-governance/review.json
 ```
 
 La commande de profil applique une sélection explicite de packs figés par
@@ -259,7 +306,7 @@ professionnels du droit, de la sécurité ou des risques. Un résultat dépend d
 la version des packs actifs, des preuves disponibles et de la qualité des faits
 transmis au moteur.
 
-Le dépôt contient la distribution de référence `v0.1.0-alpha.2`. Les schémas et
+Le dépôt contient la distribution de référence `v0.1.0-alpha.3`. Les schémas et
 interfaces en ligne de commande peuvent encore évoluer. Consultez la
 [déclaration clean-room](CLEAN_ROOM.md), les [décisions fondatrices](spec/00-project-decisions.md),
 les [dépendances auditées](DEPENDENCIES.md) et le [guide de contribution](CONTRIBUTING.md).

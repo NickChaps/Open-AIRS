@@ -4,6 +4,27 @@ All notable framework changes are documented here. Rule-pack changes also have
 their own changelog because pack versions can be activated independently from
 engine releases.
 
+## [0.1.0-alpha.3] - 2026-08-29
+
+### Added
+
+- Portable extraction records for evidence-linked fact proposals, confidence
+  and a concise readable analysis.
+- Immutable review records for mandatory, targeted and sampled human checks.
+- A quality-control guide and a controlled improvement specification covering
+  source, extraction, pack, route and explanation corrections.
+- Illustrated AI-governance and contract-review examples in English and French.
+- CLI validation commands for extraction, assessment-note and review records.
+
+### Changed
+
+- Human review is modelled as a targeted or sampled control after automated
+  assessment, with mandatory review reserved for organisation-defined cases.
+- The `air-assess` skill now states its exact host-side role and produces both
+  the structured fact grid and the readable audit analysis.
+- Corrected reviews create a versioned correction and a new assessment; they do
+  not overwrite the record under review.
+
 ## [0.1.0-alpha.2] - 2026-08-29
 
 ### Added

@@ -10,3 +10,7 @@
 - Are legal findings separate from voluntary-framework gaps?
 - Is any organisation route shown as a separate versioned output?
 - Can the assessment be replayed from the recorded hashes and versions?
+- Does every sentence in the readable note resolve to facts, evidence,
+  findings or anchors in the structured records?
+- Is the review status clear without implying that every object was manually
+  approved?

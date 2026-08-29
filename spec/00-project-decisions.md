@@ -21,6 +21,19 @@ Public legal and methodological packs do not ship an organisational traffic-ligh
 
 Language models may extract semantic facts from text and explain deterministic results. They do not silently replace the rule engine. Every inferred fact must retain its evidence, confidence, extractor profile and model provenance. Unknown and conflicting evidence are first-class states.
 
+`air-assess` is an instruction package used by the host LLM or agent. The
+reference Python engine begins with structured facts and does not invoke the
+skill or a model itself. Its outputs remain reproducible across model providers.
+
+## Review at scale
+
+Automated extraction and deterministic evaluation run before human review.
+Organisations may require full review for selected material cases and use
+targeted or stratified sampling elsewhere. Each review records why the case was
+selected. A correction creates new evidence, a new snapshot or a candidate
+extractor, pack, route or explanation version. No active artefact learns or
+changes silently from feedback.
+
 ## Composition and classification
 
 Facts and controls may propagate through explicit relations. Final legal classifications are recomputed for the relevant composition and use unless a rule explicitly defines a scoped propagation.

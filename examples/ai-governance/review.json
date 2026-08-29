@@ -1,0 +1,62 @@
+{
+  "schema_version": "0.1.0",
+  "review_id": "urn:air:review:fictional-recruiting-sample-20260829",
+  "reviewed_at": "2026-08-29T15:30:00Z",
+  "assessment_id": "urn:air:assessment:7255d4ae487d0fd863864fde",
+  "target": {
+    "id": "use-recruiting-assistant",
+    "type": "ai_use",
+    "name": "Screen and respond to job applicants (fictional)"
+  },
+  "review_type": "sample",
+  "selection": {
+    "strategy": "stratified",
+    "reason": "Monthly quality sample for employment uses assessed by air-assess 0.2.0.",
+    "population_snapshot_id": "snapshot-2026-08-29-a",
+    "stratum": "employment / configured application / high confidence"
+  },
+  "reviewer": {
+    "role": "AI governance reviewer",
+    "organization": "Fictional enterprise",
+    "pseudonymous_id": "reviewer-07"
+  },
+  "outcome": "confirmed",
+  "adjudications": [
+    {
+      "subject_type": "fact",
+      "subject_id": "use.tasks",
+      "decision": "confirmed",
+      "rationale": "The instructions and use declaration support filtering, ranking and rejection messaging.",
+      "evidence": ["ev-app-prompt", "ev-use-declaration"]
+    },
+    {
+      "subject_type": "fact",
+      "subject_id": "decision.solely_automated",
+      "decision": "confirmed",
+      "rationale": "The connector configuration contains no separate human confirmation gate.",
+      "evidence": ["ev-connector-config"]
+    },
+    {
+      "subject_type": "finding",
+      "subject_id": "EU-AIACT-HIGH-RISK-ANNEX-III",
+      "decision": "confirmed",
+      "rationale": "The cited recruitment purpose and Article 6(3) facts support the deterministic finding.",
+      "evidence": ["ev-use-declaration", "ev-legal-review"]
+    },
+    {
+      "subject_type": "analysis",
+      "subject_id": "urn:air:extraction:fictional-recruiting-20260829",
+      "decision": "confirmed",
+      "rationale": "The readable summary matches the reviewed fact proposals and does not claim an observed execution.",
+      "evidence": ["ev-app-prompt", "ev-connector-config", "ev-use-declaration"]
+    }
+  ],
+  "error_categories": [],
+  "actions": [
+    {
+      "type": "no_change",
+      "summary": "Retain the current extractor, pack and route versions; continue scheduled sampling."
+    }
+  ],
+  "notes": "Fictional quality-control record for framework documentation."
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.1.0",
+  "extraction_id": "urn:air:extraction:fictional-recruiting-20260829",
+  "created_at": "2026-08-29T11:45:00Z",
+  "target": {
+    "id": "use-recruiting-assistant",
+    "type": "ai_use",
+    "name": "Screen and respond to job applicants (fictional)"
+  },
+  "inventory": {
+    "inventory_id": "fictional-enterprise-ai-inventory",
+    "snapshot_id": "snapshot-2026-08-29-a"
+  },
+  "extractor": {
+    "kind": "hybrid",
+    "skill": {"id": "air-assess", "version": "0.2.0"},
+    "model": {"id": "fictional-assessment-model", "version": "2026-08"},
+    "run_id": "fictional-run-recruiting-001"
+  },
+  "source_evidence": [
+    "ev-app-prompt",
+    "ev-skill-text",
+    "ev-connector-config",
+    "ev-use-declaration",
+    "ev-platform-controls",
+    "ev-legal-review"
+  ],
+  "fact_proposals": [
+    {
+      "fact_id": "use.tasks",
+      "state": "known",
+      "value": ["filter_applications", "rank_candidates", "send_rejection"],
+      "evidence": ["ev-use-declaration", "ev-app-prompt"],
+      "confidence": 0.99,
+      "rationale": "The declaration and instructions describe filtering, ranking and rejection messaging."
+    },
+    {
+      "fact_id": "aiact.annex_iii_use_cases",
+      "state": "known",
+      "value": ["annex3.4a.recruitment_selection"],
+      "evidence": ["ev-use-declaration", "ev-legal-review"],
+      "confidence": 0.98,
+      "rationale": "The intended purpose is recruitment and selection of natural persons."
+    },
+    {
+      "fact_id": "controls.deployer.human_oversight_assigned",
+      "state": "known",
+      "value": false,
+      "evidence": ["ev-app-prompt", "ev-legal-review"],
+      "confidence": 0.96,
+      "rationale": "No competent human oversight role or confirmation step is established in the supplied material."
+    },
+    {
+      "fact_id": "decision.solely_automated",
+      "state": "known",
+      "value": true,
+      "evidence": ["ev-app-prompt", "ev-connector-config"],
+      "confidence": 0.97,
+      "rationale": "The application can issue the rejection message without a separate human gate."
+    },
+    {
+      "fact_id": "decision.legal_or_similarly_significant_effect",
+      "state": "known",
+      "value": true,
+      "evidence": ["ev-legal-review"],
+      "confidence": 0.95,
+      "rationale": "A rejection determines access to an employment opportunity."
+    },
+    {
+      "fact_id": "controls.dpia_completed",
+      "state": "known",
+      "value": false,
+      "evidence": ["ev-use-declaration"],
+      "confidence": 0.99,
+      "rationale": "The use owner declares that no DPIA has been completed."
+    }
+  ],
+  "analysis": {
+    "summary": "The configured application ranks job applicants and can send rejection messages without a separate human confirmation gate. The composition supports an Annex III recruitment mapping and a solely automated decision with a significant effect.",
+    "scope": "Recruitment use composed of the configured application, its screening skill, the enterprise platform and the candidate-messaging connector.",
+    "observations": [
+      {
+        "statement": "The application filters and ranks candidates for an employment decision.",
+        "fact_ids": ["use.tasks", "aiact.annex_iii_use_cases"],
+        "evidence": ["ev-app-prompt", "ev-use-declaration", "ev-legal-review"]
+      },
+      {
+        "statement": "The connector permits rejection messaging without a separate human confirmation step.",
+        "fact_ids": ["controls.deployer.human_oversight_assigned", "decision.solely_automated"],
+        "evidence": ["ev-app-prompt", "ev-connector-config", "ev-legal-review"]
+      },
+      {
+        "statement": "No completed DPIA is evidenced for the significant automated recruitment decision.",
+        "fact_ids": ["decision.legal_or_similarly_significant_effect", "controls.dpia_completed"],
+        "evidence": ["ev-use-declaration", "ev-legal-review"]
+      }
+    ],
+    "unknowns": [
+      "The example does not provide runtime execution logs showing how often rejection messages were sent."
+    ],
+    "cautions": [
+      "Safety instructions in the prompt are not treated as evidence of a runtime control."
+    ]
+  }
+}

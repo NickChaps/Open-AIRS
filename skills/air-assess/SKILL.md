@@ -4,14 +4,15 @@ description: Assess a governed object with AIR Framework rule packs. Use when as
 license: Apache-2.0
 metadata:
   author: AIR Framework contributors
-  version: 0.1.0
+  version: 0.2.0
   compatibility: Python 3.11+ and AIR Framework
 ---
 
 # AIR assessment
 
-Produce an evidence-backed assessment without letting the language model invent
-or silently alter the rule.
+Produce an evidence-backed assessment from raw sources through deterministic
+evaluation. The skill guides the model that prepares the fact grid and review
+note. The Python engine does not invoke this skill.
 
 ## 1. Establish the target
 
@@ -37,15 +38,27 @@ Use exact pack paths and versions. Read each pack's `coverage`, `known_gaps`,
 legal non-compliance. For NIS2, require the relevant national overlay before a
 production conclusion.
 
-## 3. Extract bounded facts
+## 3. Build the fact grid
 
-Read [fact extraction](references/fact-extraction.md). For each relevant fact,
-record `known`, `unknown`, `conflicted` or `not_applicable`, the value when
-known, and evidence ids. A prompt guideline is evidence of an instruction, not
-proof that an action occurred or a runtime control is enforced.
+Read [fact extraction](references/fact-extraction.md). Preserve reliable facts
+received directly from APIs, forms and configurations. Use semantic extraction
+only for fields that require interpretation. For each relevant fact, record
+`known`, `unknown`, `conflicted` or `not_applicable`, the value when known, and
+evidence ids. A prompt guideline is evidence of an instruction, not proof that
+an action occurred or a runtime control is enforced.
 
-Do not extract the legal conclusion that the selected pack is designed to
-compute. Extract its constituent facts.
+Use the pack fact catalogue as the bounded question set. The model may propose
+a controlled legal or methodological characterisation requested by the pack,
+such as an Annex III use-case code, but it must expose the supporting facts,
+evidence and confidence. It must not create a finding code, anchor or obligation
+outside the pack.
+
+Create an extraction record conforming to
+[`extraction.schema.json`](../../spec/schemas/extraction.schema.json). Include a
+plain-language analysis note with the scope, evidence-linked observations,
+unknowns and cautions. Provide an audit rationale, not private chain-of-thought.
+Resolve direct and inferred values into the inventory fact grid. Keep
+contradictions visible; do not overwrite a structured source silently.
 
 ## 4. Validate and evaluate
 
@@ -60,12 +73,33 @@ air-framework assess --inventory INVENTORY.json --pack PACK.json --target OBJECT
 Assess the same target separately with each applicable pack. Preserve the
 assessment ids, content hashes and indeterminate results.
 
-## 5. Explain for review
+## 5. Build the readable assessment note
 
 Lead with the target and matched findings. For every material conclusion, show
 the rule, reason, evidence, related objects, exact anchors and open unknowns.
-Use [output review](references/output-review.md). Do not collapse independent
-AI Act, GDPR, NIS2 and NIST axes into one colour.
+Use [assessment note](references/assessment-note.md) and
+[output review](references/output-review.md). Keep the extraction analysis and
+deterministic result visibly distinct. Do not collapse independent AI Act,
+GDPR, NIS2 and NIST axes into one colour.
+
+Store the note with
+[`assessment-note.schema.json`](../../spec/schemas/assessment-note.schema.json).
+Every material factual or normative statement must reference its structured
+support.
 
 Only apply an organisation route profile when the user has supplied or approved
 it. A route never changes the source finding.
+
+## 6. Apply the review policy
+
+Do not require a person to approve every fact before evaluation. Run the engine,
+then apply the organisation's review policy. Material findings, uncertainty,
+change and selected samples may require review. A correction creates new
+evidence, a new inventory snapshot or a candidate extractor, pack, route or
+explanation version. It triggers a fresh assessment after the applicable tests
+and approval.
+
+When a review record is requested, follow
+[`review.schema.json`](../../spec/schemas/review.schema.json). Separate source,
+composition, extraction, pack, routing and explanation errors so the right
+component can change without silently altering the others.

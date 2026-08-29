@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "review_id": "urn:air:review:fictional-contract-targeted-20260829",
+  "reviewed_at": "2026-08-29T15:45:00Z",
+  "assessment_id": "urn:air:assessment:d8a041070c24ea4c998e18d4",
+  "target": {
+    "id": "contract-cloud-demo",
+    "type": "contract",
+    "name": "Cloud services agreement (fictional)"
+  },
+  "review_type": "targeted",
+  "selection": {
+    "strategy": "unknown_or_conflict",
+    "reason": "The audit-cooperation fact and deterministic rule result are indeterminate."
+  },
+  "reviewer": {
+    "role": "Contract reviewer",
+    "organization": "Fictional enterprise",
+    "pseudonymous_id": "reviewer-12"
+  },
+  "outcome": "inconclusive",
+  "adjudications": [
+    {
+      "subject_type": "fact",
+      "subject_id": "clause.audit_cooperation_present",
+      "decision": "unresolved",
+      "rationale": "The supplied excerpt does not contain enough wording to confirm an audit or assurance right.",
+      "evidence": ["ev-contract"]
+    },
+    {
+      "subject_type": "finding",
+      "subject_id": "DEMO-CONTRACT-AUDIT",
+      "decision": "unresolved",
+      "rationale": "The deterministic indeterminate status is correct until better evidence is supplied.",
+      "evidence": ["ev-contract"]
+    }
+  ],
+  "error_categories": ["source"],
+  "actions": [
+    {
+      "type": "evidence_request",
+      "reference": "request-complete-audit-clause",
+      "summary": "Obtain the complete cooperation and audit wording before reassessment."
+    }
+  ],
+  "notes": "Fictional targeted review for framework documentation."
+}

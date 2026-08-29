@@ -57,6 +57,45 @@ ROUTE_SELECTORS = {
     "rule_ids",
     "pack_ids",
 }
+EXTRACTOR_KINDS = {"llm", "human", "hybrid"}
+REVIEW_TYPES = {"mandatory", "targeted", "sample", "appeal", "change"}
+REVIEW_STRATEGIES = {
+    "rule_trigger",
+    "low_confidence",
+    "unknown_or_conflict",
+    "change",
+    "random",
+    "stratified",
+    "manual",
+}
+REVIEW_OUTCOMES = {"confirmed", "corrected", "inconclusive"}
+REVIEW_DECISIONS = {"confirmed", "corrected", "disputed", "unresolved"}
+REVIEW_SUBJECTS = {"fact", "finding", "analysis"}
+ERROR_CATEGORIES = {
+    "source",
+    "composition",
+    "extraction",
+    "pack",
+    "routing",
+    "explanation",
+}
+REVIEW_ACTIONS = {
+    "new_inventory_snapshot",
+    "extractor_candidate",
+    "pack_candidate",
+    "route_candidate",
+    "evidence_request",
+    "no_change",
+}
+NOTE_RENDERER_KINDS = {"template", "llm", "hybrid", "human"}
+NOTE_STATEMENT_KINDS = {"fact", "finding", "unknown", "route", "review"}
+NOTE_REVIEW_STATUSES = {
+    "not_selected",
+    "selected",
+    "confirmed",
+    "corrected",
+    "inconclusive",
+}
 RELATION_SIGNATURES = {
     "runs_on": (
         {"configured_ai_application", "ai_system"},
@@ -116,6 +155,16 @@ def validate_fact(fact: Any, path: str) -> None:
         raise ValidationError(
             f"{path}.evidence: at least one evidence identifier is required for state {state!r}"
         )
+    if "confidence" in fact:
+        confidence = fact["confidence"]
+        if (
+            not isinstance(confidence, (int, float))
+            or isinstance(confidence, bool)
+            or not 0 <= confidence <= 1
+        ):
+            raise ValidationError(f"{path}.confidence: expected a number from 0 to 1")
+    if "extractor" in fact and not isinstance(fact["extractor"], Mapping):
+        raise ValidationError(f"{path}.extractor: expected an object")
 
 
 def _validate_relation_path(value: Any, path: str) -> None:
@@ -514,3 +563,390 @@ def validate_pack_profile(profile: Mapping[str, Any]) -> None:
         path = f"pack_profile.packs[{index}]"
         _require(item, "version", str, path)
         _require(item, "path", str, path)
+
+
+def validate_extraction_record(record: Mapping[str, Any]) -> None:
+    """Validate a model or human extraction record kept outside the assessment."""
+
+    version = _require(record, "schema_version", str, "extraction")
+    if version != SCHEMA_VERSION:
+        raise ValidationError(
+            f"extraction.schema_version: expected {SCHEMA_VERSION!r}, got {version!r}"
+        )
+    _require(record, "extraction_id", str, "extraction")
+    _require(record, "created_at", str, "extraction")
+
+    target = _require(record, "target", dict, "extraction")
+    _require(target, "id", str, "extraction.target")
+    target_type = _require(target, "type", str, "extraction.target")
+    if target_type not in OBJECT_TYPES:
+        raise ValidationError(
+            f"extraction.target.type: unsupported object type {target_type!r}"
+        )
+
+    inventory = _require(record, "inventory", dict, "extraction")
+    _require(inventory, "inventory_id", str, "extraction.inventory")
+    _require(inventory, "snapshot_id", str, "extraction.inventory")
+
+    extractor = _require(record, "extractor", dict, "extraction")
+    extractor_kind = _require(extractor, "kind", str, "extraction.extractor")
+    if extractor_kind not in EXTRACTOR_KINDS:
+        raise ValidationError(
+            f"extraction.extractor.kind: unsupported value {extractor_kind!r}"
+        )
+    skill = _require(extractor, "skill", dict, "extraction.extractor")
+    _require(skill, "id", str, "extraction.extractor.skill")
+    _require(skill, "version", str, "extraction.extractor.skill")
+
+    source_evidence = _require(record, "source_evidence", list, "extraction")
+    if not source_evidence or not all(isinstance(item, str) for item in source_evidence):
+        raise ValidationError(
+            "extraction.source_evidence: expected a non-empty list of evidence ids"
+        )
+    if len(source_evidence) != len(set(source_evidence)):
+        raise ValidationError("extraction.source_evidence: duplicate evidence id")
+    known_evidence = set(source_evidence)
+
+    proposals = _require(record, "fact_proposals", list, "extraction")
+    if not proposals or not all(isinstance(item, Mapping) for item in proposals):
+        raise ValidationError("extraction.fact_proposals: expected non-empty objects")
+    _unique(proposals, "fact_id", "extraction.fact_proposals")
+    proposal_ids = {item["fact_id"] for item in proposals}
+    for index, proposal in enumerate(proposals):
+        path = f"extraction.fact_proposals[{index}]"
+        validate_fact(proposal, path)
+        if extractor_kind in {"llm", "hybrid"} and "confidence" not in proposal:
+            raise ValidationError(
+                f"{path}.confidence: required for LLM or hybrid extraction"
+            )
+        _require(proposal, "rationale", str, path)
+        unknown_evidence = set(proposal.get("evidence", [])) - known_evidence
+        if unknown_evidence:
+            raise ValidationError(
+                f"{path}.evidence: ids absent from source_evidence {sorted(unknown_evidence)!r}"
+            )
+
+    analysis = _require(record, "analysis", dict, "extraction")
+    _require(analysis, "summary", str, "extraction.analysis")
+    _require(analysis, "scope", str, "extraction.analysis")
+    observations = _require(analysis, "observations", list, "extraction.analysis")
+    unknowns = _require(analysis, "unknowns", list, "extraction.analysis")
+    if not all(isinstance(item, str) for item in unknowns):
+        raise ValidationError("extraction.analysis.unknowns: expected strings")
+    cautions = analysis.get("cautions", [])
+    if not isinstance(cautions, list) or not all(isinstance(item, str) for item in cautions):
+        raise ValidationError("extraction.analysis.cautions: expected strings")
+    if not observations or not all(isinstance(item, Mapping) for item in observations):
+        raise ValidationError("extraction.analysis.observations: expected non-empty objects")
+    for index, observation in enumerate(observations):
+        path = f"extraction.analysis.observations[{index}]"
+        _require(observation, "statement", str, path)
+        fact_ids = _require(observation, "fact_ids", list, path)
+        evidence_ids = _require(observation, "evidence", list, path)
+        if not all(isinstance(item, str) for item in fact_ids + evidence_ids):
+            raise ValidationError(f"{path}: fact_ids and evidence must contain strings")
+        unknown_facts = set(fact_ids) - proposal_ids
+        unknown_evidence = set(evidence_ids) - known_evidence
+        if unknown_facts:
+            raise ValidationError(
+                f"{path}.fact_ids: unknown proposals {sorted(unknown_facts)!r}"
+            )
+        if unknown_evidence:
+            raise ValidationError(
+                f"{path}.evidence: unknown evidence ids {sorted(unknown_evidence)!r}"
+            )
+
+
+def validate_review_record(record: Mapping[str, Any]) -> None:
+    """Validate an immutable human review, including sampled quality control."""
+
+    version = _require(record, "schema_version", str, "review")
+    if version != SCHEMA_VERSION:
+        raise ValidationError(
+            f"review.schema_version: expected {SCHEMA_VERSION!r}, got {version!r}"
+        )
+    _require(record, "review_id", str, "review")
+    _require(record, "reviewed_at", str, "review")
+    _require(record, "assessment_id", str, "review")
+
+    target = _require(record, "target", dict, "review")
+    _require(target, "id", str, "review.target")
+    target_type = _require(target, "type", str, "review.target")
+    if target_type not in OBJECT_TYPES:
+        raise ValidationError(f"review.target.type: unsupported value {target_type!r}")
+
+    review_type = _require(record, "review_type", str, "review")
+    if review_type not in REVIEW_TYPES:
+        raise ValidationError(f"review.review_type: unsupported value {review_type!r}")
+    selection = _require(record, "selection", dict, "review")
+    strategy = _require(selection, "strategy", str, "review.selection")
+    if strategy not in REVIEW_STRATEGIES:
+        raise ValidationError(f"review.selection.strategy: unsupported value {strategy!r}")
+    _require(selection, "reason", str, "review.selection")
+    reviewer = _require(record, "reviewer", dict, "review")
+    _require(reviewer, "role", str, "review.reviewer")
+
+    outcome = _require(record, "outcome", str, "review")
+    if outcome not in REVIEW_OUTCOMES:
+        raise ValidationError(f"review.outcome: unsupported value {outcome!r}")
+
+    adjudications = _require(record, "adjudications", list, "review")
+    if not adjudications or not all(
+        isinstance(item, Mapping) for item in adjudications
+    ):
+        raise ValidationError("review.adjudications: expected non-empty objects")
+    corrected = False
+    decisions: list[str] = []
+    for index, item in enumerate(adjudications):
+        path = f"review.adjudications[{index}]"
+        subject_type = _require(item, "subject_type", str, path)
+        if subject_type not in REVIEW_SUBJECTS:
+            raise ValidationError(f"{path}.subject_type: unsupported value {subject_type!r}")
+        _require(item, "subject_id", str, path)
+        decision = _require(item, "decision", str, path)
+        if decision not in REVIEW_DECISIONS:
+            raise ValidationError(f"{path}.decision: unsupported value {decision!r}")
+        decisions.append(decision)
+        corrected = corrected or decision == "corrected"
+        _require(item, "rationale", str, path)
+        evidence = item.get("evidence", [])
+        if not isinstance(evidence, list) or not all(isinstance(value, str) for value in evidence):
+            raise ValidationError(f"{path}.evidence: expected strings")
+
+    categories = _require(record, "error_categories", list, "review")
+    if len(categories) != len(set(categories)):
+        raise ValidationError("review.error_categories: duplicate value")
+    for category in categories:
+        if category not in ERROR_CATEGORIES:
+            raise ValidationError(
+                f"review.error_categories: unsupported value {category!r}"
+            )
+
+    actions = _require(record, "actions", list, "review")
+    if not actions or not all(isinstance(item, Mapping) for item in actions):
+        raise ValidationError("review.actions: expected non-empty objects")
+    action_types = []
+    for index, action in enumerate(actions):
+        path = f"review.actions[{index}]"
+        action_type = _require(action, "type", str, path)
+        if action_type not in REVIEW_ACTIONS:
+            raise ValidationError(f"{path}.type: unsupported value {action_type!r}")
+        action_types.append(action_type)
+
+    if "no_change" in action_types and len(action_types) != 1:
+        raise ValidationError(
+            "review.actions: no_change cannot be combined with another action"
+        )
+    if outcome == "confirmed" and any(
+        decision != "confirmed" for decision in decisions
+    ):
+        raise ValidationError(
+            "review.outcome: confirmed requires every adjudication to be confirmed"
+        )
+    if outcome == "inconclusive" and not set(decisions).intersection(
+        {"disputed", "unresolved"}
+    ):
+        raise ValidationError(
+            "review.outcome: inconclusive requires a disputed or unresolved subject"
+        )
+    if outcome != "corrected" and corrected:
+        raise ValidationError(
+            "review.outcome: a corrected subject requires a corrected outcome"
+        )
+
+    if outcome == "corrected" and not corrected:
+        raise ValidationError(
+            "review.adjudications: a corrected outcome requires a corrected subject"
+        )
+    if outcome == "corrected" and not set(action_types).intersection(
+        {"new_inventory_snapshot", "extractor_candidate", "pack_candidate", "route_candidate"}
+    ):
+        raise ValidationError(
+            "review.actions: a corrected outcome requires a versioned corrective action"
+        )
+    if outcome == "corrected" and not categories:
+        raise ValidationError(
+            "review.error_categories: a corrected outcome requires an error category"
+        )
+
+
+def validate_assessment_note(record: Mapping[str, Any]) -> None:
+    """Validate readable prose whose material claims resolve to structured records."""
+
+    version = _require(record, "schema_version", str, "assessment_note")
+    if version != SCHEMA_VERSION:
+        raise ValidationError(
+            "assessment_note.schema_version: "
+            f"expected {SCHEMA_VERSION!r}, got {version!r}"
+        )
+    _require(record, "note_id", str, "assessment_note")
+    _require(record, "created_at", str, "assessment_note")
+    _require(record, "language", str, "assessment_note")
+
+    target = _require(record, "target", dict, "assessment_note")
+    _require(target, "id", str, "assessment_note.target")
+    target_type = _require(target, "type", str, "assessment_note.target")
+    if target_type not in OBJECT_TYPES:
+        raise ValidationError(
+            f"assessment_note.target.type: unsupported value {target_type!r}"
+        )
+
+    inputs = _require(record, "inputs", dict, "assessment_note")
+    inventory = _require(inputs, "inventory", dict, "assessment_note.inputs")
+    _require(inventory, "inventory_id", str, "assessment_note.inputs.inventory")
+    _require(inventory, "snapshot_id", str, "assessment_note.inputs.inventory")
+    extraction_ids = _require(
+        inputs, "extraction_ids", list, "assessment_note.inputs"
+    )
+    assessment_ids = _require(
+        inputs, "assessment_ids", list, "assessment_note.inputs"
+    )
+    if not all(isinstance(item, str) for item in extraction_ids):
+        raise ValidationError(
+            "assessment_note.inputs.extraction_ids: expected strings"
+        )
+    if len(extraction_ids) != len(set(extraction_ids)):
+        raise ValidationError(
+            "assessment_note.inputs.extraction_ids: duplicate identifier"
+        )
+    if not assessment_ids or not all(
+        isinstance(item, str) for item in assessment_ids
+    ):
+        raise ValidationError(
+            "assessment_note.inputs.assessment_ids: expected non-empty strings"
+        )
+    if len(assessment_ids) != len(set(assessment_ids)):
+        raise ValidationError(
+            "assessment_note.inputs.assessment_ids: duplicate identifier"
+        )
+    route_result_ids = inputs.get("route_result_ids", [])
+    if not isinstance(route_result_ids, list) or not all(
+        isinstance(item, str) for item in route_result_ids
+    ):
+        raise ValidationError(
+            "assessment_note.inputs.route_result_ids: expected strings"
+        )
+    known_routes = set(route_result_ids)
+
+    renderer = _require(record, "renderer", dict, "assessment_note")
+    renderer_kind = _require(renderer, "kind", str, "assessment_note.renderer")
+    if renderer_kind not in NOTE_RENDERER_KINDS:
+        raise ValidationError(
+            f"assessment_note.renderer.kind: unsupported value {renderer_kind!r}"
+        )
+    _require(renderer, "id", str, "assessment_note.renderer")
+    _require(renderer, "version", str, "assessment_note.renderer")
+
+    _require(record, "summary", str, "assessment_note")
+    _require(record, "scope", str, "assessment_note")
+    statements = _require(record, "statements", list, "assessment_note")
+    if not statements or not all(isinstance(item, Mapping) for item in statements):
+        raise ValidationError("assessment_note.statements: expected non-empty objects")
+    _unique(statements, "statement_id", "assessment_note.statements")
+    known_assessments = set(assessment_ids)
+    for index, statement in enumerate(statements):
+        path = f"assessment_note.statements[{index}]"
+        kind = _require(statement, "kind", str, path)
+        if kind not in NOTE_STATEMENT_KINDS:
+            raise ValidationError(f"{path}.kind: unsupported value {kind!r}")
+        _require(statement, "text", str, path)
+        references = _require(statement, "references", dict, path)
+        allowed_references = {
+            "fact_ids",
+            "evidence",
+            "assessment_id",
+            "rule_ids",
+            "anchor_ids",
+            "route_result_id",
+            "route_ids",
+            "review_id",
+        }
+        unknown_references = set(references) - allowed_references
+        if unknown_references:
+            raise ValidationError(
+                f"{path}.references: unsupported fields {sorted(unknown_references)!r}"
+            )
+        for key in {"fact_ids", "evidence", "rule_ids", "anchor_ids", "route_ids"}:
+            values = references.get(key, [])
+            if not isinstance(values, list) or not all(
+                isinstance(value, str) for value in values
+            ):
+                raise ValidationError(f"{path}.references.{key}: expected strings")
+        assessment_id = references.get("assessment_id")
+        if assessment_id is not None:
+            if not isinstance(assessment_id, str):
+                raise ValidationError(
+                    f"{path}.references.assessment_id: expected a string"
+                )
+            if assessment_id not in known_assessments:
+                raise ValidationError(
+                    f"{path}.references.assessment_id: absent from note inputs"
+                )
+        if kind == "fact" and not (
+            references.get("fact_ids") and references.get("evidence")
+        ):
+            raise ValidationError(
+                f"{path}.references: fact statements require fact_ids and evidence"
+            )
+        if kind == "finding" and not (
+            assessment_id
+            and references.get("rule_ids")
+            and references.get("anchor_ids")
+        ):
+            raise ValidationError(
+                f"{path}.references: findings require assessment_id, rule_ids and anchor_ids"
+            )
+        if kind == "unknown" and not (
+            references.get("fact_ids") or assessment_id
+        ):
+            raise ValidationError(
+                f"{path}.references: unknowns require fact_ids or assessment_id"
+            )
+        if kind == "route" and not (
+            isinstance(references.get("route_result_id"), str)
+            and references.get("route_ids")
+        ):
+            raise ValidationError(
+                f"{path}.references: route statements require route_result_id and route_ids"
+            )
+        if kind == "route" and references.get("route_result_id") not in known_routes:
+            raise ValidationError(
+                f"{path}.references.route_result_id: absent from note inputs"
+            )
+        if kind == "review" and not isinstance(references.get("review_id"), str):
+            raise ValidationError(
+                f"{path}.references: review statements require review_id"
+            )
+
+    cautions = record.get("cautions", [])
+    if not isinstance(cautions, list) or not all(
+        isinstance(item, str) for item in cautions
+    ):
+        raise ValidationError("assessment_note.cautions: expected strings")
+
+    review_status = _require(record, "review_status", dict, "assessment_note")
+    status = _require(review_status, "status", str, "assessment_note.review_status")
+    if status not in NOTE_REVIEW_STATUSES:
+        raise ValidationError(
+            f"assessment_note.review_status.status: unsupported value {status!r}"
+        )
+    review_id = review_status.get("review_id")
+    if status != "not_selected" and not isinstance(review_id, str):
+        raise ValidationError(
+            "assessment_note.review_status.review_id: required when review was selected"
+        )
+    if status == "not_selected" and review_id is not None:
+        raise ValidationError(
+            "assessment_note.review_status.review_id: forbidden when no review was selected"
+        )
+    statement_review_ids = {
+        item["references"].get("review_id")
+        for item in statements
+        if item["kind"] == "review"
+    }
+    if review_id is not None and statement_review_ids and statement_review_ids != {
+        review_id
+    }:
+        raise ValidationError(
+            "assessment_note.statements: review references must match review_status"
+        )

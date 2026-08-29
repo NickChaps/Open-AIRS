@@ -14,9 +14,12 @@ from .io import dump_json, load_json
 from .profiles import assess_profile, load_profile_packs
 from .routing import apply_routes
 from .validation import (
+    validate_assessment_note,
+    validate_extraction_record,
     validate_inventory,
     validate_pack,
     validate_pack_profile,
+    validate_review_record,
     validate_route_profile,
 )
 
@@ -43,6 +46,21 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_pack_parser = commands.add_parser("validate-pack", help="Validate a rule pack")
     validate_pack_parser.add_argument("pack")
+
+    validate_extraction_parser = commands.add_parser(
+        "validate-extraction", help="Validate an extraction and analysis record"
+    )
+    validate_extraction_parser.add_argument("extraction")
+
+    validate_review_parser = commands.add_parser(
+        "validate-review", help="Validate a human review record"
+    )
+    validate_review_parser.add_argument("review")
+
+    validate_note_parser = commands.add_parser(
+        "validate-note", help="Validate a readable assessment note"
+    )
+    validate_note_parser.add_argument("note")
 
     assess_parser = commands.add_parser("assess", help="Assess one object with one pack")
     assess_parser.add_argument("--inventory", required=True)
@@ -119,6 +137,15 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "validate-pack":
             validate_pack(load_json(args.pack))
             print(f"valid pack: {args.pack}")
+        elif args.command == "validate-extraction":
+            validate_extraction_record(load_json(args.extraction))
+            print(f"valid extraction record: {args.extraction}")
+        elif args.command == "validate-review":
+            validate_review_record(load_json(args.review))
+            print(f"valid review record: {args.review}")
+        elif args.command == "validate-note":
+            validate_assessment_note(load_json(args.note))
+            print(f"valid assessment note: {args.note}")
         elif args.command == "assess":
             result = assess(
                 load_json(args.inventory),

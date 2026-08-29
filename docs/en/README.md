@@ -13,9 +13,10 @@ question closest to your work.
 3. Try the [ten-minute walkthrough](quickstart.md).
 4. Use [How to read an assessment](reading-an-assessment.md) to distinguish a
    legal finding from an evidence gap or an internal route.
-5. Review [Sources and coverage](sources-and-coverage.md) before relying on a
+5. Understand [human review and sampling at registry scale](quality-control.md).
+6. Review [Sources and coverage](sources-and-coverage.md) before relying on a
    pack.
-6. Open the [dated pack coverage review](../audits/2026-08-29-pack-viability.md)
+7. Open the [dated pack coverage review](../audits/2026-08-29-pack-viability.md)
    to see the latest source check and residual limits.
 
 ## I configure governance
@@ -24,13 +25,16 @@ question closest to your work.
 2. Learn how to [author and release a pack](authoring-packs.md).
 3. Keep company decisions in [organisation-owned routes](../../spec/06-organization-routing.md).
 4. Review the [connector topology example](../../examples/connector-topologies/README.md).
-5. Dry-run every pack update before activation.
+5. Configure [review selection and controlled improvement](quality-control.md).
+6. Dry-run every pack update before activation.
 
 ## I integrate or develop
 
 - JSON schemas are under [`spec/schemas`](../../spec/schemas/).
 - The condition language is documented in
   [`spec/04-condition-language.md`](../../spec/04-condition-language.md).
+- Extraction, readable-note and human-review records are documented in
+  [`spec/08-extraction-review-and-learning.md`](../../spec/08-extraction-review-and-learning.md).
 - The Python reference engine is under [`src/air_framework`](../../src/air_framework/).
 - Executable examples are under [`examples`](../../examples/).
 - Conformance tests are under [`tests`](../../tests/).

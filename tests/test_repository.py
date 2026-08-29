@@ -58,6 +58,23 @@ class RepositoryIntegrityTests(unittest.TestCase):
                     self.assertTrue(path.exists())
                     self.assertIn("```mermaid", path.read_text(encoding="utf-8"))
 
+    def test_worked_examples_show_inputs_outputs_and_review_records(self):
+        for folder in ["ai-governance", "contract-review"]:
+            directory = ROOT / "examples" / folder
+            with self.subTest(folder=folder):
+                self.assertTrue((directory / "extraction.json").exists())
+                self.assertTrue((directory / "assessment-note.json").exists())
+                self.assertTrue((directory / "review.json").exists())
+            for name in ["README.md", "README.fr.md"]:
+                path = directory / name
+                with self.subTest(path=path):
+                    body = path.read_text(encoding="utf-8")
+                    self.assertIn("```mermaid", body)
+                    self.assertIn("extraction.json", body)
+                    self.assertIn("assessment-note.json", body)
+                    self.assertIn("review.json", body)
+                    self.assertGreaterEqual(body.count("| ---"), 2)
+
     def test_public_object_type_is_skill(self):
         paths = [
             ROOT / "src/air_framework/validation.py",

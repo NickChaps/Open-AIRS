@@ -35,6 +35,19 @@ store; the inventory can retain a stable reference and digest instead.
 
 An extraction model may answer a bounded question such as “Does this prompt
 instruct the application to rank CVs?” It should return the value, source
-locator, confidence and ambiguity. It must not decide whether the resulting
-use is prohibited or high-risk. That conclusion belongs to a versioned rule
-pack and is evaluated deterministically.
+locator, confidence and ambiguity. A selected pack may also request a controlled
+characterisation such as an Annex III use-case code. The proposal remains
+visible with its evidence and confidence. Finding codes, anchors and
+obligations come from the versioned rule pack and deterministic engine.
+
+The model also produces a concise source analysis. Each observation references
+the facts and evidence that support it. The analysis records scope, conclusions,
+unknowns and cautions needed for audit. It does not contain private model
+chain-of-thought. After deterministic evaluation, a separate assessment note
+combines these observations with findings and anchors.
+
+The portable extraction record is defined by
+[`extraction.schema.json`](schemas/extraction.schema.json). It remains separate
+from the deterministic assessment so a wording change cannot alter the legal
+or methodological result hash. The final readable record follows
+[`assessment-note.schema.json`](schemas/assessment-note.schema.json).

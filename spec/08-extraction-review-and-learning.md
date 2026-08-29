@@ -1,0 +1,136 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+
+# Extraction, review and controlled improvement
+
+AIR separates semantic interpretation, deterministic evaluation and human
+quality control. This separation allows an organisation to process a large
+inventory without requiring a person to approve every object before the engine
+runs.
+
+## Runtime sequence
+
+```mermaid
+flowchart LR
+    S["Source bundle<br/>prompt · metadata · graph · evidence"] --> G["Governance inventory"]
+    G --> D["Direct facts<br/>from structured sources"]
+    G --> X["Extraction agent<br/>guided by air-assess"]
+    P["Pinned pack<br/>fact catalogue"] --> X
+    X --> I["Inferred facts + source analysis<br/>evidence · confidence"]
+    D --> F["Resolved fact grid"]
+    I --> F
+    F --> E["Deterministic engine"]
+    P --> E
+    E --> A["Assessment<br/>findings · unknowns · anchors · obligations"]
+    A --> R["Organisation route"]
+    A --> Q{"Review policy"}
+    Q -->|"selected"| H["Human review record"]
+    Q -->|"not selected"| C["Current assessment"]
+    H -->|"confirmed"| C
+    H -->|"corrected"| N["Versioned correction<br/>and reassessment"]
+    N --> G
+```
+
+Structured sources can supply direct facts without a model. The extraction
+agent handles fields that require semantic reading and makes bounded
+judgements. It can recognise that
+instructions rank candidates, that a configured application can send a message
+or that a contract clause is ambiguous. It returns the proposed facts used by
+the pack and a concise source-analysis note. Direct and inferred facts are
+resolved into one grid before evaluation. The note records claims, evidence,
+unknowns and cautions. It is an audit rationale, not a transcript of private
+model reasoning.
+
+The engine evaluates the fact grid with a pinned pack. It owns the reproducible
+rule result, anchors and obligations. An organisation route is computed from
+the immutable findings as a separate step.
+
+## The `air-assess` skill
+
+`air-assess` is a portable instruction package for the extraction agent. The
+Python engine does not call it. A host agent uses the skill to:
+
+1. establish the target and composition;
+2. read the selected packs and their fact catalogues;
+3. produce an extraction record for semantic facts and contribute it to the
+   resolved inventory snapshot;
+4. invoke the deterministic engine;
+5. prepare the readable assessment note from the extraction and engine output.
+
+The CLI starts at step 4 when an inventory already contains structured facts.
+
+## Reference alpha boundary
+
+| Included in this repository | Supplied by an integrating product |
+| --- | --- |
+| `air-assess` instructions | Model client and secure source access |
+| Extraction, assessment-note and review schemas | Resolution of direct and inferred facts into inventory snapshots |
+| Deterministic pack engine and traces | Review-selection policy, scheduler and reviewer interface |
+| Versioned pack and route formats | Storage, access control and approval workflow |
+
+This boundary keeps the framework provider-neutral. It also means that running
+the Python CLI alone does not invoke a model or select a periodic sample.
+
+## Review selection
+
+Human review is controlled by an organisation-owned policy. Common selectors
+include:
+
+- findings that the organisation considers material;
+- unknown, conflicted or low-confidence facts;
+- a new model, extractor skill, pack, platform or connector configuration;
+- drift detected between snapshots;
+- a random or stratified quality sample.
+
+Sampling should cover object type, platform, risk family, confidence band,
+extractor version and time period. A purely random sample can miss rare but
+material cases.
+
+## Review records and corrections
+
+A review record references the immutable assessment and states why the case was
+selected. It can confirm, correct, dispute or leave unresolved a fact, finding
+or analysis statement. A correction never edits the old assessment. It creates
+new evidence, a new inventory snapshot or a candidate extractor, pack, route or
+explanation version. The applicable tests and approval complete before a new
+assessment becomes current.
+
+The public schemas are:
+
+- [`extraction.schema.json`](schemas/extraction.schema.json) for semantic fact
+  proposals and source analysis;
+- [`assessment-note.schema.json`](schemas/assessment-note.schema.json) for the
+  readable case file and the references supporting each material statement;
+- [`review.schema.json`](schemas/review.schema.json) for mandatory, targeted or
+  sampled human review.
+
+## Controlled learning loop
+
+```mermaid
+flowchart LR
+    H["Reviewed samples"] --> D["Adjudicated error set"]
+    D --> C{"Error source"}
+    C -->|"source or composition"| I["Improve ingestion"]
+    C -->|"extraction"| X["Candidate skill, prompt or model"]
+    C -->|"pack"| P["Candidate pack version"]
+    C -->|"routing"| R["Candidate route profile"]
+    C -->|"explanation"| N["Candidate note renderer"]
+    I --> T["Regression corpus and impact run"]
+    X --> T
+    P --> T
+    R --> T
+    N --> T
+    T --> V{"Authorised approval"}
+    V -->|"approved"| B["New pinned version"]
+    V -->|"rework"| C
+```
+
+The framework does not mutate its doctrine from reviewer feedback during a
+live run. Adjudicated errors become a versioned evaluation corpus. Candidate
+changes pass regression tests and impact simulation, then an authorised person
+publishes a new version.
+
+Quality is measured on a defined population and period. Useful measures include
+fact-level reviewer agreement, material false-negative rate, unknown rate,
+anchor fidelity, explanation fidelity and drift by extractor version. A high
+score on one sample does not establish permanent accuracy for future models,
+regulations or uses.

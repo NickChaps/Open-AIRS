@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.1.0",
+  "extraction_id": "urn:air:extraction:fictional-contract-20260829",
+  "created_at": "2026-08-29T11:30:00Z",
+  "target": {
+    "id": "contract-cloud-demo",
+    "type": "contract",
+    "name": "Cloud services agreement (fictional)"
+  },
+  "inventory": {
+    "inventory_id": "fictional-contract-demo",
+    "snapshot_id": "contract-snapshot-1"
+  },
+  "extractor": {
+    "kind": "llm",
+    "skill": {"id": "air-assess", "version": "0.2.0"},
+    "model": {"id": "fictional-assessment-model", "version": "2026-08"},
+    "run_id": "fictional-run-contract-001"
+  },
+  "source_evidence": ["ev-contract"],
+  "fact_proposals": [
+    {
+      "fact_id": "clause.confidentiality_present",
+      "state": "known",
+      "value": true,
+      "evidence": ["ev-contract"],
+      "confidence": 0.99,
+      "rationale": "The agreement contains mutual confidentiality obligations."
+    },
+    {
+      "fact_id": "clause.data_processing_present",
+      "state": "known",
+      "value": true,
+      "evidence": ["ev-contract"],
+      "confidence": 0.98,
+      "rationale": "The agreement addresses data-processing roles and instructions."
+    },
+    {
+      "fact_id": "clause.intellectual_property_present",
+      "state": "known",
+      "value": false,
+      "evidence": ["ev-contract"],
+      "confidence": 0.97,
+      "rationale": "No ownership or licensing provision for deliverables is identified."
+    },
+    {
+      "fact_id": "clause.security_incident_notice_present",
+      "state": "known",
+      "value": false,
+      "evidence": ["ev-contract"],
+      "confidence": 0.97,
+      "rationale": "No defined security-incident notification mechanism is identified."
+    },
+    {
+      "fact_id": "clause.audit_cooperation_present",
+      "state": "unknown",
+      "evidence": ["ev-contract"],
+      "confidence": 0.72,
+      "rationale": "General cooperation language may cover assurance, but the wording does not establish an audit right clearly."
+    },
+    {
+      "fact_id": "clause.liability_allocation_present",
+      "state": "known",
+      "value": true,
+      "evidence": ["ev-contract"],
+      "confidence": 0.98,
+      "rationale": "The agreement contains caps and exclusions that allocate liability."
+    }
+  ],
+  "analysis": {
+    "summary": "The agreement covers confidentiality, data processing and liability. Intellectual-property allocation and security-incident notice are absent. Audit cooperation remains ambiguous.",
+    "scope": "Presence review of six clause families in a fictional cloud-services agreement against the fictional clause library 1.0.",
+    "observations": [
+      {
+        "statement": "Confidentiality, data-processing and liability provisions are present.",
+        "fact_ids": [
+          "clause.confidentiality_present",
+          "clause.data_processing_present",
+          "clause.liability_allocation_present"
+        ],
+        "evidence": ["ev-contract"]
+      },
+      {
+        "statement": "Intellectual-property allocation and security-incident notice are absent.",
+        "fact_ids": [
+          "clause.intellectual_property_present",
+          "clause.security_incident_notice_present"
+        ],
+        "evidence": ["ev-contract"]
+      },
+      {
+        "statement": "The general cooperation wording does not establish audit cooperation clearly.",
+        "fact_ids": ["clause.audit_cooperation_present"],
+        "evidence": ["ev-contract"]
+      }
+    ],
+    "unknowns": [
+      "Whether the general cooperation clause creates a sufficient audit or assurance right."
+    ],
+    "cautions": [
+      "The example checks clause presence only; it does not assess enforceability or drafting quality."
+    ]
+  }
+}
